@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>DD3C0215-0CAA-49F4-AB4F-0F6AB54E29E4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>inWinStackCeph</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7627D0CD4DEF6D812D55E9A8135EB0BBED002DF0</key>
+		<string>http://ssteam-git.no-ip.org/PCLFG/inwinstackcephmonitorapp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>inWinStackCeph.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7627D0CD4DEF6D812D55E9A8135EB0BBED002DF0</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://ssteam-git.no-ip.org/PCLFG/inwinstackcephmonitorapp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7627D0CD4DEF6D812D55E9A8135EB0BBED002DF0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7627D0CD4DEF6D812D55E9A8135EB0BBED002DF0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>inWinStackCeph</string>
+		</dict>
+	</array>
+</dict>
+</plist>
