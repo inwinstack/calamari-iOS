@@ -60,7 +60,7 @@
         [self addSubview:self.loginButton];
         
         self.versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.loginButton.frame) + [UIView tbMarginOne], CGRectGetWidth(self.frame), 20)];
-        self.versionLabel.text = @"Ceph Monitor Version 0.9.2";
+        self.versionLabel.text = @"Ceph Monitor Version 0.10.0";
         self.versionLabel.textAlignment = NSTextAlignmentCenter;
         [self setDefaultLabel:self.versionLabel];
         

@@ -46,7 +46,11 @@
 }
 
 - (void) didSelect {
-    [self.delegate didConfirm];
+    if (self.delegate) {
+        [self.delegate didConfirm];
+    } else {
+        [self removeFromSuperview];
+    }
 }
 
 @end

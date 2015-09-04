@@ -8,14 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, NotificationType) {
-    HealthNotificationType = 0,
-    SpaceNotificationType,
-    OSDNotificationType,
-    MONNotificationType,
-    PGNotificationType,
-};
-
 @class LoginController;
 @class NotificationController;
 @class CustomNavigationController;

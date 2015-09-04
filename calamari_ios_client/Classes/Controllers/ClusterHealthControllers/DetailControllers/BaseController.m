@@ -41,7 +41,6 @@
 }
 
 - (void) backAction {
-    [[NotificationData shareInstance].notificationArray removeAllObjects];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

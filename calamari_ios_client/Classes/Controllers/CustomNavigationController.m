@@ -30,6 +30,8 @@
 #import "SVProgressHUD.h"
 #import "NavigationView.h"
 #import "NavigationViewCell.h"
+#import "NotificationData.h"
+#import "APIRecord.h"
 
 @interface CustomNavigationController ()<DidReceiveCollectionIndexDelegate, ErrorDelegate, UITabBarControllerDelegate, UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate> {
     int count;
@@ -102,7 +104,6 @@
 
 }
 
-
 - (void) didReceiveIndex:(NSInteger)collectionIndex {
     tempSelectedIndex = collectionIndex + 1;
     [self.navigationView.navigationTableView reloadData];
@@ -122,10 +123,22 @@
                     self.viewControllers = @[self.viewControllers[0], self.viewControllers[1], self.healthDetailController];
                     break;
                 } case 1: {
-                    [SVProgressHUD dismiss];
-                    self.osdHealthController = [[OSDHealthController alloc] init];
-                    [self pushViewController:self.osdHealthController animated:YES];
-                    self.viewControllers = @[self.viewControllers[0], self.viewControllers[1], self.osdHealthController];
+                    self.errorView = [[ErrorView alloc] initWithFrame:[UIScreen mainScreen].bounds title:@"系統訊息" message:@"連線錯誤"];
+                    self.errorView.delegate = self;
+                    [[CephAPI shareInstance] startGetClusterDataWithIP:[UserData shareInstance].ipString Port:[UserData shareInstance].portString Version:[APIRecord shareInstance].APIDictionary[@"OSD"][0] ClusterID:[ClusterData shareInstance].clusterArray[0][@"id"] Kind:[APIRecord shareInstance].APIDictionary[@"OSD"][1] completion:^(BOOL finished) {
+                        if (finished) {
+                            [SVProgressHUD dismiss];
+                            self.osdHealthController = [[OSDHealthController alloc] init];
+                            [self pushViewController:self.osdHealthController animated:YES];
+                            self.viewControllers = @[self.viewControllers[0], self.viewControllers[1], self.osdHealthController];
+                        }
+                    } error:^(id error) {
+                        if (error) {
+                            [SVProgressHUD dismiss];
+                            [self.view addSubview:self.errorView];
+                            NSLog(@"%@", error);
+                        }
+                    }];
                     break;
                 } case 2: {
                     [SVProgressHUD dismiss];
@@ -201,6 +214,7 @@
                     break;
                 } case 11: {
                     [SVProgressHUD dismiss];
+                    [[NotificationData shareInstance] stopTimer];
                     [self popToRootViewControllerAnimated:YES];
                     break;
                 }
