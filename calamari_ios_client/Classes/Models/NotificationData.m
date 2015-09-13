@@ -39,9 +39,10 @@
     self = [super init];
     if (self) {
         self.canNotification = YES;
+        self.isBackground = NO;
         self.notificationArray = [NSMutableArray array];
         [self resetRecord];
-        self.warnSec = @"30";
+        self.warnSec = @"10";
         self.warnCodeDic = @{@"OSD" : @"01", @"Monitor" : @"02", @"PG" : @"03", @"Usage" : @"04", @"Info" : @"4", @"Warning" : @"3", @"Error" : @"2", @"Critical" : @"1"};
         
         self.keyArray = @[@"osd", @"mon", @"pg", @"space"];
@@ -71,10 +72,13 @@
 }
 
 - (void) restartTimerWithTimeInterval:(float)timeInterValCount {
-    
+    [self stopTimer];
+    self.warnSec = [NSString stringWithFormat:@"%.f", timeInterValCount];
+    [self startTimer];
 }
 
 - (void) refreshAction {
+    NSLog(@"go");
     timeCount++;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"timeAddAction" object:[NSString stringWithFormat:@"%d", timeCount]];
     if (timeCount == [self.warnSec intValue]) {
@@ -83,7 +87,7 @@
         __weak typeof(self) weakSelf = self;
         [[CephAPI shareInstance] startGetClusterDetailAtBackgroundCompletion:^(BOOL finished) {
             if (finished) {
-                weakSelf.warnSec = @"30";
+                weakSelf.warnSec = (self.isBackground) ? @"30" : @"10";
                 [weakSelf startCheck];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"didRefreshAction" object:nil];
             }

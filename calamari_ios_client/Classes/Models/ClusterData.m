@@ -128,7 +128,8 @@
         } else if ([serviceName isEqualToString:@"osd"]) {
             return [NSString stringWithFormat:@"%@ / %d", self.clusterDetailData[[NSString stringWithFormat:@"%@_health_counters", clusterID]][serviceName][@"ok"][@"count"], (int)[self.clusterDetailData[[NSString stringWithFormat:@"%@_osd", clusterID]][@"osds"] count]];
         } else if ([serviceName isEqualToString:@"mon"]) {
-            return [NSString stringWithFormat:@"%@ / %@", self.clusterDetailData[[NSString stringWithFormat:@"%@_health_counters", clusterID]][serviceName][@"ok"][@"states"][@"in"], self.clusterDetailData[[NSString stringWithFormat:@"%@_health_counters", clusterID]][serviceName][@"ok"][@"count"]];
+            int monTotal = [self.clusterDetailData[[NSString stringWithFormat:@"%@_health_counters", clusterID]][serviceName][@"ok"][@"count"] intValue] + [self.clusterDetailData[[NSString stringWithFormat:@"%@_health_counters", clusterID]][serviceName][@"critical"][@"count"] intValue] + [self.clusterDetailData[[NSString stringWithFormat:@"%@_health_counters", clusterID]][serviceName][@"warn"][@"count"] intValue];
+            return [NSString stringWithFormat:@"%@ / %d", self.clusterDetailData[[NSString stringWithFormat:@"%@_health_counters", clusterID]][serviceName][@"ok"][@"states"][@"in"], monTotal];
         } else if ([serviceName isEqualToString:@"hosts"]) {
             return [NSString stringWithFormat:@"%ld",  [self.clusterDetailData[[NSString stringWithFormat:@"%@_server", clusterID]] count]];
         } else if ([serviceName isEqualToString:@"pg"]) {

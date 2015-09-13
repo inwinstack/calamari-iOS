@@ -1,8 +1,8 @@
 //
 //  AppDelegate.h
-//  inWinStackCeph
+//  calamari_ios_client
 //
-//  Created by Francis on 2015/4/9.
+//  Created by Francis on 2015/9/13.
 //  Copyright (c) 2015年 Francis. All rights reserved.
 //
 
