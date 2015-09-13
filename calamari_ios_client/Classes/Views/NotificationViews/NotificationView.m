@@ -11,11 +11,10 @@
 
 @implementation NotificationView
 
-- (instancetype) initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype) initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
+    self = [super initWithFrame:frame collectionViewLayout:layout];
     if (self) {
         self.backgroundColor = [UIColor oceanBackgroundOneColor];
-        self.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         self.okView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - ((CGRectGetWidth(self.frame) * 0.3) / 2), CGRectGetMidY(self.frame) - ((CGRectGetWidth(self.frame) * 0.3) / 2) - 60, (CGRectGetWidth(self.frame) * 0.3), (CGRectGetWidth(self.frame) * 0.3))];
         self.okView.image = [UIImage imageNamed:@"OSDHealthOKView"];

@@ -19,6 +19,7 @@
 #import "SVProgressHUD.h"
 #import "UIView+SizeMaker.h"
 #import "Cookies.h"
+#import "NotificationData.h"
 
 @interface LoginController () <ErrorDelegate, UITextFieldDelegate>
 
@@ -109,6 +110,7 @@
                                                                                                         weakself.navigationController.navigationBarHidden = NO;
                                                                                                         weakself.clusterHealthController = [[ClusterHealthController alloc] init];
                                                                                                         [weakself.navigationController pushViewController:weakself.clusterHealthController animated:YES];
+                                                                                                        [[NotificationData shareInstance] startTimer];
                                                                                                         [SVProgressHUD dismiss];
                                                                                                     }
                                                                                                 } error:^(id error) {

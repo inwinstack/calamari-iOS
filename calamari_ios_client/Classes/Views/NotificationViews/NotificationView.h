@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NotificationView : UITableView
+@interface NotificationView : UICollectionView
 
 @property (nonatomic, strong) UIImageView *okView;
 @property (nonatomic, strong) UILabel *okLabel;

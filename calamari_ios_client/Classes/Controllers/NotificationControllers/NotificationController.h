@@ -10,7 +10,7 @@
 
 @class NotificationView;
 
-@interface NotificationController : BaseController <UITableViewDataSource, UITableViewDelegate>
+@interface NotificationController : BaseController
 
 @property (nonatomic, strong) NotificationView *notificationView;
 

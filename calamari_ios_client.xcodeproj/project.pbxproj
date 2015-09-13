@@ -91,10 +91,13 @@
 		15373A061B871A3200AC14BE /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739AF1B871A3200AC14BE /* NotificationCell.m */; };
 		15373A071B871A3200AC14BE /* NotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739B11B871A3200AC14BE /* NotificationView.m */; };
 		15373A081B871A3200AC14BE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 153739B21B871A3200AC14BE /* Images.xcassets */; };
-		15373A091B871A3200AC14BE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 153739B31B871A3200AC14BE /* Info.plist */; };
 		15373A0A1B871A3200AC14BE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739B41B871A3200AC14BE /* main.m */; };
 		15373A2B1B871C5C00AC14BE /* calamari_ios_client_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15373A2A1B871C5C00AC14BE /* calamari_ios_client_Tests.m */; };
+		1538581A1B8EAC9E00EC32B9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153858191B8EAC9E00EC32B9 /* AVFoundation.framework */; };
 		156E621B1B3191BF0090A825 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156E621A1B3191BF0090A825 /* QuartzCore.framework */; };
+		15A651451B95BDA3008124A3 /* NotificationViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 15A651441B95BDA3008124A3 /* NotificationViewFlowLayout.m */; };
+		15BEEF791B97EB9300846A79 /* NotificationDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BEEF781B97EB9300846A79 /* NotificationDetailController.m */; };
+		15BEEF7C1B97EDD400846A79 /* NotificationDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BEEF7B1B97EDD400846A79 /* NotificationDetailView.m */; };
 		15E5C9561B871DF600B2B839 /* APITest.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E5C9551B871DF600B2B839 /* APITest.m */; };
 		F6CD02EA2335B75752713936 /* libPods-inWinStackCeph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9555D7CADD0918BCD61153F /* libPods-inWinStackCeph.a */; };
 /* End PBXBuildFile section */
@@ -282,8 +285,15 @@
 		15373A261B871C5C00AC14BE /* calamari_ios_client Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "calamari_ios_client Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		15373A291B871C5C00AC14BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		15373A2A1B871C5C00AC14BE /* calamari_ios_client_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = calamari_ios_client_Tests.m; sourceTree = "<group>"; };
+		153858191B8EAC9E00EC32B9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		156E621A1B3191BF0090A825 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1589BCD31AD6A9CE005B86A8 /* calamari_ios_client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calamari_ios_client.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		15A651431B95BDA3008124A3 /* NotificationViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewFlowLayout.h; sourceTree = "<group>"; };
+		15A651441B95BDA3008124A3 /* NotificationViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewFlowLayout.m; sourceTree = "<group>"; };
+		15BEEF771B97EB9300846A79 /* NotificationDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationDetailController.h; sourceTree = "<group>"; };
+		15BEEF781B97EB9300846A79 /* NotificationDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationDetailController.m; sourceTree = "<group>"; };
+		15BEEF7A1B97EDD400846A79 /* NotificationDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationDetailView.h; sourceTree = "<group>"; };
+		15BEEF7B1B97EDD400846A79 /* NotificationDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationDetailView.m; sourceTree = "<group>"; };
 		15E5C9551B871DF600B2B839 /* APITest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APITest.m; sourceTree = "<group>"; };
 		B515312BF3CA560B64EFE614 /* Pods-inWinStackCeph.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inWinStackCeph.debug.xcconfig"; path = "Pods/Target Support Files/Pods-inWinStackCeph/Pods-inWinStackCeph.debug.xcconfig"; sourceTree = "<group>"; };
 		C733CA9F4187E8EB7BD8BA3B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -303,6 +313,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1538581A1B8EAC9E00EC32B9 /* AVFoundation.framework in Frameworks */,
 				156E621B1B3191BF0090A825 /* QuartzCore.framework in Frameworks */,
 				F6CD02EA2335B75752713936 /* libPods-inWinStackCeph.a in Frameworks */,
 			);
@@ -328,7 +339,6 @@
 			isa = PBXGroup;
 			children = (
 				153738EF1B871A3200AC14BE /* Controllers */,
-				1537391A1B871A3200AC14BE /* Helpers */,
 				1537391B1B871A3200AC14BE /* Models */,
 				153739321B871A3200AC14BE /* Utilities */,
 				153739451B871A3200AC14BE /* Views */,
@@ -347,7 +357,6 @@
 				153739121B871A3200AC14BE /* MoreControllers */,
 				153739131B871A3200AC14BE /* MutualControllers */,
 				153739161B871A3200AC14BE /* NotificationControllers */,
-				153739191B871A3200AC14BE /* TabBarController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -430,22 +439,10 @@
 			children = (
 				153739171B871A3200AC14BE /* NotificationController.h */,
 				153739181B871A3200AC14BE /* NotificationController.m */,
+				15BEEF771B97EB9300846A79 /* NotificationDetailController.h */,
+				15BEEF781B97EB9300846A79 /* NotificationDetailController.m */,
 			);
 			path = NotificationControllers;
-			sourceTree = "<group>";
-		};
-		153739191B871A3200AC14BE /* TabBarController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TabBarController;
-			sourceTree = "<group>";
-		};
-		1537391A1B871A3200AC14BE /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		1537391B1B871A3200AC14BE /* Models */ = {
@@ -739,6 +736,10 @@
 				153739AF1B871A3200AC14BE /* NotificationCell.m */,
 				153739B01B871A3200AC14BE /* NotificationView.h */,
 				153739B11B871A3200AC14BE /* NotificationView.m */,
+				15A651431B95BDA3008124A3 /* NotificationViewFlowLayout.h */,
+				15A651441B95BDA3008124A3 /* NotificationViewFlowLayout.m */,
+				15BEEF7A1B97EDD400846A79 /* NotificationDetailView.h */,
+				15BEEF7B1B97EDD400846A79 /* NotificationDetailView.m */,
 			);
 			path = NotificationViews;
 			sourceTree = "<group>";
@@ -784,6 +785,7 @@
 		A4FD06770283489AB6076B1B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				153858191B8EAC9E00EC32B9 /* AVFoundation.framework */,
 				156E621A1B3191BF0090A825 /* QuartzCore.framework */,
 				C733CA9F4187E8EB7BD8BA3B /* libPods.a */,
 				D9555D7CADD0918BCD61153F /* libPods-inWinStackCeph.a */,
@@ -846,7 +848,7 @@
 		1589BCCB1AD6A9CE005B86A8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Francis;
 				TargetAttributes = {
 					15373A251B871C5C00AC14BE = {
@@ -896,7 +898,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15373A091B871A3200AC14BE /* Info.plist in Resources */,
 				15373A081B871A3200AC14BE /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -957,6 +958,7 @@
 				153739E81B871A3200AC14BE /* HostDetailHeaderView.m in Sources */,
 				15373A011B871A3200AC14BE /* IOPSChartView.m in Sources */,
 				153739EB1B871A3200AC14BE /* HostDetailViewFlowLayout.m in Sources */,
+				15BEEF7C1B97EDD400846A79 /* NotificationDetailView.m in Sources */,
 				153739F21B871A3200AC14BE /* OSDDetailView.m in Sources */,
 				153739DF1B871A3200AC14BE /* ClusterHealthProgressLayer.m in Sources */,
 				153739C01B871A3200AC14BE /* PoolIOPSController.m in Sources */,
@@ -1015,6 +1017,7 @@
 				153739F81B871A3200AC14BE /* PGStatusView.m in Sources */,
 				153739C61B871A3200AC14BE /* NotificationController.m in Sources */,
 				153739D91B871A3200AC14BE /* TextFieldChecker.m in Sources */,
+				15BEEF791B97EB9300846A79 /* NotificationDetailController.m in Sources */,
 				153739ED1B871A3200AC14BE /* HostHealthView.m in Sources */,
 				153739FF1B871A3200AC14BE /* PoolListViewCell.m in Sources */,
 				153739CF1B871A3200AC14BE /* OSDHealthData.m in Sources */,
@@ -1034,6 +1037,7 @@
 				15373A071B871A3200AC14BE /* NotificationView.m in Sources */,
 				15373A0A1B871A3200AC14BE /* main.m in Sources */,
 				153739DB1B871A3200AC14BE /* ChartCellBar.m in Sources */,
+				15A651451B95BDA3008124A3 /* NotificationViewFlowLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1183,7 +1187,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/inWinStackCeph",
+					"$(PROJECT_DIR)/calamari_ios_client",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/calamari_ios_client/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
@@ -1212,7 +1216,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/inWinStackCeph",
+					"$(PROJECT_DIR)/calamari_ios_client",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/calamari_ios_client/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;

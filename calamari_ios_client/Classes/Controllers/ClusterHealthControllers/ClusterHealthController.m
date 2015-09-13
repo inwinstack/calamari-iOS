@@ -18,6 +18,7 @@
 @interface ClusterHealthController ()
 
 @property (nonatomic, strong) NSMutableDictionary *collectionData;
+@property (nonatomic, strong) NSString *currentTimeString;
 
 @end
 
@@ -28,12 +29,20 @@
     [self.navigationController.navigationBar setBarTintColor:[UIColor oceanNavigationBarColor]];
     self.title = @"Dashboard";
     self.navigationController.navigationBar.translucent = NO;
+}
 
+- (void) refreshHealthCardAction:(NSNotification*)refreshHealthCardNotification {
+    self.currentTimeString = refreshHealthCardNotification.object;
+    NSIndexPath *healthIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    [(ClusterHealthViewCell*)[self.clusterHealthView cellForItemAtIndexPath:healthIndexPath] detailLabel].text = [NSString stringWithFormat:@"%@ %@", self.currentTimeString, [ClusterData shareInstance].unitArray[0]];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.currentTimeString = @"0";
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHealthCardAction:) name:@"timeAddAction" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshAction) name:@"didRefreshAction" object:nil];
     [self getData];
     self.navigationController.navigationBar.translucent = NO;
     self.flowLayout = [[ClusterHealthViewFlowLayout alloc] init];
@@ -42,6 +51,11 @@
     self.view = self.clusterHealthView;
     self.clusterHealthView.delegate = self;
     self.clusterHealthView.dataSource = self;
+}
+
+- (void) refreshAction {
+    [self getData];
+    [self.clusterHealthView reloadData];
 }
 
 - (void) collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -69,7 +83,8 @@
         height = ((CGRectGetWidth([UIScreen mainScreen].bounds) - CGRectGetWidth([UIScreen mainScreen].bounds) / 16) * 0.85) / 2;
     } else {
         height = (CGRectGetWidth([UIScreen mainScreen].bounds) - CGRectGetWidth([UIScreen mainScreen].bounds) / 16) * 0.85;
-    }    if (indexPath.row == 0) {
+    }
+    if (indexPath.row == 0) {
         if ([cell.statusLabel.text isEqualToString:@"OK"]) {
             cell.statusLabel.textColor = [UIColor okGreenColor];
             cell.layer.borderColor = [UIColor okGreenColor].CGColor;
@@ -147,7 +162,11 @@
     } else {
         cell.statusLabel.frame = CGRectMake(0, CGRectGetMaxY(cell.lineView.frame) + 35, CGRectGetWidth(cell.frame), height * 20 / 255);
         cell.detailLabel.frame = CGRectMake(0, CGRectGetMaxY(cell.statusLabel.frame), CGRectGetWidth(cell.frame), height * 20 / 255);
-        cell.detailLabel.text = [NSString stringWithFormat:@"%@%@", self.collectionData[[ClusterData shareInstance].serviceNameArray[indexPath.row]][1], [ClusterData shareInstance].unitArray[indexPath.row]];
+        if (indexPath.row == 0) {
+            cell.detailLabel.text = [NSString stringWithFormat:@"%@ %@", self.currentTimeString, [ClusterData shareInstance].unitArray[indexPath.row]];
+        } else {
+            cell.detailLabel.text = [NSString stringWithFormat:@"%@%@", self.collectionData[[ClusterData shareInstance].serviceNameArray[indexPath.row]][1], [ClusterData shareInstance].unitArray[indexPath.row]];
+        }
         [cell removeProgress];
     }
     
@@ -196,7 +215,6 @@
     NSString *osdStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"OSD" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
     NSString *monStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"MONITOR" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
     NSString *hostStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"HOSTS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *lastUpdate = [NSString stringWithFormat:@"%@ ", [[ClusterData shareInstance] getLastUpdateTimeWithID:[ClusterData shareInstance].clusterArray[0][@"id"]]];
     NSString *hostWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"HOSTS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
     NSString *hostError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"HOSTS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
     NSString *healthWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"HEALTH" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
@@ -211,7 +229,7 @@
     NSString *usageError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"Usage" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
     NSString *iopsTriger = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"IOPS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
     NSLog(@"%@", iopsTriger);
-    [self.collectionData setObject:@[healthStatus, lastUpdate, healthWarning, healthError] forKey:[ClusterData shareInstance].serviceNameArray[0]];
+    [self.collectionData setObject:@[healthStatus, @"", healthWarning, healthError] forKey:[ClusterData shareInstance].serviceNameArray[0]];
     [self.collectionData setObject:@[osdStatus, @"", osdWarning, osdError] forKey:[ClusterData shareInstance].serviceNameArray[1]];
     [self.collectionData setObject:@[monStatus, @"", monWarning, monError] forKey:[ClusterData shareInstance].serviceNameArray[2]];
     [self.collectionData setObject:@[poolStatus, @"", @"0", @"0"] forKey:[ClusterData shareInstance].serviceNameArray[3]];

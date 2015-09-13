@@ -349,7 +349,7 @@
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[URLMaker getAllCPUsWithIP:ip Port:port cpuID:object]] cachePolicy:0 timeoutInterval:6];
         [request setHTTPMethod:@"GET"];
         [request setValue:[Cookies shareInstance].sessionID forHTTPHeaderField:@"X-XSRF-TOKEN"];
-        
+
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
         operation.responseSerializer = [AFHTTPResponseSerializer serializer];
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {

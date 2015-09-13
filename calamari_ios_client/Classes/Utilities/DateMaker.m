@@ -35,7 +35,7 @@
 
 - (NSString*) getTodayWithNotificationFormat {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy/M/d HH:mm"];
+    [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm"];
     return [dateFormatter stringFromDate:[NSDate date]];
 }
 
