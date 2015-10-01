@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UILabel *versionLabel;
 @property (nonatomic, strong) UILabel *fromLabel;
 @property (nonatomic, strong) UILabel *designLabel;
+@property (nonatomic, strong) UIImageView *downTriangleImageView;
 
 @end
 
@@ -25,33 +26,60 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor oceanBackgroundOneColor];
+        float titleWidth = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? 220.0 : 110.0;
+        float titleHeight = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? 176.0 : 88.0;
+        float fieldHeight = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? 50.0 : CGRectGetWidth([UIScreen mainScreen].bounds) * 0.13;
         
-        self.titleView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 110, [UIView tbMarginFour], 220, 176)];
+        self.titleView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - titleWidth / 2.0, [UIView tbMarginFour], titleWidth, titleHeight)];
         self.titleView.image = [UIImage imageNamed:@"inWinStackIcon"];
         [self addSubview:self.titleView];
         
-        self.hostIpField = [[UITextField alloc] initWithFrame:CGRectMake([UIView lrMarginOne], CGRectGetMaxY(self.titleView.frame) + [UIView tbMarginThree], CGRectGetWidth(self.frame) - [UIView lrMarginOne] * 2, CGRectGetWidth([UIScreen mainScreen].bounds) * 0.13)];
+        self.hostIpField = [[UITextField alloc] initWithFrame:CGRectMake([UIView lrMarginOne], CGRectGetMaxY(self.titleView.frame) + [UIView tbMarginThree], CGRectGetWidth(self.frame) - [UIView lrMarginOne] * 2, fieldHeight)];
         self.hostIpField.placeholder = @"Host";
         self.hostIpField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         [self setDefaultField:self.hostIpField];
         
-        self.portField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.hostIpField.frame), CGRectGetMaxY(self.hostIpField.frame) + [UIView tbMarginOne], CGRectGetWidth(self.hostIpField.frame), CGRectGetWidth([UIScreen mainScreen].bounds) * 0.13)];
+        self.portField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.hostIpField.frame), CGRectGetMaxY(self.hostIpField.frame) + [UIView tbMarginOne], CGRectGetWidth(self.hostIpField.frame), fieldHeight)];
         self.portField.placeholder = @"Port";
         self.portField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         [self setDefaultField:self.portField];
         
-        self.accountField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.hostIpField.frame), CGRectGetMaxY(self.portField.frame) + [UIView tbMarginOne], CGRectGetWidth(self.hostIpField.frame), CGRectGetWidth([UIScreen mainScreen].bounds) * 0.13)];
+        self.accountField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.hostIpField.frame), CGRectGetMaxY(self.portField.frame) + [UIView tbMarginOne], CGRectGetWidth(self.hostIpField.frame), fieldHeight)];
         self.accountField.placeholder = @"Name";
         self.accountField.keyboardType = UIKeyboardTypeASCIICapable;
         [self setDefaultField:self.accountField];
         
-        self.passwordField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.hostIpField.frame), CGRectGetMaxY(self.accountField.frame) + [UIView tbMarginOne], CGRectGetWidth(self.hostIpField.frame), CGRectGetWidth([UIScreen mainScreen].bounds) * 0.13)];
+        self.passwordField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.hostIpField.frame), CGRectGetMaxY(self.accountField.frame) + [UIView tbMarginOne], CGRectGetWidth(self.hostIpField.frame), fieldHeight)];
         self.passwordField.placeholder = @"Password";
         self.passwordField.secureTextEntry = YES;
         self.passwordField.keyboardType = UIKeyboardTypeASCIICapable;
         [self setDefaultField:self.passwordField];
         
-        self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.passwordField.frame), CGRectGetMaxY(self.passwordField.frame) + [UIView tbMarginOne], CGRectGetWidth(self.passwordField.frame), CGRectGetWidth([UIScreen mainScreen].bounds) * 0.13)];
+        self.languageView = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.passwordField.frame), CGRectGetMaxY(self.passwordField.frame) + [UIView tbMarginOne], CGRectGetWidth(self.passwordField.frame), fieldHeight)];
+        self.languageView.backgroundColor = [UIColor oceanBackgroundThreeColor];
+        self.languageView.layer.cornerRadius = 5;
+        [self addSubview:self.languageView];
+        
+        self.downTriangleImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.languageView.frame) - ([UIView bodySize] + 10), (CGRectGetHeight(self.languageView.frame) / 2.0) - ([UIView bodySize] / 2.0), [UIView bodySize], [UIView bodySize])];
+        self.downTriangleImageView.image = [UIImage imageNamed:@"DownTriangleImage"];
+        [self.languageView addSubview:self.downTriangleImageView];
+        
+        self.languageCountryImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (CGRectGetHeight(self.languageView.frame) / 2.0) - ([UIView bodySize] / 2.0), [UIView bodySize], [UIView bodySize])];
+        [self.languageView addSubview:self.languageCountryImageView];
+        
+        self.languageContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.languageCountryImageView.frame) + 5, 0, CGRectGetWidth(self.frame) - (CGRectGetMaxX(self.languageCountryImageView.frame) + ([UIView bodySize] + 10)), CGRectGetHeight(self.languageView.frame))];
+        self.languageContentLabel.font = [UIFont systemFontOfSize:[UIView bodySize]];
+        self.languageContentLabel.textColor = [UIColor languageContentColor];
+        self.languageContentLabel.text = @"English";
+        [self.languageView addSubview:self.languageContentLabel];
+        
+        self.languageSettingButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.passwordField.frame), CGRectGetMaxY(self.passwordField.frame) + [UIView tbMarginOne], CGRectGetWidth(self.passwordField.frame), fieldHeight)];
+        self.languageSettingButton.backgroundColor = [UIColor clearColor];
+        self.languageSettingButton.layer.cornerRadius = 5;
+        [self addSubview:self.languageSettingButton];
+        
+        
+        self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.languageView.frame), CGRectGetMaxY(self.languageView.frame) + [UIView tbMarginOne], CGRectGetWidth(self.languageView.frame), fieldHeight)];
         self.loginButton.backgroundColor = [UIColor oceanNavigationBarColor];
         self.loginButton.layer.cornerRadius = 5;
         [self.loginButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
@@ -59,8 +87,8 @@
         [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self addSubview:self.loginButton];
         
-        self.versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.loginButton.frame) + [UIView tbMarginOne], CGRectGetWidth(self.frame), 20)];
-        self.versionLabel.text = @"Ceph Monitor Version 0.10.1";
+        self.versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.frame) - (40 + [UIView tbMarginOne]), CGRectGetWidth(self.frame), 20)];
+        self.versionLabel.text = @"Ceph Monitor Version 0.12.0";
         self.versionLabel.textAlignment = NSTextAlignmentCenter;
         [self setDefaultLabel:self.versionLabel];
         

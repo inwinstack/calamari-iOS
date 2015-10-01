@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OSDDetailView : UIView
+@interface OSDDetailView : UIScrollView
 
 @property (nonatomic, strong) UILabel *hostNameValueLabel;
 @property (nonatomic, strong) UILabel *publicValueLabel;

@@ -103,7 +103,7 @@
         }
         label.textColor = [UIColor whiteColor];
         label.font = [UIFont systemFontOfSize:height * 14 / 255];
-        label.text = [NSString stringWithFormat:@"%@", object];
+        label.text = ([object length] == 0) ? @"  " : [NSString stringWithFormat:@"%@", object];
         [label sizeToFit];
         label.textAlignment = NSTextAlignmentCenter;
         UIView *labelBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(label.frame) - CGRectGetWidth(self.frame) * 0.03, CGRectGetMinY(label.frame) - CGRectGetWidth(self.frame) * 0.01, CGRectGetWidth(label.frame) + CGRectGetWidth(self.frame) * 0.06, CGRectGetHeight(label.frame) + CGRectGetWidth(self.frame) * 0.03)];
@@ -118,6 +118,7 @@
     self.reWeightValueLabel.frame = CGRectMake(height * 5 / 255, CGRectGetMaxY(self.reWeightTitleLabel.frame), CGRectGetWidth(self.frame) -  height * 10 / 255,  height * 15 / 255);
     self.uuidTitleLabel.frame = CGRectMake(height * 5 / 255, CGRectGetMaxY(self.reWeightValueLabel.frame) + height * 10 / 255, CGRectGetWidth(self.frame) - height * 10 / 255, height * 25 / 255);
     self.uuidValueLabel.frame = CGRectMake(height * 5 / 255, CGRectGetMaxY(self.uuidTitleLabel.frame), CGRectGetWidth(self.frame) - height * 10 / 255, height * 15 / 255);
+    self.contentSize = CGSizeMake(CGRectGetWidth(self.frame), CGRectGetMaxY(self.uuidValueLabel.frame) + 64 + height * 5 / 255);
 }
 
 @end

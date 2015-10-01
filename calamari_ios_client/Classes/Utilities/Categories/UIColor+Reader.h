@@ -50,5 +50,9 @@
 + (UIColor*) IRQLineBrownFillColor;
 + (UIColor*) SoftIRQLineGrayFillColor;
 + (UIColor*) navigationSelectedColor;
++ (UIColor*) languageContentColor;
+
++ (UIColor*) customAlertContentDistrictColor;
++ (UIColor*) customAlertEnterButtonTextColor;
 
 @end

@@ -90,6 +90,8 @@
             if (readError) {
                 error(readError);
             } else {
+
+                [[NSUserDefaults standardUserDefaults] setObject:receiveObject[0][@"id"] forKey:@"ClusterID"];
                 [ClusterData shareInstance].clusterArray = (NSMutableArray*)receiveObject;
                 completion(true);
             }
@@ -131,6 +133,20 @@
             if (readError) {
                 error(readError);
             } else {
+                if ([kind isEqualToString:@"mon"]) {
+                    NSMutableArray *tempMonArray = [NSMutableArray array];
+                    for (id monContent in receiveObject) {
+                        NSMutableDictionary *tempMonContentDic = [NSMutableDictionary dictionary];
+                        [tempMonContentDic setObject:monContent[@"addr"] forKey:@"addr"];
+                        [tempMonContentDic setObject:monContent[@"in_quorum"] forKey:@"in_quorum"];
+                        [tempMonContentDic setObject:monContent[@"name"] forKey:@"name"];
+                        [tempMonContentDic setObject:monContent[@"rank"] forKey:@"rank"];
+                        [tempMonArray addObject:tempMonContentDic];
+                    }
+                    [[NSUserDefaults standardUserDefaults] setObject:tempMonArray forKey:[NSString stringWithFormat:@"kind_%@",kind]];
+                } else {
+                    [[NSUserDefaults standardUserDefaults] setObject:receiveObject forKey:[NSString stringWithFormat:@"kind_%@",kind]];
+                }
                 [[ClusterData shareInstance].clusterDetailData setObject:receiveObject forKey:[NSString stringWithFormat:@"%@_%@", clusterID, kind]];
                 completion(true);
             }
@@ -151,6 +167,7 @@
             if (readError) {
                 error(readError);
             } else {
+
                 [[ClusterData shareInstance].clusterDetailData setObject:receiveObject forKey:[NSString stringWithFormat:@"%@_osd_detail", clusterID]];
                 completion(true);
             }
@@ -159,25 +176,104 @@
 }
 
 - (void) startGetClusterDetailAtBackgroundCompletion:(void (^)(BOOL finished))completion error:(void (^)(id error))backgroundError {
-   [self startGetClusterDataWithIP:[UserData shareInstance].ipString Port:[UserData shareInstance].portString Version:[APIRecord shareInstance].APIDictionary[@"Health"][0] ClusterID:[ClusterData shareInstance].clusterArray[0][@"id"] Kind:[APIRecord shareInstance].APIDictionary[@"Health"][1] completion:^(BOOL finished) {
-       if (finished) {
-           [self startGetClusterDataWithIP:[UserData shareInstance].ipString Port:[UserData shareInstance].portString Version:[APIRecord shareInstance].APIDictionary[@"Space"][0] ClusterID:[ClusterData shareInstance].clusterArray[0][@"id"] Kind:[APIRecord shareInstance].APIDictionary[@"Space"][1] completion:^(BOOL finished) {
-               if (finished) {
-                   [self startGetClusterDataWithIP:[UserData shareInstance].ipString Port:[UserData shareInstance].portString Version:[APIRecord shareInstance].APIDictionary[@"Health_Counter"][0] ClusterID:[ClusterData shareInstance].clusterArray[0][@"id"] Kind:[APIRecord shareInstance].APIDictionary[@"Health_Counter"][1] completion:^(BOOL finished) {
-                       if (finished) {
-                           completion(true);
-                       }
-                   } error:^(id error) {
-                       backgroundError(error);
-                   }];
-               }
-           } error:^(id error) {
-               backgroundError(error);
-           }];
-       }
-   } error:^(id error) {
-       backgroundError(error);
-   }];
+    NSString *hostIPString = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"];
+    NSString *portString = [[NSUserDefaults standardUserDefaults] objectForKey:@"Port"];
+    NSString *accountString = [[NSUserDefaults standardUserDefaults] objectForKey:@"Account"];
+    NSString *passwordString = [[NSUserDefaults standardUserDefaults] objectForKey:@"Password"];
+    NSString *clusterID = [[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"];
+
+    [[Cookies shareInstance] clearCookies];
+    [self startGetSessionWithIP:hostIPString Port:portString Account:accountString Password:passwordString completion:^(BOOL finished) {
+        if (finished) {
+            [self startGetClusterListWithIP:hostIPString Port:portString completion:^(BOOL finished) {
+                if (finished) {
+                    [self startGetClusterDataWithIP:hostIPString Port:portString Version:[APIRecord shareInstance].APIDictionary[@"Health"][0] ClusterID:clusterID Kind:[APIRecord shareInstance].APIDictionary[@"Health"][1] completion:^(BOOL finished) {
+                        if (finished) {
+                            [self startGetClusterDataWithIP:hostIPString Port:portString Version:[APIRecord shareInstance].APIDictionary[@"Space"][0] ClusterID:clusterID Kind:[APIRecord shareInstance].APIDictionary[@"Space"][1] completion:^(BOOL finished) {
+                                if (finished) {
+                                    [self startGetClusterDataWithIP:hostIPString Port:portString Version:[APIRecord shareInstance].APIDictionary[@"Health_Counter"][0] ClusterID:clusterID Kind:[APIRecord shareInstance].APIDictionary[@"Health_Counter"][1] completion:^(BOOL finished) {
+                                        if (finished) {
+                                            [self startGetClusterDataWithIP:hostIPString Port:portString Version:[APIRecord shareInstance].APIDictionary[@"Pools"][0] ClusterID:[ClusterData shareInstance].clusterArray[0][@"id"] Kind:[APIRecord shareInstance].APIDictionary[@"Pools"][1] completion:^(BOOL finished) {
+                                                if (finished) {
+                                                    [self startGetClusterDataWithIP:hostIPString Port:portString Version:[APIRecord shareInstance].APIDictionary[@"Hosts"][0] ClusterID:clusterID Kind:[APIRecord shareInstance].APIDictionary[@"Hosts"][1] completion:^(BOOL finished) {
+                                                        if (finished) {
+                                                            [[CephAPI shareInstance] startGetClusterDataWithIP:hostIPString Port:portString Version:[APIRecord shareInstance].APIDictionary[@"OSD"][0] ClusterID:clusterID Kind:[APIRecord shareInstance].APIDictionary[@"OSD"][1] completion:^(BOOL finished) {
+                                                                if (finished) {
+                                                                    [[CephAPI shareInstance] startGetClusterDataWithIP:hostIPString Port:portString Version:[APIRecord shareInstance].APIDictionary[@"MON"][0] ClusterID:clusterID Kind:[APIRecord shareInstance].APIDictionary[@"MON"][1] completion:^(BOOL finished) {
+                                                                        if (finished) {
+                                                                            [[CephAPI shareInstance] startGetIOPSDataWithIP:hostIPString Port:portString ClusterID:clusterID Completion:^(BOOL finished) {
+                                                                                if (finished) {
+                                                                                    [[CephAPI shareInstance] startGetIOPSIDWithIP:hostIPString Port:portString ClusterID:clusterID Completion:^(BOOL finished) {
+                                                                                        if (finished) {
+                                                                                            [[CephAPI shareInstance] startGetPoolListWithIP:hostIPString Port:portString ClusterID:[ClusterData shareInstance].clusterArray[0][@"id"] Completion:^(BOOL finished) {
+                                                                                                if (finished) {
+                                                                                                    [[NSUserDefaults standardUserDefaults] setObject:@"did" forKey:@"refresh"];
+
+                                                                                                    completion(true);
+                                                                                                }
+                                                                                            } error:^(id error) {
+                                                                                                
+                                                                                                NSLog(@"%@", error);
+                                                                                            }];
+                                                                                        }
+                                                                                    } error:^(id error) {
+                                                                                        
+                                                                                        NSLog(@"%@", error);
+                                                                                    }];
+                                                                                }
+                                                                            } error:^(id error) {
+                                                                                
+                                                                                NSLog(@"%@", error);
+                                                                            }];
+                                                                        }
+                                                                    } error:^(id error) {
+                                                                        
+                                                                        NSLog(@"%@", error);
+                                                                    }];
+                                                                }
+                                                            } error:^(id error) {
+                                                                
+                                                                NSLog(@"%@", error);
+                                                            }];
+                                                        }
+                                                    } error:^(id error) {
+                                                        
+                                                        NSLog(@"%@", error);
+                                                    }];
+                                                }
+                                            } error:^(id error) {
+                                                
+                                            }];
+                                        }
+                                    } error:^(id error) {
+                                        if (error) {
+                                            backgroundError(error);
+                                        }
+                                    }];
+                                }
+                            } error:^(id error) {
+                                if (error) {
+                                    backgroundError(error);
+                                }
+                            }];
+                        }
+                    } error:^(id error) {
+                        if (error) {
+                            backgroundError(error);
+                        }
+                    }];
+                }
+            } error:^(id error) {
+                if (error) {
+                    backgroundError(error);
+                }
+            }];
+        }
+    } error:^(id error) {
+        if (error) {
+            backgroundError(error);
+        }
+    }];
 }
 
 - (void) startGetIOPSDataWithIP:(NSString*)ip Port:(NSString*)port ClusterID:(NSString*)clusterID Completion:(void (^)(BOOL finished))completion error:(void (^)(id error))getError {
@@ -254,6 +350,7 @@
             if (readError) {
                 getError(readError);
             } else {
+                [[NSUserDefaults standardUserDefaults] setObject:receiveObject forKey:@"kind_pool_list"];
                 [[ClusterData shareInstance].clusterDetailData setObject:receiveObject forKey:[NSString stringWithFormat:@"%@_pool_list", clusterID]];
                 completion(true);
             }

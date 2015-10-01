@@ -20,8 +20,15 @@
 #import "UIView+SizeMaker.h"
 #import "Cookies.h"
 #import "NotificationData.h"
+#import "AlertSelectionView.h"
+#import "AlertSelectionViewCell.h"
+#import "SettingData.h"
 
-@interface LoginController () <ErrorDelegate, UITextFieldDelegate>
+@interface LoginController () <ErrorDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, AlertSectionDelegate>
+
+@property (nonatomic, strong) AlertSelectionView *alertSelectionView;
+@property (nonatomic, strong) NSString *tempLanguageString;
+@property (nonatomic, strong) NSString *tempImageString;
 
 @end
 
@@ -34,14 +41,43 @@
     self.loginView.portField.text = ([[NSUserDefaults standardUserDefaults] objectForKey:@"Port"]) ? [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"Port"]] : @"";
     self.loginView.accountField.text = ([[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]) ? [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]] : @"";
     self.loginView.passwordField.text = ([[NSUserDefaults standardUserDefaults] objectForKey:@"Password"]) ? [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"Password"]] : @"";
+    self.loginView.languageContentLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguage"];
+    self.loginView.languageCountryImageView.image = [UIImage imageNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguageImage"]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backgroundAction) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [[Cookies shareInstance] clearCookies];
     [[NSUserDefaults standardUserDefaults] setObject:@"didLogout" forKey:@"firstTime"];
+
 }
 
 - (void) backgroundAction {
     [self textFieldResign];
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [SettingData shareSettingData].languageOptionArray.count;
+}
+
+- (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    AlertSelectionViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LanguageSettingAlertViewCellIdentifier"];
+    if (!cell) {
+        cell = [[AlertSelectionViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LanguageSettingAlertViewCellIdentifier" imageName:[SettingData shareSettingData].languageImageOptionArray[indexPath.row]];
+    }
+    cell.districtLineView.alpha = (indexPath.row == 2) ? 0.0 : 1.0;
+    cell.mainNameLabel.text = [SettingData shareSettingData].languageOptionArray[indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectedView.backgroundColor = ([self.tempLanguageString isEqualToString:cell.mainNameLabel.text]) ? [UIColor oceanNavigationBarColor] : [UIColor osdButtonHighlightColor];
+    return cell;
+}
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.tempLanguageString = [SettingData shareSettingData].languageOptionArray[indexPath.row];
+    self.tempImageString = [SettingData shareSettingData].languageImageOptionArray[indexPath.row];
+    [tableView reloadData];
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 37.0;
 }
 
 - (void)viewDidLoad {
@@ -57,6 +93,25 @@
     
     self.navigationController.navigationBarHidden = YES;
     [self.loginView.loginButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.loginView.languageSettingButton addTarget:self action:@selector(languageSettingAction) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void) alertButtonDidSelect:(UIButton *)alertButton {
+    [[NSUserDefaults standardUserDefaults] setObject:self.tempLanguageString forKey:@"CurrentLanguage"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.tempImageString forKey:@"CurrentLanguageImage"];
+    self.loginView.languageContentLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguage"];
+    self.loginView.languageCountryImageView.image = [UIImage imageNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguageImage"]];
+
+}
+
+- (void) languageSettingAction {
+    self.alertSelectionView = [[AlertSelectionView alloc] initWithTitle:@"Language" content:@""];
+    self.alertSelectionView.selectionTableView.delegate = self;
+    self.alertSelectionView.selectionTableView.dataSource = self;
+    self.alertSelectionView.alertSectionDelegate = self;
+    [self.view.window addSubview:self.alertSelectionView];
+    self.tempLanguageString = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguage"];
+    self.tempImageString = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguageImage"];
 }
 
 - (void) loginAction {
@@ -97,6 +152,8 @@
                                                                                             if (finished) {
                                                                                                 [[CephAPI shareInstance] startGetPoolListWithIP:self.loginView.hostIpField.text Port:self.loginView.portField.text ClusterID:[ClusterData shareInstance].clusterArray[0][@"id"] Completion:^(BOOL finished) {
                                                                                                     if (finished) {
+                                                                                                        NSLog(@"didLogin");
+                                                                                                        [[NSUserDefaults standardUserDefaults] setObject:@"did" forKey:@"refresh"];
                                                                                                         [[NSUserDefaults standardUserDefaults] setObject:@"did" forKey:@"firstTime"];
                                                                                                         [[NSUserDefaults standardUserDefaults] setObject:self.loginView.hostIpField.text forKey:@"HostIP"];
                                                                                                         [[NSUserDefaults standardUserDefaults] setObject:self.loginView.portField.text forKey:@"Port"];
@@ -106,12 +163,13 @@
                                                                                                         [UserData shareInstance].portString = self.loginView.portField.text;
                                                                                                         [UserData shareInstance].accountString = self.loginView.accountField.text;
                                                                                                         [UserData shareInstance].passwordString = self.loginView.passwordField.text;
+                                                                                                        [SVProgressHUD dismiss];
+
                                                                                                         weakself.loginView.userInteractionEnabled = YES;
                                                                                                         weakself.navigationController.navigationBarHidden = NO;
                                                                                                         weakself.clusterHealthController = [[ClusterHealthController alloc] init];
                                                                                                         [weakself.navigationController pushViewController:weakself.clusterHealthController animated:YES];
-                                                                                                        [[NotificationData shareInstance] startTimer];
-                                                                                                        [SVProgressHUD dismiss];
+                                                                                                        [[NotificationData shareInstance] restartTimerWithTimeInterval:10];
                                                                                                     }
                                                                                                 } error:^(id error) {
                                                                                                     [SVProgressHUD dismiss];
