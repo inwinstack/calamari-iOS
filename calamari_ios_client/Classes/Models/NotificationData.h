@@ -42,6 +42,7 @@ typedef  NS_ENUM(NSUInteger, NotificationUsageType) {
 @property (nonatomic, strong) NSMutableArray *warnPreviousArray;
 @property (nonatomic, strong) NSMutableArray *errorOriginalArray;
 @property (nonatomic, strong) NSMutableArray *errorPreviousArray;
+@property (nonatomic) BOOL isBackground;
 
 + (NotificationData*) shareInstance;
 

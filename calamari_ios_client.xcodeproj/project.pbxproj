@@ -7,797 +7,808 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		153739B51B871A3200AC14BE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 153738ED1B871A3200AC14BE /* AppDelegate.m */; };
-		153739B61B871A3200AC14BE /* ChartController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153738F21B871A3200AC14BE /* ChartController.m */; };
-		153739B71B871A3200AC14BE /* ClusterHealthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153738F51B871A3200AC14BE /* ClusterHealthController.m */; };
-		153739B81B871A3200AC14BE /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153738F81B871A3200AC14BE /* BaseController.m */; };
-		153739B91B871A3200AC14BE /* HealthDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153738FA1B871A3200AC14BE /* HealthDetailController.m */; };
-		153739BA1B871A3200AC14BE /* HostDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153738FC1B871A3200AC14BE /* HostDetailController.m */; };
-		153739BB1B871A3200AC14BE /* HostHealthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153738FE1B871A3200AC14BE /* HostHealthController.m */; };
-		153739BC1B871A3200AC14BE /* MONHealthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739001B871A3200AC14BE /* MONHealthController.m */; };
-		153739BD1B871A3200AC14BE /* OSDDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739021B871A3200AC14BE /* OSDDetailController.m */; };
-		153739BE1B871A3200AC14BE /* OSDHealthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739041B871A3200AC14BE /* OSDHealthController.m */; };
-		153739BF1B871A3200AC14BE /* PGStatusController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739061B871A3200AC14BE /* PGStatusController.m */; };
-		153739C01B871A3200AC14BE /* PoolIOPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739081B871A3200AC14BE /* PoolIOPSController.m */; };
-		153739C11B871A3200AC14BE /* PoolListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537390A1B871A3200AC14BE /* PoolListController.m */; };
-		153739C21B871A3200AC14BE /* UsageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537390C1B871A3200AC14BE /* UsageController.m */; };
-		153739C31B871A3200AC14BE /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537390E1B871A3200AC14BE /* CustomNavigationController.m */; };
-		153739C41B871A3200AC14BE /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739111B871A3200AC14BE /* LoginController.m */; };
-		153739C51B871A3200AC14BE /* MutualController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739151B871A3200AC14BE /* MutualController.m */; };
-		153739C61B871A3200AC14BE /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739181B871A3200AC14BE /* NotificationController.m */; };
-		153739C71B871A3200AC14BE /* APIRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537391D1B871A3200AC14BE /* APIRecord.m */; };
-		153739C81B871A3200AC14BE /* ClusterData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537391F1B871A3200AC14BE /* ClusterData.m */; };
-		153739C91B871A3200AC14BE /* Cookies.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739211B871A3200AC14BE /* Cookies.m */; };
-		153739CA1B871A3200AC14BE /* HealthDetailData.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739231B871A3200AC14BE /* HealthDetailData.m */; };
-		153739CB1B871A3200AC14BE /* HostHealthData.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739251B871A3200AC14BE /* HostHealthData.m */; };
-		153739CC1B871A3200AC14BE /* ImageData.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739271B871A3200AC14BE /* ImageData.m */; };
-		153739CD1B871A3200AC14BE /* MONHealthData.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739291B871A3200AC14BE /* MONHealthData.m */; };
-		153739CE1B871A3200AC14BE /* NotificationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537392B1B871A3200AC14BE /* NotificationData.m */; };
-		153739CF1B871A3200AC14BE /* OSDHealthData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537392D1B871A3200AC14BE /* OSDHealthData.m */; };
-		153739D01B871A3200AC14BE /* PGData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537392F1B871A3200AC14BE /* PGData.m */; };
-		153739D11B871A3200AC14BE /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739311B871A3200AC14BE /* UserData.m */; };
-		153739D21B871A3200AC14BE /* AnimationMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739341B871A3200AC14BE /* AnimationMaker.m */; };
-		153739D31B871A3200AC14BE /* UIColor+Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739371B871A3200AC14BE /* UIColor+Reader.m */; };
-		153739D41B871A3200AC14BE /* UINavigationBar+HeightMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739391B871A3200AC14BE /* UINavigationBar+HeightMaker.m */; };
-		153739D51B871A3200AC14BE /* UIView+SizeMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537393B1B871A3200AC14BE /* UIView+SizeMaker.m */; };
-		153739D61B871A3200AC14BE /* CephAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537393E1B871A3200AC14BE /* CephAPI.m */; };
-		153739D71B871A3200AC14BE /* URLMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739401B871A3200AC14BE /* URLMaker.m */; };
-		153739D81B871A3200AC14BE /* DateMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739421B871A3200AC14BE /* DateMaker.m */; };
-		153739D91B871A3200AC14BE /* TextFieldChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739441B871A3200AC14BE /* TextFieldChecker.m */; };
-		153739DA1B871A3200AC14BE /* ChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739481B871A3200AC14BE /* ChartCell.m */; };
-		153739DB1B871A3200AC14BE /* ChartCellBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537394A1B871A3200AC14BE /* ChartCellBar.m */; };
-		153739DC1B871A3200AC14BE /* ChartFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537394C1B871A3200AC14BE /* ChartFlowLayout.m */; };
-		153739DD1B871A3200AC14BE /* ChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537394E1B871A3200AC14BE /* ChartView.m */; };
-		153739DE1B871A3200AC14BE /* ClusterHealthCellBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739511B871A3200AC14BE /* ClusterHealthCellBar.m */; };
-		153739DF1B871A3200AC14BE /* ClusterHealthProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739531B871A3200AC14BE /* ClusterHealthProgressLayer.m */; };
-		153739E01B871A3200AC14BE /* ClusterHealthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739551B871A3200AC14BE /* ClusterHealthView.m */; };
-		153739E11B871A3200AC14BE /* ClusterHealthViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739571B871A3200AC14BE /* ClusterHealthViewCell.m */; };
-		153739E21B871A3200AC14BE /* ClusterHealthViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739591B871A3200AC14BE /* ClusterHealthViewFlowLayout.m */; };
-		153739E31B871A3200AC14BE /* HealthDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537395D1B871A3200AC14BE /* HealthDetailView.m */; };
-		153739E41B871A3200AC14BE /* HealthDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537395F1B871A3200AC14BE /* HealthDetailViewCell.m */; };
-		153739E51B871A3200AC14BE /* CPUIOPSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739621B871A3200AC14BE /* CPUIOPSView.m */; };
-		153739E61B871A3200AC14BE /* CPULineBrokenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739641B871A3200AC14BE /* CPULineBrokenView.m */; };
-		153739E71B871A3200AC14BE /* CPUSquareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739661B871A3200AC14BE /* CPUSquareView.m */; };
-		153739E81B871A3200AC14BE /* HostDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739681B871A3200AC14BE /* HostDetailHeaderView.m */; };
-		153739E91B871A3200AC14BE /* HostDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537396A1B871A3200AC14BE /* HostDetailView.m */; };
-		153739EA1B871A3200AC14BE /* HostDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537396C1B871A3200AC14BE /* HostDetailViewCell.m */; };
-		153739EB1B871A3200AC14BE /* HostDetailViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537396E1B871A3200AC14BE /* HostDetailViewFlowLayout.m */; };
-		153739EC1B871A3200AC14BE /* HostHealthFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739711B871A3200AC14BE /* HostHealthFlowLayout.m */; };
-		153739ED1B871A3200AC14BE /* HostHealthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739731B871A3200AC14BE /* HostHealthView.m */; };
-		153739EE1B871A3200AC14BE /* HostHealthViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739751B871A3200AC14BE /* HostHealthViewCell.m */; };
-		153739EF1B871A3200AC14BE /* MONHealthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739781B871A3200AC14BE /* MONHealthCell.m */; };
-		153739F01B871A3200AC14BE /* MONHealthFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537397A1B871A3200AC14BE /* MONHealthFlowLayout.m */; };
-		153739F11B871A3200AC14BE /* MONHealthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537397C1B871A3200AC14BE /* MONHealthView.m */; };
-		153739F21B871A3200AC14BE /* OSDDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537397F1B871A3200AC14BE /* OSDDetailView.m */; };
-		153739F31B871A3200AC14BE /* OSDHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739821B871A3200AC14BE /* OSDHeaderView.m */; };
-		153739F41B871A3200AC14BE /* OSDHealthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739841B871A3200AC14BE /* OSDHealthView.m */; };
-		153739F51B871A3200AC14BE /* OSDHealthViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739861B871A3200AC14BE /* OSDHealthViewCell.m */; };
-		153739F61B871A3200AC14BE /* OSDViewFLowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739881B871A3200AC14BE /* OSDViewFLowLayout.m */; };
-		153739F71B871A3200AC14BE /* PGStatusFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537398B1B871A3200AC14BE /* PGStatusFlowLayout.m */; };
-		153739F81B871A3200AC14BE /* PGStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537398D1B871A3200AC14BE /* PGStatusView.m */; };
-		153739F91B871A3200AC14BE /* PGStatusViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537398F1B871A3200AC14BE /* PGStatusViewCell.m */; };
-		153739FA1B871A3200AC14BE /* IOPSDetailChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739921B871A3200AC14BE /* IOPSDetailChartView.m */; };
-		153739FB1B871A3200AC14BE /* PoolIOPSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739941B871A3200AC14BE /* PoolIOPSView.m */; };
-		153739FC1B871A3200AC14BE /* PoolIOPSViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739961B871A3200AC14BE /* PoolIOPSViewCell.m */; };
-		153739FD1B871A3200AC14BE /* PoolIOPSViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739981B871A3200AC14BE /* PoolIOPSViewFlowLayout.m */; };
-		153739FE1B871A3200AC14BE /* PoolListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537399B1B871A3200AC14BE /* PoolListView.m */; };
-		153739FF1B871A3200AC14BE /* PoolListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1537399D1B871A3200AC14BE /* PoolListViewCell.m */; };
-		15373A001B871A3200AC14BE /* UsageStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739A01B871A3200AC14BE /* UsageStatusView.m */; };
-		15373A011B871A3200AC14BE /* IOPSChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739A21B871A3200AC14BE /* IOPSChartView.m */; };
-		15373A021B871A3200AC14BE /* ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739A51B871A3200AC14BE /* ErrorView.m */; };
-		15373A031B871A3200AC14BE /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739A81B871A3200AC14BE /* LoginView.m */; };
-		15373A041B871A3200AC14BE /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739AA1B871A3200AC14BE /* NavigationView.m */; };
-		15373A051B871A3200AC14BE /* NavigationViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739AC1B871A3200AC14BE /* NavigationViewCell.m */; };
-		15373A061B871A3200AC14BE /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739AF1B871A3200AC14BE /* NotificationCell.m */; };
-		15373A071B871A3200AC14BE /* NotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739B11B871A3200AC14BE /* NotificationView.m */; };
-		15373A081B871A3200AC14BE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 153739B21B871A3200AC14BE /* Images.xcassets */; };
-		15373A0A1B871A3200AC14BE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 153739B41B871A3200AC14BE /* main.m */; };
-		15373A2B1B871C5C00AC14BE /* calamari_ios_client_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15373A2A1B871C5C00AC14BE /* calamari_ios_client_Tests.m */; };
-		1538581A1B8EAC9E00EC32B9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 153858191B8EAC9E00EC32B9 /* AVFoundation.framework */; };
-		156E621B1B3191BF0090A825 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 156E621A1B3191BF0090A825 /* QuartzCore.framework */; };
-		15A651451B95BDA3008124A3 /* NotificationViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 15A651441B95BDA3008124A3 /* NotificationViewFlowLayout.m */; };
-		15BEEF791B97EB9300846A79 /* NotificationDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BEEF781B97EB9300846A79 /* NotificationDetailController.m */; };
-		15BEEF7C1B97EDD400846A79 /* NotificationDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BEEF7B1B97EDD400846A79 /* NotificationDetailView.m */; };
-		15E5C9561B871DF600B2B839 /* APITest.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E5C9551B871DF600B2B839 /* APITest.m */; };
-		F6CD02EA2335B75752713936 /* libPods-inWinStackCeph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9555D7CADD0918BCD61153F /* libPods-inWinStackCeph.a */; };
+		15CACE0B1BA5276300DFD26B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE0A1BA5276300DFD26B /* main.m */; };
+		15CACE0E1BA5276300DFD26B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE0D1BA5276300DFD26B /* AppDelegate.m */; };
+		15CACE161BA5276300DFD26B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15CACE151BA5276300DFD26B /* Images.xcassets */; };
+		15CACE251BA5276300DFD26B /* calamari_ios_clientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE241BA5276300DFD26B /* calamari_ios_clientTests.m */; };
+		15CACEF81BA5279900DFD26B /* ChartController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE321BA5279900DFD26B /* ChartController.m */; };
+		15CACEF91BA5279A00DFD26B /* ClusterHealthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE351BA5279900DFD26B /* ClusterHealthController.m */; };
+		15CACEFA1BA5279A00DFD26B /* BaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE381BA5279900DFD26B /* BaseController.m */; };
+		15CACEFB1BA5279A00DFD26B /* HealthDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE3A1BA5279900DFD26B /* HealthDetailController.m */; };
+		15CACEFC1BA5279A00DFD26B /* HostDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE3C1BA5279900DFD26B /* HostDetailController.m */; };
+		15CACEFD1BA5279A00DFD26B /* HostHealthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE3E1BA5279900DFD26B /* HostHealthController.m */; };
+		15CACEFE1BA5279A00DFD26B /* MONHealthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE401BA5279900DFD26B /* MONHealthController.m */; };
+		15CACEFF1BA5279A00DFD26B /* OSDDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE421BA5279900DFD26B /* OSDDetailController.m */; };
+		15CACF001BA5279A00DFD26B /* OSDHealthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE441BA5279900DFD26B /* OSDHealthController.m */; };
+		15CACF011BA5279A00DFD26B /* PGStatusController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE461BA5279900DFD26B /* PGStatusController.m */; };
+		15CACF021BA5279A00DFD26B /* PoolIOPSController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE481BA5279900DFD26B /* PoolIOPSController.m */; };
+		15CACF031BA5279A00DFD26B /* PoolListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE4A1BA5279900DFD26B /* PoolListController.m */; };
+		15CACF041BA5279A00DFD26B /* UsageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE4C1BA5279900DFD26B /* UsageController.m */; };
+		15CACF051BA5279A00DFD26B /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE4E1BA5279900DFD26B /* CustomNavigationController.m */; };
+		15CACF061BA5279A00DFD26B /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE511BA5279900DFD26B /* LoginController.m */; };
+		15CACF071BA5279A00DFD26B /* MutualController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE551BA5279900DFD26B /* MutualController.m */; };
+		15CACF081BA5279A00DFD26B /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE581BA5279900DFD26B /* NotificationController.m */; };
+		15CACF091BA5279A00DFD26B /* NotificationDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE5A1BA5279900DFD26B /* NotificationDetailController.m */; };
+		15CACF0A1BA5279A00DFD26B /* APIRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE5F1BA5279900DFD26B /* APIRecord.m */; };
+		15CACF0B1BA5279A00DFD26B /* ClusterData.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE611BA5279900DFD26B /* ClusterData.m */; };
+		15CACF0C1BA5279A00DFD26B /* Cookies.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE631BA5279900DFD26B /* Cookies.m */; };
+		15CACF0D1BA5279A00DFD26B /* HealthDetailData.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE651BA5279900DFD26B /* HealthDetailData.m */; };
+		15CACF0E1BA5279A00DFD26B /* HostHealthData.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE671BA5279900DFD26B /* HostHealthData.m */; };
+		15CACF0F1BA5279A00DFD26B /* ImageData.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE691BA5279900DFD26B /* ImageData.m */; };
+		15CACF101BA5279A00DFD26B /* MONHealthData.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE6B1BA5279900DFD26B /* MONHealthData.m */; };
+		15CACF111BA5279A00DFD26B /* NotificationData.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE6D1BA5279900DFD26B /* NotificationData.m */; };
+		15CACF121BA5279A00DFD26B /* OSDHealthData.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE6F1BA5279900DFD26B /* OSDHealthData.m */; };
+		15CACF131BA5279A00DFD26B /* PGData.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE711BA5279900DFD26B /* PGData.m */; };
+		15CACF141BA5279A00DFD26B /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE731BA5279900DFD26B /* UserData.m */; };
+		15CACF151BA5279A00DFD26B /* AnimationMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE761BA5279900DFD26B /* AnimationMaker.m */; };
+		15CACF161BA5279A00DFD26B /* UIColor+Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE791BA5279900DFD26B /* UIColor+Reader.m */; };
+		15CACF171BA5279A00DFD26B /* UINavigationBar+HeightMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE7B1BA5279900DFD26B /* UINavigationBar+HeightMaker.m */; };
+		15CACF181BA5279A00DFD26B /* UIView+SizeMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE7D1BA5279900DFD26B /* UIView+SizeMaker.m */; };
+		15CACF191BA5279A00DFD26B /* CephAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE801BA5279900DFD26B /* CephAPI.m */; };
+		15CACF1A1BA5279A00DFD26B /* URLMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE821BA5279900DFD26B /* URLMaker.m */; };
+		15CACF1B1BA5279A00DFD26B /* DateMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE841BA5279900DFD26B /* DateMaker.m */; };
+		15CACF1C1BA5279A00DFD26B /* TextFieldChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE861BA5279900DFD26B /* TextFieldChecker.m */; };
+		15CACF1D1BA5279A00DFD26B /* ChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE8A1BA5279900DFD26B /* ChartCell.m */; };
+		15CACF1E1BA5279A00DFD26B /* ChartCellBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE8C1BA5279900DFD26B /* ChartCellBar.m */; };
+		15CACF1F1BA5279A00DFD26B /* ChartFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE8E1BA5279900DFD26B /* ChartFlowLayout.m */; };
+		15CACF201BA5279A00DFD26B /* ChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE901BA5279900DFD26B /* ChartView.m */; };
+		15CACF211BA5279A00DFD26B /* ClusterHealthCellBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE931BA5279900DFD26B /* ClusterHealthCellBar.m */; };
+		15CACF221BA5279A00DFD26B /* ClusterHealthProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE951BA5279900DFD26B /* ClusterHealthProgressLayer.m */; };
+		15CACF231BA5279A00DFD26B /* ClusterHealthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE971BA5279900DFD26B /* ClusterHealthView.m */; };
+		15CACF241BA5279A00DFD26B /* ClusterHealthViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE991BA5279900DFD26B /* ClusterHealthViewCell.m */; };
+		15CACF251BA5279A00DFD26B /* ClusterHealthViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE9B1BA5279900DFD26B /* ClusterHealthViewFlowLayout.m */; };
+		15CACF261BA5279A00DFD26B /* HealthDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE9F1BA5279900DFD26B /* HealthDetailView.m */; };
+		15CACF271BA5279A00DFD26B /* HealthDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEA11BA5279900DFD26B /* HealthDetailViewCell.m */; };
+		15CACF281BA5279A00DFD26B /* CPUIOPSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEA41BA5279900DFD26B /* CPUIOPSView.m */; };
+		15CACF291BA5279A00DFD26B /* CPULineBrokenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEA61BA5279900DFD26B /* CPULineBrokenView.m */; };
+		15CACF2A1BA5279A00DFD26B /* CPUSquareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEA81BA5279900DFD26B /* CPUSquareView.m */; };
+		15CACF2B1BA5279A00DFD26B /* HostDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEAA1BA5279900DFD26B /* HostDetailHeaderView.m */; };
+		15CACF2C1BA5279A00DFD26B /* HostDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEAC1BA5279900DFD26B /* HostDetailView.m */; };
+		15CACF2D1BA5279A00DFD26B /* HostDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEAE1BA5279900DFD26B /* HostDetailViewCell.m */; };
+		15CACF2E1BA5279A00DFD26B /* HostDetailViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEB01BA5279900DFD26B /* HostDetailViewFlowLayout.m */; };
+		15CACF2F1BA5279A00DFD26B /* HostHealthFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEB31BA5279900DFD26B /* HostHealthFlowLayout.m */; };
+		15CACF301BA5279A00DFD26B /* HostHealthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEB51BA5279900DFD26B /* HostHealthView.m */; };
+		15CACF311BA5279A00DFD26B /* HostHealthViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEB71BA5279900DFD26B /* HostHealthViewCell.m */; };
+		15CACF321BA5279A00DFD26B /* MONHealthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEBA1BA5279900DFD26B /* MONHealthCell.m */; };
+		15CACF331BA5279A00DFD26B /* MONHealthFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEBC1BA5279900DFD26B /* MONHealthFlowLayout.m */; };
+		15CACF341BA5279A00DFD26B /* MONHealthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEBE1BA5279900DFD26B /* MONHealthView.m */; };
+		15CACF351BA5279A00DFD26B /* OSDDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEC11BA5279900DFD26B /* OSDDetailView.m */; };
+		15CACF361BA5279A00DFD26B /* OSDHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEC41BA5279900DFD26B /* OSDHeaderView.m */; };
+		15CACF371BA5279A00DFD26B /* OSDHealthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEC61BA5279900DFD26B /* OSDHealthView.m */; };
+		15CACF381BA5279A00DFD26B /* OSDHealthViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEC81BA5279900DFD26B /* OSDHealthViewCell.m */; };
+		15CACF391BA5279A00DFD26B /* OSDViewFLowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACECA1BA5279900DFD26B /* OSDViewFLowLayout.m */; };
+		15CACF3A1BA5279A00DFD26B /* PGStatusFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACECD1BA5279900DFD26B /* PGStatusFlowLayout.m */; };
+		15CACF3B1BA5279A00DFD26B /* PGStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACECF1BA5279900DFD26B /* PGStatusView.m */; };
+		15CACF3C1BA5279A00DFD26B /* PGStatusViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACED11BA5279900DFD26B /* PGStatusViewCell.m */; };
+		15CACF3D1BA5279A00DFD26B /* IOPSDetailChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACED41BA5279900DFD26B /* IOPSDetailChartView.m */; };
+		15CACF3E1BA5279A00DFD26B /* PoolIOPSView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACED61BA5279900DFD26B /* PoolIOPSView.m */; };
+		15CACF3F1BA5279A00DFD26B /* PoolIOPSViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACED81BA5279900DFD26B /* PoolIOPSViewCell.m */; };
+		15CACF401BA5279A00DFD26B /* PoolIOPSViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEDA1BA5279900DFD26B /* PoolIOPSViewFlowLayout.m */; };
+		15CACF411BA5279A00DFD26B /* PoolListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEDD1BA5279900DFD26B /* PoolListView.m */; };
+		15CACF421BA5279A00DFD26B /* PoolListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEDF1BA5279900DFD26B /* PoolListViewCell.m */; };
+		15CACF431BA5279A00DFD26B /* UsageStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEE21BA5279900DFD26B /* UsageStatusView.m */; };
+		15CACF441BA5279A00DFD26B /* IOPSChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEE41BA5279900DFD26B /* IOPSChartView.m */; };
+		15CACF451BA5279A00DFD26B /* ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEE71BA5279900DFD26B /* ErrorView.m */; };
+		15CACF461BA5279A00DFD26B /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEEA1BA5279900DFD26B /* LoginView.m */; };
+		15CACF471BA5279A00DFD26B /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEEC1BA5279900DFD26B /* NavigationView.m */; };
+		15CACF481BA5279A00DFD26B /* NavigationViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEEE1BA5279900DFD26B /* NavigationViewCell.m */; };
+		15CACF491BA5279A00DFD26B /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEF11BA5279900DFD26B /* NotificationCell.m */; };
+		15CACF4A1BA5279A00DFD26B /* NotificationDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEF31BA5279900DFD26B /* NotificationDetailView.m */; };
+		15CACF4B1BA5279A00DFD26B /* NotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEF51BA5279900DFD26B /* NotificationView.m */; };
+		15CACF4C1BA5279A00DFD26B /* NotificationViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACEF71BA5279900DFD26B /* NotificationViewFlowLayout.m */; };
+		4F2D199058C3A0107D7AE603 /* libPods-calamari_ios_client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D56DBF74FAD2FCBB66FDFC /* libPods-calamari_ios_client.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		15373A2C1B871C5C00AC14BE /* PBXContainerItemProxy */ = {
+		15CACE1F1BA5276300DFD26B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 1589BCCB1AD6A9CE005B86A8 /* Project object */;
+			containerPortal = 15CACDFD1BA5276300DFD26B /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 1589BCD21AD6A9CE005B86A8;
+			remoteGlobalIDString = 15CACE041BA5276300DFD26B;
 			remoteInfo = calamari_ios_client;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		153738EC1B871A3200AC14BE /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		153738ED1B871A3200AC14BE /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		153738F11B871A3200AC14BE /* ChartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartController.h; sourceTree = "<group>"; };
-		153738F21B871A3200AC14BE /* ChartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartController.m; sourceTree = "<group>"; };
-		153738F41B871A3200AC14BE /* ClusterHealthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterHealthController.h; sourceTree = "<group>"; };
-		153738F51B871A3200AC14BE /* ClusterHealthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterHealthController.m; sourceTree = "<group>"; };
-		153738F71B871A3200AC14BE /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
-		153738F81B871A3200AC14BE /* BaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseController.m; sourceTree = "<group>"; };
-		153738F91B871A3200AC14BE /* HealthDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthDetailController.h; sourceTree = "<group>"; };
-		153738FA1B871A3200AC14BE /* HealthDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthDetailController.m; sourceTree = "<group>"; };
-		153738FB1B871A3200AC14BE /* HostDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostDetailController.h; sourceTree = "<group>"; };
-		153738FC1B871A3200AC14BE /* HostDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostDetailController.m; sourceTree = "<group>"; };
-		153738FD1B871A3200AC14BE /* HostHealthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostHealthController.h; sourceTree = "<group>"; };
-		153738FE1B871A3200AC14BE /* HostHealthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostHealthController.m; sourceTree = "<group>"; };
-		153738FF1B871A3200AC14BE /* MONHealthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MONHealthController.h; sourceTree = "<group>"; };
-		153739001B871A3200AC14BE /* MONHealthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MONHealthController.m; sourceTree = "<group>"; };
-		153739011B871A3200AC14BE /* OSDDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDDetailController.h; sourceTree = "<group>"; };
-		153739021B871A3200AC14BE /* OSDDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDDetailController.m; sourceTree = "<group>"; };
-		153739031B871A3200AC14BE /* OSDHealthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDHealthController.h; sourceTree = "<group>"; };
-		153739041B871A3200AC14BE /* OSDHealthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDHealthController.m; sourceTree = "<group>"; };
-		153739051B871A3200AC14BE /* PGStatusController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGStatusController.h; sourceTree = "<group>"; };
-		153739061B871A3200AC14BE /* PGStatusController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGStatusController.m; sourceTree = "<group>"; };
-		153739071B871A3200AC14BE /* PoolIOPSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolIOPSController.h; sourceTree = "<group>"; };
-		153739081B871A3200AC14BE /* PoolIOPSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolIOPSController.m; sourceTree = "<group>"; };
-		153739091B871A3200AC14BE /* PoolListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolListController.h; sourceTree = "<group>"; };
-		1537390A1B871A3200AC14BE /* PoolListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolListController.m; sourceTree = "<group>"; };
-		1537390B1B871A3200AC14BE /* UsageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsageController.h; sourceTree = "<group>"; };
-		1537390C1B871A3200AC14BE /* UsageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsageController.m; sourceTree = "<group>"; };
-		1537390D1B871A3200AC14BE /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
-		1537390E1B871A3200AC14BE /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
-		153739101B871A3200AC14BE /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
-		153739111B871A3200AC14BE /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
-		153739141B871A3200AC14BE /* MutualController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutualController.h; sourceTree = "<group>"; };
-		153739151B871A3200AC14BE /* MutualController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutualController.m; sourceTree = "<group>"; };
-		153739171B871A3200AC14BE /* NotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
-		153739181B871A3200AC14BE /* NotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
-		1537391C1B871A3200AC14BE /* APIRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIRecord.h; sourceTree = "<group>"; };
-		1537391D1B871A3200AC14BE /* APIRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIRecord.m; sourceTree = "<group>"; };
-		1537391E1B871A3200AC14BE /* ClusterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterData.h; sourceTree = "<group>"; };
-		1537391F1B871A3200AC14BE /* ClusterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterData.m; sourceTree = "<group>"; };
-		153739201B871A3200AC14BE /* Cookies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cookies.h; sourceTree = "<group>"; };
-		153739211B871A3200AC14BE /* Cookies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cookies.m; sourceTree = "<group>"; };
-		153739221B871A3200AC14BE /* HealthDetailData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthDetailData.h; sourceTree = "<group>"; };
-		153739231B871A3200AC14BE /* HealthDetailData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthDetailData.m; sourceTree = "<group>"; };
-		153739241B871A3200AC14BE /* HostHealthData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostHealthData.h; sourceTree = "<group>"; };
-		153739251B871A3200AC14BE /* HostHealthData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostHealthData.m; sourceTree = "<group>"; };
-		153739261B871A3200AC14BE /* ImageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageData.h; sourceTree = "<group>"; };
-		153739271B871A3200AC14BE /* ImageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageData.m; sourceTree = "<group>"; };
-		153739281B871A3200AC14BE /* MONHealthData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MONHealthData.h; sourceTree = "<group>"; };
-		153739291B871A3200AC14BE /* MONHealthData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MONHealthData.m; sourceTree = "<group>"; };
-		1537392A1B871A3200AC14BE /* NotificationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationData.h; sourceTree = "<group>"; };
-		1537392B1B871A3200AC14BE /* NotificationData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationData.m; sourceTree = "<group>"; };
-		1537392C1B871A3200AC14BE /* OSDHealthData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDHealthData.h; sourceTree = "<group>"; };
-		1537392D1B871A3200AC14BE /* OSDHealthData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDHealthData.m; sourceTree = "<group>"; };
-		1537392E1B871A3200AC14BE /* PGData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGData.h; sourceTree = "<group>"; };
-		1537392F1B871A3200AC14BE /* PGData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGData.m; sourceTree = "<group>"; };
-		153739301B871A3200AC14BE /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
-		153739311B871A3200AC14BE /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
-		153739331B871A3200AC14BE /* AnimationMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationMaker.h; sourceTree = "<group>"; };
-		153739341B871A3200AC14BE /* AnimationMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationMaker.m; sourceTree = "<group>"; };
-		153739361B871A3200AC14BE /* UIColor+Reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Reader.h"; sourceTree = "<group>"; };
-		153739371B871A3200AC14BE /* UIColor+Reader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Reader.m"; sourceTree = "<group>"; };
-		153739381B871A3200AC14BE /* UINavigationBar+HeightMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+HeightMaker.h"; sourceTree = "<group>"; };
-		153739391B871A3200AC14BE /* UINavigationBar+HeightMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+HeightMaker.m"; sourceTree = "<group>"; };
-		1537393A1B871A3200AC14BE /* UIView+SizeMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SizeMaker.h"; sourceTree = "<group>"; };
-		1537393B1B871A3200AC14BE /* UIView+SizeMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SizeMaker.m"; sourceTree = "<group>"; };
-		1537393D1B871A3200AC14BE /* CephAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CephAPI.h; sourceTree = "<group>"; };
-		1537393E1B871A3200AC14BE /* CephAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CephAPI.m; sourceTree = "<group>"; };
-		1537393F1B871A3200AC14BE /* URLMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLMaker.h; sourceTree = "<group>"; };
-		153739401B871A3200AC14BE /* URLMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLMaker.m; sourceTree = "<group>"; };
-		153739411B871A3200AC14BE /* DateMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateMaker.h; sourceTree = "<group>"; };
-		153739421B871A3200AC14BE /* DateMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateMaker.m; sourceTree = "<group>"; };
-		153739431B871A3200AC14BE /* TextFieldChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldChecker.h; sourceTree = "<group>"; };
-		153739441B871A3200AC14BE /* TextFieldChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldChecker.m; sourceTree = "<group>"; };
-		153739471B871A3200AC14BE /* ChartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartCell.h; sourceTree = "<group>"; };
-		153739481B871A3200AC14BE /* ChartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartCell.m; sourceTree = "<group>"; };
-		153739491B871A3200AC14BE /* ChartCellBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartCellBar.h; sourceTree = "<group>"; };
-		1537394A1B871A3200AC14BE /* ChartCellBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartCellBar.m; sourceTree = "<group>"; };
-		1537394B1B871A3200AC14BE /* ChartFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartFlowLayout.h; sourceTree = "<group>"; };
-		1537394C1B871A3200AC14BE /* ChartFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartFlowLayout.m; sourceTree = "<group>"; };
-		1537394D1B871A3200AC14BE /* ChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartView.h; sourceTree = "<group>"; };
-		1537394E1B871A3200AC14BE /* ChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartView.m; sourceTree = "<group>"; };
-		153739501B871A3200AC14BE /* ClusterHealthCellBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterHealthCellBar.h; sourceTree = "<group>"; };
-		153739511B871A3200AC14BE /* ClusterHealthCellBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterHealthCellBar.m; sourceTree = "<group>"; };
-		153739521B871A3200AC14BE /* ClusterHealthProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterHealthProgressLayer.h; sourceTree = "<group>"; };
-		153739531B871A3200AC14BE /* ClusterHealthProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterHealthProgressLayer.m; sourceTree = "<group>"; };
-		153739541B871A3200AC14BE /* ClusterHealthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterHealthView.h; sourceTree = "<group>"; };
-		153739551B871A3200AC14BE /* ClusterHealthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterHealthView.m; sourceTree = "<group>"; };
-		153739561B871A3200AC14BE /* ClusterHealthViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterHealthViewCell.h; sourceTree = "<group>"; };
-		153739571B871A3200AC14BE /* ClusterHealthViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterHealthViewCell.m; sourceTree = "<group>"; };
-		153739581B871A3200AC14BE /* ClusterHealthViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterHealthViewFlowLayout.h; sourceTree = "<group>"; };
-		153739591B871A3200AC14BE /* ClusterHealthViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterHealthViewFlowLayout.m; sourceTree = "<group>"; };
-		1537395C1B871A3200AC14BE /* HealthDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthDetailView.h; sourceTree = "<group>"; };
-		1537395D1B871A3200AC14BE /* HealthDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthDetailView.m; sourceTree = "<group>"; };
-		1537395E1B871A3200AC14BE /* HealthDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthDetailViewCell.h; sourceTree = "<group>"; };
-		1537395F1B871A3200AC14BE /* HealthDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthDetailViewCell.m; sourceTree = "<group>"; };
-		153739611B871A3200AC14BE /* CPUIOPSView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUIOPSView.h; sourceTree = "<group>"; };
-		153739621B871A3200AC14BE /* CPUIOPSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPUIOPSView.m; sourceTree = "<group>"; };
-		153739631B871A3200AC14BE /* CPULineBrokenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPULineBrokenView.h; sourceTree = "<group>"; };
-		153739641B871A3200AC14BE /* CPULineBrokenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPULineBrokenView.m; sourceTree = "<group>"; };
-		153739651B871A3200AC14BE /* CPUSquareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUSquareView.h; sourceTree = "<group>"; };
-		153739661B871A3200AC14BE /* CPUSquareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPUSquareView.m; sourceTree = "<group>"; };
-		153739671B871A3200AC14BE /* HostDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostDetailHeaderView.h; sourceTree = "<group>"; };
-		153739681B871A3200AC14BE /* HostDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostDetailHeaderView.m; sourceTree = "<group>"; };
-		153739691B871A3200AC14BE /* HostDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostDetailView.h; sourceTree = "<group>"; };
-		1537396A1B871A3200AC14BE /* HostDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostDetailView.m; sourceTree = "<group>"; };
-		1537396B1B871A3200AC14BE /* HostDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostDetailViewCell.h; sourceTree = "<group>"; };
-		1537396C1B871A3200AC14BE /* HostDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostDetailViewCell.m; sourceTree = "<group>"; };
-		1537396D1B871A3200AC14BE /* HostDetailViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostDetailViewFlowLayout.h; sourceTree = "<group>"; };
-		1537396E1B871A3200AC14BE /* HostDetailViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostDetailViewFlowLayout.m; sourceTree = "<group>"; };
-		153739701B871A3200AC14BE /* HostHealthFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostHealthFlowLayout.h; sourceTree = "<group>"; };
-		153739711B871A3200AC14BE /* HostHealthFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostHealthFlowLayout.m; sourceTree = "<group>"; };
-		153739721B871A3200AC14BE /* HostHealthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostHealthView.h; sourceTree = "<group>"; };
-		153739731B871A3200AC14BE /* HostHealthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostHealthView.m; sourceTree = "<group>"; };
-		153739741B871A3200AC14BE /* HostHealthViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostHealthViewCell.h; sourceTree = "<group>"; };
-		153739751B871A3200AC14BE /* HostHealthViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostHealthViewCell.m; sourceTree = "<group>"; };
-		153739771B871A3200AC14BE /* MONHealthCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MONHealthCell.h; sourceTree = "<group>"; };
-		153739781B871A3200AC14BE /* MONHealthCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MONHealthCell.m; sourceTree = "<group>"; };
-		153739791B871A3200AC14BE /* MONHealthFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MONHealthFlowLayout.h; sourceTree = "<group>"; };
-		1537397A1B871A3200AC14BE /* MONHealthFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MONHealthFlowLayout.m; sourceTree = "<group>"; };
-		1537397B1B871A3200AC14BE /* MONHealthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MONHealthView.h; sourceTree = "<group>"; };
-		1537397C1B871A3200AC14BE /* MONHealthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MONHealthView.m; sourceTree = "<group>"; };
-		1537397E1B871A3200AC14BE /* OSDDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDDetailView.h; sourceTree = "<group>"; };
-		1537397F1B871A3200AC14BE /* OSDDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDDetailView.m; sourceTree = "<group>"; };
-		153739811B871A3200AC14BE /* OSDHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDHeaderView.h; sourceTree = "<group>"; };
-		153739821B871A3200AC14BE /* OSDHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDHeaderView.m; sourceTree = "<group>"; };
-		153739831B871A3200AC14BE /* OSDHealthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDHealthView.h; sourceTree = "<group>"; };
-		153739841B871A3200AC14BE /* OSDHealthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDHealthView.m; sourceTree = "<group>"; };
-		153739851B871A3200AC14BE /* OSDHealthViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDHealthViewCell.h; sourceTree = "<group>"; };
-		153739861B871A3200AC14BE /* OSDHealthViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDHealthViewCell.m; sourceTree = "<group>"; };
-		153739871B871A3200AC14BE /* OSDViewFLowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDViewFLowLayout.h; sourceTree = "<group>"; };
-		153739881B871A3200AC14BE /* OSDViewFLowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDViewFLowLayout.m; sourceTree = "<group>"; };
-		1537398A1B871A3200AC14BE /* PGStatusFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGStatusFlowLayout.h; sourceTree = "<group>"; };
-		1537398B1B871A3200AC14BE /* PGStatusFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGStatusFlowLayout.m; sourceTree = "<group>"; };
-		1537398C1B871A3200AC14BE /* PGStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGStatusView.h; sourceTree = "<group>"; };
-		1537398D1B871A3200AC14BE /* PGStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGStatusView.m; sourceTree = "<group>"; };
-		1537398E1B871A3200AC14BE /* PGStatusViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGStatusViewCell.h; sourceTree = "<group>"; };
-		1537398F1B871A3200AC14BE /* PGStatusViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGStatusViewCell.m; sourceTree = "<group>"; };
-		153739911B871A3200AC14BE /* IOPSDetailChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOPSDetailChartView.h; sourceTree = "<group>"; };
-		153739921B871A3200AC14BE /* IOPSDetailChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOPSDetailChartView.m; sourceTree = "<group>"; };
-		153739931B871A3200AC14BE /* PoolIOPSView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolIOPSView.h; sourceTree = "<group>"; };
-		153739941B871A3200AC14BE /* PoolIOPSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolIOPSView.m; sourceTree = "<group>"; };
-		153739951B871A3200AC14BE /* PoolIOPSViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolIOPSViewCell.h; sourceTree = "<group>"; };
-		153739961B871A3200AC14BE /* PoolIOPSViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolIOPSViewCell.m; sourceTree = "<group>"; };
-		153739971B871A3200AC14BE /* PoolIOPSViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolIOPSViewFlowLayout.h; sourceTree = "<group>"; };
-		153739981B871A3200AC14BE /* PoolIOPSViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolIOPSViewFlowLayout.m; sourceTree = "<group>"; };
-		1537399A1B871A3200AC14BE /* PoolListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolListView.h; sourceTree = "<group>"; };
-		1537399B1B871A3200AC14BE /* PoolListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolListView.m; sourceTree = "<group>"; };
-		1537399C1B871A3200AC14BE /* PoolListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolListViewCell.h; sourceTree = "<group>"; };
-		1537399D1B871A3200AC14BE /* PoolListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolListViewCell.m; sourceTree = "<group>"; };
-		1537399F1B871A3200AC14BE /* UsageStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsageStatusView.h; sourceTree = "<group>"; };
-		153739A01B871A3200AC14BE /* UsageStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsageStatusView.m; sourceTree = "<group>"; };
-		153739A11B871A3200AC14BE /* IOPSChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOPSChartView.h; sourceTree = "<group>"; };
-		153739A21B871A3200AC14BE /* IOPSChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOPSChartView.m; sourceTree = "<group>"; };
-		153739A41B871A3200AC14BE /* ErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorView.h; sourceTree = "<group>"; };
-		153739A51B871A3200AC14BE /* ErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorView.m; sourceTree = "<group>"; };
-		153739A71B871A3200AC14BE /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
-		153739A81B871A3200AC14BE /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
-		153739A91B871A3200AC14BE /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
-		153739AA1B871A3200AC14BE /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
-		153739AB1B871A3200AC14BE /* NavigationViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewCell.h; sourceTree = "<group>"; };
-		153739AC1B871A3200AC14BE /* NavigationViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewCell.m; sourceTree = "<group>"; };
-		153739AE1B871A3200AC14BE /* NotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCell.h; sourceTree = "<group>"; };
-		153739AF1B871A3200AC14BE /* NotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCell.m; sourceTree = "<group>"; };
-		153739B01B871A3200AC14BE /* NotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationView.h; sourceTree = "<group>"; };
-		153739B11B871A3200AC14BE /* NotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationView.m; sourceTree = "<group>"; };
-		153739B21B871A3200AC14BE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		153739B31B871A3200AC14BE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		153739B41B871A3200AC14BE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		15373A261B871C5C00AC14BE /* calamari_ios_client Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "calamari_ios_client Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		15373A291B871C5C00AC14BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		15373A2A1B871C5C00AC14BE /* calamari_ios_client_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = calamari_ios_client_Tests.m; sourceTree = "<group>"; };
-		153858191B8EAC9E00EC32B9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		156E621A1B3191BF0090A825 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		1589BCD31AD6A9CE005B86A8 /* calamari_ios_client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calamari_ios_client.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		15A651431B95BDA3008124A3 /* NotificationViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewFlowLayout.h; sourceTree = "<group>"; };
-		15A651441B95BDA3008124A3 /* NotificationViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewFlowLayout.m; sourceTree = "<group>"; };
-		15BEEF771B97EB9300846A79 /* NotificationDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationDetailController.h; sourceTree = "<group>"; };
-		15BEEF781B97EB9300846A79 /* NotificationDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationDetailController.m; sourceTree = "<group>"; };
-		15BEEF7A1B97EDD400846A79 /* NotificationDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationDetailView.h; sourceTree = "<group>"; };
-		15BEEF7B1B97EDD400846A79 /* NotificationDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationDetailView.m; sourceTree = "<group>"; };
-		15E5C9551B871DF600B2B839 /* APITest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APITest.m; sourceTree = "<group>"; };
-		B515312BF3CA560B64EFE614 /* Pods-inWinStackCeph.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inWinStackCeph.debug.xcconfig"; path = "Pods/Target Support Files/Pods-inWinStackCeph/Pods-inWinStackCeph.debug.xcconfig"; sourceTree = "<group>"; };
-		C733CA9F4187E8EB7BD8BA3B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		D9555D7CADD0918BCD61153F /* libPods-inWinStackCeph.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-inWinStackCeph.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F1D38A01E8A46704AB5B61AB /* Pods-inWinStackCeph.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inWinStackCeph.release.xcconfig"; path = "Pods/Target Support Files/Pods-inWinStackCeph/Pods-inWinStackCeph.release.xcconfig"; sourceTree = "<group>"; };
+		15CACE051BA5276300DFD26B /* calamari_ios_client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calamari_ios_client.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		15CACE091BA5276300DFD26B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		15CACE0A1BA5276300DFD26B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		15CACE0C1BA5276300DFD26B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		15CACE0D1BA5276300DFD26B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		15CACE151BA5276300DFD26B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		15CACE1E1BA5276300DFD26B /* calamari_ios_clientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = calamari_ios_clientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		15CACE231BA5276300DFD26B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		15CACE241BA5276300DFD26B /* calamari_ios_clientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = calamari_ios_clientTests.m; sourceTree = "<group>"; };
+		15CACE311BA5279900DFD26B /* ChartController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartController.h; sourceTree = "<group>"; };
+		15CACE321BA5279900DFD26B /* ChartController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartController.m; sourceTree = "<group>"; };
+		15CACE341BA5279900DFD26B /* ClusterHealthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterHealthController.h; sourceTree = "<group>"; };
+		15CACE351BA5279900DFD26B /* ClusterHealthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterHealthController.m; sourceTree = "<group>"; };
+		15CACE371BA5279900DFD26B /* BaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseController.h; sourceTree = "<group>"; };
+		15CACE381BA5279900DFD26B /* BaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseController.m; sourceTree = "<group>"; };
+		15CACE391BA5279900DFD26B /* HealthDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthDetailController.h; sourceTree = "<group>"; };
+		15CACE3A1BA5279900DFD26B /* HealthDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthDetailController.m; sourceTree = "<group>"; };
+		15CACE3B1BA5279900DFD26B /* HostDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostDetailController.h; sourceTree = "<group>"; };
+		15CACE3C1BA5279900DFD26B /* HostDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostDetailController.m; sourceTree = "<group>"; };
+		15CACE3D1BA5279900DFD26B /* HostHealthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostHealthController.h; sourceTree = "<group>"; };
+		15CACE3E1BA5279900DFD26B /* HostHealthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostHealthController.m; sourceTree = "<group>"; };
+		15CACE3F1BA5279900DFD26B /* MONHealthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MONHealthController.h; sourceTree = "<group>"; };
+		15CACE401BA5279900DFD26B /* MONHealthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MONHealthController.m; sourceTree = "<group>"; };
+		15CACE411BA5279900DFD26B /* OSDDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDDetailController.h; sourceTree = "<group>"; };
+		15CACE421BA5279900DFD26B /* OSDDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDDetailController.m; sourceTree = "<group>"; };
+		15CACE431BA5279900DFD26B /* OSDHealthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDHealthController.h; sourceTree = "<group>"; };
+		15CACE441BA5279900DFD26B /* OSDHealthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDHealthController.m; sourceTree = "<group>"; };
+		15CACE451BA5279900DFD26B /* PGStatusController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGStatusController.h; sourceTree = "<group>"; };
+		15CACE461BA5279900DFD26B /* PGStatusController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGStatusController.m; sourceTree = "<group>"; };
+		15CACE471BA5279900DFD26B /* PoolIOPSController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolIOPSController.h; sourceTree = "<group>"; };
+		15CACE481BA5279900DFD26B /* PoolIOPSController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolIOPSController.m; sourceTree = "<group>"; };
+		15CACE491BA5279900DFD26B /* PoolListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolListController.h; sourceTree = "<group>"; };
+		15CACE4A1BA5279900DFD26B /* PoolListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolListController.m; sourceTree = "<group>"; };
+		15CACE4B1BA5279900DFD26B /* UsageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsageController.h; sourceTree = "<group>"; };
+		15CACE4C1BA5279900DFD26B /* UsageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsageController.m; sourceTree = "<group>"; };
+		15CACE4D1BA5279900DFD26B /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
+		15CACE4E1BA5279900DFD26B /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
+		15CACE501BA5279900DFD26B /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
+		15CACE511BA5279900DFD26B /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		15CACE541BA5279900DFD26B /* MutualController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutualController.h; sourceTree = "<group>"; };
+		15CACE551BA5279900DFD26B /* MutualController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutualController.m; sourceTree = "<group>"; };
+		15CACE571BA5279900DFD26B /* NotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
+		15CACE581BA5279900DFD26B /* NotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
+		15CACE591BA5279900DFD26B /* NotificationDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationDetailController.h; sourceTree = "<group>"; };
+		15CACE5A1BA5279900DFD26B /* NotificationDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationDetailController.m; sourceTree = "<group>"; };
+		15CACE5E1BA5279900DFD26B /* APIRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIRecord.h; sourceTree = "<group>"; };
+		15CACE5F1BA5279900DFD26B /* APIRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIRecord.m; sourceTree = "<group>"; };
+		15CACE601BA5279900DFD26B /* ClusterData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterData.h; sourceTree = "<group>"; };
+		15CACE611BA5279900DFD26B /* ClusterData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterData.m; sourceTree = "<group>"; };
+		15CACE621BA5279900DFD26B /* Cookies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cookies.h; sourceTree = "<group>"; };
+		15CACE631BA5279900DFD26B /* Cookies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cookies.m; sourceTree = "<group>"; };
+		15CACE641BA5279900DFD26B /* HealthDetailData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthDetailData.h; sourceTree = "<group>"; };
+		15CACE651BA5279900DFD26B /* HealthDetailData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthDetailData.m; sourceTree = "<group>"; };
+		15CACE661BA5279900DFD26B /* HostHealthData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostHealthData.h; sourceTree = "<group>"; };
+		15CACE671BA5279900DFD26B /* HostHealthData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostHealthData.m; sourceTree = "<group>"; };
+		15CACE681BA5279900DFD26B /* ImageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageData.h; sourceTree = "<group>"; };
+		15CACE691BA5279900DFD26B /* ImageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageData.m; sourceTree = "<group>"; };
+		15CACE6A1BA5279900DFD26B /* MONHealthData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MONHealthData.h; sourceTree = "<group>"; };
+		15CACE6B1BA5279900DFD26B /* MONHealthData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MONHealthData.m; sourceTree = "<group>"; };
+		15CACE6C1BA5279900DFD26B /* NotificationData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationData.h; sourceTree = "<group>"; };
+		15CACE6D1BA5279900DFD26B /* NotificationData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationData.m; sourceTree = "<group>"; };
+		15CACE6E1BA5279900DFD26B /* OSDHealthData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDHealthData.h; sourceTree = "<group>"; };
+		15CACE6F1BA5279900DFD26B /* OSDHealthData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDHealthData.m; sourceTree = "<group>"; };
+		15CACE701BA5279900DFD26B /* PGData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGData.h; sourceTree = "<group>"; };
+		15CACE711BA5279900DFD26B /* PGData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGData.m; sourceTree = "<group>"; };
+		15CACE721BA5279900DFD26B /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
+		15CACE731BA5279900DFD26B /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
+		15CACE751BA5279900DFD26B /* AnimationMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationMaker.h; sourceTree = "<group>"; };
+		15CACE761BA5279900DFD26B /* AnimationMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationMaker.m; sourceTree = "<group>"; };
+		15CACE781BA5279900DFD26B /* UIColor+Reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Reader.h"; sourceTree = "<group>"; };
+		15CACE791BA5279900DFD26B /* UIColor+Reader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Reader.m"; sourceTree = "<group>"; };
+		15CACE7A1BA5279900DFD26B /* UINavigationBar+HeightMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+HeightMaker.h"; sourceTree = "<group>"; };
+		15CACE7B1BA5279900DFD26B /* UINavigationBar+HeightMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+HeightMaker.m"; sourceTree = "<group>"; };
+		15CACE7C1BA5279900DFD26B /* UIView+SizeMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SizeMaker.h"; sourceTree = "<group>"; };
+		15CACE7D1BA5279900DFD26B /* UIView+SizeMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SizeMaker.m"; sourceTree = "<group>"; };
+		15CACE7F1BA5279900DFD26B /* CephAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CephAPI.h; sourceTree = "<group>"; };
+		15CACE801BA5279900DFD26B /* CephAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CephAPI.m; sourceTree = "<group>"; };
+		15CACE811BA5279900DFD26B /* URLMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLMaker.h; sourceTree = "<group>"; };
+		15CACE821BA5279900DFD26B /* URLMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLMaker.m; sourceTree = "<group>"; };
+		15CACE831BA5279900DFD26B /* DateMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateMaker.h; sourceTree = "<group>"; };
+		15CACE841BA5279900DFD26B /* DateMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateMaker.m; sourceTree = "<group>"; };
+		15CACE851BA5279900DFD26B /* TextFieldChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldChecker.h; sourceTree = "<group>"; };
+		15CACE861BA5279900DFD26B /* TextFieldChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldChecker.m; sourceTree = "<group>"; };
+		15CACE891BA5279900DFD26B /* ChartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartCell.h; sourceTree = "<group>"; };
+		15CACE8A1BA5279900DFD26B /* ChartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartCell.m; sourceTree = "<group>"; };
+		15CACE8B1BA5279900DFD26B /* ChartCellBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartCellBar.h; sourceTree = "<group>"; };
+		15CACE8C1BA5279900DFD26B /* ChartCellBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartCellBar.m; sourceTree = "<group>"; };
+		15CACE8D1BA5279900DFD26B /* ChartFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartFlowLayout.h; sourceTree = "<group>"; };
+		15CACE8E1BA5279900DFD26B /* ChartFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartFlowLayout.m; sourceTree = "<group>"; };
+		15CACE8F1BA5279900DFD26B /* ChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartView.h; sourceTree = "<group>"; };
+		15CACE901BA5279900DFD26B /* ChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartView.m; sourceTree = "<group>"; };
+		15CACE921BA5279900DFD26B /* ClusterHealthCellBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterHealthCellBar.h; sourceTree = "<group>"; };
+		15CACE931BA5279900DFD26B /* ClusterHealthCellBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterHealthCellBar.m; sourceTree = "<group>"; };
+		15CACE941BA5279900DFD26B /* ClusterHealthProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterHealthProgressLayer.h; sourceTree = "<group>"; };
+		15CACE951BA5279900DFD26B /* ClusterHealthProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterHealthProgressLayer.m; sourceTree = "<group>"; };
+		15CACE961BA5279900DFD26B /* ClusterHealthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterHealthView.h; sourceTree = "<group>"; };
+		15CACE971BA5279900DFD26B /* ClusterHealthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterHealthView.m; sourceTree = "<group>"; };
+		15CACE981BA5279900DFD26B /* ClusterHealthViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterHealthViewCell.h; sourceTree = "<group>"; };
+		15CACE991BA5279900DFD26B /* ClusterHealthViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterHealthViewCell.m; sourceTree = "<group>"; };
+		15CACE9A1BA5279900DFD26B /* ClusterHealthViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterHealthViewFlowLayout.h; sourceTree = "<group>"; };
+		15CACE9B1BA5279900DFD26B /* ClusterHealthViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterHealthViewFlowLayout.m; sourceTree = "<group>"; };
+		15CACE9E1BA5279900DFD26B /* HealthDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthDetailView.h; sourceTree = "<group>"; };
+		15CACE9F1BA5279900DFD26B /* HealthDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthDetailView.m; sourceTree = "<group>"; };
+		15CACEA01BA5279900DFD26B /* HealthDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthDetailViewCell.h; sourceTree = "<group>"; };
+		15CACEA11BA5279900DFD26B /* HealthDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthDetailViewCell.m; sourceTree = "<group>"; };
+		15CACEA31BA5279900DFD26B /* CPUIOPSView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUIOPSView.h; sourceTree = "<group>"; };
+		15CACEA41BA5279900DFD26B /* CPUIOPSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPUIOPSView.m; sourceTree = "<group>"; };
+		15CACEA51BA5279900DFD26B /* CPULineBrokenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPULineBrokenView.h; sourceTree = "<group>"; };
+		15CACEA61BA5279900DFD26B /* CPULineBrokenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPULineBrokenView.m; sourceTree = "<group>"; };
+		15CACEA71BA5279900DFD26B /* CPUSquareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUSquareView.h; sourceTree = "<group>"; };
+		15CACEA81BA5279900DFD26B /* CPUSquareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPUSquareView.m; sourceTree = "<group>"; };
+		15CACEA91BA5279900DFD26B /* HostDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostDetailHeaderView.h; sourceTree = "<group>"; };
+		15CACEAA1BA5279900DFD26B /* HostDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostDetailHeaderView.m; sourceTree = "<group>"; };
+		15CACEAB1BA5279900DFD26B /* HostDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostDetailView.h; sourceTree = "<group>"; };
+		15CACEAC1BA5279900DFD26B /* HostDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostDetailView.m; sourceTree = "<group>"; };
+		15CACEAD1BA5279900DFD26B /* HostDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostDetailViewCell.h; sourceTree = "<group>"; };
+		15CACEAE1BA5279900DFD26B /* HostDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostDetailViewCell.m; sourceTree = "<group>"; };
+		15CACEAF1BA5279900DFD26B /* HostDetailViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostDetailViewFlowLayout.h; sourceTree = "<group>"; };
+		15CACEB01BA5279900DFD26B /* HostDetailViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostDetailViewFlowLayout.m; sourceTree = "<group>"; };
+		15CACEB21BA5279900DFD26B /* HostHealthFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostHealthFlowLayout.h; sourceTree = "<group>"; };
+		15CACEB31BA5279900DFD26B /* HostHealthFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostHealthFlowLayout.m; sourceTree = "<group>"; };
+		15CACEB41BA5279900DFD26B /* HostHealthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostHealthView.h; sourceTree = "<group>"; };
+		15CACEB51BA5279900DFD26B /* HostHealthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostHealthView.m; sourceTree = "<group>"; };
+		15CACEB61BA5279900DFD26B /* HostHealthViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostHealthViewCell.h; sourceTree = "<group>"; };
+		15CACEB71BA5279900DFD26B /* HostHealthViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostHealthViewCell.m; sourceTree = "<group>"; };
+		15CACEB91BA5279900DFD26B /* MONHealthCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MONHealthCell.h; sourceTree = "<group>"; };
+		15CACEBA1BA5279900DFD26B /* MONHealthCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MONHealthCell.m; sourceTree = "<group>"; };
+		15CACEBB1BA5279900DFD26B /* MONHealthFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MONHealthFlowLayout.h; sourceTree = "<group>"; };
+		15CACEBC1BA5279900DFD26B /* MONHealthFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MONHealthFlowLayout.m; sourceTree = "<group>"; };
+		15CACEBD1BA5279900DFD26B /* MONHealthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MONHealthView.h; sourceTree = "<group>"; };
+		15CACEBE1BA5279900DFD26B /* MONHealthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MONHealthView.m; sourceTree = "<group>"; };
+		15CACEC01BA5279900DFD26B /* OSDDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDDetailView.h; sourceTree = "<group>"; };
+		15CACEC11BA5279900DFD26B /* OSDDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDDetailView.m; sourceTree = "<group>"; };
+		15CACEC31BA5279900DFD26B /* OSDHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDHeaderView.h; sourceTree = "<group>"; };
+		15CACEC41BA5279900DFD26B /* OSDHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDHeaderView.m; sourceTree = "<group>"; };
+		15CACEC51BA5279900DFD26B /* OSDHealthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDHealthView.h; sourceTree = "<group>"; };
+		15CACEC61BA5279900DFD26B /* OSDHealthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDHealthView.m; sourceTree = "<group>"; };
+		15CACEC71BA5279900DFD26B /* OSDHealthViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDHealthViewCell.h; sourceTree = "<group>"; };
+		15CACEC81BA5279900DFD26B /* OSDHealthViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDHealthViewCell.m; sourceTree = "<group>"; };
+		15CACEC91BA5279900DFD26B /* OSDViewFLowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSDViewFLowLayout.h; sourceTree = "<group>"; };
+		15CACECA1BA5279900DFD26B /* OSDViewFLowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSDViewFLowLayout.m; sourceTree = "<group>"; };
+		15CACECC1BA5279900DFD26B /* PGStatusFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGStatusFlowLayout.h; sourceTree = "<group>"; };
+		15CACECD1BA5279900DFD26B /* PGStatusFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGStatusFlowLayout.m; sourceTree = "<group>"; };
+		15CACECE1BA5279900DFD26B /* PGStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGStatusView.h; sourceTree = "<group>"; };
+		15CACECF1BA5279900DFD26B /* PGStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGStatusView.m; sourceTree = "<group>"; };
+		15CACED01BA5279900DFD26B /* PGStatusViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGStatusViewCell.h; sourceTree = "<group>"; };
+		15CACED11BA5279900DFD26B /* PGStatusViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGStatusViewCell.m; sourceTree = "<group>"; };
+		15CACED31BA5279900DFD26B /* IOPSDetailChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOPSDetailChartView.h; sourceTree = "<group>"; };
+		15CACED41BA5279900DFD26B /* IOPSDetailChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOPSDetailChartView.m; sourceTree = "<group>"; };
+		15CACED51BA5279900DFD26B /* PoolIOPSView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolIOPSView.h; sourceTree = "<group>"; };
+		15CACED61BA5279900DFD26B /* PoolIOPSView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolIOPSView.m; sourceTree = "<group>"; };
+		15CACED71BA5279900DFD26B /* PoolIOPSViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolIOPSViewCell.h; sourceTree = "<group>"; };
+		15CACED81BA5279900DFD26B /* PoolIOPSViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolIOPSViewCell.m; sourceTree = "<group>"; };
+		15CACED91BA5279900DFD26B /* PoolIOPSViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolIOPSViewFlowLayout.h; sourceTree = "<group>"; };
+		15CACEDA1BA5279900DFD26B /* PoolIOPSViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolIOPSViewFlowLayout.m; sourceTree = "<group>"; };
+		15CACEDC1BA5279900DFD26B /* PoolListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolListView.h; sourceTree = "<group>"; };
+		15CACEDD1BA5279900DFD26B /* PoolListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolListView.m; sourceTree = "<group>"; };
+		15CACEDE1BA5279900DFD26B /* PoolListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolListViewCell.h; sourceTree = "<group>"; };
+		15CACEDF1BA5279900DFD26B /* PoolListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolListViewCell.m; sourceTree = "<group>"; };
+		15CACEE11BA5279900DFD26B /* UsageStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsageStatusView.h; sourceTree = "<group>"; };
+		15CACEE21BA5279900DFD26B /* UsageStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsageStatusView.m; sourceTree = "<group>"; };
+		15CACEE31BA5279900DFD26B /* IOPSChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOPSChartView.h; sourceTree = "<group>"; };
+		15CACEE41BA5279900DFD26B /* IOPSChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOPSChartView.m; sourceTree = "<group>"; };
+		15CACEE61BA5279900DFD26B /* ErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorView.h; sourceTree = "<group>"; };
+		15CACEE71BA5279900DFD26B /* ErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorView.m; sourceTree = "<group>"; };
+		15CACEE91BA5279900DFD26B /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		15CACEEA1BA5279900DFD26B /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
+		15CACEEB1BA5279900DFD26B /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
+		15CACEEC1BA5279900DFD26B /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
+		15CACEED1BA5279900DFD26B /* NavigationViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewCell.h; sourceTree = "<group>"; };
+		15CACEEE1BA5279900DFD26B /* NavigationViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewCell.m; sourceTree = "<group>"; };
+		15CACEF01BA5279900DFD26B /* NotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCell.h; sourceTree = "<group>"; };
+		15CACEF11BA5279900DFD26B /* NotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCell.m; sourceTree = "<group>"; };
+		15CACEF21BA5279900DFD26B /* NotificationDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationDetailView.h; sourceTree = "<group>"; };
+		15CACEF31BA5279900DFD26B /* NotificationDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationDetailView.m; sourceTree = "<group>"; };
+		15CACEF41BA5279900DFD26B /* NotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationView.h; sourceTree = "<group>"; };
+		15CACEF51BA5279900DFD26B /* NotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationView.m; sourceTree = "<group>"; };
+		15CACEF61BA5279900DFD26B /* NotificationViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewFlowLayout.h; sourceTree = "<group>"; };
+		15CACEF71BA5279900DFD26B /* NotificationViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewFlowLayout.m; sourceTree = "<group>"; };
+		A765B40473C3A8E0E63212ED /* Pods-calamari_ios_client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calamari_ios_client.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calamari_ios_client/Pods-calamari_ios_client.debug.xcconfig"; sourceTree = "<group>"; };
+		D6D56DBF74FAD2FCBB66FDFC /* libPods-calamari_ios_client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-calamari_ios_client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCD9E3BA2309249C5C33E062 /* Pods-calamari_ios_client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calamari_ios_client.release.xcconfig"; path = "Pods/Target Support Files/Pods-calamari_ios_client/Pods-calamari_ios_client.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		15373A231B871C5C00AC14BE /* Frameworks */ = {
+		15CACE021BA5276300DFD26B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F2D199058C3A0107D7AE603 /* libPods-calamari_ios_client.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1589BCD01AD6A9CE005B86A8 /* Frameworks */ = {
+		15CACE1B1BA5276300DFD26B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1538581A1B8EAC9E00EC32B9 /* AVFoundation.framework in Frameworks */,
-				156E621B1B3191BF0090A825 /* QuartzCore.framework in Frameworks */,
-				F6CD02EA2335B75752713936 /* libPods-inWinStackCeph.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		153738EB1B871A3200AC14BE /* calamari_ios_client */ = {
+		15CACDFC1BA5276300DFD26B = {
 			isa = PBXGroup;
 			children = (
-				153738EC1B871A3200AC14BE /* AppDelegate.h */,
-				153738ED1B871A3200AC14BE /* AppDelegate.m */,
-				153738EE1B871A3200AC14BE /* Classes */,
-				153739B21B871A3200AC14BE /* Images.xcassets */,
-				153739B31B871A3200AC14BE /* Info.plist */,
-				153739B41B871A3200AC14BE /* main.m */,
+				15CACE071BA5276300DFD26B /* calamari_ios_client */,
+				15CACE211BA5276300DFD26B /* calamari_ios_clientTests */,
+				15CACE061BA5276300DFD26B /* Products */,
+				CF02624DE6D820388EE08B76 /* Pods */,
+				66E4466F9E0F6F3E3CDBC118 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		15CACE061BA5276300DFD26B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				15CACE051BA5276300DFD26B /* calamari_ios_client.app */,
+				15CACE1E1BA5276300DFD26B /* calamari_ios_clientTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		15CACE071BA5276300DFD26B /* calamari_ios_client */ = {
+			isa = PBXGroup;
+			children = (
+				15CACE2E1BA5279900DFD26B /* Classes */,
+				15CACE0C1BA5276300DFD26B /* AppDelegate.h */,
+				15CACE0D1BA5276300DFD26B /* AppDelegate.m */,
+				15CACE151BA5276300DFD26B /* Images.xcassets */,
+				15CACE081BA5276300DFD26B /* Supporting Files */,
 			);
 			path = calamari_ios_client;
 			sourceTree = "<group>";
 		};
-		153738EE1B871A3200AC14BE /* Classes */ = {
+		15CACE081BA5276300DFD26B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				153738EF1B871A3200AC14BE /* Controllers */,
-				1537391B1B871A3200AC14BE /* Models */,
-				153739321B871A3200AC14BE /* Utilities */,
-				153739451B871A3200AC14BE /* Views */,
+				15CACE091BA5276300DFD26B /* Info.plist */,
+				15CACE0A1BA5276300DFD26B /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		15CACE211BA5276300DFD26B /* calamari_ios_clientTests */ = {
+			isa = PBXGroup;
+			children = (
+				15CACE241BA5276300DFD26B /* calamari_ios_clientTests.m */,
+				15CACE221BA5276300DFD26B /* Supporting Files */,
+			);
+			path = calamari_ios_clientTests;
+			sourceTree = "<group>";
+		};
+		15CACE221BA5276300DFD26B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				15CACE231BA5276300DFD26B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		15CACE2E1BA5279900DFD26B /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				15CACE2F1BA5279900DFD26B /* Controllers */,
+				15CACE5C1BA5279900DFD26B /* Helpers */,
+				15CACE5D1BA5279900DFD26B /* Models */,
+				15CACE741BA5279900DFD26B /* Utilities */,
+				15CACE871BA5279900DFD26B /* Views */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		153738EF1B871A3200AC14BE /* Controllers */ = {
+		15CACE2F1BA5279900DFD26B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				153738F01B871A3200AC14BE /* ChartControllers */,
-				153738F31B871A3200AC14BE /* ClusterHealthControllers */,
-				1537390D1B871A3200AC14BE /* CustomNavigationController.h */,
-				1537390E1B871A3200AC14BE /* CustomNavigationController.m */,
-				1537390F1B871A3200AC14BE /* LoginControllers */,
-				153739121B871A3200AC14BE /* MoreControllers */,
-				153739131B871A3200AC14BE /* MutualControllers */,
-				153739161B871A3200AC14BE /* NotificationControllers */,
+				15CACE301BA5279900DFD26B /* ChartControllers */,
+				15CACE331BA5279900DFD26B /* ClusterHealthControllers */,
+				15CACE4D1BA5279900DFD26B /* CustomNavigationController.h */,
+				15CACE4E1BA5279900DFD26B /* CustomNavigationController.m */,
+				15CACE4F1BA5279900DFD26B /* LoginControllers */,
+				15CACE521BA5279900DFD26B /* MoreControllers */,
+				15CACE531BA5279900DFD26B /* MutualControllers */,
+				15CACE561BA5279900DFD26B /* NotificationControllers */,
+				15CACE5B1BA5279900DFD26B /* TabBarController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		153738F01B871A3200AC14BE /* ChartControllers */ = {
+		15CACE301BA5279900DFD26B /* ChartControllers */ = {
 			isa = PBXGroup;
 			children = (
-				153738F11B871A3200AC14BE /* ChartController.h */,
-				153738F21B871A3200AC14BE /* ChartController.m */,
+				15CACE311BA5279900DFD26B /* ChartController.h */,
+				15CACE321BA5279900DFD26B /* ChartController.m */,
 			);
 			path = ChartControllers;
 			sourceTree = "<group>";
 		};
-		153738F31B871A3200AC14BE /* ClusterHealthControllers */ = {
+		15CACE331BA5279900DFD26B /* ClusterHealthControllers */ = {
 			isa = PBXGroup;
 			children = (
-				153738F41B871A3200AC14BE /* ClusterHealthController.h */,
-				153738F51B871A3200AC14BE /* ClusterHealthController.m */,
-				153738F61B871A3200AC14BE /* DetailControllers */,
+				15CACE341BA5279900DFD26B /* ClusterHealthController.h */,
+				15CACE351BA5279900DFD26B /* ClusterHealthController.m */,
+				15CACE361BA5279900DFD26B /* DetailControllers */,
 			);
 			path = ClusterHealthControllers;
 			sourceTree = "<group>";
 		};
-		153738F61B871A3200AC14BE /* DetailControllers */ = {
+		15CACE361BA5279900DFD26B /* DetailControllers */ = {
 			isa = PBXGroup;
 			children = (
-				153738F71B871A3200AC14BE /* BaseController.h */,
-				153738F81B871A3200AC14BE /* BaseController.m */,
-				153738F91B871A3200AC14BE /* HealthDetailController.h */,
-				153738FA1B871A3200AC14BE /* HealthDetailController.m */,
-				153738FB1B871A3200AC14BE /* HostDetailController.h */,
-				153738FC1B871A3200AC14BE /* HostDetailController.m */,
-				153738FD1B871A3200AC14BE /* HostHealthController.h */,
-				153738FE1B871A3200AC14BE /* HostHealthController.m */,
-				153738FF1B871A3200AC14BE /* MONHealthController.h */,
-				153739001B871A3200AC14BE /* MONHealthController.m */,
-				153739011B871A3200AC14BE /* OSDDetailController.h */,
-				153739021B871A3200AC14BE /* OSDDetailController.m */,
-				153739031B871A3200AC14BE /* OSDHealthController.h */,
-				153739041B871A3200AC14BE /* OSDHealthController.m */,
-				153739051B871A3200AC14BE /* PGStatusController.h */,
-				153739061B871A3200AC14BE /* PGStatusController.m */,
-				153739071B871A3200AC14BE /* PoolIOPSController.h */,
-				153739081B871A3200AC14BE /* PoolIOPSController.m */,
-				153739091B871A3200AC14BE /* PoolListController.h */,
-				1537390A1B871A3200AC14BE /* PoolListController.m */,
-				1537390B1B871A3200AC14BE /* UsageController.h */,
-				1537390C1B871A3200AC14BE /* UsageController.m */,
+				15CACE371BA5279900DFD26B /* BaseController.h */,
+				15CACE381BA5279900DFD26B /* BaseController.m */,
+				15CACE391BA5279900DFD26B /* HealthDetailController.h */,
+				15CACE3A1BA5279900DFD26B /* HealthDetailController.m */,
+				15CACE3B1BA5279900DFD26B /* HostDetailController.h */,
+				15CACE3C1BA5279900DFD26B /* HostDetailController.m */,
+				15CACE3D1BA5279900DFD26B /* HostHealthController.h */,
+				15CACE3E1BA5279900DFD26B /* HostHealthController.m */,
+				15CACE3F1BA5279900DFD26B /* MONHealthController.h */,
+				15CACE401BA5279900DFD26B /* MONHealthController.m */,
+				15CACE411BA5279900DFD26B /* OSDDetailController.h */,
+				15CACE421BA5279900DFD26B /* OSDDetailController.m */,
+				15CACE431BA5279900DFD26B /* OSDHealthController.h */,
+				15CACE441BA5279900DFD26B /* OSDHealthController.m */,
+				15CACE451BA5279900DFD26B /* PGStatusController.h */,
+				15CACE461BA5279900DFD26B /* PGStatusController.m */,
+				15CACE471BA5279900DFD26B /* PoolIOPSController.h */,
+				15CACE481BA5279900DFD26B /* PoolIOPSController.m */,
+				15CACE491BA5279900DFD26B /* PoolListController.h */,
+				15CACE4A1BA5279900DFD26B /* PoolListController.m */,
+				15CACE4B1BA5279900DFD26B /* UsageController.h */,
+				15CACE4C1BA5279900DFD26B /* UsageController.m */,
 			);
 			path = DetailControllers;
 			sourceTree = "<group>";
 		};
-		1537390F1B871A3200AC14BE /* LoginControllers */ = {
+		15CACE4F1BA5279900DFD26B /* LoginControllers */ = {
 			isa = PBXGroup;
 			children = (
-				153739101B871A3200AC14BE /* LoginController.h */,
-				153739111B871A3200AC14BE /* LoginController.m */,
+				15CACE501BA5279900DFD26B /* LoginController.h */,
+				15CACE511BA5279900DFD26B /* LoginController.m */,
 			);
 			path = LoginControllers;
 			sourceTree = "<group>";
 		};
-		153739121B871A3200AC14BE /* MoreControllers */ = {
+		15CACE521BA5279900DFD26B /* MoreControllers */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = MoreControllers;
 			sourceTree = "<group>";
 		};
-		153739131B871A3200AC14BE /* MutualControllers */ = {
+		15CACE531BA5279900DFD26B /* MutualControllers */ = {
 			isa = PBXGroup;
 			children = (
-				153739141B871A3200AC14BE /* MutualController.h */,
-				153739151B871A3200AC14BE /* MutualController.m */,
+				15CACE541BA5279900DFD26B /* MutualController.h */,
+				15CACE551BA5279900DFD26B /* MutualController.m */,
 			);
 			path = MutualControllers;
 			sourceTree = "<group>";
 		};
-		153739161B871A3200AC14BE /* NotificationControllers */ = {
+		15CACE561BA5279900DFD26B /* NotificationControllers */ = {
 			isa = PBXGroup;
 			children = (
-				153739171B871A3200AC14BE /* NotificationController.h */,
-				153739181B871A3200AC14BE /* NotificationController.m */,
-				15BEEF771B97EB9300846A79 /* NotificationDetailController.h */,
-				15BEEF781B97EB9300846A79 /* NotificationDetailController.m */,
+				15CACE571BA5279900DFD26B /* NotificationController.h */,
+				15CACE581BA5279900DFD26B /* NotificationController.m */,
+				15CACE591BA5279900DFD26B /* NotificationDetailController.h */,
+				15CACE5A1BA5279900DFD26B /* NotificationDetailController.m */,
 			);
 			path = NotificationControllers;
 			sourceTree = "<group>";
 		};
-		1537391B1B871A3200AC14BE /* Models */ = {
+		15CACE5B1BA5279900DFD26B /* TabBarController */ = {
 			isa = PBXGroup;
 			children = (
-				1537391C1B871A3200AC14BE /* APIRecord.h */,
-				1537391D1B871A3200AC14BE /* APIRecord.m */,
-				1537391E1B871A3200AC14BE /* ClusterData.h */,
-				1537391F1B871A3200AC14BE /* ClusterData.m */,
-				153739201B871A3200AC14BE /* Cookies.h */,
-				153739211B871A3200AC14BE /* Cookies.m */,
-				153739221B871A3200AC14BE /* HealthDetailData.h */,
-				153739231B871A3200AC14BE /* HealthDetailData.m */,
-				153739241B871A3200AC14BE /* HostHealthData.h */,
-				153739251B871A3200AC14BE /* HostHealthData.m */,
-				153739261B871A3200AC14BE /* ImageData.h */,
-				153739271B871A3200AC14BE /* ImageData.m */,
-				153739281B871A3200AC14BE /* MONHealthData.h */,
-				153739291B871A3200AC14BE /* MONHealthData.m */,
-				1537392A1B871A3200AC14BE /* NotificationData.h */,
-				1537392B1B871A3200AC14BE /* NotificationData.m */,
-				1537392C1B871A3200AC14BE /* OSDHealthData.h */,
-				1537392D1B871A3200AC14BE /* OSDHealthData.m */,
-				1537392E1B871A3200AC14BE /* PGData.h */,
-				1537392F1B871A3200AC14BE /* PGData.m */,
-				153739301B871A3200AC14BE /* UserData.h */,
-				153739311B871A3200AC14BE /* UserData.m */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		15CACE5C1BA5279900DFD26B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		15CACE5D1BA5279900DFD26B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				15CACE5E1BA5279900DFD26B /* APIRecord.h */,
+				15CACE5F1BA5279900DFD26B /* APIRecord.m */,
+				15CACE601BA5279900DFD26B /* ClusterData.h */,
+				15CACE611BA5279900DFD26B /* ClusterData.m */,
+				15CACE621BA5279900DFD26B /* Cookies.h */,
+				15CACE631BA5279900DFD26B /* Cookies.m */,
+				15CACE641BA5279900DFD26B /* HealthDetailData.h */,
+				15CACE651BA5279900DFD26B /* HealthDetailData.m */,
+				15CACE661BA5279900DFD26B /* HostHealthData.h */,
+				15CACE671BA5279900DFD26B /* HostHealthData.m */,
+				15CACE681BA5279900DFD26B /* ImageData.h */,
+				15CACE691BA5279900DFD26B /* ImageData.m */,
+				15CACE6A1BA5279900DFD26B /* MONHealthData.h */,
+				15CACE6B1BA5279900DFD26B /* MONHealthData.m */,
+				15CACE6C1BA5279900DFD26B /* NotificationData.h */,
+				15CACE6D1BA5279900DFD26B /* NotificationData.m */,
+				15CACE6E1BA5279900DFD26B /* OSDHealthData.h */,
+				15CACE6F1BA5279900DFD26B /* OSDHealthData.m */,
+				15CACE701BA5279900DFD26B /* PGData.h */,
+				15CACE711BA5279900DFD26B /* PGData.m */,
+				15CACE721BA5279900DFD26B /* UserData.h */,
+				15CACE731BA5279900DFD26B /* UserData.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		153739321B871A3200AC14BE /* Utilities */ = {
+		15CACE741BA5279900DFD26B /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				153739331B871A3200AC14BE /* AnimationMaker.h */,
-				153739341B871A3200AC14BE /* AnimationMaker.m */,
-				153739351B871A3200AC14BE /* Categories */,
-				1537393C1B871A3200AC14BE /* CephAPI */,
-				153739411B871A3200AC14BE /* DateMaker.h */,
-				153739421B871A3200AC14BE /* DateMaker.m */,
-				153739431B871A3200AC14BE /* TextFieldChecker.h */,
-				153739441B871A3200AC14BE /* TextFieldChecker.m */,
+				15CACE751BA5279900DFD26B /* AnimationMaker.h */,
+				15CACE761BA5279900DFD26B /* AnimationMaker.m */,
+				15CACE771BA5279900DFD26B /* Categories */,
+				15CACE7E1BA5279900DFD26B /* CephAPI */,
+				15CACE831BA5279900DFD26B /* DateMaker.h */,
+				15CACE841BA5279900DFD26B /* DateMaker.m */,
+				15CACE851BA5279900DFD26B /* TextFieldChecker.h */,
+				15CACE861BA5279900DFD26B /* TextFieldChecker.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		153739351B871A3200AC14BE /* Categories */ = {
+		15CACE771BA5279900DFD26B /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				153739361B871A3200AC14BE /* UIColor+Reader.h */,
-				153739371B871A3200AC14BE /* UIColor+Reader.m */,
-				153739381B871A3200AC14BE /* UINavigationBar+HeightMaker.h */,
-				153739391B871A3200AC14BE /* UINavigationBar+HeightMaker.m */,
-				1537393A1B871A3200AC14BE /* UIView+SizeMaker.h */,
-				1537393B1B871A3200AC14BE /* UIView+SizeMaker.m */,
+				15CACE781BA5279900DFD26B /* UIColor+Reader.h */,
+				15CACE791BA5279900DFD26B /* UIColor+Reader.m */,
+				15CACE7A1BA5279900DFD26B /* UINavigationBar+HeightMaker.h */,
+				15CACE7B1BA5279900DFD26B /* UINavigationBar+HeightMaker.m */,
+				15CACE7C1BA5279900DFD26B /* UIView+SizeMaker.h */,
+				15CACE7D1BA5279900DFD26B /* UIView+SizeMaker.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
 		};
-		1537393C1B871A3200AC14BE /* CephAPI */ = {
+		15CACE7E1BA5279900DFD26B /* CephAPI */ = {
 			isa = PBXGroup;
 			children = (
-				1537393D1B871A3200AC14BE /* CephAPI.h */,
-				1537393E1B871A3200AC14BE /* CephAPI.m */,
-				1537393F1B871A3200AC14BE /* URLMaker.h */,
-				153739401B871A3200AC14BE /* URLMaker.m */,
+				15CACE7F1BA5279900DFD26B /* CephAPI.h */,
+				15CACE801BA5279900DFD26B /* CephAPI.m */,
+				15CACE811BA5279900DFD26B /* URLMaker.h */,
+				15CACE821BA5279900DFD26B /* URLMaker.m */,
 			);
 			path = CephAPI;
 			sourceTree = "<group>";
 		};
-		153739451B871A3200AC14BE /* Views */ = {
+		15CACE871BA5279900DFD26B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				153739461B871A3200AC14BE /* ChartViews */,
-				1537394F1B871A3200AC14BE /* ClusterHealthViews */,
-				153739A31B871A3200AC14BE /* ErrorViews */,
-				153739A61B871A3200AC14BE /* LoginViews */,
-				153739A91B871A3200AC14BE /* NavigationView.h */,
-				153739AA1B871A3200AC14BE /* NavigationView.m */,
-				153739AB1B871A3200AC14BE /* NavigationViewCell.h */,
-				153739AC1B871A3200AC14BE /* NavigationViewCell.m */,
-				153739AD1B871A3200AC14BE /* NotificationViews */,
+				15CACE881BA5279900DFD26B /* ChartViews */,
+				15CACE911BA5279900DFD26B /* ClusterHealthViews */,
+				15CACEE51BA5279900DFD26B /* ErrorViews */,
+				15CACEE81BA5279900DFD26B /* LoginViews */,
+				15CACEEB1BA5279900DFD26B /* NavigationView.h */,
+				15CACEEC1BA5279900DFD26B /* NavigationView.m */,
+				15CACEED1BA5279900DFD26B /* NavigationViewCell.h */,
+				15CACEEE1BA5279900DFD26B /* NavigationViewCell.m */,
+				15CACEEF1BA5279900DFD26B /* NotificationViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		153739461B871A3200AC14BE /* ChartViews */ = {
+		15CACE881BA5279900DFD26B /* ChartViews */ = {
 			isa = PBXGroup;
 			children = (
-				153739471B871A3200AC14BE /* ChartCell.h */,
-				153739481B871A3200AC14BE /* ChartCell.m */,
-				153739491B871A3200AC14BE /* ChartCellBar.h */,
-				1537394A1B871A3200AC14BE /* ChartCellBar.m */,
-				1537394B1B871A3200AC14BE /* ChartFlowLayout.h */,
-				1537394C1B871A3200AC14BE /* ChartFlowLayout.m */,
-				1537394D1B871A3200AC14BE /* ChartView.h */,
-				1537394E1B871A3200AC14BE /* ChartView.m */,
+				15CACE891BA5279900DFD26B /* ChartCell.h */,
+				15CACE8A1BA5279900DFD26B /* ChartCell.m */,
+				15CACE8B1BA5279900DFD26B /* ChartCellBar.h */,
+				15CACE8C1BA5279900DFD26B /* ChartCellBar.m */,
+				15CACE8D1BA5279900DFD26B /* ChartFlowLayout.h */,
+				15CACE8E1BA5279900DFD26B /* ChartFlowLayout.m */,
+				15CACE8F1BA5279900DFD26B /* ChartView.h */,
+				15CACE901BA5279900DFD26B /* ChartView.m */,
 			);
 			path = ChartViews;
 			sourceTree = "<group>";
 		};
-		1537394F1B871A3200AC14BE /* ClusterHealthViews */ = {
+		15CACE911BA5279900DFD26B /* ClusterHealthViews */ = {
 			isa = PBXGroup;
 			children = (
-				153739501B871A3200AC14BE /* ClusterHealthCellBar.h */,
-				153739511B871A3200AC14BE /* ClusterHealthCellBar.m */,
-				153739521B871A3200AC14BE /* ClusterHealthProgressLayer.h */,
-				153739531B871A3200AC14BE /* ClusterHealthProgressLayer.m */,
-				153739541B871A3200AC14BE /* ClusterHealthView.h */,
-				153739551B871A3200AC14BE /* ClusterHealthView.m */,
-				153739561B871A3200AC14BE /* ClusterHealthViewCell.h */,
-				153739571B871A3200AC14BE /* ClusterHealthViewCell.m */,
-				153739581B871A3200AC14BE /* ClusterHealthViewFlowLayout.h */,
-				153739591B871A3200AC14BE /* ClusterHealthViewFlowLayout.m */,
-				1537395A1B871A3200AC14BE /* DetailViews */,
-				153739A11B871A3200AC14BE /* IOPSChartView.h */,
-				153739A21B871A3200AC14BE /* IOPSChartView.m */,
+				15CACE921BA5279900DFD26B /* ClusterHealthCellBar.h */,
+				15CACE931BA5279900DFD26B /* ClusterHealthCellBar.m */,
+				15CACE941BA5279900DFD26B /* ClusterHealthProgressLayer.h */,
+				15CACE951BA5279900DFD26B /* ClusterHealthProgressLayer.m */,
+				15CACE961BA5279900DFD26B /* ClusterHealthView.h */,
+				15CACE971BA5279900DFD26B /* ClusterHealthView.m */,
+				15CACE981BA5279900DFD26B /* ClusterHealthViewCell.h */,
+				15CACE991BA5279900DFD26B /* ClusterHealthViewCell.m */,
+				15CACE9A1BA5279900DFD26B /* ClusterHealthViewFlowLayout.h */,
+				15CACE9B1BA5279900DFD26B /* ClusterHealthViewFlowLayout.m */,
+				15CACE9C1BA5279900DFD26B /* DetailViews */,
+				15CACEE31BA5279900DFD26B /* IOPSChartView.h */,
+				15CACEE41BA5279900DFD26B /* IOPSChartView.m */,
 			);
 			path = ClusterHealthViews;
 			sourceTree = "<group>";
 		};
-		1537395A1B871A3200AC14BE /* DetailViews */ = {
+		15CACE9C1BA5279900DFD26B /* DetailViews */ = {
 			isa = PBXGroup;
 			children = (
-				1537395B1B871A3200AC14BE /* HealthDetailViews */,
-				153739601B871A3200AC14BE /* HostDetailViews */,
-				1537396F1B871A3200AC14BE /* HostHealthViews */,
-				153739761B871A3200AC14BE /* MONHealthViews */,
-				1537397D1B871A3200AC14BE /* OSDDetailViews */,
-				153739801B871A3200AC14BE /* OSDHealthViews */,
-				153739891B871A3200AC14BE /* PGStatusViews */,
-				153739901B871A3200AC14BE /* PoolIOPSViews */,
-				153739991B871A3200AC14BE /* PoolListViews */,
-				1537399E1B871A3200AC14BE /* UsageStatusViews */,
+				15CACE9D1BA5279900DFD26B /* HealthDetailViews */,
+				15CACEA21BA5279900DFD26B /* HostDetailViews */,
+				15CACEB11BA5279900DFD26B /* HostHealthViews */,
+				15CACEB81BA5279900DFD26B /* MONHealthViews */,
+				15CACEBF1BA5279900DFD26B /* OSDDetailViews */,
+				15CACEC21BA5279900DFD26B /* OSDHealthViews */,
+				15CACECB1BA5279900DFD26B /* PGStatusViews */,
+				15CACED21BA5279900DFD26B /* PoolIOPSViews */,
+				15CACEDB1BA5279900DFD26B /* PoolListViews */,
+				15CACEE01BA5279900DFD26B /* UsageStatusViews */,
 			);
 			path = DetailViews;
 			sourceTree = "<group>";
 		};
-		1537395B1B871A3200AC14BE /* HealthDetailViews */ = {
+		15CACE9D1BA5279900DFD26B /* HealthDetailViews */ = {
 			isa = PBXGroup;
 			children = (
-				1537395C1B871A3200AC14BE /* HealthDetailView.h */,
-				1537395D1B871A3200AC14BE /* HealthDetailView.m */,
-				1537395E1B871A3200AC14BE /* HealthDetailViewCell.h */,
-				1537395F1B871A3200AC14BE /* HealthDetailViewCell.m */,
+				15CACE9E1BA5279900DFD26B /* HealthDetailView.h */,
+				15CACE9F1BA5279900DFD26B /* HealthDetailView.m */,
+				15CACEA01BA5279900DFD26B /* HealthDetailViewCell.h */,
+				15CACEA11BA5279900DFD26B /* HealthDetailViewCell.m */,
 			);
 			path = HealthDetailViews;
 			sourceTree = "<group>";
 		};
-		153739601B871A3200AC14BE /* HostDetailViews */ = {
+		15CACEA21BA5279900DFD26B /* HostDetailViews */ = {
 			isa = PBXGroup;
 			children = (
-				153739611B871A3200AC14BE /* CPUIOPSView.h */,
-				153739621B871A3200AC14BE /* CPUIOPSView.m */,
-				153739631B871A3200AC14BE /* CPULineBrokenView.h */,
-				153739641B871A3200AC14BE /* CPULineBrokenView.m */,
-				153739651B871A3200AC14BE /* CPUSquareView.h */,
-				153739661B871A3200AC14BE /* CPUSquareView.m */,
-				153739671B871A3200AC14BE /* HostDetailHeaderView.h */,
-				153739681B871A3200AC14BE /* HostDetailHeaderView.m */,
-				153739691B871A3200AC14BE /* HostDetailView.h */,
-				1537396A1B871A3200AC14BE /* HostDetailView.m */,
-				1537396B1B871A3200AC14BE /* HostDetailViewCell.h */,
-				1537396C1B871A3200AC14BE /* HostDetailViewCell.m */,
-				1537396D1B871A3200AC14BE /* HostDetailViewFlowLayout.h */,
-				1537396E1B871A3200AC14BE /* HostDetailViewFlowLayout.m */,
+				15CACEA31BA5279900DFD26B /* CPUIOPSView.h */,
+				15CACEA41BA5279900DFD26B /* CPUIOPSView.m */,
+				15CACEA51BA5279900DFD26B /* CPULineBrokenView.h */,
+				15CACEA61BA5279900DFD26B /* CPULineBrokenView.m */,
+				15CACEA71BA5279900DFD26B /* CPUSquareView.h */,
+				15CACEA81BA5279900DFD26B /* CPUSquareView.m */,
+				15CACEA91BA5279900DFD26B /* HostDetailHeaderView.h */,
+				15CACEAA1BA5279900DFD26B /* HostDetailHeaderView.m */,
+				15CACEAB1BA5279900DFD26B /* HostDetailView.h */,
+				15CACEAC1BA5279900DFD26B /* HostDetailView.m */,
+				15CACEAD1BA5279900DFD26B /* HostDetailViewCell.h */,
+				15CACEAE1BA5279900DFD26B /* HostDetailViewCell.m */,
+				15CACEAF1BA5279900DFD26B /* HostDetailViewFlowLayout.h */,
+				15CACEB01BA5279900DFD26B /* HostDetailViewFlowLayout.m */,
 			);
 			path = HostDetailViews;
 			sourceTree = "<group>";
 		};
-		1537396F1B871A3200AC14BE /* HostHealthViews */ = {
+		15CACEB11BA5279900DFD26B /* HostHealthViews */ = {
 			isa = PBXGroup;
 			children = (
-				153739701B871A3200AC14BE /* HostHealthFlowLayout.h */,
-				153739711B871A3200AC14BE /* HostHealthFlowLayout.m */,
-				153739721B871A3200AC14BE /* HostHealthView.h */,
-				153739731B871A3200AC14BE /* HostHealthView.m */,
-				153739741B871A3200AC14BE /* HostHealthViewCell.h */,
-				153739751B871A3200AC14BE /* HostHealthViewCell.m */,
+				15CACEB21BA5279900DFD26B /* HostHealthFlowLayout.h */,
+				15CACEB31BA5279900DFD26B /* HostHealthFlowLayout.m */,
+				15CACEB41BA5279900DFD26B /* HostHealthView.h */,
+				15CACEB51BA5279900DFD26B /* HostHealthView.m */,
+				15CACEB61BA5279900DFD26B /* HostHealthViewCell.h */,
+				15CACEB71BA5279900DFD26B /* HostHealthViewCell.m */,
 			);
 			path = HostHealthViews;
 			sourceTree = "<group>";
 		};
-		153739761B871A3200AC14BE /* MONHealthViews */ = {
+		15CACEB81BA5279900DFD26B /* MONHealthViews */ = {
 			isa = PBXGroup;
 			children = (
-				153739771B871A3200AC14BE /* MONHealthCell.h */,
-				153739781B871A3200AC14BE /* MONHealthCell.m */,
-				153739791B871A3200AC14BE /* MONHealthFlowLayout.h */,
-				1537397A1B871A3200AC14BE /* MONHealthFlowLayout.m */,
-				1537397B1B871A3200AC14BE /* MONHealthView.h */,
-				1537397C1B871A3200AC14BE /* MONHealthView.m */,
+				15CACEB91BA5279900DFD26B /* MONHealthCell.h */,
+				15CACEBA1BA5279900DFD26B /* MONHealthCell.m */,
+				15CACEBB1BA5279900DFD26B /* MONHealthFlowLayout.h */,
+				15CACEBC1BA5279900DFD26B /* MONHealthFlowLayout.m */,
+				15CACEBD1BA5279900DFD26B /* MONHealthView.h */,
+				15CACEBE1BA5279900DFD26B /* MONHealthView.m */,
 			);
 			path = MONHealthViews;
 			sourceTree = "<group>";
 		};
-		1537397D1B871A3200AC14BE /* OSDDetailViews */ = {
+		15CACEBF1BA5279900DFD26B /* OSDDetailViews */ = {
 			isa = PBXGroup;
 			children = (
-				1537397E1B871A3200AC14BE /* OSDDetailView.h */,
-				1537397F1B871A3200AC14BE /* OSDDetailView.m */,
+				15CACEC01BA5279900DFD26B /* OSDDetailView.h */,
+				15CACEC11BA5279900DFD26B /* OSDDetailView.m */,
 			);
 			path = OSDDetailViews;
 			sourceTree = "<group>";
 		};
-		153739801B871A3200AC14BE /* OSDHealthViews */ = {
+		15CACEC21BA5279900DFD26B /* OSDHealthViews */ = {
 			isa = PBXGroup;
 			children = (
-				153739811B871A3200AC14BE /* OSDHeaderView.h */,
-				153739821B871A3200AC14BE /* OSDHeaderView.m */,
-				153739831B871A3200AC14BE /* OSDHealthView.h */,
-				153739841B871A3200AC14BE /* OSDHealthView.m */,
-				153739851B871A3200AC14BE /* OSDHealthViewCell.h */,
-				153739861B871A3200AC14BE /* OSDHealthViewCell.m */,
-				153739871B871A3200AC14BE /* OSDViewFLowLayout.h */,
-				153739881B871A3200AC14BE /* OSDViewFLowLayout.m */,
+				15CACEC31BA5279900DFD26B /* OSDHeaderView.h */,
+				15CACEC41BA5279900DFD26B /* OSDHeaderView.m */,
+				15CACEC51BA5279900DFD26B /* OSDHealthView.h */,
+				15CACEC61BA5279900DFD26B /* OSDHealthView.m */,
+				15CACEC71BA5279900DFD26B /* OSDHealthViewCell.h */,
+				15CACEC81BA5279900DFD26B /* OSDHealthViewCell.m */,
+				15CACEC91BA5279900DFD26B /* OSDViewFLowLayout.h */,
+				15CACECA1BA5279900DFD26B /* OSDViewFLowLayout.m */,
 			);
 			path = OSDHealthViews;
 			sourceTree = "<group>";
 		};
-		153739891B871A3200AC14BE /* PGStatusViews */ = {
+		15CACECB1BA5279900DFD26B /* PGStatusViews */ = {
 			isa = PBXGroup;
 			children = (
-				1537398A1B871A3200AC14BE /* PGStatusFlowLayout.h */,
-				1537398B1B871A3200AC14BE /* PGStatusFlowLayout.m */,
-				1537398C1B871A3200AC14BE /* PGStatusView.h */,
-				1537398D1B871A3200AC14BE /* PGStatusView.m */,
-				1537398E1B871A3200AC14BE /* PGStatusViewCell.h */,
-				1537398F1B871A3200AC14BE /* PGStatusViewCell.m */,
+				15CACECC1BA5279900DFD26B /* PGStatusFlowLayout.h */,
+				15CACECD1BA5279900DFD26B /* PGStatusFlowLayout.m */,
+				15CACECE1BA5279900DFD26B /* PGStatusView.h */,
+				15CACECF1BA5279900DFD26B /* PGStatusView.m */,
+				15CACED01BA5279900DFD26B /* PGStatusViewCell.h */,
+				15CACED11BA5279900DFD26B /* PGStatusViewCell.m */,
 			);
 			path = PGStatusViews;
 			sourceTree = "<group>";
 		};
-		153739901B871A3200AC14BE /* PoolIOPSViews */ = {
+		15CACED21BA5279900DFD26B /* PoolIOPSViews */ = {
 			isa = PBXGroup;
 			children = (
-				153739911B871A3200AC14BE /* IOPSDetailChartView.h */,
-				153739921B871A3200AC14BE /* IOPSDetailChartView.m */,
-				153739931B871A3200AC14BE /* PoolIOPSView.h */,
-				153739941B871A3200AC14BE /* PoolIOPSView.m */,
-				153739951B871A3200AC14BE /* PoolIOPSViewCell.h */,
-				153739961B871A3200AC14BE /* PoolIOPSViewCell.m */,
-				153739971B871A3200AC14BE /* PoolIOPSViewFlowLayout.h */,
-				153739981B871A3200AC14BE /* PoolIOPSViewFlowLayout.m */,
+				15CACED31BA5279900DFD26B /* IOPSDetailChartView.h */,
+				15CACED41BA5279900DFD26B /* IOPSDetailChartView.m */,
+				15CACED51BA5279900DFD26B /* PoolIOPSView.h */,
+				15CACED61BA5279900DFD26B /* PoolIOPSView.m */,
+				15CACED71BA5279900DFD26B /* PoolIOPSViewCell.h */,
+				15CACED81BA5279900DFD26B /* PoolIOPSViewCell.m */,
+				15CACED91BA5279900DFD26B /* PoolIOPSViewFlowLayout.h */,
+				15CACEDA1BA5279900DFD26B /* PoolIOPSViewFlowLayout.m */,
 			);
 			path = PoolIOPSViews;
 			sourceTree = "<group>";
 		};
-		153739991B871A3200AC14BE /* PoolListViews */ = {
+		15CACEDB1BA5279900DFD26B /* PoolListViews */ = {
 			isa = PBXGroup;
 			children = (
-				1537399A1B871A3200AC14BE /* PoolListView.h */,
-				1537399B1B871A3200AC14BE /* PoolListView.m */,
-				1537399C1B871A3200AC14BE /* PoolListViewCell.h */,
-				1537399D1B871A3200AC14BE /* PoolListViewCell.m */,
+				15CACEDC1BA5279900DFD26B /* PoolListView.h */,
+				15CACEDD1BA5279900DFD26B /* PoolListView.m */,
+				15CACEDE1BA5279900DFD26B /* PoolListViewCell.h */,
+				15CACEDF1BA5279900DFD26B /* PoolListViewCell.m */,
 			);
 			path = PoolListViews;
 			sourceTree = "<group>";
 		};
-		1537399E1B871A3200AC14BE /* UsageStatusViews */ = {
+		15CACEE01BA5279900DFD26B /* UsageStatusViews */ = {
 			isa = PBXGroup;
 			children = (
-				1537399F1B871A3200AC14BE /* UsageStatusView.h */,
-				153739A01B871A3200AC14BE /* UsageStatusView.m */,
+				15CACEE11BA5279900DFD26B /* UsageStatusView.h */,
+				15CACEE21BA5279900DFD26B /* UsageStatusView.m */,
 			);
 			path = UsageStatusViews;
 			sourceTree = "<group>";
 		};
-		153739A31B871A3200AC14BE /* ErrorViews */ = {
+		15CACEE51BA5279900DFD26B /* ErrorViews */ = {
 			isa = PBXGroup;
 			children = (
-				153739A41B871A3200AC14BE /* ErrorView.h */,
-				153739A51B871A3200AC14BE /* ErrorView.m */,
+				15CACEE61BA5279900DFD26B /* ErrorView.h */,
+				15CACEE71BA5279900DFD26B /* ErrorView.m */,
 			);
 			path = ErrorViews;
 			sourceTree = "<group>";
 		};
-		153739A61B871A3200AC14BE /* LoginViews */ = {
+		15CACEE81BA5279900DFD26B /* LoginViews */ = {
 			isa = PBXGroup;
 			children = (
-				153739A71B871A3200AC14BE /* LoginView.h */,
-				153739A81B871A3200AC14BE /* LoginView.m */,
+				15CACEE91BA5279900DFD26B /* LoginView.h */,
+				15CACEEA1BA5279900DFD26B /* LoginView.m */,
 			);
 			path = LoginViews;
 			sourceTree = "<group>";
 		};
-		153739AD1B871A3200AC14BE /* NotificationViews */ = {
+		15CACEEF1BA5279900DFD26B /* NotificationViews */ = {
 			isa = PBXGroup;
 			children = (
-				153739AE1B871A3200AC14BE /* NotificationCell.h */,
-				153739AF1B871A3200AC14BE /* NotificationCell.m */,
-				153739B01B871A3200AC14BE /* NotificationView.h */,
-				153739B11B871A3200AC14BE /* NotificationView.m */,
-				15A651431B95BDA3008124A3 /* NotificationViewFlowLayout.h */,
-				15A651441B95BDA3008124A3 /* NotificationViewFlowLayout.m */,
-				15BEEF7A1B97EDD400846A79 /* NotificationDetailView.h */,
-				15BEEF7B1B97EDD400846A79 /* NotificationDetailView.m */,
+				15CACEF01BA5279900DFD26B /* NotificationCell.h */,
+				15CACEF11BA5279900DFD26B /* NotificationCell.m */,
+				15CACEF21BA5279900DFD26B /* NotificationDetailView.h */,
+				15CACEF31BA5279900DFD26B /* NotificationDetailView.m */,
+				15CACEF41BA5279900DFD26B /* NotificationView.h */,
+				15CACEF51BA5279900DFD26B /* NotificationView.m */,
+				15CACEF61BA5279900DFD26B /* NotificationViewFlowLayout.h */,
+				15CACEF71BA5279900DFD26B /* NotificationViewFlowLayout.m */,
 			);
 			path = NotificationViews;
 			sourceTree = "<group>";
 		};
-		15373A271B871C5C00AC14BE /* calamari_ios_client Tests */ = {
+		66E4466F9E0F6F3E3CDBC118 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				15E5C9551B871DF600B2B839 /* APITest.m */,
-				15373A2A1B871C5C00AC14BE /* calamari_ios_client_Tests.m */,
-				15373A281B871C5C00AC14BE /* Supporting Files */,
-			);
-			path = "calamari_ios_client Tests";
-			sourceTree = "<group>";
-		};
-		15373A281B871C5C00AC14BE /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				15373A291B871C5C00AC14BE /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		1589BCCA1AD6A9CE005B86A8 = {
-			isa = PBXGroup;
-			children = (
-				153738EB1B871A3200AC14BE /* calamari_ios_client */,
-				15373A271B871C5C00AC14BE /* calamari_ios_client Tests */,
-				1589BCD41AD6A9CE005B86A8 /* Products */,
-				A4FD06770283489AB6076B1B /* Frameworks */,
-				A7FB9D2F15E7F6A2931E341E /* Pods */,
-			);
-			sourceTree = "<group>";
-		};
-		1589BCD41AD6A9CE005B86A8 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1589BCD31AD6A9CE005B86A8 /* calamari_ios_client.app */,
-				15373A261B871C5C00AC14BE /* calamari_ios_client Tests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		A4FD06770283489AB6076B1B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				153858191B8EAC9E00EC32B9 /* AVFoundation.framework */,
-				156E621A1B3191BF0090A825 /* QuartzCore.framework */,
-				C733CA9F4187E8EB7BD8BA3B /* libPods.a */,
-				D9555D7CADD0918BCD61153F /* libPods-inWinStackCeph.a */,
+				D6D56DBF74FAD2FCBB66FDFC /* libPods-calamari_ios_client.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A7FB9D2F15E7F6A2931E341E /* Pods */ = {
+		CF02624DE6D820388EE08B76 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B515312BF3CA560B64EFE614 /* Pods-inWinStackCeph.debug.xcconfig */,
-				F1D38A01E8A46704AB5B61AB /* Pods-inWinStackCeph.release.xcconfig */,
+				A765B40473C3A8E0E63212ED /* Pods-calamari_ios_client.debug.xcconfig */,
+				DCD9E3BA2309249C5C33E062 /* Pods-calamari_ios_client.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -805,69 +816,63 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		15373A251B871C5C00AC14BE /* calamari_ios_client Tests */ = {
+		15CACE041BA5276300DFD26B /* calamari_ios_client */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 15373A2E1B871C5C00AC14BE /* Build configuration list for PBXNativeTarget "calamari_ios_client Tests" */;
+			buildConfigurationList = 15CACE281BA5276300DFD26B /* Build configuration list for PBXNativeTarget "calamari_ios_client" */;
 			buildPhases = (
-				15373A221B871C5C00AC14BE /* Sources */,
-				15373A231B871C5C00AC14BE /* Frameworks */,
-				15373A241B871C5C00AC14BE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				15373A2D1B871C5C00AC14BE /* PBXTargetDependency */,
-			);
-			name = "calamari_ios_client Tests";
-			productName = "calamari_ios_client Tests";
-			productReference = 15373A261B871C5C00AC14BE /* calamari_ios_client Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		1589BCD21AD6A9CE005B86A8 /* calamari_ios_client */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1589BCF61AD6A9CE005B86A8 /* Build configuration list for PBXNativeTarget "calamari_ios_client" */;
-			buildPhases = (
-				CD109BEEB7603EA8FF828EEE /* Check Pods Manifest.lock */,
-				1589BCCF1AD6A9CE005B86A8 /* Sources */,
-				1589BCD01AD6A9CE005B86A8 /* Frameworks */,
-				1589BCD11AD6A9CE005B86A8 /* Resources */,
-				F116B9DBADD71997B9F6BE11 /* Copy Pods Resources */,
+				E39E58EE6AB75E6BA03B59CC /* Check Pods Manifest.lock */,
+				15CACE011BA5276300DFD26B /* Sources */,
+				15CACE021BA5276300DFD26B /* Frameworks */,
+				15CACE031BA5276300DFD26B /* Resources */,
+				0778C54CAAE177BF7F33318D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = calamari_ios_client;
-			productName = inWinStackCeph;
-			productReference = 1589BCD31AD6A9CE005B86A8 /* calamari_ios_client.app */;
+			productName = calamari_ios_client;
+			productReference = 15CACE051BA5276300DFD26B /* calamari_ios_client.app */;
 			productType = "com.apple.product-type.application";
+		};
+		15CACE1D1BA5276300DFD26B /* calamari_ios_clientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15CACE2B1BA5276300DFD26B /* Build configuration list for PBXNativeTarget "calamari_ios_clientTests" */;
+			buildPhases = (
+				15CACE1A1BA5276300DFD26B /* Sources */,
+				15CACE1B1BA5276300DFD26B /* Frameworks */,
+				15CACE1C1BA5276300DFD26B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				15CACE201BA5276300DFD26B /* PBXTargetDependency */,
+			);
+			name = calamari_ios_clientTests;
+			productName = calamari_ios_clientTests;
+			productReference = 15CACE1E1BA5276300DFD26B /* calamari_ios_clientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		1589BCCB1AD6A9CE005B86A8 /* Project object */ = {
+		15CACDFD1BA5276300DFD26B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Francis;
 				TargetAttributes = {
-					15373A251B871C5C00AC14BE = {
+					15CACE041BA5276300DFD26B = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = S8FBP4YLUA;
-						TestTargetID = 1589BCD21AD6A9CE005B86A8;
 					};
-					1589BCD21AD6A9CE005B86A8 = {
-						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = S8FBP4YLUA;
-						SystemCapabilities = {
-							com.apple.BackgroundModes = {
-								enabled = 1;
-							};
-						};
+					15CACE1D1BA5276300DFD26B = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 15CACE041BA5276300DFD26B;
 					};
 				};
 			};
-			buildConfigurationList = 1589BCCE1AD6A9CE005B86A8 /* Build configuration list for PBXProject "calamari_ios_client" */;
+			buildConfigurationList = 15CACE001BA5276300DFD26B /* Build configuration list for PBXProject "calamari_ios_client" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -875,37 +880,52 @@
 				en,
 				Base,
 			);
-			mainGroup = 1589BCCA1AD6A9CE005B86A8;
-			productRefGroup = 1589BCD41AD6A9CE005B86A8 /* Products */;
+			mainGroup = 15CACDFC1BA5276300DFD26B;
+			productRefGroup = 15CACE061BA5276300DFD26B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1589BCD21AD6A9CE005B86A8 /* calamari_ios_client */,
-				15373A251B871C5C00AC14BE /* calamari_ios_client Tests */,
+				15CACE041BA5276300DFD26B /* calamari_ios_client */,
+				15CACE1D1BA5276300DFD26B /* calamari_ios_clientTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		15373A241B871C5C00AC14BE /* Resources */ = {
+		15CACE031BA5276300DFD26B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15CACE161BA5276300DFD26B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1589BCD11AD6A9CE005B86A8 /* Resources */ = {
+		15CACE1C1BA5276300DFD26B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15373A081B871A3200AC14BE /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CD109BEEB7603EA8FF828EEE /* Check Pods Manifest.lock */ = {
+		0778C54CAAE177BF7F33318D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-calamari_ios_client/Pods-calamari_ios_client-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E39E58EE6AB75E6BA03B59CC /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -920,186 +940,123 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F116B9DBADD71997B9F6BE11 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-inWinStackCeph/Pods-inWinStackCeph-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		15373A221B871C5C00AC14BE /* Sources */ = {
+		15CACE011BA5276300DFD26B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15E5C9561B871DF600B2B839 /* APITest.m in Sources */,
-				15373A2B1B871C5C00AC14BE /* calamari_ios_client_Tests.m in Sources */,
+				15CACF281BA5279A00DFD26B /* CPUIOPSView.m in Sources */,
+				15CACF241BA5279A00DFD26B /* ClusterHealthViewCell.m in Sources */,
+				15CACF471BA5279A00DFD26B /* NavigationView.m in Sources */,
+				15CACF331BA5279A00DFD26B /* MONHealthFlowLayout.m in Sources */,
+				15CACF461BA5279A00DFD26B /* LoginView.m in Sources */,
+				15CACF341BA5279A00DFD26B /* MONHealthView.m in Sources */,
+				15CACF0D1BA5279A00DFD26B /* HealthDetailData.m in Sources */,
+				15CACF4B1BA5279A00DFD26B /* NotificationView.m in Sources */,
+				15CACF2F1BA5279A00DFD26B /* HostHealthFlowLayout.m in Sources */,
+				15CACF261BA5279A00DFD26B /* HealthDetailView.m in Sources */,
+				15CACF171BA5279A00DFD26B /* UINavigationBar+HeightMaker.m in Sources */,
+				15CACF0C1BA5279A00DFD26B /* Cookies.m in Sources */,
+				15CACF2E1BA5279A00DFD26B /* HostDetailViewFlowLayout.m in Sources */,
+				15CACEFE1BA5279A00DFD26B /* MONHealthController.m in Sources */,
+				15CACEFB1BA5279A00DFD26B /* HealthDetailController.m in Sources */,
+				15CACF001BA5279A00DFD26B /* OSDHealthController.m in Sources */,
+				15CACEFD1BA5279A00DFD26B /* HostHealthController.m in Sources */,
+				15CACF4A1BA5279A00DFD26B /* NotificationDetailView.m in Sources */,
+				15CACF271BA5279A00DFD26B /* HealthDetailViewCell.m in Sources */,
+				15CACF121BA5279A00DFD26B /* OSDHealthData.m in Sources */,
+				15CACF1F1BA5279A00DFD26B /* ChartFlowLayout.m in Sources */,
+				15CACF3F1BA5279A00DFD26B /* PoolIOPSViewCell.m in Sources */,
+				15CACF061BA5279A00DFD26B /* LoginController.m in Sources */,
+				15CACF291BA5279A00DFD26B /* CPULineBrokenView.m in Sources */,
+				15CACEFF1BA5279A00DFD26B /* OSDDetailController.m in Sources */,
+				15CACF3C1BA5279A00DFD26B /* PGStatusViewCell.m in Sources */,
+				15CACF231BA5279A00DFD26B /* ClusterHealthView.m in Sources */,
+				15CACF161BA5279A00DFD26B /* UIColor+Reader.m in Sources */,
+				15CACF0B1BA5279A00DFD26B /* ClusterData.m in Sources */,
+				15CACF1B1BA5279A00DFD26B /* DateMaker.m in Sources */,
+				15CACF491BA5279A00DFD26B /* NotificationCell.m in Sources */,
+				15CACF2A1BA5279A00DFD26B /* CPUSquareView.m in Sources */,
+				15CACF3A1BA5279A00DFD26B /* PGStatusFlowLayout.m in Sources */,
+				15CACF3D1BA5279A00DFD26B /* IOPSDetailChartView.m in Sources */,
+				15CACF081BA5279A00DFD26B /* NotificationController.m in Sources */,
+				15CACF091BA5279A00DFD26B /* NotificationDetailController.m in Sources */,
+				15CACF441BA5279A00DFD26B /* IOPSChartView.m in Sources */,
+				15CACEF91BA5279A00DFD26B /* ClusterHealthController.m in Sources */,
+				15CACF3B1BA5279A00DFD26B /* PGStatusView.m in Sources */,
+				15CACF051BA5279A00DFD26B /* CustomNavigationController.m in Sources */,
+				15CACF411BA5279A00DFD26B /* PoolListView.m in Sources */,
+				15CACF0F1BA5279A00DFD26B /* ImageData.m in Sources */,
+				15CACF401BA5279A00DFD26B /* PoolIOPSViewFlowLayout.m in Sources */,
+				15CACEFA1BA5279A00DFD26B /* BaseController.m in Sources */,
+				15CACF1C1BA5279A00DFD26B /* TextFieldChecker.m in Sources */,
+				15CACF141BA5279A00DFD26B /* UserData.m in Sources */,
+				15CACF021BA5279A00DFD26B /* PoolIOPSController.m in Sources */,
+				15CACF1A1BA5279A00DFD26B /* URLMaker.m in Sources */,
+				15CACEF81BA5279900DFD26B /* ChartController.m in Sources */,
+				15CACF131BA5279A00DFD26B /* PGData.m in Sources */,
+				15CACF071BA5279A00DFD26B /* MutualController.m in Sources */,
+				15CACE0E1BA5276300DFD26B /* AppDelegate.m in Sources */,
+				15CACF0A1BA5279A00DFD26B /* APIRecord.m in Sources */,
+				15CACF041BA5279A00DFD26B /* UsageController.m in Sources */,
+				15CACF391BA5279A00DFD26B /* OSDViewFLowLayout.m in Sources */,
+				15CACF101BA5279A00DFD26B /* MONHealthData.m in Sources */,
+				15CACF431BA5279A00DFD26B /* UsageStatusView.m in Sources */,
+				15CACF2B1BA5279A00DFD26B /* HostDetailHeaderView.m in Sources */,
+				15CACF251BA5279A00DFD26B /* ClusterHealthViewFlowLayout.m in Sources */,
+				15CACF311BA5279A00DFD26B /* HostHealthViewCell.m in Sources */,
+				15CACF0E1BA5279A00DFD26B /* HostHealthData.m in Sources */,
+				15CACF2C1BA5279A00DFD26B /* HostDetailView.m in Sources */,
+				15CACF421BA5279A00DFD26B /* PoolListViewCell.m in Sources */,
+				15CACEFC1BA5279A00DFD26B /* HostDetailController.m in Sources */,
+				15CACF4C1BA5279A00DFD26B /* NotificationViewFlowLayout.m in Sources */,
+				15CACF221BA5279A00DFD26B /* ClusterHealthProgressLayer.m in Sources */,
+				15CACF201BA5279A00DFD26B /* ChartView.m in Sources */,
+				15CACF1E1BA5279A00DFD26B /* ChartCellBar.m in Sources */,
+				15CACF1D1BA5279A00DFD26B /* ChartCell.m in Sources */,
+				15CACF151BA5279A00DFD26B /* AnimationMaker.m in Sources */,
+				15CACF381BA5279A00DFD26B /* OSDHealthViewCell.m in Sources */,
+				15CACF031BA5279A00DFD26B /* PoolListController.m in Sources */,
+				15CACF301BA5279A00DFD26B /* HostHealthView.m in Sources */,
+				15CACF211BA5279A00DFD26B /* ClusterHealthCellBar.m in Sources */,
+				15CACF181BA5279A00DFD26B /* UIView+SizeMaker.m in Sources */,
+				15CACF321BA5279A00DFD26B /* MONHealthCell.m in Sources */,
+				15CACF2D1BA5279A00DFD26B /* HostDetailViewCell.m in Sources */,
+				15CACF371BA5279A00DFD26B /* OSDHealthView.m in Sources */,
+				15CACF011BA5279A00DFD26B /* PGStatusController.m in Sources */,
+				15CACF361BA5279A00DFD26B /* OSDHeaderView.m in Sources */,
+				15CACF111BA5279A00DFD26B /* NotificationData.m in Sources */,
+				15CACF451BA5279A00DFD26B /* ErrorView.m in Sources */,
+				15CACF191BA5279A00DFD26B /* CephAPI.m in Sources */,
+				15CACF351BA5279A00DFD26B /* OSDDetailView.m in Sources */,
+				15CACF3E1BA5279A00DFD26B /* PoolIOPSView.m in Sources */,
+				15CACE0B1BA5276300DFD26B /* main.m in Sources */,
+				15CACF481BA5279A00DFD26B /* NavigationViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1589BCCF1AD6A9CE005B86A8 /* Sources */ = {
+		15CACE1A1BA5276300DFD26B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				153739C81B871A3200AC14BE /* ClusterData.m in Sources */,
-				153739F41B871A3200AC14BE /* OSDHealthView.m in Sources */,
-				153739E71B871A3200AC14BE /* CPUSquareView.m in Sources */,
-				153739FD1B871A3200AC14BE /* PoolIOPSViewFlowLayout.m in Sources */,
-				153739E81B871A3200AC14BE /* HostDetailHeaderView.m in Sources */,
-				15373A011B871A3200AC14BE /* IOPSChartView.m in Sources */,
-				153739EB1B871A3200AC14BE /* HostDetailViewFlowLayout.m in Sources */,
-				15BEEF7C1B97EDD400846A79 /* NotificationDetailView.m in Sources */,
-				153739F21B871A3200AC14BE /* OSDDetailView.m in Sources */,
-				153739DF1B871A3200AC14BE /* ClusterHealthProgressLayer.m in Sources */,
-				153739C01B871A3200AC14BE /* PoolIOPSController.m in Sources */,
-				153739C51B871A3200AC14BE /* MutualController.m in Sources */,
-				153739C31B871A3200AC14BE /* CustomNavigationController.m in Sources */,
-				153739F11B871A3200AC14BE /* MONHealthView.m in Sources */,
-				153739FB1B871A3200AC14BE /* PoolIOPSView.m in Sources */,
-				153739E01B871A3200AC14BE /* ClusterHealthView.m in Sources */,
-				153739DD1B871A3200AC14BE /* ChartView.m in Sources */,
-				153739C71B871A3200AC14BE /* APIRecord.m in Sources */,
-				153739E31B871A3200AC14BE /* HealthDetailView.m in Sources */,
-				153739F91B871A3200AC14BE /* PGStatusViewCell.m in Sources */,
-				153739BE1B871A3200AC14BE /* OSDHealthController.m in Sources */,
-				153739DA1B871A3200AC14BE /* ChartCell.m in Sources */,
-				153739F71B871A3200AC14BE /* PGStatusFlowLayout.m in Sources */,
-				153739EF1B871A3200AC14BE /* MONHealthCell.m in Sources */,
-				153739D51B871A3200AC14BE /* UIView+SizeMaker.m in Sources */,
-				153739BF1B871A3200AC14BE /* PGStatusController.m in Sources */,
-				15373A021B871A3200AC14BE /* ErrorView.m in Sources */,
-				153739D21B871A3200AC14BE /* AnimationMaker.m in Sources */,
-				153739B71B871A3200AC14BE /* ClusterHealthController.m in Sources */,
-				153739B91B871A3200AC14BE /* HealthDetailController.m in Sources */,
-				153739BA1B871A3200AC14BE /* HostDetailController.m in Sources */,
-				153739BD1B871A3200AC14BE /* OSDDetailController.m in Sources */,
-				15373A031B871A3200AC14BE /* LoginView.m in Sources */,
-				153739FA1B871A3200AC14BE /* IOPSDetailChartView.m in Sources */,
-				153739CD1B871A3200AC14BE /* MONHealthData.m in Sources */,
-				153739F51B871A3200AC14BE /* OSDHealthViewCell.m in Sources */,
-				153739C21B871A3200AC14BE /* UsageController.m in Sources */,
-				153739C41B871A3200AC14BE /* LoginController.m in Sources */,
-				153739E41B871A3200AC14BE /* HealthDetailViewCell.m in Sources */,
-				15373A041B871A3200AC14BE /* NavigationView.m in Sources */,
-				153739D41B871A3200AC14BE /* UINavigationBar+HeightMaker.m in Sources */,
-				153739F61B871A3200AC14BE /* OSDViewFLowLayout.m in Sources */,
-				153739CB1B871A3200AC14BE /* HostHealthData.m in Sources */,
-				153739FC1B871A3200AC14BE /* PoolIOPSViewCell.m in Sources */,
-				153739C91B871A3200AC14BE /* Cookies.m in Sources */,
-				153739DC1B871A3200AC14BE /* ChartFlowLayout.m in Sources */,
-				153739F01B871A3200AC14BE /* MONHealthFlowLayout.m in Sources */,
-				153739D01B871A3200AC14BE /* PGData.m in Sources */,
-				153739D81B871A3200AC14BE /* DateMaker.m in Sources */,
-				153739CA1B871A3200AC14BE /* HealthDetailData.m in Sources */,
-				153739B61B871A3200AC14BE /* ChartController.m in Sources */,
-				15373A061B871A3200AC14BE /* NotificationCell.m in Sources */,
-				153739BC1B871A3200AC14BE /* MONHealthController.m in Sources */,
-				153739B81B871A3200AC14BE /* BaseController.m in Sources */,
-				153739D61B871A3200AC14BE /* CephAPI.m in Sources */,
-				153739D71B871A3200AC14BE /* URLMaker.m in Sources */,
-				153739CE1B871A3200AC14BE /* NotificationData.m in Sources */,
-				153739E51B871A3200AC14BE /* CPUIOPSView.m in Sources */,
-				153739CC1B871A3200AC14BE /* ImageData.m in Sources */,
-				153739D31B871A3200AC14BE /* UIColor+Reader.m in Sources */,
-				153739FE1B871A3200AC14BE /* PoolListView.m in Sources */,
-				153739F31B871A3200AC14BE /* OSDHeaderView.m in Sources */,
-				153739E21B871A3200AC14BE /* ClusterHealthViewFlowLayout.m in Sources */,
-				153739F81B871A3200AC14BE /* PGStatusView.m in Sources */,
-				153739C61B871A3200AC14BE /* NotificationController.m in Sources */,
-				153739D91B871A3200AC14BE /* TextFieldChecker.m in Sources */,
-				15BEEF791B97EB9300846A79 /* NotificationDetailController.m in Sources */,
-				153739ED1B871A3200AC14BE /* HostHealthView.m in Sources */,
-				153739FF1B871A3200AC14BE /* PoolListViewCell.m in Sources */,
-				153739CF1B871A3200AC14BE /* OSDHealthData.m in Sources */,
-				15373A051B871A3200AC14BE /* NavigationViewCell.m in Sources */,
-				153739E61B871A3200AC14BE /* CPULineBrokenView.m in Sources */,
-				153739DE1B871A3200AC14BE /* ClusterHealthCellBar.m in Sources */,
-				153739B51B871A3200AC14BE /* AppDelegate.m in Sources */,
-				153739EA1B871A3200AC14BE /* HostDetailViewCell.m in Sources */,
-				153739C11B871A3200AC14BE /* PoolListController.m in Sources */,
-				153739D11B871A3200AC14BE /* UserData.m in Sources */,
-				153739EC1B871A3200AC14BE /* HostHealthFlowLayout.m in Sources */,
-				153739E91B871A3200AC14BE /* HostDetailView.m in Sources */,
-				153739E11B871A3200AC14BE /* ClusterHealthViewCell.m in Sources */,
-				15373A001B871A3200AC14BE /* UsageStatusView.m in Sources */,
-				153739BB1B871A3200AC14BE /* HostHealthController.m in Sources */,
-				153739EE1B871A3200AC14BE /* HostHealthViewCell.m in Sources */,
-				15373A071B871A3200AC14BE /* NotificationView.m in Sources */,
-				15373A0A1B871A3200AC14BE /* main.m in Sources */,
-				153739DB1B871A3200AC14BE /* ChartCellBar.m in Sources */,
-				15A651451B95BDA3008124A3 /* NotificationViewFlowLayout.m in Sources */,
+				15CACE251BA5276300DFD26B /* calamari_ios_clientTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		15373A2D1B871C5C00AC14BE /* PBXTargetDependency */ = {
+		15CACE201BA5276300DFD26B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1589BCD21AD6A9CE005B86A8 /* calamari_ios_client */;
-			targetProxy = 15373A2C1B871C5C00AC14BE /* PBXContainerItemProxy */;
+			target = 15CACE041BA5276300DFD26B /* calamari_ios_client */;
+			targetProxy = 15CACE1F1BA5276300DFD26B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		15373A2F1B871C5C00AC14BE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "calamari_ios_client Tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/calamari_ios_client.app/calamari_ios_client";
-			};
-			name = Debug;
-		};
-		15373A301B871C5C00AC14BE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "calamari_ios_client Tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/calamari_ios_client.app/calamari_ios_client";
-			};
-			name = Release;
-		};
-		1589BCF41AD6A9CE005B86A8 /* Debug */ = {
+		15CACE261BA5276300DFD26B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1116,12 +1073,13 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hung-Ming Chen (NHPJ3CC74D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hung-Ming Chen (NHPJ3CC74D)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1134,14 +1092,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
-		1589BCF51AD6A9CE005B86A8 /* Release */ = {
+		15CACE271BA5276300DFD26B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1158,107 +1116,117 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Hung-Ming Chen (NHPJ3CC74D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Hung-Ming Chen (NHPJ3CC74D)";
-				COPY_PHASE_STRIP = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		1589BCF71AD6A9CE005B86A8 /* Debug */ = {
+		15CACE291BA5276300DFD26B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B515312BF3CA560B64EFE614 /* Pods-inWinStackCeph.debug.xcconfig */;
+			baseConfigurationReference = A765B40473C3A8E0E63212ED /* Pods-calamari_ios_client.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/calamari_ios_client",
-				);
-				INFOPLIST_FILE = "$(SRCROOT)/calamari_ios_client/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				INFOPLIST_FILE = calamari_ios_client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-l\"Pods-inWinStackCeph-SVProgressHUD\"",
-					"-framework",
-					"\"QuartzCore\"",
-				);
-				PRODUCT_NAME = calamari_ios_client;
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		1589BCF81AD6A9CE005B86A8 /* Release */ = {
+		15CACE2A1BA5276300DFD26B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F1D38A01E8A46704AB5B61AB /* Pods-inWinStackCeph.release.xcconfig */;
+			baseConfigurationReference = DCD9E3BA2309249C5C33E062 /* Pods-calamari_ios_client.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/calamari_ios_client",
-				);
-				INFOPLIST_FILE = "$(SRCROOT)/calamari_ios_client/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				INFOPLIST_FILE = calamari_ios_client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = calamari_ios_client;
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		15CACE2C1BA5276300DFD26B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = calamari_ios_clientTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/calamari_ios_client.app/calamari_ios_client";
+			};
+			name = Debug;
+		};
+		15CACE2D1BA5276300DFD26B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = calamari_ios_clientTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/calamari_ios_client.app/calamari_ios_client";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		15373A2E1B871C5C00AC14BE /* Build configuration list for PBXNativeTarget "calamari_ios_client Tests" */ = {
+		15CACE001BA5276300DFD26B /* Build configuration list for PBXProject "calamari_ios_client" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				15373A2F1B871C5C00AC14BE /* Debug */,
-				15373A301B871C5C00AC14BE /* Release */,
+				15CACE261BA5276300DFD26B /* Debug */,
+				15CACE271BA5276300DFD26B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1589BCCE1AD6A9CE005B86A8 /* Build configuration list for PBXProject "calamari_ios_client" */ = {
+		15CACE281BA5276300DFD26B /* Build configuration list for PBXNativeTarget "calamari_ios_client" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1589BCF41AD6A9CE005B86A8 /* Debug */,
-				1589BCF51AD6A9CE005B86A8 /* Release */,
+				15CACE291BA5276300DFD26B /* Debug */,
+				15CACE2A1BA5276300DFD26B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1589BCF61AD6A9CE005B86A8 /* Build configuration list for PBXNativeTarget "calamari_ios_client" */ = {
+		15CACE2B1BA5276300DFD26B /* Build configuration list for PBXNativeTarget "calamari_ios_clientTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1589BCF71AD6A9CE005B86A8 /* Debug */,
-				1589BCF81AD6A9CE005B86A8 /* Release */,
+				15CACE2C1BA5276300DFD26B /* Debug */,
+				15CACE2D1BA5276300DFD26B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 1589BCCB1AD6A9CE005B86A8 /* Project object */;
+	rootObject = 15CACDFD1BA5276300DFD26B /* Project object */;
 }

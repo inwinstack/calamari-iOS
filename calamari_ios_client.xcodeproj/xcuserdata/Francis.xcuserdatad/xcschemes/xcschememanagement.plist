@@ -4,12 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>calamari_ios_clientTests copy.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>inWinStackCeph.xcscheme</key>
+		<key>calamari_ios_client.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -17,22 +12,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>15373A161B871BD400AC14BE</key>
+		<key>15CACE041BA5276300DFD26B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>15373A251B871C5C00AC14BE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1589BCD21AD6A9CE005B86A8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1589BCEB1AD6A9CE005B86A8</key>
+		<key>15CACE1D1BA5276300DFD26B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -1,8 +1,8 @@
 //
 //  AppDelegate.m
-//  inWinStackCeph
+//  calamari_ios_client
 //
-//  Created by Francis on 2015/4/9.
+//  Created by Francis on 2015/9/13.
 //  Copyright (c) 2015年 Francis. All rights reserved.
 //
 
@@ -55,13 +55,17 @@
 }
 
 - (void) applicationWillEnterForeground:(UIApplication *)application {
+    [NotificationData shareInstance].isBackground = NO;
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[NotificationData shareInstance] resetRecord];
+    [[NotificationData shareInstance] restartTimerWithTimeInterval:10];
 }
 
 - (void) applicationDidEnterBackground:(UIApplication *)application {
     self.isBackground = YES;
+    [NotificationData shareInstance].isBackground = YES;
+    [[NotificationData shareInstance] restartTimerWithTimeInterval:30];
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTime"] isEqualToString:@"did"]) {
         self.backgroundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
             
