@@ -31,7 +31,7 @@
 - (void) startSort {
     NSMutableArray *tempArray = [NSMutableArray array];
     for (id monDic in self.monArray) {
-        for (id object in [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_health", [ClusterData shareInstance].clusterArray[0][@"id"]]][@"report"][@"health"][@"health_services"][0][@"mons"]) {
+        for (id object in [[NSUserDefaults standardUserDefaults]objectForKey:@"kind_health"][@"report"][@"health"][@"health_services"][0][@"mons"]) {
             if ([monDic[@"name"] isEqualToString:[NSString stringWithFormat:@"%@", object[@"name"]]]) {
                 if ([[NSString stringWithFormat:@"%@", object[@"health"]] isEqualToString:@"HEALTH_ERROR"]) {
                     [tempArray addObject:monDic];
@@ -41,7 +41,7 @@
     }
     
     for (id monDic in self.monArray) {
-        for (id object in [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_health", [ClusterData shareInstance].clusterArray[0][@"id"]]][@"report"][@"health"][@"health_services"][0][@"mons"]) {
+        for (id object in [[NSUserDefaults standardUserDefaults]objectForKey:@"kind_health"][@"report"][@"health"][@"health_services"][0][@"mons"]) {
             if ([monDic[@"name"] isEqualToString:[NSString stringWithFormat:@"%@", object[@"name"]]]) {
                 if ([[NSString stringWithFormat:@"%@", object[@"health"]] isEqualToString:@"HEALTH_WARN"]) {
                     [tempArray addObject:monDic];
@@ -51,7 +51,7 @@
     }
     
     for (id monDic in self.monArray) {
-        for (id object in [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_health", [ClusterData shareInstance].clusterArray[0][@"id"]]][@"report"][@"health"][@"health_services"][0][@"mons"]) {
+        for (id object in [[NSUserDefaults standardUserDefaults]objectForKey:@"kind_health"][@"report"][@"health"][@"health_services"][0][@"mons"]) {
             if ([monDic[@"name"] isEqualToString:[NSString stringWithFormat:@"%@", object[@"name"]]]) {
                 if ([[NSString stringWithFormat:@"%@", object[@"health"]] isEqualToString:@"HEALTH_OK"]) {
                     [tempArray addObject:monDic];
@@ -65,7 +65,7 @@
 
 - (NSString*) checkMonWithNodeName:(NSString*)nodeName {
     NSString *statusString;
-    for (id object in [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_health", [ClusterData shareInstance].clusterArray[0][@"id"]]][@"report"][@"health"][@"health_services"][0][@"mons"]) {
+    for (id object in [[NSUserDefaults standardUserDefaults]objectForKey:@"kind_health"][@"report"][@"health"][@"health_services"][0][@"mons"]) {
         if ([nodeName isEqualToString:[NSString stringWithFormat:@"%@", object[@"name"]]]) {
             statusString = [NSString stringWithFormat:@"%@", object[@"health"]];
         }

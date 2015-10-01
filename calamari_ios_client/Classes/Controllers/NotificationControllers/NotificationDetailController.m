@@ -9,6 +9,7 @@
 #import "NotificationDetailController.h"
 #import "UIColor+Reader.h"
 #import "NotificationDetailView.h"
+#import "DateMaker.h"
 
 @interface NotificationDetailController ()
 
@@ -20,7 +21,7 @@
     [super viewDidLoad];
     self.title = @"Notification Detail";
     [self setBackButtonDisplay:YES];
-    NSString *timeDataString = [self.dataDic[@"Time"] stringByReplacingOccurrencesOfString:@" - " withString:@""];
+    NSString *timeDataString = [[DateMaker shareDateMaker] getTodayWithNotificationFormatWithTimeStamp:[self.dataDic[@"Time"] doubleValue]];
     NSString *errorType = [NSString stringWithFormat:@"%@", self.dataDic[@"Type"]];
     NSString *errorCondtionType = [NSString stringWithFormat:@"%@", self.dataDic[@"Status"]];
     NSString *contentString = [NSString stringWithFormat:@"%@", self.dataDic[@"Content"]];
@@ -34,7 +35,7 @@
     self.view = self.notificationDetailView;
     
     if (self.dataDic[@"ResolveTime"]) {
-        NSString *resolvedtimeDataString = [self.dataDic[@"ResolveTime"] stringByReplacingOccurrencesOfString:@" - " withString:@""];
+        NSString *resolvedtimeDataString = [[DateMaker shareDateMaker] getTodayWithNotificationFormatWithTimeStamp:[self.dataDic[@"ResolveTime"] doubleValue]];
         NSString *resolvedTimeString = [NSString stringWithFormat:@"Resolved at\n%@", resolvedtimeDataString];
         contentString = [NSString stringWithFormat:@"%@", self.dataDic[@"ResolveContent"]];
         [self.notificationDetailView setContentWithContent:contentString status:errorCondtionType errorTitle:errorTitleString errorCount:errorCountString errorTimeString:errorTimeString resolveTimeString:resolvedTimeString];

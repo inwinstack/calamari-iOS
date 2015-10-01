@@ -77,7 +77,7 @@
     [HostHealthData shareInstance].hostDic = [NSMutableDictionary dictionary];
     self.hostHealthView.userInteractionEnabled = NO;
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-    [[CephAPI shareInstance] startGetCPUSummaryDataWithIP:[UserData shareInstance].ipString Port:[UserData shareInstance].portString nodeID:tempName Completion:^(BOOL finished) {
+    [[CephAPI shareInstance] startGetCPUSummaryDataWithIP:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] Port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] nodeID:tempName Completion:^(BOOL finished) {
         if (finished) {
             [SVProgressHUD dismiss];
             self.hostHealthView.userInteractionEnabled = YES;

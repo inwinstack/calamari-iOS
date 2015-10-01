@@ -30,7 +30,7 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_pool_list", [ClusterData shareInstance].clusterArray[0][@"id"]]] count];
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"kind_pool_list"] count];
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -38,10 +38,10 @@
     if (!cell) {
         cell = [[PoolListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PoolListCellIdentifier"];
     }
-    cell.nameLabel.text = [NSString stringWithFormat:@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_pool_list", [ClusterData shareInstance].clusterArray[0][@"id"]]][indexPath.row][@"name"]];
-    cell.idLabel.text = [NSString stringWithFormat:@"# %@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_pool_list", [ClusterData shareInstance].clusterArray[0][@"id"]]][indexPath.row][@"id"]];
-    cell.replicasNumberLabel.text = [NSString stringWithFormat:@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_pool_list", [ClusterData shareInstance].clusterArray[0][@"id"]]][indexPath.row][@"size"]];
-    cell.pgNumberLabel.text = [NSString stringWithFormat:@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_pool_list", [ClusterData shareInstance].clusterArray[0][@"id"]]][indexPath.row][@"pg_num"]];
+    cell.nameLabel.text = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"kind_pool_list"][indexPath.row][@"name"]];
+    cell.idLabel.text = [NSString stringWithFormat:@"# %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"kind_pool_list"][indexPath.row][@"id"]];
+    cell.replicasNumberLabel.text = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"kind_pool_list"][indexPath.row][@"size"]];
+    cell.pgNumberLabel.text = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"kind_pool_list"][indexPath.row][@"pg_num"]];
     [cell reloadLayout];
     return cell;
 }

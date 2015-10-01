@@ -55,7 +55,7 @@
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     switch (currentIndex) {
         case 0: {
-            return [[[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"OSD" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]] integerValue] + [[[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"OSD" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]] integerValue] + [[[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"OSD" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]] integerValue];
+            return [[[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"OSD" clusterID:[[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"]] integerValue] + [[[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"OSD" clusterID:[[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"]] integerValue] + [[[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"OSD" clusterID:[[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"]] integerValue];
             break;
         } case 1: {
             return self.warnArray.count;
@@ -71,7 +71,7 @@
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.osdHealthView.userInteractionEnabled = NO;
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-    [[CephAPI shareInstance] startGetOSDDataWithIP:[UserData shareInstance].ipString Port:[UserData shareInstance].portString ClusterID:[ClusterData shareInstance].clusterArray[0][@"id"] OSDID:[(OSDHealthViewCell*)[collectionView cellForItemAtIndexPath:indexPath] numberLabel].text completion:^(BOOL finished) {
+    [[CephAPI shareInstance] startGetOSDDataWithIP:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] Port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] ClusterID:[[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"] OSDID:[(OSDHealthViewCell*)[collectionView cellForItemAtIndexPath:indexPath] numberLabel].text completion:^(BOOL finished) {
         if (finished) {
             [SVProgressHUD dismiss];
             self.osdHealthView.userInteractionEnabled = YES;

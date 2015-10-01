@@ -40,13 +40,13 @@
     if (self) {
         self.canNotification = YES;
         self.isBackground = NO;
-        self.notificationArray = [NSMutableArray array];
+        self.notificationArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationAlerts"]];
         [self resetRecord];
         self.warnSec = @"10";
         self.warnCodeDic = @{@"OSD" : @"01", @"Monitor" : @"02", @"PG" : @"03", @"Usage" : @"04", @"Info" : @"4", @"Warning" : @"3", @"Error" : @"2", @"Critical" : @"1"};
         
         self.keyArray = @[@"osd", @"mon", @"pg", @"space"];
-        self.notificationContentArray = @[@[@"發生 OSD 異常！", @"OSD 異常數增加！", @"OSD 異常數增加！", @"OSD 修復完成！", @"發生 OSD 損毀！", @"OSD 損毀數增加！", @"OSD 損毀數增加！", @"OSD 修復完成！"], @[@"發生 Monitor 異常！", @"Monitor 異常數增加！", @"Monitor 異常數增加！", @"Monitor 修復完成！", @"發生 Monitor 損毀！", @"Monitor 損毀數增加！", @"Monitor 損毀數增加！", @"Monitor 修復完成！"], @[@"PG 狀態更新中！PG 嘗試修復系統中", @"PG 狀態更新中！", @"PG 狀態更新中！", @"PG 修復完成！", @"PG 狀態異常！", @"PG 異常數增加！", @"PG 異常數增加！", @"PG 修復完成！"]];
+        self.notificationContentArray = @[@[@"OSD is in abnormal status!", @"OSD comes new abnormal status!", @"OSD comes new abnormal status!", @"OSD has been repaired!", @"發生 OSD 損毀！", @"OSD 損毀數增加！", @"OSD 損毀數增加！", @"OSD has been repaired!"], @[@"Monitor is in abnormal status!", @"Monitor comes new abnormal status!", @"Monitor comes new abnormal status!", @"Monitor has been repaired!", @"發生 Monitor 損毀！", @"Monitor 損毀數增加！", @"Monitor 損毀數增加！", @"Monitor has been repaired!"], @[@"Some PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"PGs have been repaired!", @"PG 狀態異常！", @"PG 異常數增加！", @"PG 異常數增加！", @"PGs have been repaired!"]];
         self.notificationUsageContentArray = @[@"使用量已超過 70%！建議擴充儲存空間！", @"使用量已達上限！請立即擴充儲存空間！", @"系統修復完成"];
         self.notificationContentDetailArray = @[@[@"OSD is in abnormal status!", @"OSD comes new abnormal status!", @"OSD comes new abnormal status!", @"OSD has been repaired!"], @[@"Monitor is in abnormal status!", @"Monitor comes new abnormal status!", @"Monitor comes new abnormal status!", @"Monitor has been repaired!"], @[@"Some PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"PGs have been repaired!"]];
         self.notificationUsageContentDetailArray = @[@"Disk usage exceeds 70%! Please expand the storage capacity!", @"Disk usage exceeds 85%! Please expand the storage capacity!", @"Storage capacity has been expanded!"];
@@ -69,6 +69,7 @@
 - (void) stopTimer {
     [self.refreshTimer invalidate];
     self.refreshTimer = nil;
+    timeCount = 0;
 }
 
 - (void) restartTimerWithTimeInterval:(float)timeInterValCount {
@@ -78,7 +79,6 @@
 }
 
 - (void) refreshAction {
-    NSLog(@"go");
     timeCount++;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"timeAddAction" object:[NSString stringWithFormat:@"%d", timeCount]];
     if (timeCount == [self.warnSec intValue]) {
@@ -106,6 +106,7 @@
 }
 
 - (void) startCheck {
+//    NSLog(@"%@\n%@\n%@\n%@",self.warnOriginalArray, self.warnPreviousArray, self.errorOriginalArray, self.errorPreviousArray);
     self.canNotification = YES;
     for (id object in [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_health", [ClusterData shareInstance].clusterArray[0][@"id"]]][@"report"][@"summary"]) {
         if ([[NSString stringWithFormat:@"%@", object[@"summary"]] isEqualToString:@"noout flag(s) set"]) {
@@ -254,7 +255,7 @@
 
 - (void) addToNotificationArrayWithUsageType:(NotificationUsageType)notificationUsageType usagePercent:(NSString*)usagePercent {
     NSString *notificationConetentString = self.notificationUsageContentDetailArray[notificationUsageType];
-    NSString *notificationTimeString = [NSString stringWithFormat:@" - %@", [[DateMaker shareDateMaker] getTodayWithNotificationFormat]];
+    NSString *notificationTimeString = [NSString stringWithFormat:@"%f", [[DateMaker shareDateMaker] getTodayTimestamp]];
     NSString *notificationStatusString = (notificationUsageType == UsageDoneType) ? @"Resolved" :  @"Pending";
     NSString *notificationTypeString;
     if (notificationUsageType == UsageErrorType) {
@@ -273,8 +274,8 @@
 }
 
 - (void) addToNotificationArrayWithType:(NotificationType)notificationType conditionType:(NotificationCoditionType)conditionType total:(int)total pgCountString:(NSString*)pgCountString {
-    NSString *notificationConetentString = self.notificationContentDetailArray[notificationType][conditionType % 4];
-    NSString *notificationTimeString = [NSString stringWithFormat:@" - %@", [[DateMaker shareDateMaker] getTodayWithNotificationFormat]];
+    NSString *notificationConetentString = self.notificationContentArray[notificationType][conditionType];
+    NSString *notificationTimeString = [NSString stringWithFormat:@"%f", [[DateMaker shareDateMaker] getTodayTimestamp]];
     NSString *notificationStatusString = ((conditionType == ConditionWarnDone) || (conditionType == ConditionErrorDone)) ? @"Resolved" :  @"Pending";
     
     NSString *notificationTypeString = (conditionType > 3) ? @"Error" : @"Warning";
@@ -297,43 +298,71 @@
         }
     }
 
+    NSMutableArray *tempGlobalDicArray = [NSMutableArray array];
+    NSMutableArray *tempRemoveDicArray = [NSMutableArray array];
     NSDictionary *notificationContentDictionary;
     if (conditionType == ConditionWarnDone) {
         NSString *resolveTimeString = notificationTimeString;
         NSString *resolveContentString = notificationConetentString;
         for (int i = 0; i < self.notificationArray.count; i++) {
             NSDictionary *tempDic = self.notificationArray[i];
+            
             if ([tempDic[@"Type"] isEqualToString:@"Warning"] && [tempDic[@"TypeCode"] isEqualToString:self.keyArray[notificationType]]) {
+                [tempRemoveDicArray addObject:tempDic];
                 resolveContentString = tempDic[@"Content"];
                 totalErrorString = tempDic[@"ErrorCount"];
                 notificationTimeString = tempDic[@"Time"];
-                break;
+                notificationContentDictionary = @{@"Content" : resolveContentString, @"Status" : notificationStatusString, @"Time" : notificationTimeString, @"Type" : notificationTypeString, @"ErrorCount" : totalErrorString, @"ErrorTitle" : notificationTitleString, @"ResolveTime" : resolveTimeString, @"ResolveContent" : resolveContentString};
+                [tempGlobalDicArray addObject:notificationContentDictionary];
             }
         }
-        notificationContentDictionary = @{@"Content" : notificationConetentString, @"Status" : notificationStatusString, @"Time" : notificationTimeString, @"Type" : notificationTypeString, @"ErrorCount" : totalErrorString, @"ErrorTitle" : notificationTitleString, @"ResolveTime" : resolveTimeString, @"ResolveContent" : resolveContentString};
 
     } else if (conditionType == ConditionErrorDone) {
         NSString *resolveTimeString = notificationTimeString;
         NSString *resolveContentString = notificationConetentString;
+        
         for (int i = 0; i < self.notificationArray.count; i++) {
             NSDictionary *tempDic = self.notificationArray[i];
-            if ([tempDic[@"Type"] isEqualToString:@"Error"] && [tempDic[@"TypeCode"] isEqualToString:self.keyArray[notificationType]]) {
+            if ([tempDic[@"Type"] isEqualToString:@"Error"] && [tempDic[@"TypeCode"] isEqualToString:self.keyArray[notificationType]] ) {
+                [tempRemoveDicArray addObject:tempDic];
                 resolveContentString = tempDic[@"Content"];
                 totalErrorString = tempDic[@"ErrorCount"];
                 notificationTimeString = tempDic[@"Time"];
-                break;
+                notificationContentDictionary = @{@"Content" : resolveContentString, @"Status" : notificationStatusString, @"Time" : notificationTimeString, @"Type" : notificationTypeString, @"ErrorCount" : totalErrorString, @"ErrorTitle" : notificationTitleString, @"ResolveTime" : resolveTimeString, @"ResolveContent" : resolveContentString};
+                [tempGlobalDicArray addObject:notificationContentDictionary];
             }
         }
-        notificationContentDictionary = @{@"Content" : notificationConetentString, @"Status" : notificationStatusString, @"Time" : notificationTimeString, @"Type" : notificationTypeString, @"ErrorCount" : totalErrorString, @"ErrorTitle" : notificationTitleString, @"ResolveTime" : resolveTimeString, @"ResolveContent" : resolveContentString};
 
     } else {
         notificationContentDictionary = @{@"Content" : notificationConetentString, @"Status" : notificationStatusString, @"Time" : notificationTimeString, @"Type" : notificationTypeString, @"ErrorCount" : totalErrorString, @"ErrorTitle" : notificationTitleString, @"TypeCode" : [NSString stringWithFormat:@"%@", self.keyArray[notificationType]]};
     }
-    if (self.notificationArray.count > 0) {
-        [self.notificationArray insertObject:notificationContentDictionary atIndex:0];
+    if (tempGlobalDicArray.count > 0) {
+        for (id removeObj in tempRemoveDicArray) {
+            [self.notificationArray removeObject:removeObj];
+        }
+        for (int i = 0; i < tempGlobalDicArray.count; i++) {
+            [self.notificationArray insertObject:tempGlobalDicArray[tempGlobalDicArray.count - 1 - i] atIndex:0];
+        }
     } else {
-        [self.notificationArray addObject:notificationContentDictionary];
+        if (self.notificationArray.count > 0) {
+            [self.notificationArray insertObject:notificationContentDictionary atIndex:0];
+        } else {
+            [self.notificationArray addObject:notificationContentDictionary];
+        }
     }
+    for (int i = 0; i < self.notificationArray.count; i++) {
+        for (int j = i; j < self.notificationArray.count; j++) {
+            double originTimeInterval = [self.notificationArray[i][@"Time"] doubleValue];
+            double changeTimeInterval = [self.notificationArray[j][@"Time"] doubleValue];
+            if (originTimeInterval < changeTimeInterval) {
+                id tempObject = self.notificationArray[i];
+                self.notificationArray[i] = self.notificationArray[j];
+                self.notificationArray[j] = tempObject;
+            }
+        }
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:self.notificationArray forKey:@"NotificationAlerts"];
 }
 
 - (void) makeNotificationStringWithConditionType:(NotificationCoditionType)conditionType notificationType:(NotificationType)notificationType {

@@ -16,6 +16,10 @@
 @property (nonatomic, strong) UITextField *portField;
 @property (nonatomic, strong) UITextField *accountField;
 @property (nonatomic, strong) UITextField *passwordField;
+@property (nonatomic, strong) UIView *languageView;
+@property (nonatomic, strong) UIImageView *languageCountryImageView;
+@property (nonatomic, strong) UILabel *languageContentLabel;
+@property (nonatomic, strong) UIButton *languageSettingButton;
 
 - (void) setDefaultField;
 - (void) setRedField:(UITextField*)field;

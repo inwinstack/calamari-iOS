@@ -94,8 +94,10 @@
         for (int i = 1080; i < [[ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_iops", [ClusterData shareInstance].clusterArray[0][@"id"]]][@"datapoints"] count] ; i++) {
             [dailyIOPSArray addObject:@[[[DateMaker shareDateMaker] getTimeWithTimeStamp:[NSString stringWithFormat:@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_iops", [ClusterData shareInstance].clusterArray[0][@"id"]]][@"datapoints"][i][0]]], [NSString stringWithFormat:@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_iops", [ClusterData shareInstance].clusterArray[0][@"id"]]][@"datapoints"][i][1]]]];
         }
-        [self.clusterDetailData setObject:[NSString stringWithFormat:@"%.1f", tempMax] forKey:@"iops_max"];
-        [self.clusterDetailData setObject:dailyIOPSArray forKey:@"iops"];
+//        [self.clusterDetailData setObject:[NSString stringWithFormat:@"%.1f", tempMax] forKey:@"iops_max"];
+//        [self.clusterDetailData setObject:dailyIOPSArray forKey:@"iops"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%.1f", tempMax] forKey:@"iops_max"];
+        [[NSUserDefaults standardUserDefaults] setObject:dailyIOPSArray forKey:@"iops"];
     }
     
     if ([status isEqualToString:@"Error"]) {
@@ -187,19 +189,21 @@
 
 - (void) setData:(NSString*)clusterID completion:(void (^)(BOOL finished))completion {
     [HealthDetailData shareInstance].detailArray = (NSMutableArray*)self.clusterDetailData[[NSString stringWithFormat:@"%@_health", clusterID]][@"report"][@"summary"];
-    [OSDHealthData shareInstance].osdArray = (NSMutableArray*)self.clusterDetailData[[NSString stringWithFormat:@"%@_osd", clusterID]][@"osds"];
-    [MONHealthData shareInstance].monArray = (NSMutableArray*)self.clusterDetailData[[NSString stringWithFormat:@"%@_mon", clusterID]];
+    [OSDHealthData shareInstance].osdArray = (NSMutableArray*)[[NSUserDefaults standardUserDefaults] objectForKey:@"kind_osd"][@"osds"];
+    [MONHealthData shareInstance].monArray = (NSMutableArray*)[[NSUserDefaults standardUserDefaults] objectForKey:@"kind_mon"];
+
     [[MONHealthData shareInstance] startSort];
         
     NSMutableSet *hostSet = [NSMutableSet set];
     
-    for (id object in self.clusterDetailData[[NSString stringWithFormat:@"%@_server", clusterID]]) {
+    for (id object in [[NSUserDefaults standardUserDefaults] objectForKey:@"kind_server"]) {
         for (id typeObj in object[@"services"]) {
             if ([[NSString stringWithFormat:@"%@", typeObj[@"type"]] isEqualToString:@"osd"]) {
                 [hostSet addObject:object];
             }
         }
     }
+    
     NSMutableDictionary *tempHostDic = [NSMutableDictionary dictionary];
     NSMutableArray *hostKeyArray = [NSMutableArray array];
     for (id tempObj in hostSet) {
@@ -222,11 +226,11 @@
     [HostHealthData shareInstance].hostAllData = tempHostDic;
     [HostHealthData shareInstance].hostArray = hostKeyArray;
     
-    
-    [PGData shareInstance].criticalCount = [NSString stringWithFormat:@"%@", self.clusterDetailData[[NSString stringWithFormat:@"%@_health_counters", clusterID]][@"pg"][@"critical"][@"count"]];
-    [PGData shareInstance].warnCount = [NSString stringWithFormat:@"%@", self.clusterDetailData[[NSString stringWithFormat:@"%@_health_counters", clusterID]][@"pg"][@"warn"][@"count"]];
-    [PGData shareInstance].okCount = [NSString stringWithFormat:@"%@", self.clusterDetailData[[NSString stringWithFormat:@"%@_health_counters", clusterID]][@"pg"][@"ok"][@"count"]];
-    [PGData shareInstance].pgDic = [NSMutableDictionary dictionaryWithDictionary:self.clusterDetailData[[NSString stringWithFormat:@"%@_osd", clusterID]][@"pg_state_counts"]];
+    ;
+    [PGData shareInstance].criticalCount = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"kind_health_counters"][@"pg"][@"critical"][@"count"]];
+    [PGData shareInstance].warnCount = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"kind_health_counters"][@"pg"][@"warn"][@"count"]];
+    [PGData shareInstance].okCount = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"kind_health_counters"][@"pg"][@"ok"][@"count"]];
+    [PGData shareInstance].pgDic = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"kind_osd"][@"pg_state_counts"]];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         completion(true);
     });

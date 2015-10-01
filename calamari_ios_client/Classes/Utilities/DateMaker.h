@@ -11,7 +11,9 @@
 @interface DateMaker : NSObject
 
 + (DateMaker*) shareDateMaker;
-- (NSString*) getTodayWithNotificationFormat;
+
+- (double) getTodayTimestamp;
+- (NSString*) getTodayWithNotificationFormatWithTimeStamp:(double)timeStamp;
 - (NSString*) getTimeWithTimeStamp:(NSString*)timeStamp;
 - (NSString*) getDateWithDate:(NSString*)dateString;
 - (NSString*) getTimeWithDate:(NSString*)dateString;

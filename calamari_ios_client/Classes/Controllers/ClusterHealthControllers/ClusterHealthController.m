@@ -14,10 +14,11 @@
 #import "ImageData.h"
 #import "UIColor+Reader.h"
 #import "SVProgressHUD.h"
+#import "CephAPI.h"
+#import "NotificationData.h"
 
 @interface ClusterHealthController ()
 
-@property (nonatomic, strong) NSMutableDictionary *collectionData;
 @property (nonatomic, strong) NSString *currentTimeString;
 
 @end
@@ -39,11 +40,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isFirstController"] isEqualToString:@"YES"]) {
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+        [[CephAPI shareInstance] startGetClusterDetailAtBackgroundCompletion:^(BOOL finished) {
+            if (finished) {
+                [[NotificationData shareInstance] restartTimerWithTimeInterval:10];
+                [SVProgressHUD dismiss];
+            }
+        } error:^(id error) {
+            if (error) {
+                [[NotificationData shareInstance] restartTimerWithTimeInterval:10];
+                [SVProgressHUD dismiss];
+                NSLog(@"%@", error);
+            }
+        }];
+    } else {
+        [self getData];
+    }
+
     self.currentTimeString = @"0";
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHealthCardAction:) name:@"timeAddAction" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshAction) name:@"didRefreshAction" object:nil];
-    [self getData];
     self.navigationController.navigationBar.translucent = NO;
     self.flowLayout = [[ClusterHealthViewFlowLayout alloc] init];
     self.clusterHealthView = [[ClusterHealthView alloc] initWithFrame:self.view.frame collectionViewLayout:self.flowLayout];
@@ -75,9 +93,9 @@
     ClusterHealthViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HealthViewCell" forIndexPath:indexPath];
     cell.iconImage.image = [UIImage imageNamed:[ImageData shareInstance].imageNameDictionary[@"HealthImages"][indexPath.row]];
     cell.titleLabel.text = [ClusterData shareInstance].serviceNameArray[indexPath.row];
-    cell.statusLabel.text = self.collectionData[[ClusterData shareInstance].serviceNameArray[indexPath.row]][0];
-    [cell.bottomBar setWarningValue:self.collectionData[[ClusterData shareInstance].serviceNameArray[indexPath.row]][2]];
-    [cell.bottomBar setErrorValue:self.collectionData[[ClusterData shareInstance].serviceNameArray[indexPath.row]][3]];
+    cell.statusLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:[ClusterData shareInstance].serviceNameArray[indexPath.row]][0];
+    [cell.bottomBar setWarningValue:[[NSUserDefaults standardUserDefaults] objectForKey:[ClusterData shareInstance].serviceNameArray[indexPath.row]][2]];
+    [cell.bottomBar setErrorValue:[[NSUserDefaults standardUserDefaults] objectForKey:[ClusterData shareInstance].serviceNameArray[indexPath.row]][3]];
     float height;
     if ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) {
         height = ((CGRectGetWidth([UIScreen mainScreen].bounds) - CGRectGetWidth([UIScreen mainScreen].bounds) / 16) * 0.85) / 2;
@@ -138,13 +156,13 @@
         cell.bottomBar.alpha = 0;
         cell.detailLabel.alpha = 0;
         cell.iopsChartView.alpha = 1;
-        
-        cell.iopsChartView.maxLabel.text = [NSString stringWithFormat:@"%d", [[ClusterData shareInstance].clusterDetailData[@"iops_max"] intValue]];
-        cell.iopsChartView.middleLabel.text = [NSString stringWithFormat:@"%d", [[NSString stringWithFormat:@"%f", ceil([[ClusterData shareInstance].clusterDetailData[@"iops_max"] floatValue] / 2.0)] intValue]];
-        [cell.iopsChartView setDataWithDataArray:[ClusterData shareInstance].clusterDetailData[@"iops"]];
+
+        cell.iopsChartView.maxLabel.text = [NSString stringWithFormat:@"%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"iops_max"] intValue]];
+        cell.iopsChartView.middleLabel.text = [NSString stringWithFormat:@"%d", [[NSString stringWithFormat:@"%f", ceil([[[NSUserDefaults standardUserDefaults] objectForKey:@"iops_max"] floatValue] / 2.0)] intValue]];
+        [cell.iopsChartView setDataWithDataArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"iops"]];
         if ([cell.iopsChartView.maxLabel.text integerValue] > 1000) {
-            cell.iopsChartView.maxLabel.text = [[[[ClusterData shareInstance] caculateByte:[[NSString stringWithFormat:@"%d", [[ClusterData shareInstance].clusterDetailData[@"iops_max"] intValue]] doubleValue]] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"B" withString:@""];
-            cell.iopsChartView.middleLabel.text = [[[[ClusterData shareInstance] caculateByte:[[NSString stringWithFormat:@"%d", [[ClusterData shareInstance].clusterDetailData[@"iops_max"] intValue]] doubleValue] / 2.0] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"B" withString:@""];
+            cell.iopsChartView.maxLabel.text = [[[[ClusterData shareInstance] caculateByte:[[NSString stringWithFormat:@"%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"iops_max"] intValue]] doubleValue]] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"B" withString:@""];
+            cell.iopsChartView.middleLabel.text = [[[[ClusterData shareInstance] caculateByte:[[NSString stringWithFormat:@"%d", [[[NSUserDefaults standardUserDefaults] objectForKey:@"iops_max"] intValue]] doubleValue] / 2.0] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"B" withString:@""];
         }
     } else {
         cell.bottomBar.alpha = 1;
@@ -165,7 +183,7 @@
         if (indexPath.row == 0) {
             cell.detailLabel.text = [NSString stringWithFormat:@"%@ %@", self.currentTimeString, [ClusterData shareInstance].unitArray[indexPath.row]];
         } else {
-            cell.detailLabel.text = [NSString stringWithFormat:@"%@%@", self.collectionData[[ClusterData shareInstance].serviceNameArray[indexPath.row]][1], [ClusterData shareInstance].unitArray[indexPath.row]];
+            cell.detailLabel.text = [NSString stringWithFormat:@"%@%@", [[NSUserDefaults standardUserDefaults] objectForKey:[ClusterData shareInstance].serviceNameArray[indexPath.row]][1], [ClusterData shareInstance].unitArray[indexPath.row]];
         }
         [cell removeProgress];
     }
@@ -200,42 +218,43 @@
 }
 
 - (void) getData {
-    self.collectionData = [NSMutableDictionary dictionary];
-    NSString *healthStatus;
-    if ([[[ClusterData shareInstance] getCurrentStatusWithID:[ClusterData shareInstance].clusterArray[0][@"id"]] isEqualToString:@"HEALTH_ERROR"]) {
-        healthStatus = @"ERROR";
-    } else if ([[[ClusterData shareInstance] getCurrentStatusWithID:[ClusterData shareInstance].clusterArray[0][@"id"]] isEqualToString:@"HEALTH_WARN"]) {
-        healthStatus = @"WARNING";
-    } else {
-        healthStatus = @"OK";
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"refresh"] isEqualToString:@"did"] && [ClusterData shareInstance].clusterArray.count > 0) {
+        NSString *healthStatus;
+        if ([[[ClusterData shareInstance] getCurrentStatusWithID:[ClusterData shareInstance].clusterArray[0][@"id"]] isEqualToString:@"HEALTH_ERROR"]) {
+            healthStatus = @"ERROR";
+        } else if ([[[ClusterData shareInstance] getCurrentStatusWithID:[ClusterData shareInstance].clusterArray[0][@"id"]] isEqualToString:@"HEALTH_WARN"]) {
+            healthStatus = @"WARNING";
+        } else {
+            healthStatus = @"OK";
+        }
+        NSString *poolStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"POOLS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *pgStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"PG STATUS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *usageStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"Usage" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *osdStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"OSD" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *monStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"MONITOR" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *hostStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"HOSTS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *hostWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"HOSTS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *hostError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"HOSTS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *healthWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"HEALTH" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *healthError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"HEALTH" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *osdWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"OSD" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *osdError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"OSD" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *monWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"MONITOR" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *monError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"MONITOR" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *pgWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"PG STATUS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *pgError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"PG STATUS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *usageWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"Usage" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *usageError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"Usage" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *iopsTriger = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"IOPS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSLog(@"%@", iopsTriger);
+        [[NSUserDefaults standardUserDefaults] setObject:@[healthStatus, @"", healthWarning, healthError] forKey:[ClusterData shareInstance].serviceNameArray[0]];
+        [[NSUserDefaults standardUserDefaults] setObject:@[osdStatus, @"", osdWarning, osdError] forKey:[ClusterData shareInstance].serviceNameArray[1]];
+        [[NSUserDefaults standardUserDefaults] setObject:@[monStatus, @"", monWarning, monError] forKey:[ClusterData shareInstance].serviceNameArray[2]];
+        [[NSUserDefaults standardUserDefaults] setObject:@[poolStatus, @"", @"0", @"0"] forKey:[ClusterData shareInstance].serviceNameArray[3]];
+        [[NSUserDefaults standardUserDefaults] setObject:@[hostStatus, @"", hostWarning, hostError] forKey:[ClusterData shareInstance].serviceNameArray[4]];
+        [[NSUserDefaults standardUserDefaults] setObject:@[pgStatus, @"", pgWarning, pgError] forKey:[ClusterData shareInstance].serviceNameArray[5]];
+        [[NSUserDefaults standardUserDefaults] setObject:@[usageStatus, @"", usageWarning, usageError] forKey:[ClusterData shareInstance].serviceNameArray[6]];
     }
-    NSString *poolStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"POOLS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *pgStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"PG STATUS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *usageStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"Usage" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *osdStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"OSD" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *monStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"MONITOR" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *hostStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"HOSTS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *hostWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"HOSTS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *hostError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"HOSTS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *healthWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"HEALTH" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *healthError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"HEALTH" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *osdWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"OSD" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *osdError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"OSD" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *monWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"MONITOR" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *monError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"MONITOR" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *pgWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"PG STATUS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *pgError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"PG STATUS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *usageWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"Usage" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *usageError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"Usage" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSString *iopsTriger = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"IOPS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-    NSLog(@"%@", iopsTriger);
-    [self.collectionData setObject:@[healthStatus, @"", healthWarning, healthError] forKey:[ClusterData shareInstance].serviceNameArray[0]];
-    [self.collectionData setObject:@[osdStatus, @"", osdWarning, osdError] forKey:[ClusterData shareInstance].serviceNameArray[1]];
-    [self.collectionData setObject:@[monStatus, @"", monWarning, monError] forKey:[ClusterData shareInstance].serviceNameArray[2]];
-    [self.collectionData setObject:@[poolStatus, @"", @"0", @"0"] forKey:[ClusterData shareInstance].serviceNameArray[3]];
-    [self.collectionData setObject:@[hostStatus, @"", hostWarning, hostError] forKey:[ClusterData shareInstance].serviceNameArray[4]];
-    [self.collectionData setObject:@[pgStatus, @"", pgWarning, pgError] forKey:[ClusterData shareInstance].serviceNameArray[5]];
-    [self.collectionData setObject:@[usageStatus, @"", usageWarning, usageError] forKey:[ClusterData shareInstance].serviceNameArray[6]];
 }
 
 - (void)didReceiveMemoryWarning {

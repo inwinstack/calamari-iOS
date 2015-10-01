@@ -67,7 +67,7 @@
 }
 
 + (UIColor*) normalBlackColor {
-    return [UIColor colorWithRed:(6.0 / 255.0) green:(6.0 / 255.0) blue:(6.0 / 255.0) alpha:1];
+    return [UIColor colorWithRed:(102.0 / 255.0) green:(102.0 / 255.0) blue:(102.0 / 255.0) alpha:1.0];
 }
 
 + (UIColor*) normalBolderColor {
@@ -79,7 +79,7 @@
 }
 
 + (UIColor*) unitTextDefalutGrayColor {
-    return [UIColor colorWithRed:(9.0 / 255.0) green:(9.0 / 255.0) blue:(9.0 / 255.0) alpha:1];
+    return [UIColor colorWithRed:(153.0 / 255.0) green:(153.0 / 255.0) blue:(153.0 / 255.0) alpha:1];
 }
 
 + (UIColor*) HostHealthCardBackgroundColor {
@@ -166,5 +166,16 @@
     return [UIColor colorWithRed:(213.0 / 255.0) green:(213.0 / 255.0) blue:(213.0 / 255.0) alpha:1];
 }
 
++ (UIColor*) languageContentColor {
+    return [UIColor colorWithRed:(85.0 / 255.0) green:(85.0 / 255.0) blue:(85.0 / 255.0) alpha:1];
+}
+
++ (UIColor*) customAlertContentDistrictColor {
+    return [UIColor colorWithRed:(205.0 / 255.0) green:(205.0 / 255.0) blue:(205.0 / 255.0) alpha:1];
+}
+
++ (UIColor*) customAlertEnterButtonTextColor {
+    return [UIColor colorWithRed:(40.0 / 255.0) green:(146.0 / 255.0) blue:(206.0 / 255.0) alpha:1];
+}
 
 @end

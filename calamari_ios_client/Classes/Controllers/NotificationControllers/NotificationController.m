@@ -9,10 +9,10 @@
 #import "NotificationController.h"
 #import "NotificationView.h"
 #import "NotificationCell.h"
-#import "NotificationData.h"
 #import "NotificationViewFlowLayout.h"
 #import "UIColor+Reader.h"
 #import "NotificationDetailController.h"
+#import "DateMaker.h"
 
 @interface NotificationController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
@@ -55,7 +55,7 @@
 }
 
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *dataString = [NotificationData shareInstance].notificationArray[indexPath.row][@"Content"];
+    NSString *dataString = [[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationAlerts"][indexPath.row][@"Content"];
 
     NSInteger rowCount = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? (dataString.length / 102) + 1 : (dataString.length / 40) + 1 ;
     return CGSizeMake( CGRectGetWidth(self.view.frame) - 20, rowCount * 15 + 55);
@@ -67,31 +67,32 @@
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     [self noNotficationAction];
-    return [NotificationData shareInstance].notificationArray.count;
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationAlerts"] count];
 }
 
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NotificationCell *notificationCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"notificationCell" forIndexPath:indexPath];
-    NSDictionary *cellDictionary = [NotificationData shareInstance].notificationArray[indexPath.row];
+    NSDictionary *cellDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationAlerts"][indexPath.row];
     NSString *statusString = cellDictionary[@"Status"];
     notificationCell.statusColorView.fillColor = ([cellDictionary[@"Type"] isEqualToString:@"Error"]) ? [UIColor errorColor].CGColor : [UIColor warningColor].CGColor;
     notificationCell.alertContentLabel.text = cellDictionary[@"Content"];
     notificationCell.statusLabel.text =  statusString;
     notificationCell.statusLabel.textColor = ([statusString isEqualToString:@"Pending"]) ? [UIColor errorColor] : [UIColor normalBlueColor];
     notificationCell.statusImageView.image = ([statusString isEqualToString:@"Pending"]) ? [UIImage imageNamed:@"NotificationPendingImage"] : [UIImage imageNamed:@"NotificationResolvedImage"];
-    notificationCell.statusTimeLabel.text = cellDictionary[@"Time"];
+    
+    notificationCell.statusTimeLabel.text = ([statusString isEqualToString:@"Pending"]) ? [NSString stringWithFormat:@" - %@", [[DateMaker shareDateMaker] getTodayWithNotificationFormatWithTimeStamp:[cellDictionary[@"Time"] doubleValue]]] : [NSString stringWithFormat:@" - %@", [[DateMaker shareDateMaker] getTodayWithNotificationFormatWithTimeStamp:[cellDictionary[@"ResolveTime"] doubleValue]]] ;
     notificationCell.archiveButton.hidden = ([statusString isEqualToString:@"Pending"]);
     return notificationCell;
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.notificationDetailController = [[NotificationDetailController alloc] init];
-    self.notificationDetailController.dataDic = [NotificationData shareInstance].notificationArray[indexPath.row];
+    self.notificationDetailController.dataDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationAlerts"][indexPath.row];
     [self.navigationController pushViewController:self.notificationDetailController animated:YES];
 }
 
 - (void) noNotficationAction {
-    if ([NotificationData shareInstance].notificationArray.count == 0) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationAlerts"] count] == 0) {
         self.notificationView.okLabel.alpha = 1;
         self.notificationView.okView.alpha = 1;
     } else {

@@ -122,9 +122,9 @@
         case HostDetailAllCpuType: {
             [(UIScrollView*)selectedButton.superview scrollRectToVisible:CGRectMake(CGRectGetMidX(selectedButton.superview.frame), 0, CGRectGetWidth(selectedButton.superview.frame), CGRectGetHeight(selectedButton.superview.frame)) animated:YES];
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-            [[CephAPI shareInstance] startGetAllDataWithIP:[UserData shareInstance].ipString Port:[UserData shareInstance].portString nodeID:self.navigationTitle whichType:@"cpu" Completion:^(BOOL finished) {
+            [[CephAPI shareInstance] startGetAllDataWithIP:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] Port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] nodeID:self.navigationTitle whichType:@"cpu" Completion:^(BOOL finished) {
                 if (finished) {
-                    [[CephAPI shareInstance] startGetAllCPUDataWithIP:[UserData shareInstance].ipString Port:[UserData shareInstance].portString cpuArray:[HostHealthData shareInstance].hostAllCPUKeyArray Completion:^(BOOL finished) {
+                    [[CephAPI shareInstance] startGetAllCPUDataWithIP:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] Port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] cpuArray:[HostHealthData shareInstance].hostAllCPUKeyArray Completion:^(BOOL finished) {
                         if (finished) {
                             [SVProgressHUD dismiss];
                             self.hostDetailView.userInteractionEnabled = YES;
@@ -147,7 +147,7 @@
         } case HostDetailSummaryType: {
             [(UIScrollView*)selectedButton.superview scrollRectToVisible:CGRectMake(0, 0, CGRectGetWidth(selectedButton.superview.frame), CGRectGetHeight(selectedButton.superview.frame)) animated:YES];
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-            [[CephAPI shareInstance] startGetCPUSummaryDataWithIP:[UserData shareInstance].ipString Port:[UserData shareInstance].portString nodeID:self.navigationTitle Completion:^(BOOL finished) {
+            [[CephAPI shareInstance] startGetCPUSummaryDataWithIP:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] Port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] nodeID:self.navigationTitle Completion:^(BOOL finished) {
                 if (finished) {
                     [SVProgressHUD dismiss];
                     self.hostDetailView.userInteractionEnabled = YES;
@@ -163,9 +163,9 @@
         } case HostDetailIOPSType: {
             [(UIScrollView*)selectedButton.superview scrollRectToVisible:CGRectMake(CGRectGetMaxX(selectedButton.superview.frame), 0, CGRectGetWidth(selectedButton.superview.frame), CGRectGetHeight(selectedButton.superview.frame)) animated:YES];
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-            [[CephAPI shareInstance] startGetAllDataWithIP:[UserData shareInstance].ipString Port:[UserData shareInstance].portString nodeID:self.navigationTitle whichType:@"iostat" Completion:^(BOOL finished) {
+            [[CephAPI shareInstance] startGetAllDataWithIP:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] Port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] nodeID:self.navigationTitle whichType:@"iostat" Completion:^(BOOL finished) {
                 if (finished) {
-                    [[CephAPI shareInstance] startGetCPUIOPSDataWithIP:[UserData shareInstance].ipString Port:[UserData shareInstance].portString iopsArray:[HostHealthData shareInstance].hostDic[[NSString stringWithFormat:@"%@_iostat", self.navigationTitle]] Completion:^(BOOL finished) {
+                    [[CephAPI shareInstance] startGetCPUIOPSDataWithIP:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] Port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] iopsArray:[HostHealthData shareInstance].hostDic[[NSString stringWithFormat:@"%@_iostat", self.navigationTitle]] Completion:^(BOOL finished) {
                         if (finished) {
                             [SVProgressHUD dismiss];
                             self.hostDetailView.userInteractionEnabled = YES;

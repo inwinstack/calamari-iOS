@@ -33,10 +33,21 @@
     return self;
 }
 
-- (NSString*) getTodayWithNotificationFormat {
+- (double) getTodayTimestamp {
+    NSTimeInterval todayTimeStamp = [[NSDate date] timeIntervalSince1970];
+    return todayTimeStamp;
+}
+
+- (NSString*) getTodayWithNotificationFormatWithTimeStamp:(double)timeStamp {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy/MM/dd HH:mm"];
-    return [dateFormatter stringFromDate:[NSDate date]];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentDateFormat"] isEqualToString:@"2015/12/31"]) {
+        [dateFormatter setDateFormat:@"YYYY/MM/dd HH:mm"];
+    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentDateFormat"] isEqualToString:@"12/31/2015"]) {
+        [dateFormatter setDateFormat:@"MM/dd/YYYY HH:mm"];
+    } else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentDateFormat"] isEqualToString:@"31/12/2015"]) {
+        [dateFormatter setDateFormat:@"dd/MM/YYYY HH:mm"];
+    }
+    return [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:timeStamp]];
 }
 
 - (NSString*) getTimeWithTimeStamp:(NSString *)timeStamp {

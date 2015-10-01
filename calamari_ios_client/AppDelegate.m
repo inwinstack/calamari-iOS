@@ -14,9 +14,11 @@
 #import "CustomNavigationController.h"
 #import "NotificationData.h"
 #import "ErrorView.h"
+#import "ClusterHealthController.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <ErrorDelegate>
 
+@property (nonatomic, strong) ClusterHealthController *clusterHealthController;
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundTask;
 @property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 @property (nonatomic, strong) ErrorView *alertView;
@@ -28,29 +30,49 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [[Cookies shareInstance] clearCookies];
     self.loginController = [[LoginController alloc] init];
     self.customNavigationController = [[CustomNavigationController alloc] initWithRootViewController:self.loginController];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTime"] isEqualToString:@"did"]) {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isFirstController"];
+        self.clusterHealthController = [[ClusterHealthController alloc] init];
+        [self.customNavigationController pushViewController:self.clusterHealthController animated:NO];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"isFirstController"];
+    }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguage"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"English" forKey:@"CurrentLanguage"];
+    }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentDateFormat"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"2015/12/31" forKey:@"CurrentDateFormat"];
+    }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguageImage"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"USAImage" forKey:@"CurrentLanguageImage"];
+    }
+    
     self.window.rootViewController = self.customNavigationController;
-    [[Cookies shareInstance] clearCookies];
     [self.window makeKeyAndVisible];
+
     self.isBackground = NO;
     
     self.alertView = [[ErrorView alloc] initWithFrame:self.window.frame title:@"儲存系統警告" message:@"您有新的警告通知！"];
+    self.alertView.delegate = self;
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)  categories:nil]];
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"mute" ofType:@"mp3"];
-    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-    NSError *error;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:fileData fileTypeHint:AVFileTypeMPEGLayer3 error:&error];
-    [self.audioPlayer setNumberOfLoops:-1];
-    if (self.audioPlayer != nil) {
-        if ([self.audioPlayer prepareToPlay]) {
-            [self.audioPlayer play];
-        }
-    }
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"mute" ofType:@"mp3"];
+//    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+//    NSError *error;
+//    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:fileData fileTypeHint:AVFileTypeMPEGLayer3 error:&error];
+//    [self.audioPlayer setNumberOfLoops:-1];
+//    if (self.audioPlayer != nil) {
+//        if ([self.audioPlayer prepareToPlay]) {
+//            [self.audioPlayer play];
+//        }
+//    }
     return YES;
 }
 
@@ -76,7 +98,7 @@
 - (void) applicationWillTerminate:(UIApplication *)application {
     [[Cookies shareInstance] clearCookies];
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    [[NSUserDefaults standardUserDefaults] setObject:@"didLogout" forKey:@"firstTime"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"didlogout" forKey:@"refresh"];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -88,6 +110,7 @@
 }
 
 - (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+
     if (self.isBackground) {
         self.isBackground = NO;
         if (!self.notificationController) {
@@ -98,6 +121,14 @@
         if ([self.window.subviews indexOfObject:self.alertView] > self.window.subviews.count) {
             [self.window addSubview:self.alertView];
         }
+    }
+}
+
+- (void) didConfirm {
+    if (!self.notificationController) {
+        [self.alertView removeFromSuperview];
+        self.notificationController = [[NotificationController alloc] init];
+        [self.customNavigationController pushViewController:self.notificationController animated:YES];
     }
 }
 
