@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>89CBFEEB-1863-43A7-A1AF-DB3363FBF852</string>
+	<key>IDESourceControlProjectName</key>
+	<string>calamari_ios_client</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BB1E110FF9E15B1D59A6CF00438C089C8B5D7C52</key>
+		<string>http://imac-team.no-ip.org/PCLFG/calamari_ios_client.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>calamari_ios_client.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BB1E110FF9E15B1D59A6CF00438C089C8B5D7C52</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://imac-team.no-ip.org/PCLFG/calamari_ios_client.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BB1E110FF9E15B1D59A6CF00438C089C8B5D7C52</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BB1E110FF9E15B1D59A6CF00438C089C8B5D7C52</string>
+			<key>IDESourceControlWCCName</key>
+			<string>calamari_ios_client</string>
+		</dict>
+	</array>
+</dict>
+</plist>

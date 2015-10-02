@@ -21,7 +21,7 @@
     [super viewDidLoad];
     [self setBackButtonDisplay:YES];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"Usage Status";
+    self.navigationItem.title = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_usage_status"];
         
     self.usageStatusView = [[UsageStatusView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:self.usageStatusView];

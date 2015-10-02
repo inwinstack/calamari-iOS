@@ -113,10 +113,8 @@
 
     if (self.isBackground) {
         self.isBackground = NO;
-        if (!self.notificationController) {
-            self.notificationController = [[NotificationController alloc] init];
-            [self.customNavigationController pushViewController:self.notificationController animated:YES];
-        }
+        self.notificationController = [[NotificationController alloc] init];
+        [self.customNavigationController pushViewController:self.notificationController animated:YES];
     } else {
         if ([self.window.subviews indexOfObject:self.alertView] > self.window.subviews.count) {
             [self.window addSubview:self.alertView];
@@ -125,11 +123,9 @@
 }
 
 - (void) didConfirm {
-    if (!self.notificationController) {
-        [self.alertView removeFromSuperview];
-        self.notificationController = [[NotificationController alloc] init];
-        [self.customNavigationController pushViewController:self.notificationController animated:YES];
-    }
+    [self.alertView removeFromSuperview];
+    self.notificationController = [[NotificationController alloc] init];
+    [self.customNavigationController pushViewController:self.notificationController animated:YES];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {

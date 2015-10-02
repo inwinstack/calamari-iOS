@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSArray *notificationUsageContentArray;
 @property (nonatomic, strong) NSArray *notificationContentDetailArray;
 @property (nonatomic, strong) NSArray *notificationUsageContentDetailArray;
+@property (nonatomic, strong) NSMutableArray *notificationWarnCountArray;
+@property (nonatomic, strong) NSMutableArray *notificationErrorCountArray;
 @property (nonatomic) BOOL canNotification;
 
 @end
@@ -40,14 +42,14 @@
     if (self) {
         self.canNotification = YES;
         self.isBackground = NO;
-        self.notificationArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationAlerts"]];
+        self.notificationArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_NotificationAlerts", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]]];
         [self resetRecord];
         self.warnSec = @"10";
         self.warnCodeDic = @{@"OSD" : @"01", @"Monitor" : @"02", @"PG" : @"03", @"Usage" : @"04", @"Info" : @"4", @"Warning" : @"3", @"Error" : @"2", @"Critical" : @"1"};
         
         self.keyArray = @[@"osd", @"mon", @"pg", @"space"];
-        self.notificationContentArray = @[@[@"OSD is in abnormal status!", @"OSD comes new abnormal status!", @"OSD comes new abnormal status!", @"OSD has been repaired!", @"發生 OSD 損毀！", @"OSD 損毀數增加！", @"OSD 損毀數增加！", @"OSD has been repaired!"], @[@"Monitor is in abnormal status!", @"Monitor comes new abnormal status!", @"Monitor comes new abnormal status!", @"Monitor has been repaired!", @"發生 Monitor 損毀！", @"Monitor 損毀數增加！", @"Monitor 損毀數增加！", @"Monitor has been repaired!"], @[@"Some PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"PGs have been repaired!", @"PG 狀態異常！", @"PG 異常數增加！", @"PG 異常數增加！", @"PGs have been repaired!"]];
-        self.notificationUsageContentArray = @[@"使用量已超過 70%！建議擴充儲存空間！", @"使用量已達上限！請立即擴充儲存空間！", @"系統修復完成"];
+        self.notificationContentArray = @[@[@"OSD is in abnormal status!", @"OSD comes new abnormal status!", @"OSD comes new abnormal status!", @"OSD has been repaired!", @"OSD is in severe status!", @"OSD comes new severe status!", @"OSD comes new severe status!", @"OSD has been repaired!"], @[@"Monitor is in abnormal status!", @"Monitor comes new abnormal status!", @"Monitor comes new abnormal status!", @"Monitor has been repaired!", @"Monitor is in severe status!", @"Monitor comes new severe status!", @"Monitor comes new severe status!", @"Monitor has been repaired!"], @[@"Some PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"PGs have been repaired!", @"Some PGs stuck in abnormal states!", @"Some other PGs stuck in abnormal states!", @"Some other PGs stuck in abnormal states!", @"PGs have been repaired!"]];
+        self.notificationUsageContentArray = @[@"Disk usage exceeds 70%!Please expand the storage capacity!", @"Not enough free space! Please expand the storage capacity immediately!", @"Storage capacity has been expanded!"];
         self.notificationContentDetailArray = @[@[@"OSD is in abnormal status!", @"OSD comes new abnormal status!", @"OSD comes new abnormal status!", @"OSD has been repaired!"], @[@"Monitor is in abnormal status!", @"Monitor comes new abnormal status!", @"Monitor comes new abnormal status!", @"Monitor has been repaired!"], @[@"Some PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"PGs have been repaired!"]];
         self.notificationUsageContentDetailArray = @[@"Disk usage exceeds 70%! Please expand the storage capacity!", @"Disk usage exceeds 85%! Please expand the storage capacity!", @"Storage capacity has been expanded!"];
         timeCount = 0;
@@ -335,6 +337,14 @@
 
     } else {
         notificationContentDictionary = @{@"Content" : notificationConetentString, @"Status" : notificationStatusString, @"Time" : notificationTimeString, @"Type" : notificationTypeString, @"ErrorCount" : totalErrorString, @"ErrorTitle" : notificationTitleString, @"TypeCode" : [NSString stringWithFormat:@"%@", self.keyArray[notificationType]]};
+        for (int i = 0; i < self.notificationArray.count; i++) {
+            NSDictionary *tempDic = self.notificationArray[i];
+            if ([tempDic[@"Type"] isEqualToString:notificationTypeString] && [tempDic[@"TypeCode"] isEqualToString:self.keyArray[notificationType]] ) {
+                [tempRemoveDicArray addObject:tempDic];
+                
+                [tempGlobalDicArray addObject:notificationContentDictionary];
+            }
+        }
     }
     if (tempGlobalDicArray.count > 0) {
         for (id removeObj in tempRemoveDicArray) {
@@ -350,19 +360,38 @@
             [self.notificationArray addObject:notificationContentDictionary];
         }
     }
-    for (int i = 0; i < self.notificationArray.count; i++) {
-        for (int j = i; j < self.notificationArray.count; j++) {
-            double originTimeInterval = [self.notificationArray[i][@"Time"] doubleValue];
-            double changeTimeInterval = [self.notificationArray[j][@"Time"] doubleValue];
+    NSMutableArray *tempPendingArray = [NSMutableArray array];
+    NSMutableArray *tempResolveArray = [NSMutableArray array];
+    for (id notificationContent in self.notificationArray) {
+        (notificationContent[@"ResolveTime"]) ? [tempResolveArray addObject:notificationContent] : [tempPendingArray addObject:notificationContent] ;
+    }
+    [self sortArray:tempPendingArray];
+    [self sortArray:tempResolveArray];
+    
+    self.notificationArray = [NSMutableArray array];
+    for (id tempObject in tempPendingArray) {
+        [self.notificationArray addObject:tempObject];
+    }
+    
+    for (id tempObject in tempResolveArray) {
+        [self.notificationArray addObject:tempObject];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:self.notificationArray forKey:[NSString stringWithFormat:@"%@_NotificationAlerts", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]];
+}
+
+- (void) sortArray:(NSMutableArray*)sortArray {
+    for (int i = 0; i < sortArray.count; i++) {
+        for (int j = i; j < sortArray.count; j++) {
+            double originTimeInterval = [sortArray[i][@"Time"] doubleValue];
+            double changeTimeInterval = [sortArray[j][@"Time"] doubleValue];
             if (originTimeInterval < changeTimeInterval) {
-                id tempObject = self.notificationArray[i];
-                self.notificationArray[i] = self.notificationArray[j];
-                self.notificationArray[j] = tempObject;
+                id tempObject = sortArray[i];
+                sortArray[i] = sortArray[j];
+                sortArray[j] = tempObject;
             }
         }
     }
-    
-    [[NSUserDefaults standardUserDefaults] setObject:self.notificationArray forKey:@"NotificationAlerts"];
 }
 
 - (void) makeNotificationStringWithConditionType:(NotificationCoditionType)conditionType notificationType:(NotificationType)notificationType {

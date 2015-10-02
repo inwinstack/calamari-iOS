@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>login_host</key>
+	<string>伺服器位址</string>
+	<key>login_port</key>
+	<string>埠號</string>
+	<key>login_name</key>
+	<string>使用者名稱</string>
+	<key>login_password</key>
+	<string>密碼</string>
+	<key>login_fail_title</key>
+	<string>登入失敗</string>
+	<key>login_from</key>
+	<string>由</string>
+	<key>login_fail_confirm</key>
+	<string>確認</string>
+	<key>login_developer</key>
+	<string>公司設計開發</string>
+	<key>login_sign_in</key>
+	<string>登入</string>
+	<key>login_version</key>
+	<string>Ceph Monitor Version 0.11.1</string>
+	<key>settings_profile_language</key>
+	<string>語言</string>
+	<key>settings_dialog_save</key>
+	<string>儲存</string>
+	<key>settings_dialog_cancel</key>
+	<string>取消</string>
+	<key>login_fail_sing_in</key>
+	<string>連線錯誤</string>
+	<key>login_fail_field</key>
+	<string>欄位未填</string>
+	<key>main_activity_fragment_health</key>
+	<string>儀表板</string>
+	<key>main_activity_fragment_health_detail</key>
+	<string>健康詳細資訊</string>
+	<key>main_activity_fragment_osd_health</key>
+	<string>OSD 健康</string>
+	<key>main_activity_fragment_mon_health</key>
+	<string>監視器健康</string>
+	<key>main_activity_fragment_notification</key>
+	<string>通知</string>
+	<key>main_activity_fragment_host_health</key>
+	<string>主機列表</string>
+	<key>main_activity_fragment_pg_status</key>
+	<string>PG 狀態</string>
+	<key>main_activity_fragment_usage_status</key>
+	<string>使用量狀態</string>
+	<key>main_activity_fragment_pool_iops</key>
+	<string>集區 IOPS</string>
+	<key>main_activity_fragment_pool_list</key>
+	<string>集區列表</string>
+	<key>main_activity_option_logs</key>
+	<string>紀錄</string>
+	<key>main_activity_option_setting</key>
+	<string>設定</string>
+	<key>main_activity_option_logout</key>
+	<string>登出</string>
+	<key>main_activity_fragment_tab_summary</key>
+	<string>總結</string>
+	<key>main_activity_fragment_tab_all_cpus</key>
+	<string>整體 CPUs</string>
+	<key>main_activity_fragment_tab_iops</key>
+	<string>IOPS</string>
+	<key>health_card_status_ok</key>
+	<string>OK</string>
+	<key>health_card_status_warning</key>
+	<string>警告</string>
+	<key>health_card_status_error</key>
+	<string>錯誤</string>
+	<key>health_card_health</key>
+	<string>健康</string>
+	<key>health_card_ago</key>
+	<string>之前</string>
+	<key>health_card_osd</key>
+	<string>OSD</string>
+	<key>health_card_in_and_up</key>
+	<string>In &amp; Up</string>
+	<key>health_card_mon</key>
+	<string>監視器</string>
+	<key>health_card_quorum</key>
+	<string>Quorum</string>
+	<key>health_card_pools</key>
+	<string>集區</string>
+	<key>health_card_active</key>
+	<string>活躍</string>
+	<key>health_card_hosts</key>
+	<string>主機</string>
+	<key>health_card_reporting</key>
+	<string>報告</string>
+	<key>health_card_pg</key>
+	<string>PG 狀態</string>
+	<key>health_card_clean</key>
+	<string>乾淨</string>
+	<key>health_card_Working</key>
+	<string>工作中</string>
+	<key>health_card_Dirty</key>
+	<string>污染</string>
+	<key>health_card_usage</key>
+	<string>使用量</string>
+	<key>health_card_used</key>
+	<string>已使用</string>
+	<key>health_card_available</key>
+	<string>可使用</string>
+	<key>health_card_iops</key>
+	<string>IOPS</string>
+	<key>health_card_read_write</key>
+	<string>- 讀取 + 寫入</string>
+	<key>health_card_warnings</key>
+	<string>警告</string>
+	<key>health_card_errors</key>
+	<string>錯誤</string>
+	<key>health_card_bottombar_mon</key>
+	<string>監視器</string>
+	<key>health_detail_great</key>
+	<string>沒有異常 !</string>
+	<key>health_detail_work_fine</key>
+	<string>系統正常運作 !</string>
+	<key>osd_health_all</key>
+	<string>全部</string>
+	<key>osd_health_great</key>
+	<string>沒有異常 !</string>
+	<key>osd_health_work_fine</key>
+	<string>OSD 全部正常運作 !</string>
+	<key>osd_detail_host_name</key>
+	<string>主機名稱</string>
+	<key>osd_detail_public_ip</key>
+	<string>公共 IP</string>
+	<key>osd_detail_cluster_ip</key>
+	<string>叢集 IP</string>
+	<key>osd_detail_pools</key>
+	<string>集區</string>
+	<key>osd_detail_re_weight</key>
+	<string>Reweight</string>
+	<key>osd_detail_uuid</key>
+	<string>UUID</string>
+	<key>pool_list_id_replicas</key>
+	<string>副本</string>
+	<key>host_detail_title_cpu_summary</key>
+	<string>CPU 總結</string>
+	<key>host_detail_title_load_average</key>
+	<string>平均負載</string>
+	<key>host_detail_title_memory</key>
+	<string>記憶體</string>
+	<key>host_detail_summary_system</key>
+	<string>- 系統</string>
+	<key>host_detail_summary_user</key>
+	<string>- 使用者</string>
+	<key>host_detail_summary_Idle</key>
+	<string>- 閒置</string>
+	<key>host_detail_summary_one_min</key>
+	<string>- 1 分</string>
+	<key>host_detail_summary_five_min</key>
+	<string>- 5 分</string>
+	<key>host_detail_summary_fifteen_min</key>
+	<string>- 15 分</string>
+	<key>host_detail_summary_active</key>
+	<string>- 活躍</string>
+	<key>host_detail_summary_buffers</key>
+	<string>- 緩衝</string>
+	<key>host_detail_summary_free</key>
+	<string>- 釋放</string>
+	<key>host_detail_summary_cached</key>
+	<string>- 暫存</string>
+	<key>host_detail_all_cpus_system</key>
+	<string>- 系統</string>
+	<key>host_detail_all_cpus_user</key>
+	<string>- 使用者</string>
+	<key>host_detail_all_cpus_nice</key>
+	<string>- 優先權</string>
+	<key>host_detail_all_cpus_idle</key>
+	<string>- 閒置</string>
+	<key>host_detail_all_cpus_io_wait</key>
+	<string>- IOWait</string>
+	<key>host_detail_all_cpus_irq</key>
+	<string>- IRQ</string>
+	<key>host_detail_all_cpus_soft_irq</key>
+	<string>- 軟體 IRQ</string>
+	<key>host_detail_all_cpus_steal</key>
+	<string>- Steal</string>
+	<key>usage_status_disk_usage_statistics</key>
+	<string>硬碟使用量統計</string>
+	<key>usage_status_disk_usage_available</key>
+	<string>-可用量</string>
+	<key>usage_status_disk_usage_used</key>
+	<string>-使用量</string>
+	<key>pool_iops_read</key>
+	<string>-讀取</string>
+	<key>pool_iops_write</key>
+	<string>-寫入</string>
+	<key>other_time_unit_second</key>
+	<string>秒</string>
+	<key>notification_work_find</key>
+	<string>現在沒有任何通知!</string>
+	<key>main_activity_fragment_notification_detail</key>
+	<string>通知詳細資訊</string>
+	<key>settings_profile</key>
+	<string>個人設定</string>
+	<key>settings_profile_formats</key>
+	<string>日期格式</string>
+	<key>settings_alert</key>
+	<string>通知</string>
+	<key>settings_about</key>
+	<string>關於</string>
+	<key>settings_about_version</key>
+	<string>版本號</string>
+	<key>settings_language_dialog_description</key>
+	<string>請回到登入畫面以便切換語系，是否現在登出？</string>
+	<key>settings_dialog_ok</key>
+	<string>確定</string>
+	<key>OSD is in abnormal status!</key>
+	<string>發生 OSD 異常！</string>
+	<key>OSD comes new abnormal status!</key>
+	<string>OSD 異常數增加！</string>
+	<key>OSD has been repaired!</key>
+	<string>OSD 修復完成！</string>
+	<key>OSD is in severe status!</key>
+	<string>發生 OSD 損毀！</string>
+	<key>OSD comes new severe status!</key>
+	<string>OSD 損毀數增加！</string>
+	<key>Monitor is in abnormal status!</key>
+	<string>發生 Monitor 異常！</string>
+	<key>Monitor comes new abnormal status!</key>
+	<string>Monitor 異常數增加！</string>
+	<key>Monitor has been repaired!</key>
+	<string>Monitor 修復完成！</string>
+	<key>Monitor is in severe status!</key>
+	<string>發生 Monitor 損毀！</string>
+	<key>Monitor comes new severe status!</key>
+	<string>Monitor 損毀數增加！</string>
+	<key>Some PGs are being modified by Ceph!</key>
+	<string>PG 狀態更動！</string>
+	<key>Some other PGs are being modified by Ceph!</key>
+	<string>部分 PG 狀態更動！</string>
+	<key>PGs have been repaired!</key>
+	<string>PG 修復完成！</string>
+	<key>Some PGs stuck in abnormal states!</key>
+	<string>PG 狀態異常！</string>
+	<key>Some other PGs stuck in abnormal states!</key>
+	<string>PG 異常數增加！</string>
+	<key>Disk usage exceeds 70%!Please expand the storage capacity!</key>
+	<string>使用量已超過 70%了！建議擴充儲存空間！</string>
+	<key>Not enough free space! Please expand the storage capacity immediately!</key>
+	<string>使用量已達上限！請立即擴充儲存空間！</string>
+	<key>Storage capacity has been expanded!</key>
+	<string>已擴充儲存空間！</string>
+	<key>notification_detail_triggered_title</key>
+	<string>觸發時間</string>
+	<key>notification_detail_resolved_title</key>
+	<string>解決時間</string>
+	<key>Warnings</key>
+	<string>警告</string>
+	<key>Errors</key>
+	<string>錯誤</string>
+	<key>Error ratio</key>
+	<string>錯誤比率</string>
+	<key>Warning ratio</key>
+	<string>警告比率</string>
+</dict>
+</plist>

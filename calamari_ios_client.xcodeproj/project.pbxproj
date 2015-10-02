@@ -94,6 +94,10 @@
 		15550D811BB1036200471D62 /* SettingData.m in Sources */ = {isa = PBXBuildFile; fileRef = 15550D801BB1036200471D62 /* SettingData.m */; settings = {ASSET_TAGS = (); }; };
 		15550D841BB1222000471D62 /* SelectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15550D831BB1222000471D62 /* SelectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		15550D881BB149B700471D62 /* AlertSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15550D871BB149B700471D62 /* AlertSelectionView.m */; settings = {ASSET_TAGS = (); }; };
+		1591698C1BBD899D00846CB7 /* TranditionalChinese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1591698B1BBD899D00846CB7 /* TranditionalChinese.plist */; settings = {ASSET_TAGS = (); }; };
+		1591698E1BBD89AE00846CB7 /* English.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1591698D1BBD89AE00846CB7 /* English.plist */; settings = {ASSET_TAGS = (); }; };
+		159169901BBD89B900846CB7 /* Japanese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1591698F1BBD89B900846CB7 /* Japanese.plist */; settings = {ASSET_TAGS = (); }; };
+		159169931BBD8F7500846CB7 /* LocalizationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 159169921BBD8F7500846CB7 /* LocalizationManager.m */; settings = {ASSET_TAGS = (); }; };
 		159E4A3B1BA66D7200EFC3D2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 159E4A3A1BA66D7200EFC3D2 /* AVFoundation.framework */; };
 		15CACE0B1BA5276300DFD26B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE0A1BA5276300DFD26B /* main.m */; };
 		15CACE0E1BA5276300DFD26B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE0D1BA5276300DFD26B /* AppDelegate.m */; };
@@ -287,6 +291,11 @@
 		15550D831BB1222000471D62 /* SelectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionViewCell.m; sourceTree = "<group>"; };
 		15550D861BB149B700471D62 /* AlertSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertSelectionView.h; sourceTree = "<group>"; };
 		15550D871BB149B700471D62 /* AlertSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertSelectionView.m; sourceTree = "<group>"; };
+		1591698B1BBD899D00846CB7 /* TranditionalChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TranditionalChinese.plist; sourceTree = "<group>"; };
+		1591698D1BBD89AE00846CB7 /* English.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = English.plist; sourceTree = "<group>"; };
+		1591698F1BBD89B900846CB7 /* Japanese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Japanese.plist; sourceTree = "<group>"; };
+		159169911BBD8F7500846CB7 /* LocalizationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizationManager.h; sourceTree = "<group>"; };
+		159169921BBD8F7500846CB7 /* LocalizationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizationManager.m; sourceTree = "<group>"; };
 		159E4A3A1BA66D7200EFC3D2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		15CACE051BA5276300DFD26B /* calamari_ios_client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calamari_ios_client.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15CACE091BA5276300DFD26B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -464,6 +473,8 @@
 				15550CA81BB0F03B00471D62 /* DateMaker.m */,
 				15550CA91BB0F03B00471D62 /* TextFieldChecker.h */,
 				15550CAA1BB0F03B00471D62 /* TextFieldChecker.m */,
+				159169911BBD8F7500846CB7 /* LocalizationManager.h */,
+				159169921BBD8F7500846CB7 /* LocalizationManager.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -780,6 +791,9 @@
 			children = (
 				15CACE091BA5276300DFD26B /* Info.plist */,
 				15CACE0A1BA5276300DFD26B /* main.m */,
+				1591698B1BBD899D00846CB7 /* TranditionalChinese.plist */,
+				1591698D1BBD89AE00846CB7 /* English.plist */,
+				1591698F1BBD89B900846CB7 /* Japanese.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -908,6 +922,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				15CACE161BA5276300DFD26B /* Images.xcassets in Resources */,
+				1591698E1BBD89AE00846CB7 /* English.plist in Resources */,
+				1591698C1BBD899D00846CB7 /* TranditionalChinese.plist in Resources */,
+				159169901BBD89B900846CB7 /* Japanese.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1016,6 +1033,7 @@
 				15550D2A1BB0F03B00471D62 /* UsageController.m in Sources */,
 				15550D5F1BB0F03B00471D62 /* OSDViewFLowLayout.m in Sources */,
 				15550D361BB0F03B00471D62 /* MONHealthData.m in Sources */,
+				159169931BBD8F7500846CB7 /* LocalizationManager.m in Sources */,
 				15550D691BB0F03B00471D62 /* UsageStatusView.m in Sources */,
 				15550D511BB0F03B00471D62 /* HostDetailHeaderView.m in Sources */,
 				15550D4B1BB0F03B00471D62 /* ClusterHealthViewFlowLayout.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "OSDDetailView.h"
 #import "UIColor+Reader.h"
+#import "LocalizationManager.h"
 
 @interface OSDDetailView ()
 
@@ -28,39 +29,39 @@
         float height = (CGRectGetWidth([UIScreen mainScreen].bounds) - CGRectGetWidth([UIScreen mainScreen].bounds) / 16) * 0.85;
         self.backgroundColor = [UIColor oceanBackgroundOneColor];
         self.hostNameTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(height * 5 / 255, height * 5 / 255, CGRectGetWidth(self.frame) - height * 10 / 255, height * 25 / 255)];
-        self.hostNameTitleLabel.text = @"Hostname";
+        self.hostNameTitleLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"osd_detail_host_name"];
         [self setTitleLabel:self.hostNameTitleLabel];
         
         self.hostNameValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(height * 5 / 255, CGRectGetMaxY(self.hostNameTitleLabel.frame), CGRectGetWidth(self.frame) - height * 10 / 255,  height * 15 / 255)];
         [self setValueLabel:self.hostNameValueLabel];
         
         self.publicTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(height * 5 / 255, CGRectGetMaxY(self.hostNameValueLabel.frame) + height * 10 / 255, CGRectGetWidth(self.frame) - height * 10 / 255, height * 25 / 255)];
-        self.publicTitleLabel.text = @"Public IP";
+        self.publicTitleLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"osd_detail_public_ip"];
         [self setTitleLabel:self.publicTitleLabel];
         
         self.publicValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(height * 5 / 255, CGRectGetMaxY(self.publicTitleLabel.frame), CGRectGetWidth(self.frame) - height * 10 / 255, height * 15 / 255)];
         [self setValueLabel:self.publicValueLabel];
         
         self.clusterTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(height * 5 / 255, CGRectGetMaxY(self.publicValueLabel.frame) + height * 10 / 255, CGRectGetWidth(self.frame) - height * 10 / 255, height * 25 / 255)];
-        self.clusterTitleLabel.text = @"Cluster IP";
+        self.clusterTitleLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"osd_detail_cluster_ip"];
         [self setTitleLabel:self.clusterTitleLabel];
         
         self.clusterValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(height * 5 / 255, CGRectGetMaxY(self.clusterTitleLabel.frame), CGRectGetWidth(self.frame) - height * 10 / 255, height * 15 / 255)];
         [self setValueLabel:self.clusterValueLabel];
         
         self.poolTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(height * 5 / 255, CGRectGetMaxY(self.clusterValueLabel.frame) + height * 10 / 255, CGRectGetWidth(self.frame) - height * 10 / 255, height * 25 / 255)];
-        self.poolTitleLabel.text = @"Pools";
+        self.poolTitleLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"osd_detail_pools"];
         [self setTitleLabel:self.poolTitleLabel];
         
         self.reWeightTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(height * 5 / 255, CGRectGetMaxY(self.poolTitleLabel.frame) + height * 65 / 255, CGRectGetWidth(self.frame) - height * 10 / 255, height * 25 / 255)];
-        self.reWeightTitleLabel.text = @"Reweight";
+        self.reWeightTitleLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"osd_detail_re_weight"];
         [self setTitleLabel:self.reWeightTitleLabel];
         
         self.reWeightValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(height * 5 / 255, CGRectGetMaxY(self.reWeightTitleLabel.frame), CGRectGetWidth(self.frame) - height * 10 / 255, height * 15 / 255)];
         [self setValueLabel:self.reWeightValueLabel];
         
         self.uuidTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(height * 5 / 255, CGRectGetMaxY(self.reWeightValueLabel.frame) + height * 10 / 255, CGRectGetWidth(self.frame) - height * 10 / 255, height * 25 / 255)];
-        self.uuidTitleLabel.text = @"UUID";
+        self.uuidTitleLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"osd_detail_uuid"];
         [self setTitleLabel:self.uuidTitleLabel];
         
         self.uuidValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(height * 5 / 255, CGRectGetMaxY(self.uuidTitleLabel.frame), CGRectGetWidth(self.frame) - height * 10 / 255, height * 15 / 255)];

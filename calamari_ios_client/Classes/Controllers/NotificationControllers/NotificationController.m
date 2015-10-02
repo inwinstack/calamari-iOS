@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Notifications";
+    self.title = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_notification"];
     [self setBackButtonDisplay:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshAction) name:@"didRefreshAction" object:nil];
     NotificationViewFlowLayout *layout = [[NotificationViewFlowLayout alloc] init];
@@ -55,7 +55,8 @@
 }
 
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *dataString = [[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationAlerts"][indexPath.row][@"Content"];
+    
+    NSString *dataString = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_NotificationAlerts", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]][indexPath.row][@"Content"];
 
     NSInteger rowCount = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? (dataString.length / 102) + 1 : (dataString.length / 40) + 1 ;
     return CGSizeMake( CGRectGetWidth(self.view.frame) - 20, rowCount * 15 + 55);
@@ -67,15 +68,15 @@
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     [self noNotficationAction];
-    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationAlerts"] count];
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_NotificationAlerts", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] count];
 }
 
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NotificationCell *notificationCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"notificationCell" forIndexPath:indexPath];
-    NSDictionary *cellDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationAlerts"][indexPath.row];
+    NSDictionary *cellDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_NotificationAlerts", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]][indexPath.row];
     NSString *statusString = cellDictionary[@"Status"];
     notificationCell.statusColorView.fillColor = ([cellDictionary[@"Type"] isEqualToString:@"Error"]) ? [UIColor errorColor].CGColor : [UIColor warningColor].CGColor;
-    notificationCell.alertContentLabel.text = cellDictionary[@"Content"];
+    notificationCell.alertContentLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:cellDictionary[@"Content"]];
     notificationCell.statusLabel.text =  statusString;
     notificationCell.statusLabel.textColor = ([statusString isEqualToString:@"Pending"]) ? [UIColor errorColor] : [UIColor normalBlueColor];
     notificationCell.statusImageView.image = ([statusString isEqualToString:@"Pending"]) ? [UIImage imageNamed:@"NotificationPendingImage"] : [UIImage imageNamed:@"NotificationResolvedImage"];
@@ -87,12 +88,12 @@
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.notificationDetailController = [[NotificationDetailController alloc] init];
-    self.notificationDetailController.dataDic = [[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationAlerts"][indexPath.row];
+    self.notificationDetailController.dataDic = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_NotificationAlerts", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]][indexPath.row];
     [self.navigationController pushViewController:self.notificationDetailController animated:YES];
 }
 
 - (void) noNotficationAction {
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"NotificationAlerts"] count] == 0) {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_NotificationAlerts", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] count] == 0) {
         self.notificationView.okLabel.alpha = 1;
         self.notificationView.okView.alpha = 1;
     } else {

@@ -13,6 +13,7 @@
 #import "HostHealthData.h"
 #import "PGData.h"
 #import "DateMaker.h"
+#import "LocalizationManager.h"
 
 @interface ClusterData ()
 
@@ -34,13 +35,35 @@
 - (instancetype) init {
     self = [super init];
     if (self) {
-        self.serviceNameArray = @[@"HEALTH", @"OSD", @"MONITOR", @"POOLS", @"HOSTS", @"PG STATUS", @"Usage", @"IOPS"];
-        self.unitArray = @[@"sec ago", @"In & Up", @"Quorum", @"Active", @"Reporting", @"Clean", @"Used", @""];
-        self.serviceNameDictionary = @{@"HEALTH" : @"health", @"POOLS" : @"pool", @"OSD" : @"osd", @"MONITOR" : @"mon", @"HOSTS" : @"hosts", @"PG STATUS" : @"pg", @"Usage" : @"usage", @"IOPS" : @"iops"};
+        [self setData];
         self.clusterArray = [NSMutableArray array];
         self.clusterDetailData = [NSMutableDictionary dictionary];
     }
     return self;
+}
+
+- (void) setData {
+    NSString *healthString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_health"];
+    NSString *osdString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_osd"];
+    NSString *monString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_mon"];
+    NSString *poolString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_pools"];
+    NSString *hostString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_hosts"];
+    NSString *pgString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_pg"];
+    NSString *usageString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_usage"];
+    NSString *iopsString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_iops"];
+    
+    self.serviceNameArray = @[healthString, osdString, monString, poolString, hostString, pgString, usageString, iopsString];
+    
+    NSString *healthUnitString = [NSString stringWithFormat:@"%@%@", [[LocalizationManager sharedLocalizationManager] getTextByKey:@"other_time_unit_second"], [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_ago"]];
+    NSString *osdUnitString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_in_and_up"];
+    NSString *monUnitString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_quorum"];
+    NSString *poolUnitString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_active"];
+    NSString *hostUnitString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_reporting"];
+    NSString *pgUnitString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_clean"];
+    NSString *usageUnitString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_used"];
+    
+    self.unitArray = @[healthUnitString, osdUnitString, monUnitString, poolUnitString, hostUnitString, pgUnitString, usageUnitString, @""];
+    self.serviceNameDictionary = @{healthString : @"health", poolString : @"pool", osdString : @"osd", monString : @"mon", hostString : @"hosts", pgString : @"pg", usageString : @"usage", iopsString : @"iops"};
 }
 
 - (NSString*) getCurrentStatusWithID:(NSString *)clusterID {

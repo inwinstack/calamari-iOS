@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackButtonDisplay:YES];
-    self.navigationItem.title = @"Pool IOPS";
+    self.navigationItem.title = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_pool_iops"];
     
     self.flowLayout = [[PoolIOPSViewFlowLayout alloc] init];
     

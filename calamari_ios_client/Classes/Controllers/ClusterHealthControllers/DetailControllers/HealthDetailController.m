@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackButtonDisplay:YES];
-    self.navigationItem.title = @"Health Detail";
+    self.navigationItem.title = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_health_detail"];
     
     self.healthDetailView = [[HealthDetailView alloc] initWithFrame:self.view.frame];
     self.view = self.healthDetailView;

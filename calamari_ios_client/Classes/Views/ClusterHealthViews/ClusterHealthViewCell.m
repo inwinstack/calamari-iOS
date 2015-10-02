@@ -28,7 +28,7 @@
         self.iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 15, height * [UIView subHeadIconSize] / 255, height * [UIView subHeadIconSize] / 255)];
         [self addSubview:self.iconImage];
         
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.iconImage.frame) + 5, CGRectGetMidY(self.iconImage.frame) - height * 10 / 255, height * 100 / 255, height * 20 / 255)];
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.iconImage.frame) + 5, CGRectGetMidY(self.iconImage.frame) - height * 10 / 255, height * 200 / 255, height * 20 / 255)];
         self.titleLabel.font = [UIFont boldSystemFontOfSize:height * [UIView subHeadSize] / 255];
         self.titleLabel.textColor = [UIColor titleGrayColor];
         [self addSubview:self.titleLabel];

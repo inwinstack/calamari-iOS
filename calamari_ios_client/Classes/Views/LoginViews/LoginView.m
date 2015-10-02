@@ -9,6 +9,7 @@
 #import "LoginView.h"
 #import "UIColor+Reader.h"
 #import "UIView+SizeMaker.h"
+#import "LocalizationManager.h"
 
 @interface LoginView ()
 
@@ -35,22 +36,22 @@
         [self addSubview:self.titleView];
         
         self.hostIpField = [[UITextField alloc] initWithFrame:CGRectMake([UIView lrMarginOne], CGRectGetMaxY(self.titleView.frame) + [UIView tbMarginThree], CGRectGetWidth(self.frame) - [UIView lrMarginOne] * 2, fieldHeight)];
-        self.hostIpField.placeholder = @"Host";
+        self.hostIpField.placeholder = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_host"];
         self.hostIpField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         [self setDefaultField:self.hostIpField];
         
         self.portField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.hostIpField.frame), CGRectGetMaxY(self.hostIpField.frame) + [UIView tbMarginOne], CGRectGetWidth(self.hostIpField.frame), fieldHeight)];
-        self.portField.placeholder = @"Port";
+        self.portField.placeholder = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_port"];
         self.portField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         [self setDefaultField:self.portField];
         
         self.accountField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.hostIpField.frame), CGRectGetMaxY(self.portField.frame) + [UIView tbMarginOne], CGRectGetWidth(self.hostIpField.frame), fieldHeight)];
-        self.accountField.placeholder = @"Name";
+        self.accountField.placeholder = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_name"];
         self.accountField.keyboardType = UIKeyboardTypeASCIICapable;
         [self setDefaultField:self.accountField];
         
         self.passwordField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.hostIpField.frame), CGRectGetMaxY(self.accountField.frame) + [UIView tbMarginOne], CGRectGetWidth(self.hostIpField.frame), fieldHeight)];
-        self.passwordField.placeholder = @"Password";
+        self.passwordField.placeholder = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_password"];
         self.passwordField.secureTextEntry = YES;
         self.passwordField.keyboardType = UIKeyboardTypeASCIICapable;
         [self setDefaultField:self.passwordField];
@@ -70,7 +71,6 @@
         self.languageContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.languageCountryImageView.frame) + 5, 0, CGRectGetWidth(self.frame) - (CGRectGetMaxX(self.languageCountryImageView.frame) + ([UIView bodySize] + 10)), CGRectGetHeight(self.languageView.frame))];
         self.languageContentLabel.font = [UIFont systemFontOfSize:[UIView bodySize]];
         self.languageContentLabel.textColor = [UIColor languageContentColor];
-        self.languageContentLabel.text = @"English";
         [self.languageView addSubview:self.languageContentLabel];
         
         self.languageSettingButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.passwordField.frame), CGRectGetMaxY(self.passwordField.frame) + [UIView tbMarginOne], CGRectGetWidth(self.passwordField.frame), fieldHeight)];
@@ -83,27 +83,29 @@
         self.loginButton.backgroundColor = [UIColor oceanNavigationBarColor];
         self.loginButton.layer.cornerRadius = 5;
         [self.loginButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
-        [self.loginButton setTitle:@"SIGN IN" forState:UIControlStateNormal];
+        [self.loginButton setTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_sign_in"] forState:UIControlStateNormal];
         [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self addSubview:self.loginButton];
         
-        self.versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.frame) - (40 + [UIView tbMarginOne]), CGRectGetWidth(self.frame), 20)];
-        self.versionLabel.text = @"Ceph Monitor Version 0.12.0";
+        self.versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.frame) - 50, CGRectGetWidth(self.frame), 20)];
+        self.versionLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_version"];
         self.versionLabel.textAlignment = NSTextAlignmentCenter;
         [self setDefaultLabel:self.versionLabel];
-        
+
         self.inWinLabelImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 100, CGRectGetMaxY(self.versionLabel.frame), 144, 20)];
         self.inWinLabelImageView.image = [UIImage imageNamed:@"inWinLabelImage"];
         [self addSubview:self.inWinLabelImageView];
         
         self.fromLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.inWinLabelImageView.frame) - 18, CGRectGetMidY(self.inWinLabelImageView.frame) - 7.5, 0, 0)];
-        self.fromLabel.text = @"由";
+        self.fromLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_from"];
         self.fromLabel.textAlignment = NSTextAlignmentRight;
         [self.fromLabel sizeToFit];
+        float tempFromLabelWidth = CGRectGetWidth(self.fromLabel.frame);
+        self.fromLabel.frame = CGRectMake(CGRectGetMinX(self.inWinLabelImageView.frame) - tempFromLabelWidth - 5, self.fromLabel.frame.origin.y, self.fromLabel.frame.size.width, self.fromLabel.frame.size.height);
         [self setDefaultLabel:self.fromLabel];
         
         self.designLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.inWinLabelImageView.frame), CGRectGetMidY(self.inWinLabelImageView.frame) - 7.5, 0, 0)];
-        self.designLabel.text = @"公司設計開發";
+        self.designLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_developer"];
         [self.designLabel sizeToFit];
         self.designLabel.textAlignment = NSTextAlignmentLeft;
         [self setDefaultLabel:self.designLabel];

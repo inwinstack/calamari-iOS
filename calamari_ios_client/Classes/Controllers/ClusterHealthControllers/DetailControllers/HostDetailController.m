@@ -16,6 +16,7 @@
 #import "UserData.h"
 #import "ErrorView.h"
 #import "SVProgressHUD.h"
+#import "LocalizationManager.h"
 
 @interface HostDetailController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, ErrorDelegate> {
     float tempX;
@@ -51,7 +52,11 @@
     self.errorView = [[ErrorView alloc] initWithFrame:self.view.frame title:@"系統訊息" message:@"連線錯誤"];
     self.errorView.delegate = self;
     
-    self.titleArray = @[@"CPU Summary", @"Load Average", @"Memory"];
+    NSString *cpuSummaryName = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_title_cpu_summary"];
+    NSString *loadAverageName = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_title_load_average"];
+    NSString *memoryName = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_title_memory"];
+    
+    self.titleArray = @[cpuSummaryName, loadAverageName, memoryName];
     self.keyArray = @[@"percent", @"average", @"byte"];
 }
 
