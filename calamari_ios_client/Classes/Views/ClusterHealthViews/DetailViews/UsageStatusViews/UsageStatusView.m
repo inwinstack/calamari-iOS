@@ -10,6 +10,7 @@
 #import "UIColor+Reader.h"
 #import "DateMaker.h"
 #import "UIView+SizeMaker.h"
+#import "LocalizationManager.h"
 
 @interface UsageStatusView ()
 
@@ -51,19 +52,19 @@
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth([UIScreen mainScreen].bounds) * 0.03, 5 + CGRectGetWidth([UIScreen mainScreen].bounds) * 0.05, CGRectGetWidth([UIScreen mainScreen].bounds) * 0.94, 25)];
         self.titleLabel.font = [UIFont boldSystemFontOfSize:[UIView subHeadSize]];
         self.titleLabel.textColor = [UIColor normalBlackColor];
-        self.titleLabel.text = @"Disk Usage Statistics";
+        self.titleLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"usage_status_disk_usage_statistics"];
         [self addSubview:self.titleLabel];
         
         self.availableLabel  = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth([UIScreen mainScreen].bounds) * 0.04, CGRectGetMaxY(self.titleLabel.frame) + CGRectGetWidth([UIScreen mainScreen].bounds) * 0.03, 80, 25)];
         self.availableLabel.font = [UIFont systemFontOfSize:[UIView bodySize]];
         self.availableLabel.textColor = [UIColor okGreenColor];
-        self.availableLabel.text = @"-Available";
+        self.availableLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"usage_status_disk_usage_available"];
         [self addSubview:self.availableLabel];
         
-        self.usedLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.availableLabel.frame), CGRectGetMinY(self.availableLabel.frame), 80, 25)];
+        self.usedLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.availableLabel.frame), CGRectGetMinY(self.availableLabel.frame), 120, 25)];
         self.usedLabel.font = [UIFont systemFontOfSize:[UIView bodySize]];
         self.usedLabel.textColor = [UIColor warningColor];
-        self.usedLabel.text = @"-Used";
+        self.usedLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"usage_status_disk_usage_used"];
         [self addSubview:self.usedLabel];
         
         self.tempWhiteView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.availableLabel.frame) / 3 - height * 15 / 255, CGRectGetMaxY(self.availableLabel.frame) + 10 * height / 255, CGRectGetWidth(self.frame) - (CGRectGetWidth(self.availableLabel.frame) / 3 - height * 30 / 255), CGRectGetMidY(self.frame) - CGRectGetMaxY(self.availableLabel.frame) + height * 15 / 255)];

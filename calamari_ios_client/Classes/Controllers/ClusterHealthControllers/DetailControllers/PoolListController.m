@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackButtonDisplay:YES];
-    self.navigationItem.title = @"Pool List";
+    self.navigationItem.title = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_pool_list"];
     
     self.poolListView = [[PoolListView alloc] initWithFrame:self.view.frame];
     self.poolListView.dataSource = self;

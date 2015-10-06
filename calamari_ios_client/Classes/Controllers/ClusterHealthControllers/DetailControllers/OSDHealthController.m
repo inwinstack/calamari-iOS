@@ -40,7 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackButtonDisplay:YES];
-    self.navigationItem.title = @"OSD Health";
+    self.navigationItem.title = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_osd_health"];
     
     self.flowLayout = [[OSDViewFLowLayout alloc] init];
     self.osdHealthView = [[OSDHealthView alloc] initWithFrame:self.view.frame collectionViewLayout:self.flowLayout];

@@ -10,6 +10,7 @@
 #import "UIColor+Reader.h"
 #import "DateMaker.h"
 #import "UIView+SizeMaker.h"
+#import "LocalizationManager.h"
 
 @interface CPUSquareView ()
 
@@ -61,44 +62,45 @@
     
         self.systemLabel  = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth([UIScreen mainScreen].bounds) * 0.04, CGRectGetWidth([UIScreen mainScreen].bounds) * 0.03, 0, height * 25 / 255)];
         self.systemLabel.textColor = [UIColor okGreenColor];
-        self.systemLabel.text = @"-System";
+        self.systemLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_all_cpus_system"];
         [self setLabel:self.systemLabel];
-        
+
         self.userLabel  = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.systemLabel.frame) + height * 5 / 255, CGRectGetMinY(self.systemLabel.frame), 0, height * 25 / 255)];
         self.userLabel.textColor = [UIColor UserLinePurpleColor];
-        self.userLabel.text = @"-User";
+        self.userLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_all_cpus_user"];
         [self setLabel:self.userLabel];
         
         self.niceLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userLabel.frame) + height * 5 / 255, CGRectGetMinY(self.systemLabel.frame), 0, height * 25 / 255)];
         self.niceLabel.textColor = [UIColor warningColor];
-        self.niceLabel.text = @"-Nice";
+        self.niceLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_all_cpus_nice"];
         [self setLabel:self.niceLabel];
         
         self.idleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.niceLabel.frame) + height * 5 / 255, CGRectGetMinY(self.systemLabel.frame), 0, height * 25 / 255)];
         self.idleLabel.textColor = [UIColor IdleLineBlueColor];
-        self.idleLabel.text = @"-Idle";
+        self.idleLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_all_cpus_idle"];
         [self setLabel:self.idleLabel];
         
-        self.ioWaitLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.idleLabel.frame) + height * 5 / 255, CGRectGetMinY(self.systemLabel.frame), 0, height * 25 / 255)];
+        float iowaitY = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? CGRectGetMinY(self.systemLabel.frame) : CGRectGetMaxY(self.systemLabel.frame);
+        float iowaitX = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? CGRectGetMaxX(self.idleLabel.frame) + height * 5 / 255 : CGRectGetMinX(self.systemLabel.frame);
+        
+        self.ioWaitLabel = [[UILabel alloc] initWithFrame:CGRectMake(iowaitX, iowaitY, 0, height * 25 / 255)];
         self.ioWaitLabel.textColor = [UIColor IOWaitLinePinkColor];
-        self.ioWaitLabel.text = @"-IOWait";
+        self.ioWaitLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_all_cpus_io_wait"];
         [self setLabel:self.ioWaitLabel];
         
-        self.irqLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.ioWaitLabel.frame) + height * 5 / 255, CGRectGetMinY(self.systemLabel.frame), 0, height * 25 / 255)];
+        self.irqLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.ioWaitLabel.frame) + height * 5 / 255, CGRectGetMinY(self.ioWaitLabel.frame), 0, height * 25 / 255)];
         self.irqLabel.textColor = [UIColor IRQLineBrownColor];
-        self.irqLabel.text = @"-IRQ";
+        self.irqLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_all_cpus_irq"];
         [self setLabel:self.irqLabel];
         
-        float tempSoftIrqY = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? CGRectGetMinY(self.systemLabel.frame) : CGRectGetMaxY(self.systemLabel.frame);
-        float tempSoftIrqX = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? CGRectGetMaxX(self.irqLabel.frame) + height * 5 / 255 : CGRectGetMinX(self.systemLabel.frame);
-        self.softIrqLabel = [[UILabel alloc] initWithFrame:CGRectMake(tempSoftIrqX, tempSoftIrqY, 0, height * 25 / 255)];
+        self.softIrqLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.irqLabel.frame) + height * 5 / 255, CGRectGetMinY(self.irqLabel.frame), 0, height * 25 / 255)];
         self.softIrqLabel.textColor = [UIColor SoftIRQLineGrayColor];
-        self.softIrqLabel.text = @"-Soft IRQ";
+        self.softIrqLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_all_cpus_soft_irq"];
         [self setLabel:self.softIrqLabel];
         
         self.stealLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.softIrqLabel.frame) + height * 5 / 255, CGRectGetMinY(self.softIrqLabel.frame), 0, height * 25 / 255)];
         self.stealLabel.textColor = [UIColor okGreenColor];
-        self.stealLabel.text = @"-Steal";
+        self.stealLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_all_cpus_steal"];
         [self setLabel:self.stealLabel];
         
         self.backgroundWhiteView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.stealLabel.frame) + 10 * height / 255, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - CGRectGetMaxY(self.stealLabel.frame) - height * 15 / 255)];

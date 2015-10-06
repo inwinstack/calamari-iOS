@@ -8,6 +8,7 @@
 
 #import "OSDHealthView.h"
 #import "UIColor+Reader.h"
+#import "LocalizationManager.h"
 
 @implementation OSDHealthView
 
@@ -21,12 +22,12 @@
         self.okView.alpha = 0;
         [self addSubview:self.okView];
         
-        self.okLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 100, CGRectGetMaxY(self.okView.frame) + 25, 200, 50)];
+        self.okLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 150, CGRectGetMaxY(self.okView.frame) + 25, 300, 50)];
         self.okLabel.alpha = 0;
         self.okLabel.numberOfLines = 0;
         self.okLabel.textColor = [UIColor unitTextDefalutGrayColor];
         self.okLabel.textAlignment = NSTextAlignmentCenter;
-        self.okLabel.text = @"Great！\nAll OSD work fine！";
+        self.okLabel.text = [NSString stringWithFormat:@"%@\n%@", [[LocalizationManager sharedLocalizationManager] getTextByKey:@"osd_health_great"], [[LocalizationManager sharedLocalizationManager] getTextByKey:@"osd_health_work_fine"]];
         [self addSubview:self.okLabel];
     }
     return self;

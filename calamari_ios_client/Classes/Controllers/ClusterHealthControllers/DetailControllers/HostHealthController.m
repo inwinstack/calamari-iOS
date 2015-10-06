@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackButtonDisplay:YES];
-    self.navigationItem.title = @"Host List";
+    self.navigationItem.title = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_host_health"];
     
     self.hostHealthFlowLayout = [[HostHealthFlowLayout alloc] init];
     self.hostHealthView = [[HostHealthView alloc] initWithFrame:self.view.frame collectionViewLayout:self.hostHealthFlowLayout];

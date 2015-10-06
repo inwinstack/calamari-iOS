@@ -8,6 +8,7 @@
 
 #import "OSDHeaderView.h"
 #import "UIColor+Reader.h"
+#import "LocalizationManager.h"
 
 @interface OSDHeaderView ()
 
@@ -27,7 +28,7 @@
         self.allButton.backgroundColor = [UIColor osdButtonDefaultColor];
         self.allButton.layer.borderWidth = 1;
         self.allButton.layer.borderColor = [UIColor normalBolderColor].CGColor;
-        [self.allButton setTitle:@"All" forState:UIControlStateNormal];
+        [self.allButton setTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"osd_health_all"] forState:UIControlStateNormal];
         [self.allButton.titleLabel setFont:[UIFont systemFontOfSize:height * 14 / 255]];
         [self.allButton setTitleColor:[UIColor normalBlackColor] forState:UIControlStateNormal];
         self.allButton.tag = 0;

@@ -23,6 +23,7 @@
 #import "AlertSelectionView.h"
 #import "AlertSelectionViewCell.h"
 #import "SettingData.h"
+#import "LocalizationManager.h"
 
 @interface LoginController () <ErrorDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, AlertSectionDelegate>
 
@@ -94,18 +95,28 @@
     self.navigationController.navigationBarHidden = YES;
     [self.loginView.loginButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
     [self.loginView.languageSettingButton addTarget:self action:@selector(languageSettingAction) forControlEvents:UIControlEventTouchUpInside];
-}
-
-- (void) alertButtonDidSelect:(UIButton *)alertButton {
-    [[NSUserDefaults standardUserDefaults] setObject:self.tempLanguageString forKey:@"CurrentLanguage"];
-    [[NSUserDefaults standardUserDefaults] setObject:self.tempImageString forKey:@"CurrentLanguageImage"];
+    
+    self.loginView.hostIpField.text = ([[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]) ? [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]] : @"";
+    self.loginView.portField.text = ([[NSUserDefaults standardUserDefaults] objectForKey:@"Port"]) ? [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"Port"]] : @"";
+    self.loginView.accountField.text = ([[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]) ? [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]] : @"";
+    self.loginView.passwordField.text = ([[NSUserDefaults standardUserDefaults] objectForKey:@"Password"]) ? [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"Password"]] : @"";
     self.loginView.languageContentLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguage"];
     self.loginView.languageCountryImageView.image = [UIImage imageNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguageImage"]];
 
 }
 
+- (void) alertButtonDidSelect:(UIButton *)alertButton {
+    [[NSUserDefaults standardUserDefaults] setObject:self.tempLanguageString forKey:@"CurrentLanguage"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.tempImageString forKey:@"CurrentLanguageImage"];
+    [[LocalizationManager sharedLocalizationManager] setLanguege];
+    self.loginView.languageContentLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguage"];
+    self.loginView.languageCountryImageView.image = [UIImage imageNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguageImage"]];
+    [self viewDidLoad];
+
+}
+
 - (void) languageSettingAction {
-    self.alertSelectionView = [[AlertSelectionView alloc] initWithTitle:@"Language" content:@""];
+    self.alertSelectionView = [[AlertSelectionView alloc] initWithTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"settings_profile_language"] content:@""];
     self.alertSelectionView.selectionTableView.delegate = self;
     self.alertSelectionView.selectionTableView.dataSource = self;
     self.alertSelectionView.alertSectionDelegate = self;
@@ -125,7 +136,7 @@
 
     if ([[TextFieldChecker shareInstance] startCheck]) {
         [[TextFieldChecker shareInstance].checkArray removeAllObjects];
-        self.errorView = [[ErrorView alloc] initWithFrame:self.view.frame title:@"Login Failed" message:@"連線錯誤"];
+        self.errorView = [[ErrorView alloc] initWithFrame:self.view.frame title:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_fail_title"] message:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_fail_sing_in"]];
         self.errorView.delegate = self;
         __weak typeof(self) weakself = self;
         [[CephAPI shareInstance] startGetSessionWithIP:self.loginView.hostIpField.text Port:self.loginView.portField.text Account:self.loginView.accountField.text Password:self.loginView.passwordField.text completion:^(BOOL finished) {
@@ -260,14 +271,14 @@
     } else {
         [SVProgressHUD dismiss];
         self.loginView.userInteractionEnabled = YES;
-        self.errorView = [[ErrorView alloc] initWithFrame:self.view.frame title:@"Login Failed" message:@"欄位未填"];
+        self.errorView = [[ErrorView alloc] initWithFrame:self.view.frame title:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_fail_title"] message:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_fail_field"]];
         self.errorView.delegate = self;
         [self.view addSubview:self.errorView];
     }
 }
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField {
-    [[TextFieldChecker shareInstance].checkArray addObjectsFromArray:@[self.loginView.hostIpField, self.loginView.portField, self.loginView.accountField, self.loginView.passwordField]];
+    [TextFieldChecker shareInstance].checkArray = [NSMutableArray arrayWithArray:@[self.loginView.hostIpField, self.loginView.portField, self.loginView.accountField, self.loginView.passwordField]];
     [self.loginView setRedField:textField];
     if (textField.frame.origin.y > 150) {
         [UIView animateWithDuration:0.3 animations:^{

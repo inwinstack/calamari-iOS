@@ -9,6 +9,7 @@
 #import "HostDetailHeaderView.h"
 #import "UIColor+Reader.h"
 #import "UIView+SizeMaker.h"
+#import "LocalizationManager.h"
 
 @implementation HostDetailHeaderView
 
@@ -25,13 +26,13 @@
         self.summaryButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - height * 50 / 255, 0, height * 100 / 255, CGRectGetHeight(self.frame))];
         self.summaryButton.tag = 0;
         [self.summaryButton setTitleColor:[UIColor osdButtonHighlightColor] forState:UIControlStateNormal];
-        [self.summaryButton setTitle:@"Summary" forState:UIControlStateNormal];
+        [self.summaryButton setTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_tab_summary"] forState:UIControlStateNormal];
         [self.summaryButton.titleLabel setFont:[UIFont systemFontOfSize:[UIView bodySize]]];
         [self addSubview:self.summaryButton];
         
         self.allCPUButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.frame) - height * 50 / 255, 0, height * 100 / 255, CGRectGetHeight(self.frame))];
         self.allCPUButton.tag = 1;
-        [self.allCPUButton setTitle:@"All CPUs" forState:UIControlStateNormal];
+        [self.allCPUButton setTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_tab_all_cpus"] forState:UIControlStateNormal];
         [self.allCPUButton.titleLabel setFont:[UIFont systemFontOfSize:[UIView bodySize]]];
         [self.allCPUButton setTitleColor:[UIColor osdButtonHighlightColor] forState:UIControlStateNormal];
         [self addSubview:self.allCPUButton];
@@ -39,7 +40,7 @@
         self.iopsButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.frame) + CGRectGetMidX(self.frame) - height * 50 / 255, 0, height * 100 / 255, CGRectGetHeight(self.frame))];
         self.iopsButton.tag = 2;
         [self.iopsButton setTitleColor:[UIColor osdButtonHighlightColor] forState:UIControlStateNormal];
-        [self.iopsButton setTitle:@"IOPS" forState:UIControlStateNormal];
+        [self.iopsButton setTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_tab_iops"] forState:UIControlStateNormal];
         [self.iopsButton.titleLabel setFont:[UIFont systemFontOfSize:[UIView bodySize]]];
         [self addSubview:self.iopsButton];
     }

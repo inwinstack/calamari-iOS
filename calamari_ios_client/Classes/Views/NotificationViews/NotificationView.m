@@ -8,6 +8,7 @@
 
 #import "NotificationView.h"
 #import "UIColor+Reader.h"
+#import "LocalizationManager.h"
 
 @implementation NotificationView
 
@@ -27,7 +28,7 @@
         self.okLabel.textColor = [UIColor unitTextDefalutGrayColor];
         self.okLabel.numberOfLines = 0;
         self.okLabel.textAlignment = NSTextAlignmentCenter;
-        self.okLabel.text = @"You don't have any\nnotifications right now！";
+        self.okLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"notification_work_find"];
         [self addSubview:self.okLabel];
     }
     return self;

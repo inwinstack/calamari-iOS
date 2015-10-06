@@ -16,6 +16,7 @@
 #import "SVProgressHUD.h"
 #import "CephAPI.h"
 #import "NotificationData.h"
+#import "LocalizationManager.h"
 
 @interface ClusterHealthController ()
 
@@ -28,7 +29,7 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController.navigationBar setBarTintColor:[UIColor oceanNavigationBarColor]];
-    self.title = @"Dashboard";
+    self.title = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_health"];
     self.navigationController.navigationBar.translucent = NO;
 }
 
@@ -136,20 +137,20 @@
     }
     if (indexPath.row == 4) {
         cell.bottomBar.errorTextLabel.text = @"OSD";
-        cell.bottomBar.warningTextLabel.text = @"MON";
+        cell.bottomBar.warningTextLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_bottombar_mon"];
         cell.layer.borderColor = [UIColor okGreenColor].CGColor;
         cell.bottomBar.errorLabel.textColor = [UIColor defaultGrayColor];
         cell.bottomBar.warningLabel.textColor = [UIColor defaultGrayColor];
     } else if (indexPath.row == 5) {
-        cell.bottomBar.errorTextLabel.text = @"Dirty";
-        cell.bottomBar.warningTextLabel.text = @"Working";
+        cell.bottomBar.errorTextLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_Dirty"];
+        cell.bottomBar.warningTextLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_Working"];
     } else if (indexPath.row == 6) {
-        cell.bottomBar.errorTextLabel.text = @"Available";
-        cell.bottomBar.warningTextLabel.text = @"Used";
+        cell.bottomBar.errorTextLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_available"];
+        cell.bottomBar.warningTextLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_used"];
         cell.bottomBar.errorLabel.textColor = [UIColor okGreenColor];
     } else {
-        cell.bottomBar.errorTextLabel.text = @"Errors";
-        cell.bottomBar.warningTextLabel.text = @"Warnings";
+        cell.bottomBar.errorTextLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_errors"];
+        cell.bottomBar.warningTextLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_warnings"];
     }
     
     if (indexPath.row == 7) {
@@ -227,25 +228,35 @@
         } else {
             healthStatus = @"OK";
         }
-        NSString *poolStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"POOLS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *pgStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"PG STATUS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *usageStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"Usage" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *osdStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"OSD" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *monStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"MONITOR" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *hostStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"HOSTS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *hostWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"HOSTS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *hostError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"HOSTS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *healthWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"HEALTH" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *healthError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"HEALTH" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *osdWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"OSD" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *osdError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"OSD" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *monWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"MONITOR" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *monError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"MONITOR" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *pgWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"PG STATUS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *pgError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"PG STATUS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *usageWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:@"Usage" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *usageError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:@"Usage" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
-        NSString *iopsTriger = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:@"IOPS" clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        
+        NSString *healthServiceKey = [ClusterData shareInstance].serviceNameArray[0];
+        NSString *osdServiceKey = [ClusterData shareInstance].serviceNameArray[1];
+        NSString *monServiceKey = [ClusterData shareInstance].serviceNameArray[2];
+        NSString *poolServiceKey = [ClusterData shareInstance].serviceNameArray[3];
+        NSString *hostServiceKey = [ClusterData shareInstance].serviceNameArray[4];
+        NSString *pgServiceKey = [ClusterData shareInstance].serviceNameArray[5];
+        NSString *usageServiceKey = [ClusterData shareInstance].serviceNameArray[6];
+        NSString *iopsServiceKey = [ClusterData shareInstance].serviceNameArray[7];
+        
+        NSString *poolStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:poolServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *pgStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:pgServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *usageStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:usageServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *osdStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:osdServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *monStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:monServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *hostStatus = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:hostServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *hostWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:hostServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *hostError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:hostServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *healthWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:healthServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *healthError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:healthServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *osdWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:osdServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *osdError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:osdServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *monWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:monServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *monError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:monServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *pgWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:pgServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *pgError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:pgServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *usageWarning = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Warn" service:usageServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *usageError = [[ClusterData shareInstance] getCurrentValueWithStatus:@"Error" service:usageServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
+        NSString *iopsTriger = [[ClusterData shareInstance] getCurrentValueWithStatus:@"ok" service:iopsServiceKey clusterID:[ClusterData shareInstance].clusterArray[0][@"id"]];
         NSLog(@"%@", iopsTriger);
         [[NSUserDefaults standardUserDefaults] setObject:@[healthStatus, @"", healthWarning, healthError] forKey:[ClusterData shareInstance].serviceNameArray[0]];
         [[NSUserDefaults standardUserDefaults] setObject:@[osdStatus, @"", osdWarning, osdError] forKey:[ClusterData shareInstance].serviceNameArray[1]];

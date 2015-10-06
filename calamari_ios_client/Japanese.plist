@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>login_host</key>
+	<string>ホスト</string>
+	<key>login_port</key>
+	<string>ポート</string>
+	<key>login_name</key>
+	<string>名前</string>
+	<key>login_password</key>
+	<string>パスワード</string>
+	<key>login_fail_title</key>
+	<string>認証に失敗しました。</string>
+	<key>login_from</key>
+	<string>から</string>
+	<key>login_fail_confirm</key>
+	<string>確認</string>
+	<key>login_developer</key>
+	<string>によって開発され</string>
+	<key>login_sign_in</key>
+	<string>ログイン</string>
+	<key>login_version</key>
+	<string>Ceph モニター版 0.11.1</string>
+	<key>settings_profile_language</key>
+	<string>言語</string>
+	<key>settings_dialog_save</key>
+	<string>セーブ</string>
+	<key>settings_dialog_cancel</key>
+	<string>キャンセル</string>
+	<key>login_fail_sing_in</key>
+	<string>接続失敗</string>
+	<key>login_fail_field</key>
+	<string>未充填のフィールド</string>
+	<key>main_activity_fragment_health</key>
+	<string>ダッシュボード</string>
+	<key>main_activity_fragment_health_detail</key>
+	<string>ヘルス詳細</string>
+	<key>main_activity_fragment_osd_health</key>
+	<string>OSD ヘルス</string>
+	<key>main_activity_fragment_mon_health</key>
+	<string>MON ヘルス</string>
+	<key>main_activity_fragment_notification</key>
+	<string>通知</string>
+	<key>main_activity_fragment_host_health</key>
+	<string>リストホスト</string>
+	<key>main_activity_fragment_pg_status</key>
+	<string>PG ステータス</string>
+	<key>main_activity_fragment_usage_status</key>
+	<string>ユーセッジ ステータス</string>
+	<key>main_activity_fragment_pool_iops</key>
+	<string>プール IOPS</string>
+	<key>main_activity_fragment_pool_list</key>
+	<string>プールリスト</string>
+	<key>main_activity_option_logs</key>
+	<string>ログ</string>
+	<key>main_activity_option_setting</key>
+	<string>設定</string>
+	<key>main_activity_option_logout</key>
+	<string>ログアウト</string>
+	<key>main_activity_fragment_tab_summary</key>
+	<string>サマリ</string>
+	<key>main_activity_fragment_tab_all_cpus</key>
+	<string>すべての CPUs </string>
+	<key>main_activity_fragment_tab_iops</key>
+	<string>IOPS</string>
+	<key>health_card_status_ok</key>
+	<string>OK</string>
+	<key>health_card_status_warning</key>
+	<string>警告</string>
+	<key>health_card_status_error</key>
+	<string>エラー</string>
+	<key>health_card_health</key>
+	<string>ヘルス</string>
+	<key>health_card_ago</key>
+	<string>前</string>
+	<key>health_card_osd</key>
+	<string>OSD</string>
+	<key>health_card_in_and_up</key>
+	<string>In &amp; Up</string>
+	<key>health_card_mon</key>
+	<string>モニター</string>
+	<key>health_card_quorum</key>
+	<string>Quorum</string>
+	<key>health_card_pools</key>
+	<string>プール</string>
+	<key>health_card_active</key>
+	<string>アクティブ</string>
+	<key>health_card_hosts</key>
+	<string>ホスト</string>
+	<key>health_card_reporting</key>
+	<string>報告</string>
+	<key>health_card_pg</key>
+	<string>PG ステータス</string>
+	<key>health_card_clean</key>
+	<string>クリーン</string>
+	<key>health_card_Working</key>
+	<string>ワーキング</string>
+	<key>health_card_Dirty</key>
+	<string>ダーティ</string>
+	<key>health_card_usage</key>
+	<string>ユーセージ</string>
+	<key>health_card_used</key>
+	<string>使用しました</string>
+	<key>health_card_available</key>
+	<string>使用可能</string>
+	<key>health_card_iops</key>
+	<string>IOPS</string>
+	<key>health_card_read_write</key>
+	<string>-リード +ライト</string>
+	<key>health_card_warnings</key>
+	<string>警告</string>
+	<key>health_card_errors</key>
+	<string>エラー</string>
+	<key>health_card_bottombar_mon</key>
+	<string>モニター</string>
+	<key>health_detail_great</key>
+	<string>すばらしいです。</string>
+	<key>health_detail_work_fine</key>
+	<string>正常に動作します。</string>
+	<key>osd_health_all</key>
+	<string>すべて</string>
+	<key>osd_health_great</key>
+	<string>すばらしいです。</string>
+	<key>osd_health_work_fine</key>
+	<string>すべてのOSD正常に動作します。</string>
+	<key>osd_detail_host_name</key>
+	<string>ホスト名</string>
+	<key>osd_detail_public_ip</key>
+	<string>パブリックIP</string>
+	<key>osd_detail_cluster_ip</key>
+	<string>クラスタIP</string>
+	<key>osd_detail_pools</key>
+	<string>プール</string>
+	<key>osd_detail_re_weight</key>
+	<string>Reweight</string>
+	<key>osd_detail_uuid</key>
+	<string>UUID</string>
+	<key>pool_list_id_replicas</key>
+	<string>レプリカ</string>
+	<key>host_detail_title_cpu_summary</key>
+	<string>CPUサマリー</string>
+	<key>host_detail_title_load_average</key>
+	<string>ロード平均</string>
+	<key>host_detail_title_memory</key>
+	<string>メモリ</string>
+	<key>host_detail_summary_system</key>
+	<string>- システム</string>
+	<key>host_detail_summary_user</key>
+	<string>- ユーザー</string>
+	<key>host_detail_summary_Idle</key>
+	<string>- アイドル</string>
+	<key>host_detail_summary_one_min</key>
+	<string>- 1分</string>
+	<key>host_detail_summary_five_min</key>
+	<string>- 5分</string>
+	<key>host_detail_summary_fifteen_min</key>
+	<string>- 15分</string>
+	<key>host_detail_summary_active</key>
+	<string>- アクティブ</string>
+	<key>host_detail_summary_buffers</key>
+	<string>- バッファ</string>
+	<key>host_detail_summary_free</key>
+	<string>- フリー</string>
+	<key>host_detail_summary_cached</key>
+	<string>- キャッシュ</string>
+	<key>host_detail_all_cpus_system</key>
+	<string>-システム</string>
+	<key>host_detail_all_cpus_user</key>
+	<string>-ユーザー</string>
+	<key>host_detail_all_cpus_nice</key>
+	<string>-ニース</string>
+	<key>host_detail_all_cpus_idle</key>
+	<string>-アイドル</string>
+	<key>host_detail_all_cpus_io_wait</key>
+	<string>- IOWait</string>
+	<key>host_detail_all_cpus_irq</key>
+	<string>- IRQ</string>
+	<key>host_detail_all_cpus_soft_irq</key>
+	<string>-ソフトIRQ</string>
+	<key>host_detail_all_cpus_steal</key>
+	<string>- Steal</string>
+	<key>usage_status_disk_usage_statistics</key>
+	<string>ディスク使用状況の統計情報</string>
+	<key>usage_status_disk_usage_available</key>
+	<string>-使用可能</string>
+	<key>usage_status_disk_usage_used</key>
+	<string>-使用しました</string>
+	<key>pool_iops_read</key>
+	<string>-リード</string>
+	<key>pool_iops_write</key>
+	<string>-ライト</string>
+	<key>other_time_unit_second</key>
+	<string>秒</string>
+	<key>notification_work_find</key>
+	<string>いずれも持っていません今すぐ通知する</string>
+	<key>main_activity_fragment_notification_detail</key>
+	<string>通知の詳細</string>
+	<key>settings_profile</key>
+	<string>プロフィール</string>
+	<key>settings_profile_formats</key>
+	<string>日付形式</string>
+	<key>settings_alert</key>
+	<string>アラート</string>
+	<key>settings_about</key>
+	<string>について</string>
+	<key>settings_about_version</key>
+	<string>バージョン</string>
+	<key>settings_language_dialog_description</key>
+	<string>別の言語を切り替えるにはログインページにリダイレクトしてください。今サインアウト？</string>
+	<key>settings_dialog_ok</key>
+	<string>OK</string>
+	<key>OSD is in abnormal status!</key>
+	<string>異常な状態でOSD</string>
+	<key>OSD comes new abnormal status!</key>
+	<string>OSDは新しい異常な状況が来ます！</string>
+	<key>OSD has been repaired!</key>
+	<string>OSDは修復されました</string>
+	<key>OSD is in severe status!</key>
+	<string>OSD損傷</string>
+	<key>OSD comes new severe status!</key>
+	<string>OSD損害の数が増加し</string>
+	<key>Monitor is in abnormal status!</key>
+	<string>異常な状態でモニター</string>
+	<key>Monitor comes new abnormal status!</key>
+	<string>モニターは新しい異常な状況が来ます！</string>
+	<key>Monitor has been repaired!</key>
+	<string>モニターは修復されました</string>
+	<key>Monitor is in severe status!</key>
+	<string>モニター損傷</string>
+	<key>Monitor comes new severe status!</key>
+	<string>モニター損害の数が増加し</string>
+	<key>Some PGs are being modified by Ceph!</key>
+	<string>一部のPGsは、Cephによって変更され</string>
+	<key>Some other PGs are being modified by Ceph!</key>
+	<string>一部のPGsは、Cephによって変更され</string>
+	<key>PGs have been repaired!</key>
+	<string>PGは修復されました</string>
+	<key>Some PGs stuck in abnormal states!</key>
+	<string>異常な状態でPG</string>
+	<key>Some other PGs stuck in abnormal states!</key>
+	<string>PG異常の数が増加し</string>
+	<key>Disk usage exceeds 70%!Please expand the storage capacity!</key>
+	<string>70%の容量を使いました。ストレージ容量を拡張するのはお勧めです。</string>
+	<key>Not enough free space! Please expand the storage capacity immediately!</key>
+	<string>容量は最大限に達して、ストレージ容量を拡張してください。</string>
+	<key>Storage capacity has been expanded!</key>
+	<string>ストレージ容量は拡張されました</string>
+	<key>notification_detail_triggered_title</key>
+	<string>でトリガ</string>
+	<key>notification_detail_resolved_title</key>
+	<string>で解決</string>
+	<key>Warnings</key>
+	<string>警告</string>
+	<key>Errors</key>
+	<string>エラー</string>
+	<key>Error ratio</key>
+	<string>誤り率</string>
+	<key>Warning ratio</key>
+	<string>警告比</string>
+</dict>
+</plist>

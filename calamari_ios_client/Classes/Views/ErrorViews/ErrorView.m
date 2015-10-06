@@ -8,6 +8,7 @@
 
 #import "ErrorView.h"
 #import "UIColor+Reader.h"
+#import "LocalizationManager.h"
 
 @interface ErrorView ()
 
@@ -37,7 +38,7 @@
         
         self.confirmButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.titleLabel.frame), CGRectGetMaxY(self.messageLabel.frame), CGRectGetWidth(self.titleLabel.frame), 30)];
         self.confirmButton.backgroundColor = [UIColor osdButtonDefaultColor];
-        [self.confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
+        [self.confirmButton setTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_fail_confirm"] forState:UIControlStateNormal];
         [self.confirmButton setTitleColor:[UIColor titleGrayColor] forState:UIControlStateNormal];
         [self.confirmButton addTarget:self action:@selector(didSelect) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.confirmButton];

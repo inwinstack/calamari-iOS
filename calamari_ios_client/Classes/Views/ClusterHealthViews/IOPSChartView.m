@@ -10,6 +10,7 @@
 #import "UIColor+Reader.h"
 #import "DateMaker.h"
 #import "AnimationMaker.h"
+#import "LocalizationManager.h"
 
 @interface IOPSChartView ()
 
@@ -50,7 +51,7 @@
             height = (CGRectGetWidth([UIScreen mainScreen].bounds) - CGRectGetWidth([UIScreen mainScreen].bounds) / 16) * 0.85;
         }
         self.readWriteLabel = [[UILabel alloc] initWithFrame:CGRectMake(height * 5 / 255, height * 5 / 255, CGRectGetWidth(self.frame) - height * 5 / 255, height * 30 / 255)];
-        self.readWriteLabel.text = @"   - Read + Write";
+        self.readWriteLabel.text = [NSString stringWithFormat:@"   %@", [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_card_read_write"]];
         self.readWriteLabel.font = [UIFont systemFontOfSize:height * 14 / 255];
         self.readWriteLabel.textColor = [UIColor okGreenColor];
         [self addSubview:self.readWriteLabel];

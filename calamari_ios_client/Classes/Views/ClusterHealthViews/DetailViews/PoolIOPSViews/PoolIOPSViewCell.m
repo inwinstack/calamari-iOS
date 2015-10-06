@@ -9,6 +9,7 @@
 #import "PoolIOPSViewCell.h"
 #import "UIColor+Reader.h"
 #import "UIView+SizeMaker.h"
+#import "LocalizationManager.h"
 
 @interface PoolIOPSViewCell()
 
@@ -31,13 +32,13 @@
         [self addSubview:self.titleLabel];
         
         self.readLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.titleLabel.frame), CGRectGetMaxY(self.titleLabel.frame) + CGRectGetWidth([UIScreen mainScreen].bounds) * 0.03, 50, 25)];
-        self.readLabel.text = @"-Read";
+        self.readLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"pool_iops_read"];
         self.readLabel.font = [UIFont systemFontOfSize:[UIView bodySize]];
         self.readLabel.textColor = [UIColor okGreenColor];
         [self addSubview:self.readLabel];
         
         self.writeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.readLabel.frame) + height * 10 / 255, CGRectGetMinY(self.readLabel.frame), 50, 25)];
-        self.writeLabel.text = @"-Write";
+        self.writeLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"pool_iops_write"];
         self.writeLabel.textColor = [UIColor warningColor];
         self.writeLabel.font = [UIFont systemFontOfSize:[UIView bodySize]];
         [self addSubview:self.writeLabel];

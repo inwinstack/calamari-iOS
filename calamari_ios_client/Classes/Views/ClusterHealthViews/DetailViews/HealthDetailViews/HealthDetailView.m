@@ -8,6 +8,7 @@
 
 #import "HealthDetailView.h"
 #import "UIColor+Reader.h"
+#import "LocalizationManager.h"
 
 @implementation HealthDetailView
 
@@ -28,7 +29,8 @@
         self.okLabel.numberOfLines = 0;
         self.okLabel.textColor = [UIColor unitTextDefalutGrayColor];
         self.okLabel.textAlignment = NSTextAlignmentCenter;
-        self.okLabel.text = @"Great！\nSystem works fine！";
+
+        self.okLabel.text = [NSString stringWithFormat:@"%@\n%@", [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_detail_great"], [[LocalizationManager sharedLocalizationManager] getTextByKey:@"health_detail_work_fine"]];
         [self addSubview:self.okLabel];
     }
     return self;

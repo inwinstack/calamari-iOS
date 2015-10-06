@@ -8,6 +8,7 @@
 
 #import "PoolListViewCell.h"
 #import "UIColor+Reader.h"
+#import "LocalizationManager.h"
 
 @interface  PoolListViewCell()
 
@@ -53,7 +54,7 @@
         [self addSubview:self.pgNumberLabel];
         
         self.replicasLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.replicasNumberLabel.frame) + CGRectGetWidth([UIScreen mainScreen].bounds) * 0.02, CGRectGetMidY(self.replicasImage.frame) - height * 15 / 255, CGRectGetWidth([UIScreen mainScreen].bounds) - CGRectGetMaxX(self.replicasNumberLabel.frame), height * 30 / 255)];
-        self.replicasLabel.text = @"REPLICAS";
+        self.replicasLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"pool_list_id_replicas"];
         self.replicasLabel.font = [UIFont systemFontOfSize:height * 16 / 255];
         [self addSubview:self.replicasLabel];
         

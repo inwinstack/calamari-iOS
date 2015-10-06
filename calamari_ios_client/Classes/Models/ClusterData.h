@@ -22,5 +22,6 @@
 - (NSString*) getCurrentValueWithStatus:(NSString*)status service:(NSString*)service clusterID:(NSString*)clusterID;
 - (void) setData:(NSString*)clusterID completion:(void (^)(BOOL finished))completion;
 - (NSString*) caculateByte:(double)value;
+- (void) setData;
 
 @end

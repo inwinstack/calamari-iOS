@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LocalizationManager.h"
 
 @interface BaseController : UIViewController
 

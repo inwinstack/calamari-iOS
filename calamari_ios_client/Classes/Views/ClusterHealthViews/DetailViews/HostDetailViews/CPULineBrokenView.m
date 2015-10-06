@@ -10,6 +10,7 @@
 #import "UIColor+Reader.h"
 #import "DateMaker.h"
 #import "UIView+SizeMaker.h"
+#import "LocalizationManager.h"
 
 @interface CPULineBrokenView () {
     BOOL currentIsFilled;
@@ -56,22 +57,23 @@
         
         self.systemLabel  = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth([UIScreen mainScreen].bounds) * 0.04, CGRectGetWidth([UIScreen mainScreen].bounds) * 0.03, 0, height * 25 / 255)];
         self.systemLabel.textColor = [UIColor okGreenColor];
-        self.systemLabel.text = (isFilled) ? @"-System" : @"-1 Min";
+        self.systemLabel.text = (isFilled) ? [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_summary_system"] : [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_summary_one_min"];
         [self setLabel:self.systemLabel];
         
         self.userLabel  = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.systemLabel.frame) + height * 5 / 255, CGRectGetMinY(self.systemLabel.frame), 0, height * 25 / 255)];
         self.userLabel.textColor = [UIColor UserLinePurpleColor];
-        self.userLabel.text = (isFilled) ? @"-User" : @"-5 Min";
+        self.userLabel.text = (isFilled) ? [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_summary_user"] : [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_summary_five_min"];
         [self setLabel:self.userLabel];
-        
+
         self.idleLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.userLabel.frame) + height * 5 / 255, CGRectGetMinY(self.systemLabel.frame), 0, height * 25 / 255)];
         self.idleLabel.textColor = [UIColor warningColor];
-        self.idleLabel.text = (isFilled) ? @"-Idle" : @"-15 Min";
+        self.idleLabel.text = (isFilled) ? [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_summary_Idle"] : [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_summary_fifteen_min"];
         [self setLabel:self.idleLabel];
         
         self.freeLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.idleLabel.frame) + height * 5 / 255, CGRectGetMinY(self.systemLabel.frame), 0, height * 25 / 255)];
         self.freeLabel.textColor = [UIColor IdleLineBlueColor];
-        self.freeLabel.text = @"-Free";
+        
+        self.freeLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_summary_free"];
         [self setLabel:self.freeLabel];
         
         self.backgroundWhiteView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.freeLabel.frame) + 10 * height / 255, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - CGRectGetMaxY(self.freeLabel.frame) - height * 15 / 255)];

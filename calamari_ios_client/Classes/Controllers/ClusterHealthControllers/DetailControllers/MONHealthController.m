@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackButtonDisplay:YES];
-    self.navigationItem.title = @"Monitor Health";
+    self.navigationItem.title = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_mon_health"];
     
     self.flowLayout = [[MONHealthFlowLayout alloc] init];
     self.monHealthView = [[MONHealthView alloc] initWithFrame:self.view.frame collectionViewLayout:self.flowLayout];
