@@ -16,6 +16,11 @@
 @property (nonatomic, strong) NSArray *languageOptionArray;
 @property (nonatomic, strong) NSArray *dateFormatOptionArray;
 @property (nonatomic, strong) NSArray *languageImageOptionArray;
+@property (nonatomic, strong) NSArray *alertTitleArray;
+@property (nonatomic, strong) NSArray *alertBodyArray;
+@property (nonatomic, strong) NSArray *checkBoxArray;
+@property (nonatomic, strong) NSArray *triggerWarnDetailArray;
+@property (nonatomic, strong) NSArray *triggerErrorDetailArray;
 
 + (SettingData*) shareSettingData;
 

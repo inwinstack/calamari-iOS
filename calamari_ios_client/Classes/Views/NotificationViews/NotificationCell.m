@@ -27,6 +27,7 @@
         
         self.alertContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.statusColorView.frame) + 10, 10, CGRectGetWidth(self.frame) - (CGRectGetMaxX(self.statusColorView.frame) + 20), 0)];
         self.alertContentLabel.numberOfLines = 0;
+        self.alertContentLabel.textColor = [UIColor normalBlackColor];
         self.alertContentLabel.font = [UIFont systemFontOfSize:[UIView bodySize]];
         [self addSubview:self.alertContentLabel];
         
@@ -34,6 +35,7 @@
         [self addSubview:self.statusImageView];
         
         self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.statusImageView.frame) + 10, CGRectGetMinY(self.statusImageView.frame), 0, 20)];
+        self.statusLabel.textColor = [UIColor normalBlackColor];
         self.statusLabel.font = [UIFont systemFontOfSize:[UIView noteSize]];
         [self addSubview:self.statusLabel];
         

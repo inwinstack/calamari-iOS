@@ -10,6 +10,7 @@
 #import "CephAPI.h"
 #import "ClusterData.h"
 #import "DateMaker.h"
+#import "LocalizationManager.h"
 
 @interface NotificationData () {
     int timeCount;
@@ -43,7 +44,6 @@
         self.canNotification = YES;
         self.isBackground = NO;
         self.notificationArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_NotificationAlerts", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]]];
-        [self resetRecord];
         self.warnSec = @"10";
         self.warnCodeDic = @{@"OSD" : @"01", @"Monitor" : @"02", @"PG" : @"03", @"Usage" : @"04", @"Info" : @"4", @"Warning" : @"3", @"Error" : @"2", @"Critical" : @"1"};
         
@@ -57,11 +57,29 @@
     return self;
 }
 
+- (void) setRecordWithHostIp:(NSString*)hostIp {
+    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_didResetRecordArray", hostIp]]) {
+
+        [[NSUserDefaults standardUserDefaults] setObject:@[@"0", @"0", @"0", @"0"] forKey:[NSString stringWithFormat:@"%@_WarnPreviousRecord", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:@[@"0", @"0", @"0", @"0"] forKey:[NSString stringWithFormat:@"%@_WarnOriginalRecord", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:@[@"0", @"0", @"0", @"0"] forKey:[NSString stringWithFormat:@"%@_ErrorPreviousRecord", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:@[@"0", @"0", @"0", @"0"] forKey:[NSString stringWithFormat:@"%@_ErrorOriginalRecord", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:@[@"0", @"0", @"0", @"0"] forKey:[NSString stringWithFormat:@"%@_WarnCountRecord", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:@[@"0", @"0", @"0", @"0"] forKey:[NSString stringWithFormat:@"%@_ErrorCountRecord", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:@"did" forKey:[NSString stringWithFormat:@"%@_didResetRecordArray", hostIp]];
+
+    }
+}
+
 - (void) resetRecord {
-    self.warnOriginalArray = [NSMutableArray arrayWithArray:@[@"0", @"0", @"0", @"0"]];
-    self.warnPreviousArray = [NSMutableArray arrayWithArray:@[@"0", @"0", @"0", @"0"]];
-    self.errorOriginalArray = [NSMutableArray arrayWithArray:@[@"0", @"0", @"0", @"0"]];
-    self.errorPreviousArray = [NSMutableArray arrayWithArray:@[@"0", @"0", @"0", @"0"]];
+    NSString *currentHostIp = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"];
+    self.warnOriginalArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_WarnPreviousRecord", currentHostIp]]];
+    self.warnPreviousArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_WarnOriginalRecord", currentHostIp]]];
+    self.notificationErrorCountArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_ErrorCountRecord", currentHostIp]]];
+    self.notificationWarnCountArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_WarnCountRecord", currentHostIp]]];
+    self.errorOriginalArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_ErrorPreviousRecord", currentHostIp]]];
+    self.errorPreviousArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_ErrorOriginalRecord", currentHostIp]]];
 }
 
 - (void) startTimer {
@@ -116,6 +134,19 @@
             break;
         }
     }
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_Auto Delete", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] isEqualToString:@"YES"]) {
+        NSMutableArray *tempDeleteArray = [NSMutableArray array];
+
+        for (id notificationContent in self.notificationArray) {
+            (notificationContent[@"ResolveTime"]) ? [tempDeleteArray addObject:notificationContent] : nil;
+        }
+        for (id deleteObj in tempDeleteArray) {
+            [self.notificationArray removeObject:deleteObj];
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:self.notificationArray forKey:[NSString stringWithFormat:@"%@_NotificationAlerts", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]];
+        
+    }
+    
     int loopCount = 0;
     NSString *clusterID = [ClusterData shareInstance].clusterArray[0][@"id"];
     for (NSString *key in self.keyArray) {
@@ -168,14 +199,45 @@
     [self  startTimer];
 }
 
-- (void) upDateWarnDataWithType:(NotificationType)type Count:(int)warnCount {
+- (void) upDateWarnDataWithType:(NotificationType)type conditionType:(NotificationCoditionType)conditionType Count:(int)warnCount {
+    NSString *currentHostIp = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"];
+    int newCount;
+    if (conditionType == ConditionNewWarn) {
+        newCount = warnCount;
+    } else if (conditionType == ConditionWarnDone) {
+        newCount = 0;
+    } else {
+        newCount = [self.notificationWarnCountArray[type] intValue] + (warnCount - [self.warnPreviousArray[type] intValue]);
+    }
+
     self.warnOriginalArray[type] = [NSString stringWithFormat:@"%d", warnCount];
     self.warnPreviousArray[type] = [NSString stringWithFormat:@"%d", warnCount];
+    
+    self.notificationWarnCountArray[type] = [NSString stringWithFormat:@"%d", newCount];
+
+    [[NSUserDefaults standardUserDefaults] setObject:self.warnPreviousArray forKey:[NSString stringWithFormat:@"%@_WarnPreviousRecord", currentHostIp]];
+    [[NSUserDefaults standardUserDefaults] setObject:self.warnOriginalArray forKey:[NSString stringWithFormat:@"%@_WarnOriginalRecord", currentHostIp]];
+    [[NSUserDefaults standardUserDefaults] setObject:self.notificationWarnCountArray forKey:[NSString stringWithFormat:@"%@_WarnCountRecord", currentHostIp]];
 }
 
-- (void) upDateErrorDataWithType:(NotificationType)type Count:(int)errorCount {
+- (void) upDateErrorDataWithType:(NotificationType)type conditionType:(NotificationCoditionType)conditionType Count:(int)errorCount {
+    NSString *currentHostIp = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"];
+    int newCount;
+    if (conditionType == ConditionNewError) {
+        newCount = errorCount;
+    } else if (conditionType == ConditionErrorDone) {
+        newCount = 0;
+    } else {
+        newCount = [self.notificationErrorCountArray[type] intValue] + (errorCount - [self.errorPreviousArray[type] intValue]);
+    }
     self.errorOriginalArray[type] = [NSString stringWithFormat:@"%d", errorCount];
     self.errorPreviousArray[type] = [NSString stringWithFormat:@"%d", errorCount];
+    self.notificationErrorCountArray[type] = [NSString stringWithFormat:@"%d", newCount];
+
+    [[NSUserDefaults standardUserDefaults] setObject:self.errorPreviousArray forKey:[NSString stringWithFormat:@"%@_ErrorPreviousRecord", currentHostIp]];
+    [[NSUserDefaults standardUserDefaults] setObject:self.errorOriginalArray forKey:[NSString stringWithFormat:@"%@_ErrorOriginalRecord", currentHostIp]];
+    [[NSUserDefaults standardUserDefaults] setObject:self.notificationErrorCountArray forKey:[NSString stringWithFormat:@"%@_ErrorCountRecord", currentHostIp]];
+
 }
 
 - (void) findPgWithTotal:(int)total original:(int)original previous:(int)previous count:(int)count isWarn:(BOOL)isWarn notificationType:(NotificationType)notificationType {
@@ -186,11 +248,11 @@
     NSString *pgWarnCountString = [NSString stringWithFormat:@"%.f%% ( %d / %d )", pgPercent, count, total];
     if ((totalPercent > count) && (original > count) && (previous > count)) {
         if (isWarn) {
-            [self upDateWarnDataWithType:notificationType Count:0];
+            [self upDateWarnDataWithType:notificationType conditionType:ConditionWarnDone Count:0];
             [self makeNotificationStringWithConditionType:ConditionWarnDone notificationType:notificationType];
             [self addToNotificationArrayWithType:notificationType conditionType:ConditionWarnDone total:previous pgCountString:pgWarnCountString];
         } else {
-            [self upDateErrorDataWithType:notificationType Count:0];
+            [self upDateErrorDataWithType:notificationType conditionType:ConditionErrorDone Count:0];
             [self makeNotificationStringWithConditionType:ConditionErrorDone notificationType:notificationType];
             [self addToNotificationArrayWithType:notificationType conditionType:ConditionErrorDone total:previous pgCountString:pgWarnCountString];
         }
@@ -200,41 +262,49 @@
 }
 
 - (void) findWrongOfServerActionWithOriginal:(int)original previous:(int)previous count:(int)count isWarn:(BOOL)isWarn notificationType:(NotificationType)notificationType pgCountString:(NSString*)pgCountString {
+    NSString *currentHostIp = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"];
     if (count > 0) {
         self.warnSec = @"120";
         if ((original == 0) && (count > original) && (count > previous)) {
             if (isWarn) {
-                [self upDateWarnDataWithType:notificationType Count:count];
+                [self upDateWarnDataWithType:notificationType conditionType:ConditionNewWarn Count:count];
                 [self makeNotificationStringWithConditionType:ConditionNewWarn notificationType:notificationType];
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionNewWarn total:count pgCountString:pgCountString];
             } else {
-                [self upDateErrorDataWithType:notificationType Count:count];
+                [self upDateErrorDataWithType:notificationType conditionType:ConditionNewError Count:count];
                 [self makeNotificationStringWithConditionType:ConditionNewError notificationType:notificationType];
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionNewError total:count pgCountString:pgCountString];
             }
         } else if ((original > 0) && (count > original) && (count > previous)) {
             if (isWarn) {
-                [self upDateWarnDataWithType:notificationType Count:count];
+                [self upDateWarnDataWithType:notificationType conditionType:ConditionWarnMoreThanOriginal Count:count];
                 [self makeNotificationStringWithConditionType:ConditionWarnMoreThanOriginal notificationType:notificationType];
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionWarnMoreThanOriginal total:count pgCountString:pgCountString];
             } else {
-                [self upDateErrorDataWithType:notificationType Count:count];
+                [self upDateErrorDataWithType:notificationType conditionType:ConditionErrorMoreThanOriginal Count:count];
                 [self makeNotificationStringWithConditionType:ConditionErrorMoreThanOriginal notificationType:notificationType];
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionErrorMoreThanOriginal total:count pgCountString:pgCountString];
             }
         } else if ((count < original) && (count < previous)) {
             if (isWarn) {
                 self.warnPreviousArray[notificationType] = [NSString stringWithFormat:@"%d", count];
+                [[NSUserDefaults standardUserDefaults] setObject:self.warnPreviousArray forKey:[NSString stringWithFormat:@"%@_WarnPreviousRecord", currentHostIp]];
             } else {
                 self.errorPreviousArray[notificationType] = [NSString stringWithFormat:@"%d", count];
+                [[NSUserDefaults standardUserDefaults] setObject:self.errorPreviousArray forKey:[NSString stringWithFormat:@"%@_ErrorPreviousRecord", currentHostIp]];
+
             }
         } else if ((count < original) && (count > previous)) {
             if (isWarn) {
                 self.warnPreviousArray[notificationType] = [NSString stringWithFormat:@"%d", count];
+                [[NSUserDefaults standardUserDefaults] setObject:self.warnPreviousArray forKey:[NSString stringWithFormat:@"%@_WarnPreviousRecord", currentHostIp]];
+
                 [self makeNotificationStringWithConditionType:ConditionWarnDoneThenWarn notificationType:notificationType];
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionWarnDoneThenWarn total:count pgCountString:pgCountString];
             } else {
                 self.errorPreviousArray[notificationType] = [NSString stringWithFormat:@"%d", count];
+                [[NSUserDefaults standardUserDefaults] setObject:self.errorPreviousArray forKey:[NSString stringWithFormat:@"%@_ErrorPreviousRecord", currentHostIp]];
+
                 [self makeNotificationStringWithConditionType:ConditionErrorDoneThenError notificationType:notificationType];
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionErrorDoneThenError total:count pgCountString:pgCountString];
             }
@@ -242,11 +312,11 @@
     } else if (count == 0) {
         if ((count < original) && (count < previous)) {
             if (isWarn) {
-                [self upDateWarnDataWithType:notificationType Count:count];
+                [self upDateWarnDataWithType:notificationType conditionType:ConditionWarnDone Count:count];
                 [self makeNotificationStringWithConditionType:ConditionWarnDone notificationType:notificationType];
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionWarnDone total:previous pgCountString:pgCountString];
             } else {
-                [self upDateErrorDataWithType:notificationType Count:count];
+                [self upDateErrorDataWithType:notificationType conditionType:ConditionErrorDone Count:count];
                 [self makeNotificationStringWithConditionType:ConditionErrorDone notificationType:notificationType];
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionErrorDone total:previous pgCountString:pgCountString];
             }
@@ -282,7 +352,7 @@
     
     NSString *notificationTypeString = (conditionType > 3) ? @"Error" : @"Warning";
     NSString *notificationTitleString;
-    NSString *totalErrorString = [NSString stringWithFormat:@"%d", total];
+    NSString *totalErrorString = (conditionType > 3) ? [NSString stringWithFormat:@"%@", self.notificationErrorCountArray[notificationType]] : [NSString stringWithFormat:@"%@", self.notificationWarnCountArray[notificationType]];
     
     if ([notificationTypeString isEqualToString:@"Error"]) {
         if (notificationType == PGNotificationType) {
@@ -336,6 +406,7 @@
         }
 
     } else {
+        
         notificationContentDictionary = @{@"Content" : notificationConetentString, @"Status" : notificationStatusString, @"Time" : notificationTimeString, @"Type" : notificationTypeString, @"ErrorCount" : totalErrorString, @"ErrorTitle" : notificationTitleString, @"TypeCode" : [NSString stringWithFormat:@"%@", self.keyArray[notificationType]]};
         for (int i = 0; i < self.notificationArray.count; i++) {
             NSDictionary *tempDic = self.notificationArray[i];
@@ -373,8 +444,10 @@
         [self.notificationArray addObject:tempObject];
     }
     
-    for (id tempObject in tempResolveArray) {
-        [self.notificationArray addObject:tempObject];
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_Auto Delete", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] isEqualToString:@"YES"]) {
+        for (id tempObject in tempResolveArray) {
+            [self.notificationArray addObject:tempObject];
+        }
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:self.notificationArray forKey:[NSString stringWithFormat:@"%@_NotificationAlerts", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]];
@@ -395,17 +468,35 @@
 }
 
 - (void) makeNotificationStringWithConditionType:(NotificationCoditionType)conditionType notificationType:(NotificationType)notificationType {
-    NSString *notificationContentString = self.notificationContentArray[notificationType][conditionType];
-    [self startNotificationWithNotificationString:notificationContentString];
+    NSString *notificationContentString = [[LocalizationManager sharedLocalizationManager] getTextByKey:self.notificationContentArray[notificationType][conditionType]];
+    NSString *notificationTitleString;
+    if ((conditionType == ConditionErrorDone) || (conditionType == ConditionWarnDone)) {
+        notificationTitleString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"NotificationTitleInfo"];
+    } else if (conditionType > 3) {
+        notificationTitleString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"NotificationTitleError"];
+    } else {
+        notificationTitleString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"NotificationTitleWarning"];
+    }
+    [self startNotificationWithNotificationString:notificationContentString notificationTitle:notificationTitleString];
+
 }
 
 - (void) makeNotificationStringWithUsageType:(NotificationUsageType)usageType {
-    NSString *usageContentString = self.notificationUsageContentArray[usageType];
-    [self startNotificationWithNotificationString:usageContentString];
+    NSString *usageContentString = [[LocalizationManager sharedLocalizationManager] getTextByKey:self.notificationUsageContentArray[usageType]];
+    NSString *usageTitleString;
+    if (usageType == UsageErrorType) {
+        usageTitleString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"NotificationTitleError"];
+    } else if (usageType == UsageWarnType) {
+        usageTitleString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"NotificationTitleWarning"];
+    } else {
+        usageTitleString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"NotificationTitleInfo"];
+    }
+    [self startNotificationWithNotificationString:usageContentString notificationTitle:usageTitleString];
 }
 
-- (void) startNotificationWithNotificationString:(NSString*)notificationString {
-    if (self.canNotification) {
+- (void) startNotificationWithNotificationString:(NSString*)notificationString notificationTitle:(NSString*)notificationTitle {
+    
+    if (self.canNotification && [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_Notifications", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] isEqualToString:@"YES"]) {
         UILocalNotification* notifyWarn = [[UILocalNotification alloc] init];
         notifyWarn.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
         notifyWarn.timeZone = [NSTimeZone defaultTimeZone];
@@ -413,6 +504,7 @@
         notifyWarn.soundName = UILocalNotificationDefaultSoundName;
         notifyWarn.applicationIconBadgeNumber = self.notificationArray.count;
         notifyWarn.alertBody = notificationString;
+        notifyWarn.alertTitle = notificationTitle;
         [[UIApplication sharedApplication] scheduleLocalNotification:notifyWarn];
     }
 }

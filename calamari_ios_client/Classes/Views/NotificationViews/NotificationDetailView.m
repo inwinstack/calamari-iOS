@@ -19,24 +19,30 @@
         
         self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, CGRectGetWidth(self.frame) - 20, 0)];
         self.contentLabel.font = [UIFont systemFontOfSize:[UIView subHeadSize]];
+        self.contentLabel.textColor = [UIColor normalBlackColor];
         [self addSubview:self.contentLabel];
         
         self.statusImageView = [[UIImageView alloc] initWithFrame:CGRectMake(7, CGRectGetMaxY(self.contentLabel.frame) + 10, 20, 15)];
         [self addSubview:self.statusImageView];
         
         self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.statusImageView.frame) + 10, CGRectGetMinY(self.statusImageView.frame), 0, 20)];
+        self.statusLabel.textColor = [UIColor normalBlackColor];
         [self addSubview:self.statusLabel];
         
         self.errorTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.statusLabel.frame) + 10, 0, 0)];
+        self.errorTitleLabel.textColor = [UIColor normalBlackColor];
         [self addSubview:self.errorTitleLabel];
         
         self.errorCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.errorTitleLabel.frame), 0, 0)];
+        self.errorCountLabel.textColor = [UIColor normalBlackColor];
         [self addSubview:self.errorCountLabel];
         
         self.errorTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.errorCountLabel.frame) + 10, 0, 0)];
+        self.errorTimeLabel.textColor = [UIColor normalBlackColor];
         [self addSubview:self.errorTimeLabel];
         
         self.resolveTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(self.errorTimeLabel.frame) + 10, 0, 0)];
+        self.resolveTimeLabel.textColor = [UIColor normalBlackColor];
         self.resolveTimeLabel.alpha = 0;
         [self addSubview:self.resolveTimeLabel];
         

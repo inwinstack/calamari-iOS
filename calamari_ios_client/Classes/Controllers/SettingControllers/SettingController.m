@@ -17,6 +17,7 @@
 #import "NotificationData.h"
 #import "AlertSelectionViewCell.h"
 #import "UIColor+Reader.h"
+#import "AlertTriggersController.h"
 
 @interface SettingController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, AlertSectionDelegate>
 
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) SettingViewFlowLayout *flowLayout;
 @property (nonatomic, strong) AlertSelectionView *alertSelectionView;
 @property (nonatomic, strong) NSString *tempDateFormat;
+@property (nonatomic, strong) AlertTriggersController *alertTriggersController;
 
 @end
 
@@ -59,7 +61,7 @@
             break;
             
         case 1:
-            cell.selectionView.frame = CGRectMake(tempFrame.origin.x, tempFrame.origin.y, tempFrame.size.width, 0);
+            cell.selectionView.frame = CGRectMake(tempFrame.origin.x, tempFrame.origin.y, tempFrame.size.width, 370);
             break;
             
         case 2:
@@ -70,7 +72,7 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 37;
+    return (tableView.tag == 1) ? 74 : 37;
 }
 
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(nonnull UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -80,7 +82,7 @@
             break;
             
         case 1:
-            return CGSizeMake(CGRectGetWidth(self.view.frame) - 20, 30);
+            return CGSizeMake(CGRectGetWidth(self.view.frame) - 20, 400);
             break;
             
         case 2:
@@ -98,7 +100,7 @@
             break;
             
         case 1:
-            return 0;
+            return [SettingData shareSettingData].alertTitleArray.count;
             break;
             
         case 2:
@@ -132,21 +134,45 @@
             case 0:
                 cell.mainLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:[SettingData shareSettingData].settingMainNameArray[indexPath.row]];
                 cell.rightDetailLabel.text = (indexPath.row == 0) ? [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguage"] : [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentDateFormat"] ;
+                cell.checkBoxButton.hidden = YES;
                 break;
                 
             case 1:
-                cell.mainLabel.text = @"";
-                cell.rightDetailLabel.text = @"";
+                cell.districtLineView.frame =  CGRectMake(0, 73, CGRectGetWidth([UIScreen mainScreen].bounds) - 20, 2);
+                cell.rightDetailLabel.frame = (indexPath.row > 2) ? CGRectMake(10, CGRectGetMaxY(cell.mainLabel.frame), CGRectGetWidth(cell.districtLineView.frame) - 20, 37) : CGRectMake(10, CGRectGetMaxY(cell.mainLabel.frame), CGRectGetWidth(cell.districtLineView.frame) - 50, 37);
+                cell.rightDetailLabel.font = [UIFont systemFontOfSize:[UIView noteSize]];
+                cell.rightDetailLabel.textAlignment = NSTextAlignmentLeft;
+                cell.mainLabel.text = [SettingData shareSettingData].alertTitleArray[indexPath.row];
+                cell.rightDetailLabel.text = [SettingData shareSettingData].alertBodyArray[indexPath.row];
+                cell.checkBoxButton.hidden = (indexPath.row > 2);
+                cell.checkBoxButton.frame = CGRectMake(CGRectGetWidth(cell.districtLineView.frame) - 30, 27, 20, 20);
+                cell.checkBoxButton.tag = indexPath.row;
+                cell.checkBoxButton.backgroundColor = ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]] isEqualToString:@"YES"]) ? [UIColor oceanNavigationBarColor] : [UIColor clearColor];
+                [cell.checkBoxButton addTarget:self action:@selector(didSelectCheckBoxButton:) forControlEvents:UIControlEventTouchUpInside];
+                cell.checkBoxButton.layer.borderWidth = ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]] isEqualToString:@"YES"]) ? 0.0 : 2.0;
+                
                 break;
                 
             case 2:
                 cell.mainLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"settings_about_version"];
-                cell.rightDetailLabel.text = @"0.11.1";
+                cell.rightDetailLabel.text = @"0.12.0";
+                cell.checkBoxButton.hidden = YES;
                 break;
         }
-        cell.districtLineView.alpha = (indexPath.row == 2) ? 0.0 : 1.0;
         return cell;
     }
+}
+
+- (void) didSelectCheckBoxButton:(UIButton*)checkBoxButton {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]] isEqualToString:@"YES"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]];
+        checkBoxButton.layer.borderWidth = 2.0;
+    } else {
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]];
+        checkBoxButton.layer.borderWidth = 0.0;
+    }
+    [(UITableView*)checkBoxButton.superview.superview.superview reloadData];
+
 }
 
 - (void) alertButtonDidSelect:(UIButton *)alertButton {
@@ -182,6 +208,11 @@
     } else if (tableView.tag == 3) {
         self.tempDateFormat = [SettingData shareSettingData].dateFormatOptionArray[indexPath.row];
         [tableView reloadData];
+    } else if (tableView.tag == 1) {
+        if (indexPath.row == 4) {
+            self.alertTriggersController = [[AlertTriggersController alloc] init];
+            [self.navigationController pushViewController:self.alertTriggersController animated:YES];
+        }
     }
 }
 

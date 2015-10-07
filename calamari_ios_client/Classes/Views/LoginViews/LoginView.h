@@ -20,8 +20,12 @@
 @property (nonatomic, strong) UIImageView *languageCountryImageView;
 @property (nonatomic, strong) UILabel *languageContentLabel;
 @property (nonatomic, strong) UIButton *languageSettingButton;
+@property (nonatomic, strong) UILabel *versionLabel;
+@property (nonatomic, strong) UILabel *fromLabel;
+@property (nonatomic, strong) UILabel *designLabel;
 
 - (void) setDefaultField;
 - (void) setRedField:(UITextField*)field;
+- (void) setBottomInfo;
 
 @end

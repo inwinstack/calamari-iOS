@@ -17,8 +17,9 @@
         self.itemSize = CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds) * 0.1875, CGRectGetWidth([UIScreen mainScreen].bounds) * 0.1875);
         self.minimumInteritemSpacing = height * 5 / 255;
         self.minimumLineSpacing = height * 15 / 255;
-        self.headerReferenceSize = CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds) - height * 10 / 255, height * 50 / 255);
-        self.sectionInset = UIEdgeInsetsMake( (CGRectGetWidth([UIScreen mainScreen].bounds) - 15) / 8, height * 10 / 255, (CGRectGetWidth([UIScreen mainScreen].bounds) - 15) / 8, height * 10 / 255);
+//        self.sectionInset = UIEdgeInsetsMake( (CGRectGetWidth([UIScreen mainScreen].bounds) - 15) / 8, height * 10 / 255, (CGRectGetWidth([UIScreen mainScreen].bounds) - 15) / 8, height * 10 / 255);
+        self.sectionInset = UIEdgeInsetsMake( height * 10 / 255, height * 10 / 255, (CGRectGetWidth([UIScreen mainScreen].bounds) - 15) / 8, height * 10 / 255);
+
     }
     return self;
 }

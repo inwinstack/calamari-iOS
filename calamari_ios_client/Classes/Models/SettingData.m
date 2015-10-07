@@ -28,6 +28,12 @@
         self.languageOptionArray = @[@"English", @"繁體中文", @"日本語"];
         self.languageImageOptionArray = @[@"USAImage", @"TaiwanImage", @"JapaneseImage"];
         self.settingDetailArray = [NSMutableArray arrayWithArray:@[@"English", @"2015/12/31"]];
+        self.alertTitleArray = @[@"Notifications", @"Email Notifications", @"Auto Delete", @"Time Period", @"Alert Triggers"];
+        self.alertBodyArray = @[@"Trigger alarts when storage system comes new warnings", @"Notification will be sent to nutc.imac@gmail.com", @"Delete alerts automatically when alerts were resolved", @"Set a time frame to monitor and receive alerts", @"Setup different alert mechanisms based on various scenarios"];
+        self.checkBoxArray = @[@"Notifications", @"Email Notifications", @"Auto Delete", @"", @""];
+        self.triggerWarnDetailArray = @[@"1 OSD is in abnormal status", @"1 monitor is in abnormal status", @"20% PGs are modified by Ceph", @"Trigger alert when usage exceeds 70%"];
+        self.triggerErrorDetailArray = @[@"1 OSD is in severely status", @"1 monitor is in severely status", @"20% PGs stuck in abnormal status", @"Trigger alert when usage exceeds 85%"];
+
     }
     return self;
 }

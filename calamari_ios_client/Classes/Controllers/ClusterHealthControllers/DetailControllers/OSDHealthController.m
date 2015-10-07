@@ -25,6 +25,7 @@
     NSInteger currentIndex;
 }
 
+@property (nonatomic, strong) OSDHeaderView *osdHealthToolBar;
 @property (nonatomic, strong) NSMutableArray *warnArray;
 @property (nonatomic, strong) NSMutableArray *errorArray;
 
@@ -50,6 +51,11 @@
     [self.osdHealthView registerClass:[OSDHealthViewCell class] forCellWithReuseIdentifier:@"OSDHealthCell"];
     [self.osdHealthView registerClass:[OSDHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"OSDHeaderView"];
     currentIndex = 0;
+    
+    self.osdHealthToolBar = [[OSDHeaderView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame) - 64 - CGRectGetWidth(self.view.frame) * 0.1, CGRectGetWidth(self.view.frame), CGRectGetWidth(self.view.frame) * 0.1)];
+    [self.osdHealthToolBar setCurrentButton:currentIndex];
+    self.osdHealthToolBar.delegate = self;
+    [self.view addSubview:self.osdHealthToolBar];
 }
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -129,17 +135,6 @@
         }
     }
     return cell;
-}
-
-- (UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    UICollectionReusableView *collectionReusableView = nil;
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        OSDHeaderView *osdHeaderView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"OSDHeaderView" forIndexPath:indexPath];
-        [osdHeaderView setCurrentButton:currentIndex];
-        osdHeaderView.delegate = self;
-        collectionReusableView = osdHeaderView;
-    }
-    return collectionReusableView;
 }
 
 - (void) didReceviButton:(UIButton *)button {

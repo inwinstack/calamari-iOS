@@ -111,8 +111,14 @@
     [[LocalizationManager sharedLocalizationManager] setLanguege];
     self.loginView.languageContentLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguage"];
     self.loginView.languageCountryImageView.image = [UIImage imageNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguageImage"]];
-    [self viewDidLoad];
 
+    self.loginView.hostIpField.placeholder = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_host"];
+    self.loginView.portField.placeholder = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_port"];
+    self.loginView.accountField.placeholder = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_name"];
+    self.loginView.passwordField.placeholder = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_password"];
+    [self.loginView.loginButton setTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_sign_in"] forState:UIControlStateNormal];
+    self.loginView.versionLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_version"];
+    [self.loginView setBottomInfo];
 }
 
 - (void) languageSettingAction {
@@ -163,13 +169,15 @@
                                                                                             if (finished) {
                                                                                                 [[CephAPI shareInstance] startGetPoolListWithIP:self.loginView.hostIpField.text Port:self.loginView.portField.text ClusterID:[ClusterData shareInstance].clusterArray[0][@"id"] Completion:^(BOOL finished) {
                                                                                                     if (finished) {
-                                                                                                        NSLog(@"didLogin");
+                                                                                                        [[NotificationData shareInstance] setRecordWithHostIp:self.loginView.hostIpField.text];
+                                                                                                        
                                                                                                         [[NSUserDefaults standardUserDefaults] setObject:@"did" forKey:@"refresh"];
                                                                                                         [[NSUserDefaults standardUserDefaults] setObject:@"did" forKey:@"firstTime"];
                                                                                                         [[NSUserDefaults standardUserDefaults] setObject:self.loginView.hostIpField.text forKey:@"HostIP"];
                                                                                                         [[NSUserDefaults standardUserDefaults] setObject:self.loginView.portField.text forKey:@"Port"];
                                                                                                         [[NSUserDefaults standardUserDefaults] setObject:self.loginView.accountField.text forKey:@"Account"];
                                                                                                         [[NSUserDefaults standardUserDefaults] setObject:self.loginView.passwordField.text forKey:@"Password"];
+                                                                                                        [[NotificationData shareInstance] resetRecord];
                                                                                                         [UserData shareInstance].ipString = self.loginView.hostIpField.text;
                                                                                                         [UserData shareInstance].portString = self.loginView.portField.text;
                                                                                                         [UserData shareInstance].accountString = self.loginView.accountField.text;
@@ -280,7 +288,7 @@
 - (void) textFieldDidBeginEditing:(UITextField *)textField {
     [TextFieldChecker shareInstance].checkArray = [NSMutableArray arrayWithArray:@[self.loginView.hostIpField, self.loginView.portField, self.loginView.accountField, self.loginView.passwordField]];
     [self.loginView setRedField:textField];
-    if (textField.frame.origin.y > 150) {
+    if (textField.frame.origin.y > 150 && ![[UIDevice currentDevice].model isEqualToString:@"iPad"]) {
         [UIView animateWithDuration:0.3 animations:^{
             self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 150, self.view.frame.size.width, self.view.frame.size.height);
             textField.tag = 1;

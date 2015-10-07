@@ -96,7 +96,7 @@
         if (firstTime) {
             label = [[UILabel alloc] initWithFrame:CGRectMake( height * 5 / 255 + CGRectGetWidth(self.frame) * 0.03, CGRectGetMaxY(self.poolTitleLabel.frame) + height * 5 / 255, 0,  height * 15 / 255)];
         } else {
-            if (!([NSString stringWithFormat:@"%@", object].length * height * 8.2 / 255 + height * 5 / 255 + CGRectGetMaxX([[self.subviews lastObject] frame]) + CGRectGetWidth(self.frame) * 0.06 < CGRectGetMaxX(self.frame))) {
+            if (!([NSString stringWithFormat:@"%@", object].length * height * 8.2 / 255 + height * 15 / 255 + CGRectGetMaxX([[self.subviews lastObject] frame]) + CGRectGetWidth(self.frame) * 0.06 < CGRectGetMaxX(self.frame))) {
                 label = [[UILabel alloc] initWithFrame:CGRectMake( height * 5 / 255 + CGRectGetWidth(self.frame) * 0.03, CGRectGetMaxY([[self.subviews lastObject] frame]) + height * 5 / 255 + CGRectGetWidth(self.frame) * 0.03, 0, height * 15 / 255)];
             } else {
                 label = [[UILabel alloc] initWithFrame:CGRectMake( height * 5 / 255 + CGRectGetMaxX([[self.subviews lastObject] frame]) + CGRectGetWidth(self.frame) * 0.06, CGRectGetMinY([[self.subviews lastObject] frame]), 0, height * 15 / 255)];
