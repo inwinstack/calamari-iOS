@@ -15,7 +15,7 @@
 
 @end
 
-@interface OSDHeaderView : UICollectionReusableView
+@interface OSDHeaderView : UIView
 
 @property (nonatomic, weak) id <DidReceiveButtonDelegate> delegate;
 @property (nonatomic, strong) UIButton *allButton;

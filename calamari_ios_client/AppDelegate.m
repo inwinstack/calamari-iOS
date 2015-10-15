@@ -36,6 +36,7 @@
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTime"] isEqualToString:@"did"]) {
         
         [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isFirstController"];
+        [[NotificationData shareInstance] resetRecord];
         self.clusterHealthController = [[ClusterHealthController alloc] init];
         [self.customNavigationController pushViewController:self.clusterHealthController animated:NO];
     } else {
@@ -80,7 +81,6 @@
     [NotificationData shareInstance].isBackground = NO;
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    [[NotificationData shareInstance] resetRecord];
     [[NotificationData shareInstance] restartTimerWithTimeInterval:10];
 }
 

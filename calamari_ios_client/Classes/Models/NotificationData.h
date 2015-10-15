@@ -46,6 +46,7 @@ typedef  NS_ENUM(NSUInteger, NotificationUsageType) {
 
 + (NotificationData*) shareInstance;
 
+- (void) setRecordWithHostIp:(NSString*)hostIp;
 - (void) startTimer;
 - (void) restartTimerWithTimeInterval:(float)timeInterValCount;
 - (void) stopTimer;

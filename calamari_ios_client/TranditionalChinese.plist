@@ -21,7 +21,7 @@
 	<key>login_sign_in</key>
 	<string>登入</string>
 	<key>login_version</key>
-	<string>Ceph Monitor Version 0.11.1</string>
+	<string>Ceph Monitor Version 0.12.0</string>
 	<key>settings_profile_language</key>
 	<string>語言</string>
 	<key>settings_dialog_save</key>
@@ -258,5 +258,11 @@
 	<string>錯誤比率</string>
 	<key>Warning ratio</key>
 	<string>警告比率</string>
+	<key>NotificationTitleWarning</key>
+	<string>儲存系統警告</string>
+	<key>NotificationTitleError</key>
+	<string>儲存系統錯誤</string>
+	<key>NotificationTitleInfo</key>
+	<string>儲存系統資訊</string>
 </dict>
 </plist>

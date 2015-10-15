@@ -381,31 +381,35 @@
 }
 
 - (void) pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    [super pushViewController:viewController animated:animated];
-    self.panGesture.enabled = YES;
-    if ([viewController class] == [ClusterHealthController class]) {
-        [[ClusterData shareInstance] setData];
-        NSString *dashboardString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_health"];
-        NSString *healthDetailString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_health_detail"];
-        NSString *osdHealthString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_osd_health"];
-        NSString *monitorHealthString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_mon_health"];
-        NSString *poolListString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_pool_list"];
-        NSString *hostListString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_host_health"];
-        NSString *pgStatusString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_pg_status"];
-        NSString *usageStatusString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_usage_status"];
-        NSString *poolIopsString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_pool_iops"];
-        NSString *notificationString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_notification"];
-        NSString *logString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_option_logs"];
-        NSString *settingString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_option_setting"];
-        NSString *logoutString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_option_logout"];
-
-        self.itemArray = @[dashboardString, healthDetailString, osdHealthString, monitorHealthString, poolListString, hostListString, pgStatusString, usageStatusString, poolIopsString, notificationString, logString, settingString, logoutString];
-
-        self.navigationView.userNameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"Account"];
-        self.navigationView.userIPLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"];
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-        [(ClusterHealthController*)viewController setDelegate:self];
-        [viewController.navigationItem setLeftBarButtonItem:self.menuBarButton];
+    if ([viewController class] == [self.topViewController class]) {
+        [(UICollectionView*)self.topViewController.view reloadData];
+    } else {
+        [super pushViewController:viewController animated:animated];
+        self.panGesture.enabled = YES;
+        if ([viewController class] == [ClusterHealthController class]) {
+            [[ClusterData shareInstance] setData];
+            NSString *dashboardString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_health"];
+            NSString *healthDetailString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_health_detail"];
+            NSString *osdHealthString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_osd_health"];
+            NSString *monitorHealthString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_mon_health"];
+            NSString *poolListString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_pool_list"];
+            NSString *hostListString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_host_health"];
+            NSString *pgStatusString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_pg_status"];
+            NSString *usageStatusString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_usage_status"];
+            NSString *poolIopsString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_pool_iops"];
+            NSString *notificationString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_notification"];
+            NSString *logString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_option_logs"];
+            NSString *settingString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_option_setting"];
+            NSString *logoutString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_option_logout"];
+            
+            self.itemArray = @[dashboardString, healthDetailString, osdHealthString, monitorHealthString, poolListString, hostListString, pgStatusString, usageStatusString, poolIopsString, notificationString, logString, settingString, logoutString];
+            
+            self.navigationView.userNameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"Account"];
+            self.navigationView.userIPLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"];
+            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+            [(ClusterHealthController*)viewController setDelegate:self];
+            [viewController.navigationItem setLeftBarButtonItem:self.menuBarButton];
+        }
     }
 }
 

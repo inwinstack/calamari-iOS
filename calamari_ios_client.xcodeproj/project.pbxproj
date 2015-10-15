@@ -94,6 +94,9 @@
 		15550D811BB1036200471D62 /* SettingData.m in Sources */ = {isa = PBXBuildFile; fileRef = 15550D801BB1036200471D62 /* SettingData.m */; settings = {ASSET_TAGS = (); }; };
 		15550D841BB1222000471D62 /* SelectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15550D831BB1222000471D62 /* SelectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		15550D881BB149B700471D62 /* AlertSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15550D871BB149B700471D62 /* AlertSelectionView.m */; settings = {ASSET_TAGS = (); }; };
+		1559785D1BC57B750059C43F /* AlertTriggersController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559785C1BC57B750059C43F /* AlertTriggersController.m */; settings = {ASSET_TAGS = (); }; };
+		155978601BC57C220059C43F /* AlertTriggersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1559785F1BC57C220059C43F /* AlertTriggersView.m */; settings = {ASSET_TAGS = (); }; };
+		155978631BC58AB70059C43F /* AlertTriggerCalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 155978621BC58AB70059C43F /* AlertTriggerCalculatorView.m */; settings = {ASSET_TAGS = (); }; };
 		1591698C1BBD899D00846CB7 /* TranditionalChinese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1591698B1BBD899D00846CB7 /* TranditionalChinese.plist */; settings = {ASSET_TAGS = (); }; };
 		1591698E1BBD89AE00846CB7 /* English.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1591698D1BBD89AE00846CB7 /* English.plist */; settings = {ASSET_TAGS = (); }; };
 		159169901BBD89B900846CB7 /* Japanese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1591698F1BBD89B900846CB7 /* Japanese.plist */; settings = {ASSET_TAGS = (); }; };
@@ -291,6 +294,12 @@
 		15550D831BB1222000471D62 /* SelectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectionViewCell.m; sourceTree = "<group>"; };
 		15550D861BB149B700471D62 /* AlertSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertSelectionView.h; sourceTree = "<group>"; };
 		15550D871BB149B700471D62 /* AlertSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertSelectionView.m; sourceTree = "<group>"; };
+		1559785B1BC57B750059C43F /* AlertTriggersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertTriggersController.h; sourceTree = "<group>"; };
+		1559785C1BC57B750059C43F /* AlertTriggersController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertTriggersController.m; sourceTree = "<group>"; };
+		1559785E1BC57C220059C43F /* AlertTriggersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertTriggersView.h; sourceTree = "<group>"; };
+		1559785F1BC57C220059C43F /* AlertTriggersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertTriggersView.m; sourceTree = "<group>"; };
+		155978611BC58AB70059C43F /* AlertTriggerCalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertTriggerCalculatorView.h; sourceTree = "<group>"; };
+		155978621BC58AB70059C43F /* AlertTriggerCalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertTriggerCalculatorView.m; sourceTree = "<group>"; };
 		1591698B1BBD899D00846CB7 /* TranditionalChinese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TranditionalChinese.plist; sourceTree = "<group>"; };
 		1591698D1BBD89AE00846CB7 /* English.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = English.plist; sourceTree = "<group>"; };
 		1591698F1BBD89B900846CB7 /* Japanese.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Japanese.plist; sourceTree = "<group>"; };
@@ -427,6 +436,8 @@
 			children = (
 				15550D731BB0F06100471D62 /* SettingController.h */,
 				15550D741BB0F06100471D62 /* SettingController.m */,
+				1559785B1BC57B750059C43F /* AlertTriggersController.h */,
+				1559785C1BC57B750059C43F /* AlertTriggersController.m */,
 			);
 			path = SettingControllers;
 			sourceTree = "<group>";
@@ -739,6 +750,10 @@
 				15550D7D1BB0FEC500471D62 /* SettingViewFlowLayout.m */,
 				15550D821BB1222000471D62 /* SelectionViewCell.h */,
 				15550D831BB1222000471D62 /* SelectionViewCell.m */,
+				1559785E1BC57C220059C43F /* AlertTriggersView.h */,
+				1559785F1BC57C220059C43F /* AlertTriggersView.m */,
+				155978611BC58AB70059C43F /* AlertTriggerCalculatorView.h */,
+				155978621BC58AB70059C43F /* AlertTriggerCalculatorView.m */,
 			);
 			path = SettingViews;
 			sourceTree = "<group>";
@@ -985,6 +1000,7 @@
 				15550D711BB0F03B00471D62 /* NotificationView.m in Sources */,
 				15550D841BB1222000471D62 /* SelectionViewCell.m in Sources */,
 				15550D551BB0F03B00471D62 /* HostHealthFlowLayout.m in Sources */,
+				1559785D1BC57B750059C43F /* AlertTriggersController.m in Sources */,
 				15550D4C1BB0F03B00471D62 /* HealthDetailView.m in Sources */,
 				15550D3D1BB0F03B00471D62 /* UINavigationBar+HeightMaker.m in Sources */,
 				15550D321BB0F03B00471D62 /* Cookies.m in Sources */,
@@ -1039,9 +1055,11 @@
 				15550D4B1BB0F03B00471D62 /* ClusterHealthViewFlowLayout.m in Sources */,
 				15550D571BB0F03B00471D62 /* HostHealthViewCell.m in Sources */,
 				15550D341BB0F03B00471D62 /* HostHealthData.m in Sources */,
+				155978631BC58AB70059C43F /* AlertTriggerCalculatorView.m in Sources */,
 				15550D521BB0F03B00471D62 /* HostDetailView.m in Sources */,
 				15550D681BB0F03B00471D62 /* PoolListViewCell.m in Sources */,
 				15550D221BB0F03B00471D62 /* HostDetailController.m in Sources */,
+				155978601BC57C220059C43F /* AlertTriggersView.m in Sources */,
 				15550D721BB0F03B00471D62 /* NotificationViewFlowLayout.m in Sources */,
 				15550D481BB0F03B00471D62 /* ClusterHealthProgressLayer.m in Sources */,
 				15550D3B1BB0F03B00471D62 /* AnimationMaker.m in Sources */,

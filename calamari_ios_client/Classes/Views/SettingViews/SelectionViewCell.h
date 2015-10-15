@@ -13,5 +13,6 @@
 @property (nonatomic, strong) UILabel *mainLabel;
 @property (nonatomic, strong) UILabel *rightDetailLabel;
 @property (nonatomic, strong) UIView *districtLineView;
+@property (nonatomic, strong) UIButton *checkBoxButton;
 
 @end

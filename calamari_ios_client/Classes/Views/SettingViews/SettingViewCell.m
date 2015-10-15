@@ -15,6 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.settingNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), 30)];
+        self.settingNameLabel.textColor = [UIColor normalBlackColor];
         [self addSubview:self.settingNameLabel];
         
         self.selectionView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.settingNameLabel.frame), CGRectGetWidth(self.frame), 100)];

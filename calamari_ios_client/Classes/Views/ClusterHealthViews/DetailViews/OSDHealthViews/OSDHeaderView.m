@@ -14,6 +14,9 @@
 
 @property (nonatomic, strong) UIImageView *warnImageView;
 @property (nonatomic, strong) UIImageView *errorImageView;
+@property (nonatomic, strong) UIView *currentUnderLineView;
+@property (nonatomic, strong) UIView *districtOneLineView;
+@property (nonatomic, strong) UIView *districtTwoLineView;
 
 @end
 
@@ -23,11 +26,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         float height = (CGRectGetWidth([UIScreen mainScreen].bounds) - CGRectGetWidth([UIScreen mainScreen].bounds) / 16) * 0.85;
-        float imageHeight = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? 50 : 30;
-        self.allButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 15, (CGRectGetWidth(self.frame) - 20) / 3, height * 50 / 255)];
-        self.allButton.backgroundColor = [UIColor osdButtonDefaultColor];
-        self.allButton.layer.borderWidth = 1;
-        self.allButton.layer.borderColor = [UIColor normalBolderColor].CGColor;
+        float imageHeight = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? 21.0 : 9.0;
+        self.layer.borderWidth = 1.0;
+        self.layer.borderColor = [UIColor oceanHorizonRuleTwoColor].CGColor;
+        
+        self.backgroundColor = [UIColor oceanBackgroundTwoColor];
+        self.allButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame) / 3.0, CGRectGetHeight(self.frame))];
         [self.allButton setTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"osd_health_all"] forState:UIControlStateNormal];
         [self.allButton.titleLabel setFont:[UIFont systemFontOfSize:height * 14 / 255]];
         [self.allButton setTitleColor:[UIColor normalBlackColor] forState:UIControlStateNormal];
@@ -35,11 +39,8 @@
         [self.allButton addTarget:self action:@selector(didSelectButton:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.allButton];
         
-        self.warnButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.allButton.frame), 15, (CGRectGetWidth(self.frame) - 20) / 3, height * 50 / 255)];
-        self.warnButton.layer.borderWidth = 1;
+        self.warnButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.allButton.frame), 0, CGRectGetWidth(self.frame) / 3.0, CGRectGetHeight(self.frame))];
         self.warnButton.tag = 1;
-        self.warnButton.layer.borderColor = [UIColor normalBolderColor].CGColor;
-        self.warnButton.backgroundColor = [UIColor osdButtonDefaultColor];
         [self.warnButton addTarget:self action:@selector(didSelectButton:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.warnButton];
         
@@ -47,10 +48,7 @@
         self.warnImageView.image = [UIImage imageNamed:@"OSDWarnImage"];
         [self.warnButton addSubview:self.warnImageView];
         
-        self.errorButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.warnButton.frame), 15, (CGRectGetWidth(self.frame) - 20) / 3, height * 50 / 255)];
-        self.errorButton.layer.borderWidth = 1;
-        self.errorButton.layer.borderColor = [UIColor normalBolderColor].CGColor;
-        self.errorButton.backgroundColor = [UIColor osdButtonDefaultColor];
+        self.errorButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.warnButton.frame), 0, CGRectGetWidth(self.frame) / 3.0, CGRectGetHeight(self.frame))];
         self.errorButton.tag = 2;
         [self.errorButton addTarget:self action:@selector(didSelectButton:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.errorButton];
@@ -58,29 +56,48 @@
         self.errorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.errorButton.frame) / 2 - imageHeight / 2, CGRectGetHeight(self.errorButton.frame) / 2 - imageHeight / 2, imageHeight, imageHeight)];
         self.errorImageView.image = [UIImage imageNamed:@"OSDErrorImage"];
         [self.errorButton addSubview:self.errorImageView];
+        
+        self.districtOneLineView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.allButton.frame) - 0.5, CGRectGetHeight(self.warnButton.frame) / 2 - imageHeight / 2, 1, imageHeight)];
+        self.districtOneLineView.backgroundColor = [UIColor oceanHorizonRuleTwoColor];
+        [self addSubview:self.districtOneLineView];
+        
+        self.districtTwoLineView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.warnButton.frame) - 0.5, CGRectGetHeight(self.warnButton.frame) / 2 - imageHeight / 2, 1, imageHeight)];
+        self.districtTwoLineView.backgroundColor = [UIColor oceanHorizonRuleTwoColor];
+        [self addSubview:self.districtTwoLineView];
+        
+        self.currentUnderLineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame) - 3, CGRectGetWidth(self.frame) / 3.0, 3)];
+        self.currentUnderLineView.backgroundColor = [UIColor oceanNavigationBarColor];
+        [self addSubview:self.currentUnderLineView];
     }
     return self;
 }
 
 - (void) didSelectButton:(UIButton*)button {
-    self.allButton.backgroundColor = [UIColor osdButtonDefaultColor];
-    self.warnButton.backgroundColor = [UIColor osdButtonDefaultColor];
-    self.errorButton.backgroundColor = [UIColor osdButtonDefaultColor];
-    
-    button.backgroundColor = [UIColor osdButtonHighlightColor];
+    [self setCurrentButton:button.tag];
     [self.delegate didReceviButton:button];
 }
 
 - (void) setCurrentButton:(NSInteger)buttonTag {
     switch (buttonTag) {
         case 0: {
-            self.allButton.backgroundColor = [UIColor osdButtonHighlightColor];
+            [self.allButton setTitleColor:[UIColor oceanNavigationBarColor] forState:UIControlStateNormal];
+            self.warnImageView.image = [UIImage imageNamed:@"OSDWarnImage"];
+            self.errorImageView.image = [UIImage imageNamed:@"OSDErrorImage"];
+            self.currentUnderLineView.frame = CGRectMake(0, CGRectGetHeight(self.frame) - 3, CGRectGetWidth(self.frame) / 3.0, 3);
             break;
         } case 1: {
-            self.warnButton.backgroundColor = [UIColor osdButtonHighlightColor];
+            [self.allButton setTitleColor:[UIColor unitTextDefalutGrayColor] forState:UIControlStateNormal];
+            self.warnImageView.image = [UIImage imageNamed:@"OSDWarnHighlightImage"];
+            self.errorImageView.image = [UIImage imageNamed:@"OSDErrorImage"];
+            self.currentUnderLineView.frame = CGRectMake(CGRectGetWidth(self.frame) / 3.0, CGRectGetHeight(self.frame) - 3, CGRectGetWidth(self.frame) / 3.0, 3);
+
             break;
         } case 2: {
-            self.errorButton.backgroundColor = [UIColor osdButtonHighlightColor];
+            [self.allButton setTitleColor:[UIColor unitTextDefalutGrayColor] forState:UIControlStateNormal];
+            self.warnImageView.image = [UIImage imageNamed:@"OSDWarnImage"];
+            self.errorImageView.image = [UIImage imageNamed:@"OSDErrorHighlightImage"];
+            self.currentUnderLineView.frame = CGRectMake(CGRectGetWidth(self.frame) * 2 / 3.0, CGRectGetHeight(self.frame) - 3, CGRectGetWidth(self.frame) / 3.0, 3);
+
             break;
         }
     }
