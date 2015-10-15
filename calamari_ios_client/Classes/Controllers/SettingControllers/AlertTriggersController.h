@@ -8,6 +8,13 @@
 
 #import "BaseController.h"
 
+typedef NS_ENUM(NSUInteger, AlertCalculatorType) {
+    AlertCalculatorOSDType = 0,
+    AlertCalculatorMONType,
+    AlertCalculatorPGType,
+    AlertCalculatorUsageType,
+};
+
 @interface AlertTriggersController : BaseController
 
 @end

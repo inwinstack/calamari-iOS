@@ -117,7 +117,9 @@
         [self.customNavigationController pushViewController:self.notificationController animated:YES];
     } else {
         if ([self.window.subviews indexOfObject:self.alertView] > self.window.subviews.count) {
-            [self.window addSubview:self.alertView];
+            if (![notification.alertTitle isEqualToString:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"NotificationTitleInfo"]]) {
+                [self.window addSubview:self.alertView];
+            }
         }
     }
 }

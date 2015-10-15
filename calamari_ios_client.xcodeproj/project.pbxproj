@@ -106,6 +106,9 @@
 		15CACE0E1BA5276300DFD26B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE0D1BA5276300DFD26B /* AppDelegate.m */; };
 		15CACE161BA5276300DFD26B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15CACE151BA5276300DFD26B /* Images.xcassets */; };
 		15CACE251BA5276300DFD26B /* calamari_ios_clientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE241BA5276300DFD26B /* calamari_ios_clientTests.m */; };
+		15CFFA361BCCC37A008CFBB7 /* TimePeriodController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CFFA351BCCC37A008CFBB7 /* TimePeriodController.m */; settings = {ASSET_TAGS = (); }; };
+		15CFFA391BCCC43F008CFBB7 /* TimePeriodView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CFFA381BCCC43F008CFBB7 /* TimePeriodView.m */; settings = {ASSET_TAGS = (); }; };
+		15CFFA3C1BCCDE82008CFBB7 /* ClockSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CFFA3B1BCCDE82008CFBB7 /* ClockSettingView.m */; settings = {ASSET_TAGS = (); }; };
 		4F2D199058C3A0107D7AE603 /* libPods-calamari_ios_client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D56DBF74FAD2FCBB66FDFC /* libPods-calamari_ios_client.a */; };
 /* End PBXBuildFile section */
 
@@ -315,6 +318,12 @@
 		15CACE1E1BA5276300DFD26B /* calamari_ios_clientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = calamari_ios_clientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15CACE231BA5276300DFD26B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		15CACE241BA5276300DFD26B /* calamari_ios_clientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = calamari_ios_clientTests.m; sourceTree = "<group>"; };
+		15CFFA341BCCC37A008CFBB7 /* TimePeriodController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimePeriodController.h; sourceTree = "<group>"; };
+		15CFFA351BCCC37A008CFBB7 /* TimePeriodController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimePeriodController.m; sourceTree = "<group>"; };
+		15CFFA371BCCC43F008CFBB7 /* TimePeriodView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimePeriodView.h; sourceTree = "<group>"; };
+		15CFFA381BCCC43F008CFBB7 /* TimePeriodView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimePeriodView.m; sourceTree = "<group>"; };
+		15CFFA3A1BCCDE82008CFBB7 /* ClockSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClockSettingView.h; sourceTree = "<group>"; };
+		15CFFA3B1BCCDE82008CFBB7 /* ClockSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockSettingView.m; sourceTree = "<group>"; };
 		A765B40473C3A8E0E63212ED /* Pods-calamari_ios_client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calamari_ios_client.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calamari_ios_client/Pods-calamari_ios_client.debug.xcconfig"; sourceTree = "<group>"; };
 		D6D56DBF74FAD2FCBB66FDFC /* libPods-calamari_ios_client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-calamari_ios_client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD9E3BA2309249C5C33E062 /* Pods-calamari_ios_client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calamari_ios_client.release.xcconfig"; path = "Pods/Target Support Files/Pods-calamari_ios_client/Pods-calamari_ios_client.release.xcconfig"; sourceTree = "<group>"; };
@@ -438,6 +447,8 @@
 				15550D741BB0F06100471D62 /* SettingController.m */,
 				1559785B1BC57B750059C43F /* AlertTriggersController.h */,
 				1559785C1BC57B750059C43F /* AlertTriggersController.m */,
+				15CFFA341BCCC37A008CFBB7 /* TimePeriodController.h */,
+				15CFFA351BCCC37A008CFBB7 /* TimePeriodController.m */,
 			);
 			path = SettingControllers;
 			sourceTree = "<group>";
@@ -754,6 +765,10 @@
 				1559785F1BC57C220059C43F /* AlertTriggersView.m */,
 				155978611BC58AB70059C43F /* AlertTriggerCalculatorView.h */,
 				155978621BC58AB70059C43F /* AlertTriggerCalculatorView.m */,
+				15CFFA371BCCC43F008CFBB7 /* TimePeriodView.h */,
+				15CFFA381BCCC43F008CFBB7 /* TimePeriodView.m */,
+				15CFFA3A1BCCDE82008CFBB7 /* ClockSettingView.h */,
+				15CFFA3B1BCCDE82008CFBB7 /* ClockSettingView.m */,
 			);
 			path = SettingViews;
 			sourceTree = "<group>";
@@ -899,7 +914,7 @@
 				TargetAttributes = {
 					15CACE041BA5276300DFD26B = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = S8FBP4YLUA;
+						DevelopmentTeam = MQTK4RU7AZ;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -1012,6 +1027,7 @@
 				15550D701BB0F03B00471D62 /* NotificationDetailView.m in Sources */,
 				15550D4D1BB0F03B00471D62 /* HealthDetailViewCell.m in Sources */,
 				15550D381BB0F03B00471D62 /* OSDHealthData.m in Sources */,
+				15CFFA391BCCC43F008CFBB7 /* TimePeriodView.m in Sources */,
 				15550D651BB0F03B00471D62 /* PoolIOPSViewCell.m in Sources */,
 				15550D2C1BB0F03B00471D62 /* LoginController.m in Sources */,
 				15550D4F1BB0F03B00471D62 /* CPULineBrokenView.m in Sources */,
@@ -1039,6 +1055,7 @@
 				15550D661BB0F03B00471D62 /* PoolIOPSViewFlowLayout.m in Sources */,
 				15550D201BB0F03B00471D62 /* BaseController.m in Sources */,
 				15550D421BB0F03B00471D62 /* TextFieldChecker.m in Sources */,
+				15CFFA3C1BCCDE82008CFBB7 /* ClockSettingView.m in Sources */,
 				15550D3A1BB0F03B00471D62 /* UserData.m in Sources */,
 				15550D281BB0F03B00471D62 /* PoolIOPSController.m in Sources */,
 				15550D401BB0F03B00471D62 /* URLMaker.m in Sources */,
@@ -1055,6 +1072,7 @@
 				15550D4B1BB0F03B00471D62 /* ClusterHealthViewFlowLayout.m in Sources */,
 				15550D571BB0F03B00471D62 /* HostHealthViewCell.m in Sources */,
 				15550D341BB0F03B00471D62 /* HostHealthData.m in Sources */,
+				15CFFA361BCCC37A008CFBB7 /* TimePeriodController.m in Sources */,
 				155978631BC58AB70059C43F /* AlertTriggerCalculatorView.m in Sources */,
 				15550D521BB0F03B00471D62 /* HostDetailView.m in Sources */,
 				15550D681BB0F03B00471D62 /* PoolListViewCell.m in Sources */,
@@ -1194,7 +1212,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = calamari_ios_client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Francis.inWinStackCeph;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inwinSTACK.CephMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1208,7 +1226,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = calamari_ios_client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Francis.inWinStackCeph;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inwinSTACK.CephMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -31,11 +31,34 @@
         self.alertTitleArray = @[@"Notifications", @"Email Notifications", @"Auto Delete", @"Time Period", @"Alert Triggers"];
         self.alertBodyArray = @[@"Trigger alarts when storage system comes new warnings", @"Notification will be sent to nutc.imac@gmail.com", @"Delete alerts automatically when alerts were resolved", @"Set a time frame to monitor and receive alerts", @"Setup different alert mechanisms based on various scenarios"];
         self.checkBoxArray = @[@"Notifications", @"Email Notifications", @"Auto Delete", @"", @""];
-        self.triggerWarnDetailArray = @[@"1 OSD is in abnormal status", @"1 monitor is in abnormal status", @"20% PGs are modified by Ceph", @"Trigger alert when usage exceeds 70%"];
-        self.triggerErrorDetailArray = @[@"1 OSD is in severely status", @"1 monitor is in severely status", @"20% PGs stuck in abnormal status", @"Trigger alert when usage exceeds 85%"];
-
+        [self setTriggerArray];
     }
     return self;
+}
+
+- (void) setTriggerArray {
+    NSString *currentIp = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"];
+    NSString *osdWarn = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_OSDTriggerWarn", currentIp]];
+    NSString *osdError = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_OSDTriggerError", currentIp]];
+    NSString *monWarn = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_MONTriggerWarn", currentIp]];
+    NSString *monError = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_MONTriggerError", currentIp]];
+    NSString *pgWarn = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_PGTriggerWarn", currentIp]];
+    NSString *pgError = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_PGTriggerError", currentIp]];
+    NSString *usageWarn = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_UsageTriggerWarn", currentIp]];
+    NSString *usageError = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_UsageTriggerError", currentIp]];
+    
+    NSString *osdWarnString = [NSString stringWithFormat:@"%@ OSD is in abnormal status", osdWarn];
+    NSString *monWarnString = [NSString stringWithFormat:@"%@ monitor is in abnormal status", monWarn];
+    NSString *pgWarnString = [NSString stringWithFormat:@"%@%% PGs are modified by Ceph", pgWarn];
+    NSString *usageWarnString = [NSString stringWithFormat:@"Trigger alert when usage exceeds %@%%", usageWarn];
+    
+    NSString *osdErrorString = [NSString stringWithFormat:@"%@ OSD is in severely status", osdError];
+    NSString *monErrorString = [NSString stringWithFormat:@"%@ monitor is in severely status", monError];
+    NSString *pgErrorString = [NSString stringWithFormat:@"%@%% PGs stuck in abnormal status", pgError];
+    NSString *usageErrorString = [NSString stringWithFormat:@"Trigger alert when usage exceeds %@%%", usageError];
+    
+    self.triggerWarnDetailArray = @[osdWarnString, monWarnString, pgWarnString, usageWarnString];
+    self.triggerErrorDetailArray = @[osdErrorString, monErrorString, pgErrorString, usageErrorString];
 }
 
 @end

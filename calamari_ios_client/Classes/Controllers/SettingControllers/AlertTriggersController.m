@@ -13,6 +13,7 @@
 #import "SelectionViewCell.h"
 #import "SettingData.h"
 #import "AlertTriggerCalculatorView.h"
+#import "ClusterData.h"
 
 @interface AlertTriggersController () <UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -20,6 +21,10 @@
 @property (nonatomic, strong) SettingViewFlowLayout *flowLayout;
 @property (nonatomic, strong) NSArray *nameArray;
 @property (nonatomic, strong) NSArray *calculatorNameArray;
+@property (nonatomic, strong) NSArray *keyNameArray;
+@property (nonatomic, strong) NSArray *unitArray;
+@property (nonatomic, strong) NSArray *clusterKeyNameArray;
+@property (nonatomic, strong) NSArray *minArray;
 @property (nonatomic, strong) AlertTriggerCalculatorView *alertCalculatorView;
 
 @end
@@ -39,6 +44,10 @@
     self.view = self.alertTriggersView;
     self.nameArray = @[@"OSD", @"Monitor", @"Placement Group", @"Usage"];
     self.calculatorNameArray = @[@"OSD", @"Monitor", @"PG", @"Usage"];
+    self.keyNameArray = @[@"OSD", @"MON", @"PG", @"Usage"];
+    self.unitArray = @[@"OSD", @"MON", @"%", @"%"];
+    self.clusterKeyNameArray = @[@"osd", @"mon", @"pg"];
+    self.minArray = @[@"1", @"1", @"20"];
     [self.alertTriggersView registerClass:[SettingViewCell class] forCellWithReuseIdentifier:@"AlertTriggersCellIdentifer"];
 }
 
@@ -67,13 +76,35 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger triggerIndex = [self.alertTriggersView indexPathForCell:(UICollectionViewCell*)tableView.superview].row;
-
-    self.alertCalculatorView = [[AlertTriggerCalculatorView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.alertCalculatorView.titleLabel.text = (indexPath.row == 0) ? [NSString stringWithFormat:@"%@ Warnings", self.calculatorNameArray[triggerIndex]] : [NSString stringWithFormat:@"%@ Errors", self.calculatorNameArray[triggerIndex]];
-    self.alertCalculatorView.unitLabel.text = self.calculatorNameArray[triggerIndex];
-    [self.alertCalculatorView.cancelButton addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.alertCalculatorView.saveButton addTarget:self action:@selector(enterAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view.window addSubview:self.alertCalculatorView];
+    if ([self.view.window.subviews indexOfObject:self.alertCalculatorView] > self.view.window.subviews.count) {
+        self.alertCalculatorView = [[AlertTriggerCalculatorView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        self.alertCalculatorView.titleLabel.text = (indexPath.row == 0) ? [NSString stringWithFormat:@"%@ Warnings", self.calculatorNameArray[triggerIndex]] : [NSString stringWithFormat:@"%@ Errors", self.calculatorNameArray[triggerIndex]];
+        self.alertCalculatorView.unitLabel.text = self.unitArray[triggerIndex];
+        self.alertCalculatorView.numberLabel.text = [NSString stringWithFormat:@"%d", [self getAlertCurrentValueWithKey:self.keyNameArray[triggerIndex] isError:(indexPath.row == 1)]];
+        self.alertCalculatorView.infoLabel.text = [self calculatorInfoStringWithIndex:triggerIndex isError:(indexPath.row == 1)];
+        self.alertCalculatorView.originalValue = [self calculatorInfoStringWithIndex:triggerIndex isError:(indexPath.row == 1)];
+        [self.alertCalculatorView.cancelButton addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.alertCalculatorView.saveButton addTarget:self action:@selector(enterAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.view.window addSubview:self.alertCalculatorView];
+        if (triggerIndex < 3) {
+            if (triggerIndex < 2) {
+                self.alertCalculatorView.minValue = 1;
+                self.alertCalculatorView.maxValue = floor([self totalMaxWithType:triggerIndex] / 2);
+            } else {
+                self.alertCalculatorView.minValue = 20;
+                self.alertCalculatorView.maxValue = 80;
+            }
+        } else {
+            if (indexPath.row == 0) {
+                self.alertCalculatorView.minValue = 5;
+                self.alertCalculatorView.maxValue = [self getAlertCurrentValueWithKey:self.keyNameArray[triggerIndex] isError:YES];
+            } else {
+                self.alertCalculatorView.minValue = [self getAlertCurrentValueWithKey:self.keyNameArray[triggerIndex] isError:NO];
+                self.alertCalculatorView.maxValue = 85;
+            }
+        }
+        self.alertCalculatorView.currentCount = (triggerIndex < 3) ? [self totalMaxWithType:triggerIndex] : [self getUsageMaxValue];
+    }
 }
 
 - (void) cancelAction {
@@ -81,8 +112,74 @@
 }
 
 - (void) enterAction {
-    [self.alertCalculatorView removeFromSuperview];
+    NSRange tempSearchSpaceRange = [self.alertCalculatorView.titleLabel.text rangeOfString:@" "];
+    NSInteger objectIndex = [self.calculatorNameArray indexOfObject:[self.alertCalculatorView.titleLabel.text substringToIndex:tempSearchSpaceRange.location]];
+    if ([[self.alertCalculatorView.titleLabel.text substringFromIndex:tempSearchSpaceRange.location + tempSearchSpaceRange.length] isEqualToString:@"Warnings"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:self.alertCalculatorView.numberLabel.text forKey:[NSString stringWithFormat:@"%@_%@TriggerWarn", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], self.keyNameArray[objectIndex]]];
+    } else {
+        [[NSUserDefaults standardUserDefaults] setObject:self.alertCalculatorView.numberLabel.text forKey:[NSString stringWithFormat:@"%@_%@TriggerError", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], self.keyNameArray[objectIndex]]];
+        
+    }
+    [[SettingData shareSettingData] setTriggerArray];
 
+    [self.alertCalculatorView removeFromSuperview];
+    
+    NSIndexPath *reloadPath = [NSIndexPath indexPathForItem:objectIndex inSection:0];
+    [[(SettingViewCell*)[self.alertTriggersView cellForItemAtIndexPath:reloadPath] selectionView] reloadData];
+
+}
+
+- (int) totalMaxWithType:(AlertCalculatorType)alertCalculatorType {
+    NSString *clusterID = [ClusterData shareInstance].clusterArray[0][@"id"];
+    NSString *clusterKey = self.clusterKeyNameArray[alertCalculatorType];
+    return [[ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_health_counters", clusterID]][clusterKey][@"ok"][@"count"] intValue] + [[ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_health_counters", clusterID]][clusterKey][@"critical"][@"count"] intValue] + [[ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_health_counters", clusterID]][clusterKey][@"warn"][@"count"] intValue];
+}
+
+- (double) getUsageMaxValue {
+    NSString *clusterID = [ClusterData shareInstance].clusterArray[0][@"id"];
+
+    return [[ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_space", clusterID]][@"space"][@"capacity_bytes"] doubleValue];
+}
+
+- (int) getAlertCurrentValueWithKey:(NSString*)keyName isError:(BOOL)isError {
+    int result = (isError) ? [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@TriggerError", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], keyName]] intValue] : [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@TriggerWarn", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], keyName]] intValue];
+
+    return result;
+}
+
+- (NSString*) calculatorInfoStringWithIndex:(AlertCalculatorType)calculatorItemIndex isError:(BOOL)isError {
+    int tempCount = 0;
+    if (calculatorItemIndex < 3) {
+        tempCount = [self totalMaxWithType:calculatorItemIndex];
+    }
+    int alertValue = [self getAlertCurrentValueWithKey:self.keyNameArray[calculatorItemIndex] isError:isError];
+     ;
+    switch (calculatorItemIndex) {
+        case AlertCalculatorOSDType: {
+            NSString *osdInfoString = [NSString stringWithFormat:@"MIN 1  MAX %.f", floor([self totalMaxWithType:calculatorItemIndex] / 2)];
+            return osdInfoString;
+            break;
+        } case AlertCalculatorMONType: {
+            double monMax = floor([self totalMaxWithType:calculatorItemIndex] / 2);
+            NSString *monInfoString = (monMax > 0) ? [NSString stringWithFormat:@"MIN 1  MAX %.f", monMax] : @"MIN 1  MAX 1";
+            return monInfoString;
+            break;
+        } case AlertCalculatorPGType: {
+            int alertPg = tempCount * alertValue / 100;
+            NSString *pgInfoString = [NSString stringWithFormat:@"%d PGs / %d PGs", alertPg, tempCount];
+            return pgInfoString;
+            break;
+        } case AlertCalculatorUsageType: {
+            double usageMax = [self getUsageMaxValue];
+            NSString *usageTotalString = [[ClusterData shareInstance] caculateByte:usageMax];
+            double alertUsage = usageMax * alertValue / 100;
+            NSString *usageAlertString = [[ClusterData shareInstance] caculateByte:alertUsage];
+            NSString *usageInfoString = [NSString stringWithFormat:@"%@ / %@", usageAlertString, usageTotalString];
+            return usageInfoString;
+            break;
+        }
+    }
+    return nil;
 }
 
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
