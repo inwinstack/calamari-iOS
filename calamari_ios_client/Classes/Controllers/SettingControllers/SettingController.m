@@ -215,8 +215,8 @@
             self.alertTriggersController = [[AlertTriggersController alloc] init];
             [self.navigationController pushViewController:self.alertTriggersController animated:YES];
         } else if (indexPath.row == 3) {
-            self.timePeriodController = [[TimePeriodController alloc] init];
-            [self.navigationController pushViewController:self.timePeriodController animated:YES];
+//            self.timePeriodController = [[TimePeriodController alloc] init];
+//            [self.navigationController pushViewController:self.timePeriodController animated:YES];
         }
     }
 }

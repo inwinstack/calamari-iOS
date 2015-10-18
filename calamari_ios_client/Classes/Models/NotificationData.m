@@ -272,6 +272,19 @@
     NSString *triggerValue = (isWarn) ? [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@TriggerWarn",currentHostIp, self.triggerKeyArray[notificationType]]] : [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@TriggerError",currentHostIp, self.triggerKeyArray[notificationType]]];
     
     int triggerMinValue = (notificationType == PGNotificationType) ? 0 : [triggerValue intValue];
+    
+    if (count > 0) {
+        if ((count < original) && (count > previous)) {
+            if (isWarn) {
+                [self upDateWarnDataWithType:notificationType conditionType:ConditionErrorDoneThenError Count:count];
+            } else {
+                
+                [self upDateErrorDataWithType:notificationType conditionType:ConditionErrorDoneThenError Count:count];
+
+            }
+        }
+    }
+    
     if (count >= triggerMinValue) {
         self.warnSec = @"120";
         if ((original <= triggerMinValue) && (count > original) && (count > previous)) {

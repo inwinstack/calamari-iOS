@@ -43,7 +43,7 @@
 }
 
 + (NSString*) getUsageStatusDataWithIp:(NSString*)ip Port:(NSString*)port ClusterID:(NSString*)clusterID {
-    return [NSString stringWithFormat:@"http://%@:%@/graphite/render/?format=json-array&target=scale(ceph.cluster.%@.df.total_avail,%%201024)&target=scale(ceph.cluster.%@.df.total_used,%%201024)&from=-1d", ip, port, clusterID, clusterID];
+    return [NSString stringWithFormat:@"http://%@:%@/graphite/render/?format=json-array&target=sumSeries(%%20scale(ceph.cluster.%@.df.total_avail,1024)%%20,%%20ceph.cluster.%@.df.total_avail_bytes%%20)&target=sumSeries(%%20scale(ceph.cluster.%@.df.total_used,1024)%%20,%%20ceph.cluster.%@.df.total_used_bytes%%20)", ip, port, clusterID, clusterID, clusterID, clusterID];
 }
 
 + (NSString*) getPoolIOPSWithIp:(NSString*)ip Port:(NSString*)port PoolID:(NSString*)poolID {

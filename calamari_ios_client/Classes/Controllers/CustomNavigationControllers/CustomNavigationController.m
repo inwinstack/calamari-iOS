@@ -324,10 +324,11 @@
 - (void) panAction:(UIPanGestureRecognizer*)pan {
     if (isTouchFromZero) {
         self.navigationWindow.hidden = NO;
-        if (pan.state == UIGestureRecognizerStateEnded && [pan locationInView:self.view].x < CGRectGetWidth([UIScreen mainScreen].bounds) / 2) {
+        
+        if (pan.state == UIGestureRecognizerStateEnded && [pan locationInView:self.view].x < 50) {
             [self removeNavigation];
             isTouchFromZero = false;
-        } else if (pan.state == UIGestureRecognizerStateEnded && [pan locationInView:self.view].x >= CGRectGetWidth([UIScreen mainScreen].bounds) / 2) {
+        } else if (pan.state == UIGestureRecognizerStateEnded && [pan locationInView:self.view].x >= 50) {
             [self.navigationPanGesture setEnabled:YES];
             [pan setEnabled:NO];
             self.navigationWindow.hidden = NO;
@@ -343,7 +344,7 @@
             [self.navigationView userPanAnimateWithX:moveX];
         }
     } else {
-        if (pan.state == UIGestureRecognizerStateBegan && [pan locationInView:self.view].x < 150) {
+        if (pan.state == UIGestureRecognizerStateBegan && [pan locationInView:self.view].x < 50) {
             isTouchFromZero = true;
         } else {
             [self.navigationView resetPanAnimate];
