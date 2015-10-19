@@ -55,9 +55,9 @@
                 NSLog(@"%@", error);
             }
         }];
-    } else {
-        [self getData];
     }
+    
+    [self getData];
 
     self.currentTimeString = @"0";
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];

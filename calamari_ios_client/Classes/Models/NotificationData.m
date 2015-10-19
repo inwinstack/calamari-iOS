@@ -334,13 +334,34 @@
     } else if (count <= triggerMinValue) {
         if ((count < original) && (count < previous)) {
             if (isWarn) {
-                [self upDateWarnDataWithType:notificationType conditionType:ConditionWarnDone Count:count];
-                [self makeNotificationStringWithConditionType:ConditionWarnDone notificationType:notificationType];
-                [self addToNotificationArrayWithType:notificationType conditionType:ConditionWarnDone total:previous pgCountString:pgCountString];
+                if (notificationType == PGNotificationType) {
+                    [self upDateWarnDataWithType:notificationType conditionType:ConditionWarnDone Count:count];
+                    [self makeNotificationStringWithConditionType:ConditionWarnDone notificationType:notificationType];
+                    [self addToNotificationArrayWithType:notificationType conditionType:ConditionWarnDone total:previous pgCountString:pgCountString];
+                } else {
+                    if (count == 0) {
+                        [self upDateWarnDataWithType:notificationType conditionType:ConditionWarnDone Count:count];
+                        [self makeNotificationStringWithConditionType:ConditionWarnDone notificationType:notificationType];
+                        [self addToNotificationArrayWithType:notificationType conditionType:ConditionWarnDone total:previous pgCountString:pgCountString];
+                    } else {
+                        self.warnSec = @"120";
+                    }
+                }
             } else {
-                [self upDateErrorDataWithType:notificationType conditionType:ConditionErrorDone Count:count];
-                [self makeNotificationStringWithConditionType:ConditionErrorDone notificationType:notificationType];
-                [self addToNotificationArrayWithType:notificationType conditionType:ConditionErrorDone total:previous pgCountString:pgCountString];
+                if (notificationType == PGNotificationType) {
+                    [self upDateErrorDataWithType:notificationType conditionType:ConditionErrorDone Count:count];
+                    [self makeNotificationStringWithConditionType:ConditionErrorDone notificationType:notificationType];
+                    [self addToNotificationArrayWithType:notificationType conditionType:ConditionErrorDone total:previous pgCountString:pgCountString];
+                } else {
+                    if (count == 0) {
+                        [self upDateErrorDataWithType:notificationType conditionType:ConditionErrorDone Count:count];
+                        [self makeNotificationStringWithConditionType:ConditionErrorDone notificationType:notificationType];
+                        [self addToNotificationArrayWithType:notificationType conditionType:ConditionErrorDone total:previous pgCountString:pgCountString];
+                    } else {
+                        self.warnSec = @"120";
+                    }
+                }
+                
             }
         }
     }
