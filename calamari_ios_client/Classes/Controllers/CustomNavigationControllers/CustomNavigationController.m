@@ -69,7 +69,13 @@
     [self.navigationBar setBarTintColor:[UIColor oceanNavigationBarColor]];
     [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor], NSFontAttributeName : [UIFont boldSystemFontOfSize:[UIView titleSize]]}];
     self.navigationItem.hidesBackButton = YES;
-    self.navigationView = [[NavigationView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    if ([UIScreen mainScreen].bounds.size.width > [UIScreen mainScreen].bounds.size.height) {
+        self.navigationView = [[NavigationView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width)];
+        self.navigationWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width)];
+    } else {
+        self.navigationView = [[NavigationView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        self.navigationWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    }
     self.navigationView.navigationTableView.delegate = self;
     self.navigationView.navigationTableView.dataSource = self;
     [self.navigationView.navigationTableView setShowsVerticalScrollIndicator:NO];
@@ -82,7 +88,6 @@
     [self.navigationPanGesture setMaximumNumberOfTouches:1];
     [self.navigationView addGestureRecognizer:self.navigationPanGesture];
     
-    self.navigationWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.navigationWindow.backgroundColor = [UIColor clearColor];
     self.navigationWindow.windowLevel = UIWindowLevelStatusBar + 1;
     [self.navigationWindow addSubview:self.navigationView];
