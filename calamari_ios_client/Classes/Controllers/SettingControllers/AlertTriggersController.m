@@ -14,6 +14,7 @@
 #import "SettingData.h"
 #import "AlertTriggerCalculatorView.h"
 #import "ClusterData.h"
+#import "LocalizationManager.h"
 
 @interface AlertTriggersController () <UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -25,6 +26,8 @@
 @property (nonatomic, strong) NSArray *unitArray;
 @property (nonatomic, strong) NSArray *clusterKeyNameArray;
 @property (nonatomic, strong) NSArray *minArray;
+@property (nonatomic, strong) NSArray *locationWarnKeyArray;
+@property (nonatomic, strong) NSArray *locationErrorKeyArray;
 @property (nonatomic, strong) AlertTriggerCalculatorView *alertCalculatorView;
 
 @end
@@ -42,11 +45,15 @@
     self.alertTriggersView.delegate = self;
     self.alertTriggersView.dataSource = self;
     self.view = self.alertTriggersView;
-    self.nameArray = @[@"OSD", @"Monitor", @"Placement Group", @"Usage"];
-    self.calculatorNameArray = @[@"OSD", @"Monitor", @"PG", @"Usage"];
+    NSString *monitorString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"alert_triggers_monitor"];
+    NSString *usageString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"alert_triggers_usage"];
+    self.nameArray = @[@"OSD", monitorString, @"Placement Group", usageString];
+    self.calculatorNameArray = @[@"OSD", monitorString, @"PG", usageString];
     self.keyNameArray = @[@"OSD", @"MON", @"PG", @"Usage"];
     self.unitArray = @[@"OSD", @"MON", @"%", @"%"];
     self.clusterKeyNameArray = @[@"osd", @"mon", @"pg"];
+    self.locationErrorKeyArray = @[@"alert_triggers_osd_error_detail", @"alert_triggers_mon_error_detail", @"alert_triggers_pg_error_detail", @"alert_triggers_usage_error_detail"];
+    self.locationWarnKeyArray = @[@"alert_triggers_osd_warning_detail", @"alert_triggers_mon_warning_detail", @"alert_triggers_pg_warning_detail", @"alert_triggers_usage_warning_detail"];
     self.minArray = @[@"1", @"1", @"20"];
     [self.alertTriggersView registerClass:[SettingViewCell class] forCellWithReuseIdentifier:@"AlertTriggersCellIdentifer"];
 }
@@ -66,10 +73,13 @@
     }
     alertTriggerSelectionCell.checkBoxButton.hidden = YES;
     alertTriggerSelectionCell.districtLineView.frame = CGRectMake(alertTriggerSelectionCell.districtLineView.frame.origin.x, 73, alertTriggerSelectionCell.districtLineView.frame.size.width, alertTriggerSelectionCell.districtLineView.frame.size.height);
-    alertTriggerSelectionCell.mainLabel.text = (indexPath.row == 0) ? @"Warnings" : @"Errors";
+    alertTriggerSelectionCell.mainLabel.text = (indexPath.row == 0) ? [[LocalizationManager sharedLocalizationManager] getTextByKey:@"Warnings"] : [[LocalizationManager sharedLocalizationManager] getTextByKey:@"Errors"];
     alertTriggerSelectionCell.rightDetailLabel.frame = CGRectMake(10, CGRectGetMaxY(alertTriggerSelectionCell.mainLabel.frame), CGRectGetWidth(alertTriggerSelectionCell.districtLineView.frame) - 20, 37);
     NSInteger triggerIndex = [self.alertTriggersView indexPathForCell:(UICollectionViewCell*)tableView.superview].row;
-    alertTriggerSelectionCell.rightDetailLabel.text = (indexPath.row == 0) ? [NSString stringWithFormat:@"Trigger alert when %@", [SettingData shareSettingData].triggerWarnDetailArray[triggerIndex]] : [NSString stringWithFormat:@"Trigger alert when %@", [SettingData shareSettingData].triggerErrorDetailArray[triggerIndex]];
+    NSString *warnDetailString = [[[LocalizationManager sharedLocalizationManager] getTextByKey:self.locationWarnKeyArray[triggerIndex]] stringByReplacingOccurrencesOfString:@"%1$s" withString:[SettingData shareSettingData].triggerWarnDetailArray[triggerIndex]];
+    NSString *errorDetailString = [[[LocalizationManager sharedLocalizationManager] getTextByKey:self.locationErrorKeyArray[triggerIndex]] stringByReplacingOccurrencesOfString:@"%1$s" withString:[SettingData shareSettingData].triggerErrorDetailArray[triggerIndex]];
+
+    alertTriggerSelectionCell.rightDetailLabel.text = (indexPath.row == 0) ? warnDetailString : errorDetailString;
     alertTriggerSelectionCell.rightDetailLabel.textAlignment = NSTextAlignmentLeft;
     return alertTriggerSelectionCell;
 }
@@ -78,7 +88,7 @@
     NSInteger triggerIndex = [self.alertTriggersView indexPathForCell:(UICollectionViewCell*)tableView.superview].row;
     if ([self.view.window.subviews indexOfObject:self.alertCalculatorView] > self.view.window.subviews.count) {
         self.alertCalculatorView = [[AlertTriggerCalculatorView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        self.alertCalculatorView.titleLabel.text = (indexPath.row == 0) ? [NSString stringWithFormat:@"%@ Warnings", self.calculatorNameArray[triggerIndex]] : [NSString stringWithFormat:@"%@ Errors", self.calculatorNameArray[triggerIndex]];
+        self.alertCalculatorView.titleLabel.text = (indexPath.row == 0) ? [NSString stringWithFormat:@"%@ %@", self.calculatorNameArray[triggerIndex], [[LocalizationManager sharedLocalizationManager] getTextByKey:@"Warnings"]] : [NSString stringWithFormat:@"%@ %@", self.calculatorNameArray[triggerIndex], [[LocalizationManager sharedLocalizationManager] getTextByKey:@"Errors"]];
         self.alertCalculatorView.unitLabel.text = self.unitArray[triggerIndex];
         self.alertCalculatorView.numberLabel.text = [NSString stringWithFormat:@"%d", [self getAlertCurrentValueWithKey:self.keyNameArray[triggerIndex] isError:(indexPath.row == 1)]];
         self.alertCalculatorView.infoLabel.text = [self calculatorInfoStringWithIndex:triggerIndex isError:(indexPath.row == 1)];
@@ -114,7 +124,7 @@
 - (void) enterAction {
     NSRange tempSearchSpaceRange = [self.alertCalculatorView.titleLabel.text rangeOfString:@" "];
     NSInteger objectIndex = [self.calculatorNameArray indexOfObject:[self.alertCalculatorView.titleLabel.text substringToIndex:tempSearchSpaceRange.location]];
-    if ([[self.alertCalculatorView.titleLabel.text substringFromIndex:tempSearchSpaceRange.location + tempSearchSpaceRange.length] isEqualToString:@"Warnings"]) {
+    if ([[self.alertCalculatorView.titleLabel.text substringFromIndex:tempSearchSpaceRange.location + tempSearchSpaceRange.length] isEqualToString:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"Warnings"]]) {
         [[NSUserDefaults standardUserDefaults] setObject:self.alertCalculatorView.numberLabel.text forKey:[NSString stringWithFormat:@"%@_%@TriggerWarn", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], self.keyNameArray[objectIndex]]];
     } else {
         [[NSUserDefaults standardUserDefaults] setObject:self.alertCalculatorView.numberLabel.text forKey:[NSString stringWithFormat:@"%@_%@TriggerError", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], self.keyNameArray[objectIndex]]];

@@ -102,6 +102,7 @@
 		159169901BBD89B900846CB7 /* Japanese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1591698F1BBD89B900846CB7 /* Japanese.plist */; settings = {ASSET_TAGS = (); }; };
 		159169931BBD8F7500846CB7 /* LocalizationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 159169921BBD8F7500846CB7 /* LocalizationManager.m */; settings = {ASSET_TAGS = (); }; };
 		159E4A3B1BA66D7200EFC3D2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 159E4A3A1BA66D7200EFC3D2 /* AVFoundation.framework */; };
+		15C476211BD3BBC300D9826B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15C476201BD3BBC300D9826B /* Launch Screen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		15CACE0B1BA5276300DFD26B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE0A1BA5276300DFD26B /* main.m */; };
 		15CACE0E1BA5276300DFD26B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE0D1BA5276300DFD26B /* AppDelegate.m */; };
 		15CACE161BA5276300DFD26B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15CACE151BA5276300DFD26B /* Images.xcassets */; };
@@ -309,6 +310,7 @@
 		159169911BBD8F7500846CB7 /* LocalizationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizationManager.h; sourceTree = "<group>"; };
 		159169921BBD8F7500846CB7 /* LocalizationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizationManager.m; sourceTree = "<group>"; };
 		159E4A3A1BA66D7200EFC3D2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		15C476201BD3BBC300D9826B /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		15CACE051BA5276300DFD26B /* calamari_ios_client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calamari_ios_client.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15CACE091BA5276300DFD26B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		15CACE0A1BA5276300DFD26B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -811,6 +813,7 @@
 				15CACE0C1BA5276300DFD26B /* AppDelegate.h */,
 				15CACE0D1BA5276300DFD26B /* AppDelegate.m */,
 				15CACE151BA5276300DFD26B /* Images.xcassets */,
+				15C476201BD3BBC300D9826B /* Launch Screen.storyboard */,
 				15CACE081BA5276300DFD26B /* Supporting Files */,
 			);
 			path = calamari_ios_client;
@@ -954,6 +957,7 @@
 				15CACE161BA5276300DFD26B /* Images.xcassets in Resources */,
 				1591698E1BBD89AE00846CB7 /* English.plist in Resources */,
 				1591698C1BBD899D00846CB7 /* TranditionalChinese.plist in Resources */,
+				15C476211BD3BBC300D9826B /* Launch Screen.storyboard in Resources */,
 				159169901BBD89B900846CB7 /* Japanese.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1209,6 +1213,7 @@
 			baseConfigurationReference = A765B40473C3A8E0E63212ED /* Pods-calamari_ios_client.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = calamari_ios_client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1223,6 +1228,7 @@
 			baseConfigurationReference = DCD9E3BA2309249C5C33E062 /* Pods-calamari_ios_client.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = calamari_ios_client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

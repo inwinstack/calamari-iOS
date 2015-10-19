@@ -9,6 +9,7 @@
 #import "AlertTriggerCalculatorView.h"
 #import "UIColor+Reader.h"
 #import "UIView+SizeMaker.h"
+#import "LocalizationManager.h"
 
 @interface AlertTriggerCalculatorView ()
 
@@ -104,14 +105,15 @@
         [self.calculatorView addSubview:self.clearButton];
         
         self.cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.clearButton.frame), CGRectGetWidth(self.calculatorView.frame) / 2, 50)];
-        [self.cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+        [self.cancelButton setTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"settings_dialog_cancel"] forState:UIControlStateNormal];
         self.cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
         [self.cancelButton setTitleColor:[UIColor normalBlackColor] forState:UIControlStateNormal];
         [self.calculatorView addSubview:self.cancelButton];
         
         self.saveButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.cancelButton.frame), CGRectGetMaxY(self.clearButton.frame), CGRectGetWidth(self.calculatorView.frame) / 2, 50)];
-        [self.saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
+        [self.saveButton setTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"settings_dialog_save"] forState:UIControlStateNormal];
         [self.saveButton setTitleColor:[UIColor oceanNavigationBarColor] forState:UIControlStateNormal];
+        self.saveButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
         self.saveButton.exclusiveTouch = YES;
         [self.calculatorView addSubview:self.saveButton];
 

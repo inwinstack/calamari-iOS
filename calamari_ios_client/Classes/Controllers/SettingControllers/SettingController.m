@@ -144,8 +144,9 @@
                 cell.rightDetailLabel.frame = (indexPath.row > 2) ? CGRectMake(10, CGRectGetMaxY(cell.mainLabel.frame), CGRectGetWidth(cell.districtLineView.frame) - 20, 37) : CGRectMake(10, CGRectGetMaxY(cell.mainLabel.frame), CGRectGetWidth(cell.districtLineView.frame) - 50, 37);
                 cell.rightDetailLabel.font = [UIFont systemFontOfSize:[UIView noteSize]];
                 cell.rightDetailLabel.textAlignment = NSTextAlignmentLeft;
-                cell.mainLabel.text = [SettingData shareSettingData].alertTitleArray[indexPath.row];
-                cell.rightDetailLabel.text = [SettingData shareSettingData].alertBodyArray[indexPath.row];
+                
+                cell.mainLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:[SettingData shareSettingData].alertTitleArray[indexPath.row]];
+                cell.rightDetailLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:[SettingData shareSettingData].alertBodyArray[indexPath.row]];
                 cell.checkBoxButton.hidden = (indexPath.row > 2);
                 cell.checkBoxButton.frame = CGRectMake(CGRectGetWidth(cell.districtLineView.frame) - 30, 27, 20, 20);
                 cell.checkBoxButton.tag = indexPath.row;

@@ -414,6 +414,14 @@
     }
 }
 
+- (BOOL) shouldAutorotate {
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 - (NSArray*) popToRootViewControllerAnimated:(BOOL)animated {
     NSArray *popArray = [super popToRootViewControllerAnimated:animated];
     self.panGesture.enabled = NO;

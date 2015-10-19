@@ -264,5 +264,45 @@
 	<string>儲存系統錯誤</string>
 	<key>NotificationTitleInfo</key>
 	<string>儲存系統資訊</string>
+	<key>settings_alert_notifications</key>
+	<string>通知</string>
+	<key>settings_alert_notifications_detail</key>
+	<string>儲存系統產生新的異常時發出警告通知</string>
+	<key>settings_alert_email_notifications</key>
+	<string>電子郵件通知</string>
+	<key>settings_alert_email_notifications_detail</key>
+	<string>通知將會寄送到nutc.imac@gmail.com</string>
+	<key>settings_auto_delete</key>
+	<string>自動刪除</string>
+	<key>settings_auto_delete_detail</key>
+	<string>異常狀況解除後刪除警告通知</string>
+	<key>settings_time_period</key>
+	<string>時間區間</string>
+	<key>settings_time_period_detail</key>
+	<string>設定監控服務檢查或接收警告通知的頻率</string>
+	<key>settings_alert_triggers</key>
+	<string>警告觸發條件</string>
+	<key>settings_alert_triggers_detail</key>
+	<string>設定不同情境的警告機制</string>
+	<key>alert_triggers_monitor</key>
+	<string>監視器</string>
+	<key>alert_triggers_usage</key>
+	<string>使用量</string>
+	<key>alert_triggers_osd_warning_detail</key>
+	<string>%1$s 個 OSD 異常時觸發警告通知</string>
+	<key>alert_triggers_osd_error_detail</key>
+	<string>%1$s 個 OSD 損毀時觸發警告通知</string>
+	<key>alert_triggers_mon_warning_detail</key>
+	<string>%1$s 個監視器異常時觸發警告通知</string>
+	<key>alert_triggers_mon_error_detail</key>
+	<string>%1$s 個監視器損毀時觸發警告通知</string>
+	<key>alert_triggers_pg_warning_detail</key>
+	<string>%1$s 的 PGs 被 Ceph 改變時觸發警告通知</string>
+	<key>alert_triggers_pg_error_detail</key>
+	<string>%1$s 的 PGs 陷於損毀狀態時觸發警告通知</string>
+	<key>alert_triggers_usage_warning_detail</key>
+	<string>使用量超過 %1$s 時觸發警告通知</string>
+	<key>alert_triggers_usage_error_detail</key>
+	<string>使用量超過 %1$s 時觸發警告通知</string>
 </dict>
 </plist>

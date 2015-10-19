@@ -264,5 +264,45 @@
 	<string>Storage System Error</string>
 	<key>NotificationTitleInfo</key>
 	<string>Storage System Info</string>
+	<key>settings_alert_notifications</key>
+	<string>Notifications</string>
+	<key>settings_alert_notifications_detail</key>
+	<string>Trigger alerts when storage system comes new warnings</string>
+	<key>settings_alert_email_notifications</key>
+	<string>Email Notifications</string>
+	<key>settings_alert_email_notifications_detail</key>
+	<string>Notification will be sent to nutc.imac@gmail.com</string>
+	<key>settings_auto_delete</key>
+	<string>Auto Delete</string>
+	<key>settings_auto_delete_detail</key>
+	<string>Delete alerts automatically when alerts were resolved</string>
+	<key>settings_time_period</key>
+	<string>Time Period</string>
+	<key>settings_time_period_detail</key>
+	<string>Set a time frame to monitor and receive alerts</string>
+	<key>settings_alert_triggers</key>
+	<string>Alert Triggers</string>
+	<key>settings_alert_triggers_detail</key>
+	<string>Setup different alert mechanisms based on various scenarios</string>
+	<key>alert_triggers_monitor</key>
+	<string>Monitor</string>
+	<key>alert_triggers_usage</key>
+	<string>Usage</string>
+	<key>alert_triggers_osd_warning_detail</key>
+	<string>Trigger alert when %1$s OSD is in abnormal status</string>
+	<key>alert_triggers_osd_error_detail</key>
+	<string>Trigger alert when %1$s OSD is in severely status</string>
+	<key>alert_triggers_mon_warning_detail</key>
+	<string>Trigger alert when %1$s monitor is in abnormal status</string>
+	<key>alert_triggers_mon_error_detail</key>
+	<string>Trigger alert when %1$s monitor is in severely status</string>
+	<key>alert_triggers_pg_warning_detail</key>
+	<string>Trigger alert when %1$s PGs are modified by Ceph</string>
+	<key>alert_triggers_pg_error_detail</key>
+	<string>Trigger alert when %1$s PGs stuck in abnormal states</string>
+	<key>alert_triggers_usage_warning_detail</key>
+	<string>Trigger alert when usage exceeds %1$s</string>
+	<key>alert_triggers_usage_error_detail</key>
+	<string>Trigger alert when usage exceeds %1$s</string>
 </dict>
 </plist>
