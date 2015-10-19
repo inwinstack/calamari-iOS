@@ -158,7 +158,7 @@
                 
             case 2:
                 cell.mainLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"settings_about_version"];
-                cell.rightDetailLabel.text = [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"];
+                cell.rightDetailLabel.text = @"0.12.1";
                 cell.checkBoxButton.hidden = YES;
                 break;
         }
