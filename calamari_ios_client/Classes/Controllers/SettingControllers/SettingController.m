@@ -218,6 +218,16 @@
         } else if (indexPath.row == 3) {
 //            self.timePeriodController = [[TimePeriodController alloc] init];
 //            [self.navigationController pushViewController:self.timePeriodController animated:YES];
+        } else {
+            UIButton *tempCheckBoxButton = [(SelectionViewCell*)[tableView cellForRowAtIndexPath:indexPath] checkBoxButton];
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]] isEqualToString:@"YES"]) {
+                [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]];
+                tempCheckBoxButton.layer.borderWidth = 2.0;
+            } else {
+                [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]];
+                tempCheckBoxButton.layer.borderWidth = 0.0;
+            }
+            [tableView reloadData];
         }
     }
 }
