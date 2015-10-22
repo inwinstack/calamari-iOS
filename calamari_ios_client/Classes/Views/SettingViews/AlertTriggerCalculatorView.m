@@ -173,7 +173,7 @@
                 return;
             }
             NSRange tempSpaceRange = [self.infoLabel.text rangeOfString:@" "];
-            NSString *tempLastString = [self.infoLabel.text substringFromIndex:tempSpaceRange.location + tempSpaceRange.length + 2];
+            NSString *tempLastString = ([[self.infoLabel.text substringWithRange:NSMakeRange(tempSpaceRange.location + tempSpaceRange.length + 1, 1)] isEqualToString:@"B"]) ? [self.infoLabel.text substringFromIndex:tempSpaceRange.location + tempSpaceRange.length + 2] : [self.infoLabel.text substringFromIndex:tempSpaceRange.location + tempSpaceRange.length];
             double newValue = self.currentCount * [tempString doubleValue] / 100.0;
             self.infoLabel.text = [NSString stringWithFormat:@"%@%@", [self caculateByte:newValue], tempLastString];
         }
@@ -237,7 +237,17 @@
     NSRange tempRange = [self.titleLabel.text rangeOfString:@" "];
     NSString *tempTitle = [self.titleLabel.text substringToIndex:tempRange.location];
     if ([tempTitle isEqualToString:@"PG"] || [tempTitle isEqualToString:@"Usage"]) {
-        self.infoLabel.text = self.originalValue;
+        if ([tempTitle isEqualToString:@"PG"]) {
+            
+            NSRange tempSpaceRange = [self.infoLabel.text rangeOfString:@" "];
+            NSString *tempLastString = [self.infoLabel.text substringFromIndex:tempSpaceRange.location + tempSpaceRange.length];
+            self.infoLabel.text = [NSString stringWithFormat:@"0 %@", tempLastString];
+        } else if ([tempTitle isEqualToString:@"Usage"]) {
+            
+            NSRange tempSpaceRange = [self.infoLabel.text rangeOfString:@" "];
+            NSString *tempLastString = ([[self.infoLabel.text substringWithRange:NSMakeRange(tempSpaceRange.location + tempSpaceRange.length + 1, 1)] isEqualToString:@"B"]) ? [self.infoLabel.text substringFromIndex:tempSpaceRange.location + tempSpaceRange.length + 2] : [self.infoLabel.text substringFromIndex:tempSpaceRange.location + tempSpaceRange.length];
+            self.infoLabel.text = [NSString stringWithFormat:@"0.0 %@", tempLastString];
+        }
     }
 }
 

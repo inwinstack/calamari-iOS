@@ -99,28 +99,44 @@
     [self.fromLabel removeFromSuperview];
     [self.designLabel removeFromSuperview];
     [self.inWinLabelImageView removeFromSuperview];
-    if ([[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_developer"] isEqualToString:@"Developed by inWinStack"]) {
-        self.inWinLabelImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 125, CGRectGetMaxY(self.versionLabel.frame), 144, 20)];
+    if ([[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_developer"] isEqualToString:@"Developed by"]) {
+        self.inWinLabelImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 30, CGRectGetMaxY(self.versionLabel.frame), 144, 20)];
+        self.inWinLabelImageView.image = [UIImage imageNamed:@"inWinLabelImage"];
+        [self addSubview:self.inWinLabelImageView];
+        
+        self.fromLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.inWinLabelImageView.frame) - 18, CGRectGetMidY(self.inWinLabelImageView.frame) - 7.5, 0, 0)];
+        self.fromLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_developer"];
+        self.fromLabel.textAlignment = NSTextAlignmentRight;
+        [self.fromLabel sizeToFit];
+        
+        float tempFromLabelWidth = CGRectGetWidth(self.fromLabel.frame);
+        self.fromLabel.frame = CGRectMake(CGRectGetMinX(self.inWinLabelImageView.frame) - tempFromLabelWidth - 5, self.fromLabel.frame.origin.y, self.fromLabel.frame.size.width, self.fromLabel.frame.size.height);
+        [self setDefaultLabel:self.fromLabel];
+        
+        self.designLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.inWinLabelImageView.frame) + 3, CGRectGetMidY(self.inWinLabelImageView.frame) - 7.5, 0, 0)];
+        self.designLabel.text = @"";
+        [self.designLabel sizeToFit];
+        self.designLabel.textAlignment = NSTextAlignmentLeft;
+        [self setDefaultLabel:self.designLabel];
     } else {
         self.inWinLabelImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 100, CGRectGetMaxY(self.versionLabel.frame), 144, 20)];
+        self.inWinLabelImageView.image = [UIImage imageNamed:@"inWinLabelImage"];
+        [self addSubview:self.inWinLabelImageView];
         
+        self.fromLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.inWinLabelImageView.frame) - 18, CGRectGetMidY(self.inWinLabelImageView.frame) - 7.5, 0, 0)];
+        self.fromLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_from"];
+        self.fromLabel.textAlignment = NSTextAlignmentRight;
+        [self.fromLabel sizeToFit];
+        float tempFromLabelWidth = CGRectGetWidth(self.fromLabel.frame);
+        self.fromLabel.frame = CGRectMake(CGRectGetMinX(self.inWinLabelImageView.frame) - tempFromLabelWidth - 5, self.fromLabel.frame.origin.y, self.fromLabel.frame.size.width, self.fromLabel.frame.size.height);
+        [self setDefaultLabel:self.fromLabel];
+        
+        self.designLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.inWinLabelImageView.frame) + 3, CGRectGetMidY(self.inWinLabelImageView.frame) - 7.5, 0, 0)];
+        self.designLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_developer"];
+        [self.designLabel sizeToFit];
+        self.designLabel.textAlignment = NSTextAlignmentLeft;
+        [self setDefaultLabel:self.designLabel];
     }
-    self.inWinLabelImageView.image = [UIImage imageNamed:@"inWinLabelImage"];
-    [self addSubview:self.inWinLabelImageView];
-    
-    self.fromLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.inWinLabelImageView.frame) - 18, CGRectGetMidY(self.inWinLabelImageView.frame) - 7.5, 0, 0)];
-    self.fromLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_from"];
-    self.fromLabel.textAlignment = NSTextAlignmentRight;
-    [self.fromLabel sizeToFit];
-    float tempFromLabelWidth = CGRectGetWidth(self.fromLabel.frame);
-    self.fromLabel.frame = CGRectMake(CGRectGetMinX(self.inWinLabelImageView.frame) - tempFromLabelWidth - 5, self.fromLabel.frame.origin.y, self.fromLabel.frame.size.width, self.fromLabel.frame.size.height);
-    [self setDefaultLabel:self.fromLabel];
-    
-    self.designLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.inWinLabelImageView.frame) + 3, CGRectGetMidY(self.inWinLabelImageView.frame) - 7.5, 0, 0)];
-    self.designLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_developer"];
-    [self.designLabel sizeToFit];
-    self.designLabel.textAlignment = NSTextAlignmentLeft;
-    [self setDefaultLabel:self.designLabel];
 }
 
 - (void) setDefaultField:(UITextField*)field {

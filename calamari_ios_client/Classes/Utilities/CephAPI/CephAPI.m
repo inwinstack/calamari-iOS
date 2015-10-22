@@ -375,8 +375,6 @@
             if (readError) {
                 getError(readError);
             } else {
-                NSLog(@"%@", [URLMaker getUsageStatusDataWithIp:ip Port:port ClusterID:clusterID]);
-                NSLog(@"%@", receiveObject);
                 [self setDataWithDataArray:receiveObject[@"datapoints"] target:[ClusterData shareInstance].clusterDetailData key:clusterID kind:@"usage"];
                 completion(true);
             }
