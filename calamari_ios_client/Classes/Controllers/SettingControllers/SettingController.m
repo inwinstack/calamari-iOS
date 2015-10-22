@@ -18,6 +18,7 @@
 #import "AlertSelectionViewCell.h"
 #import "UIColor+Reader.h"
 #import "AlertTriggersController.h"
+#import "TimePeriodController.h"
 
 @interface SettingController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, AlertSectionDelegate>
 
@@ -26,6 +27,7 @@
 @property (nonatomic, strong) AlertSelectionView *alertSelectionView;
 @property (nonatomic, strong) NSString *tempDateFormat;
 @property (nonatomic, strong) AlertTriggersController *alertTriggersController;
+@property (nonatomic, strong) TimePeriodController *timePeriodController;
 
 @end
 
@@ -142,8 +144,9 @@
                 cell.rightDetailLabel.frame = (indexPath.row > 2) ? CGRectMake(10, CGRectGetMaxY(cell.mainLabel.frame), CGRectGetWidth(cell.districtLineView.frame) - 20, 37) : CGRectMake(10, CGRectGetMaxY(cell.mainLabel.frame), CGRectGetWidth(cell.districtLineView.frame) - 50, 37);
                 cell.rightDetailLabel.font = [UIFont systemFontOfSize:[UIView noteSize]];
                 cell.rightDetailLabel.textAlignment = NSTextAlignmentLeft;
-                cell.mainLabel.text = [SettingData shareSettingData].alertTitleArray[indexPath.row];
-                cell.rightDetailLabel.text = [SettingData shareSettingData].alertBodyArray[indexPath.row];
+                
+                cell.mainLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:[SettingData shareSettingData].alertTitleArray[indexPath.row]];
+                cell.rightDetailLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:[SettingData shareSettingData].alertBodyArray[indexPath.row]];
                 cell.checkBoxButton.hidden = (indexPath.row > 2);
                 cell.checkBoxButton.frame = CGRectMake(CGRectGetWidth(cell.districtLineView.frame) - 30, 27, 20, 20);
                 cell.checkBoxButton.tag = indexPath.row;
@@ -155,7 +158,7 @@
                 
             case 2:
                 cell.mainLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"settings_about_version"];
-                cell.rightDetailLabel.text = @"0.12.0";
+                cell.rightDetailLabel.text = @"0.12.1";
                 cell.checkBoxButton.hidden = YES;
                 break;
         }
@@ -212,6 +215,19 @@
         if (indexPath.row == 4) {
             self.alertTriggersController = [[AlertTriggersController alloc] init];
             [self.navigationController pushViewController:self.alertTriggersController animated:YES];
+        } else if (indexPath.row == 3) {
+//            self.timePeriodController = [[TimePeriodController alloc] init];
+//            [self.navigationController pushViewController:self.timePeriodController animated:YES];
+        } else {
+            UIButton *tempCheckBoxButton = [(SelectionViewCell*)[tableView cellForRowAtIndexPath:indexPath] checkBoxButton];
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]] isEqualToString:@"YES"]) {
+                [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]];
+                tempCheckBoxButton.layer.borderWidth = 2.0;
+            } else {
+                [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]];
+                tempCheckBoxButton.layer.borderWidth = 0.0;
+            }
+            [tableView reloadData];
         }
     }
 }

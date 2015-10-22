@@ -16,5 +16,9 @@
 @property (nonatomic, strong) UILabel *numberLabel;
 @property (nonatomic, strong) UILabel *unitLabel;
 @property (nonatomic, strong) UILabel *infoLabel;
+@property (nonatomic, strong) NSString *originalValue;
+@property (nonatomic) double maxValue;
+@property (nonatomic) double minValue;
+@property (nonatomic) double currentCount;
 
 @end

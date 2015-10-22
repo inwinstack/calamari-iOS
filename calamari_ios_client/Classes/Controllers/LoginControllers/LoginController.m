@@ -183,12 +183,17 @@
                                                                                                         [UserData shareInstance].accountString = self.loginView.accountField.text;
                                                                                                         [UserData shareInstance].passwordString = self.loginView.passwordField.text;
                                                                                                         [SVProgressHUD dismiss];
-
+                                                                                                        if (![[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_Notifications", self.loginView.hostIpField.text]]) {
+                                                                                                            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:[NSString stringWithFormat:@"%@_Notifications", self.loginView.hostIpField.text]];
+                                                                                                            [self setDefaultTrigger];
+                                                                                                            
+                                                                                                        }
                                                                                                         weakself.loginView.userInteractionEnabled = YES;
                                                                                                         weakself.navigationController.navigationBarHidden = NO;
                                                                                                         weakself.clusterHealthController = [[ClusterHealthController alloc] init];
                                                                                                         [weakself.navigationController pushViewController:weakself.clusterHealthController animated:YES];
                                                                                                         [[NotificationData shareInstance] restartTimerWithTimeInterval:10];
+                                                                                                        
                                                                                                     }
                                                                                                 } error:^(id error) {
                                                                                                     [SVProgressHUD dismiss];
@@ -322,6 +327,19 @@
 
 - (void) didConfirm {
     [self.errorView removeFromSuperview];
+}
+
+- (void) setDefaultTrigger {
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:[NSString stringWithFormat:@"%@_OSDTriggerWarn", self.loginView.hostIpField.text]];
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:[NSString stringWithFormat:@"%@_OSDTriggerError", self.loginView.hostIpField.text]];
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:[NSString stringWithFormat:@"%@_MONTriggerWarn", self.loginView.hostIpField.text]];
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:[NSString stringWithFormat:@"%@_MONTriggerError", self.loginView.hostIpField.text]];
+    [[NSUserDefaults standardUserDefaults] setObject:@"20" forKey:[NSString stringWithFormat:@"%@_PGTriggerWarn", self.loginView.hostIpField.text]];
+    [[NSUserDefaults standardUserDefaults] setObject:@"20" forKey:[NSString stringWithFormat:@"%@_PGTriggerError", self.loginView.hostIpField.text]];
+    [[NSUserDefaults standardUserDefaults] setObject:@"70" forKey:[NSString stringWithFormat:@"%@_UsageTriggerWarn", self.loginView.hostIpField.text]];
+    [[NSUserDefaults standardUserDefaults] setObject:@"85" forKey:[NSString stringWithFormat:@"%@_UsageTriggerError", self.loginView.hostIpField.text]];
+    
+    [[SettingData shareSettingData] setTriggerArray];
 }
 
 - (void)didReceiveMemoryWarning {

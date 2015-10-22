@@ -83,20 +83,20 @@
             [self.allButton setTitleColor:[UIColor oceanNavigationBarColor] forState:UIControlStateNormal];
             self.warnImageView.image = [UIImage imageNamed:@"OSDWarnImage"];
             self.errorImageView.image = [UIImage imageNamed:@"OSDErrorImage"];
-            self.currentUnderLineView.frame = CGRectMake(0, CGRectGetHeight(self.frame) - 3, CGRectGetWidth(self.frame) / 3.0, 3);
+            self.currentUnderLineView.frame = CGRectMake(0, CGRectGetHeight(self.frame) - 7, CGRectGetWidth(self.frame) / 3.0, 7);
             break;
         } case 1: {
             [self.allButton setTitleColor:[UIColor unitTextDefalutGrayColor] forState:UIControlStateNormal];
             self.warnImageView.image = [UIImage imageNamed:@"OSDWarnHighlightImage"];
             self.errorImageView.image = [UIImage imageNamed:@"OSDErrorImage"];
-            self.currentUnderLineView.frame = CGRectMake(CGRectGetWidth(self.frame) / 3.0, CGRectGetHeight(self.frame) - 3, CGRectGetWidth(self.frame) / 3.0, 3);
+            self.currentUnderLineView.frame = CGRectMake(CGRectGetWidth(self.frame) / 3.0, CGRectGetHeight(self.frame) - 7, CGRectGetWidth(self.frame) / 3.0, 7);
 
             break;
         } case 2: {
             [self.allButton setTitleColor:[UIColor unitTextDefalutGrayColor] forState:UIControlStateNormal];
             self.warnImageView.image = [UIImage imageNamed:@"OSDWarnImage"];
             self.errorImageView.image = [UIImage imageNamed:@"OSDErrorHighlightImage"];
-            self.currentUnderLineView.frame = CGRectMake(CGRectGetWidth(self.frame) * 2 / 3.0, CGRectGetHeight(self.frame) - 3, CGRectGetWidth(self.frame) / 3.0, 3);
+            self.currentUnderLineView.frame = CGRectMake(CGRectGetWidth(self.frame) * 2 / 3.0, CGRectGetHeight(self.frame) - 7, CGRectGetWidth(self.frame) / 3.0, 7);
 
             break;
         }

@@ -21,7 +21,7 @@
 	<key>login_sign_in</key>
 	<string>ログイン</string>
 	<key>login_version</key>
-	<string>Ceph モニター版 0.12.0</string>
+	<string>Ceph モニター版 0.12.1</string>
 	<key>settings_profile_language</key>
 	<string>言語</string>
 	<key>settings_dialog_save</key>
@@ -264,5 +264,45 @@
 	<string>ストレージシステムエラー</string>
 	<key>NotificationTitleInfo</key>
 	<string>ストレージシステム情報</string>
+	<key>settings_alert_notifications</key>
+	<string>通知</string>
+	<key>settings_alert_notifications_detail</key>
+	<string>ストレーシステムが新しい警告がある場合にトリガが警告します</string>
+	<key>settings_alert_email_notifications</key>
+	<string>電子メール通知</string>
+	<key>settings_alert_email_notifications_detail</key>
+	<string>通知はに送信されますnutc.imac@gmail.com</string>
+	<key>settings_auto_delete</key>
+	<string>自動削除</string>
+	<key>settings_auto_delete_detail</key>
+	<string>アラートが解決されたとき自動的にアラートを削除します</string>
+	<key>settings_time_period</key>
+	<string>期間</string>
+	<key>settings_time_period_detail</key>
+	<string>監視しアラートを受信する時間枠を設定します</string>
+	<key>settings_alert_triggers</key>
+	<string>アラート・トリガー</string>
+	<key>settings_alert_triggers_detail</key>
+	<string>異なるシナリオに従ってセットアップ異なるアラート</string>
+	<key>alert_triggers_monitor</key>
+	<string>モニター</string>
+	<key>alert_triggers_usage</key>
+	<string>使い</string>
+	<key>alert_triggers_osd_warning_detail</key>
+	<string>%1$s OSD異常状態にあるときにトリガが警告します</string>
+	<key>alert_triggers_osd_error_detail</key>
+	<string>%1$s OSD重度の状態にあるときにトリガが警告します</string>
+	<key>alert_triggers_mon_warning_detail</key>
+	<string>%1$s モニター異常状態にあるときにトリガが警告します</string>
+	<key>alert_triggers_mon_error_detail</key>
+	<string>%1$s モニター重度の状態にあるときにトリガが警告します</string>
+	<key>alert_triggers_pg_warning_detail</key>
+	<string>Cephによって変更にあるとき %1$s PGs にトリガが警告します</string>
+	<key>alert_triggers_pg_error_detail</key>
+	<string>%1$s PGs 異常状態にあるときにトリガが警告します</string>
+	<key>alert_triggers_usage_warning_detail</key>
+	<string>使用率が %1$s を超えた場合に警報を発します</string>
+	<key>alert_triggers_usage_error_detail</key>
+	<string>使用率が %1$s を超えた場合に警報を発します</string>
 </dict>
 </plist>

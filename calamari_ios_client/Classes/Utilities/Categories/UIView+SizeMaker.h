@@ -16,6 +16,7 @@
 + (float) subHeadSize;
 + (float) subHeadIconSize;
 + (float) bodySize;
++ (float) largeButtonSize;
 + (float) iconBodySize;
 + (float) noteSize;
 + (float) titleIconSize;

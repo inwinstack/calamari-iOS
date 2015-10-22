@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSArray *notificationUsageContentDetailArray;
 @property (nonatomic, strong) NSMutableArray *notificationWarnCountArray;
 @property (nonatomic, strong) NSMutableArray *notificationErrorCountArray;
+@property (nonatomic, strong) NSArray *triggerKeyArray;
 @property (nonatomic) BOOL canNotification;
 
 @end
@@ -46,7 +47,7 @@
         self.notificationArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_NotificationAlerts", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]]];
         self.warnSec = @"10";
         self.warnCodeDic = @{@"OSD" : @"01", @"Monitor" : @"02", @"PG" : @"03", @"Usage" : @"04", @"Info" : @"4", @"Warning" : @"3", @"Error" : @"2", @"Critical" : @"1"};
-        
+        self.triggerKeyArray = @[@"OSD", @"MON", @"PG", @"Usage"];
         self.keyArray = @[@"osd", @"mon", @"pg", @"space"];
         self.notificationContentArray = @[@[@"OSD is in abnormal status!", @"OSD comes new abnormal status!", @"OSD comes new abnormal status!", @"OSD has been repaired!", @"OSD is in severe status!", @"OSD comes new severe status!", @"OSD comes new severe status!", @"OSD has been repaired!"], @[@"Monitor is in abnormal status!", @"Monitor comes new abnormal status!", @"Monitor comes new abnormal status!", @"Monitor has been repaired!", @"Monitor is in severe status!", @"Monitor comes new severe status!", @"Monitor comes new severe status!", @"Monitor has been repaired!"], @[@"Some PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"PGs have been repaired!", @"Some PGs stuck in abnormal states!", @"Some other PGs stuck in abnormal states!", @"Some other PGs stuck in abnormal states!", @"PGs have been repaired!"]];
         self.notificationUsageContentArray = @[@"Disk usage exceeds 70%!Please expand the storage capacity!", @"Not enough free space! Please expand the storage capacity immediately!", @"Storage capacity has been expanded!"];
@@ -156,12 +157,16 @@
             dataDic = [ClusterData shareInstance].clusterDetailData[getKey];
             double usagePercent = [dataDic[@"space"][@"used_bytes"] doubleValue] / [dataDic[@"space"][@"capacity_bytes"] doubleValue];
             NSString *usagePercentString = [NSString stringWithFormat:@"%.f", usagePercent * 100.0];
-            if (usagePercent >= 0.85) {
+
+            float tempUsageErrorTrigger = [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_UsageTriggerError", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] floatValue] / 100.0;
+            float tempUsageWarnTrigger = [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_UsageTriggerWarn", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] floatValue] / 100.0;
+            
+            if (usagePercent >= tempUsageErrorTrigger) {
                 [self makeNotificationStringWithUsageType:UsageErrorType];
                 [self addToNotificationArrayWithUsageType:UsageErrorType usagePercent:usagePercentString];
                 self.warnPreviousArray[loopCount] = @"0";
                 self.errorPreviousArray[loopCount] = @"1";
-            } else if (usagePercent >= 0.7) {
+            } else if (usagePercent >= tempUsageWarnTrigger) {
                 [self makeNotificationStringWithUsageType:UsageWarnType];
                 [self addToNotificationArrayWithUsageType:UsageWarnType usagePercent:usagePercentString];
                 self.warnPreviousArray[loopCount] = @"1";
@@ -243,7 +248,8 @@
 - (void) findPgWithTotal:(int)total original:(int)original previous:(int)previous count:(int)count isWarn:(BOOL)isWarn notificationType:(NotificationType)notificationType {
     float totalFloat = (float)total;
     float countFloat = (float)count;
-    float totalPercent = totalFloat * 0.2;
+    float calculatePercent = (!isWarn) ? [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_PGTriggerError", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] floatValue] / 100.0 : [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_PGTriggerWarn", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] floatValue] / 100.0;
+    float totalPercent = totalFloat * calculatePercent;
     float pgPercent = countFloat / totalFloat * 100.0;
     NSString *pgWarnCountString = [NSString stringWithFormat:@"%.f%% ( %d / %d )", pgPercent, count, total];
     if ((totalPercent > count) && (original > count) && (previous > count)) {
@@ -263,9 +269,25 @@
 
 - (void) findWrongOfServerActionWithOriginal:(int)original previous:(int)previous count:(int)count isWarn:(BOOL)isWarn notificationType:(NotificationType)notificationType pgCountString:(NSString*)pgCountString {
     NSString *currentHostIp = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"];
+    NSString *triggerValue = (isWarn) ? [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@TriggerWarn",currentHostIp, self.triggerKeyArray[notificationType]]] : [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@TriggerError",currentHostIp, self.triggerKeyArray[notificationType]]];
+    
+    int triggerMinValue = (notificationType == PGNotificationType) ? 0 : [triggerValue intValue];
+    
     if (count > 0) {
+        if ((count < original) && (count > previous)) {
+            if (isWarn) {
+                [self upDateWarnDataWithType:notificationType conditionType:ConditionErrorDoneThenError Count:count];
+            } else {
+                
+                [self upDateErrorDataWithType:notificationType conditionType:ConditionErrorDoneThenError Count:count];
+
+            }
+        }
+    }
+    
+    if (count >= triggerMinValue) {
         self.warnSec = @"120";
-        if ((original == 0) && (count > original) && (count > previous)) {
+        if ((original <= triggerMinValue) && (count > original) && (count > previous)) {
             if (isWarn) {
                 [self upDateWarnDataWithType:notificationType conditionType:ConditionNewWarn Count:count];
                 [self makeNotificationStringWithConditionType:ConditionNewWarn notificationType:notificationType];
@@ -275,7 +297,7 @@
                 [self makeNotificationStringWithConditionType:ConditionNewError notificationType:notificationType];
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionNewError total:count pgCountString:pgCountString];
             }
-        } else if ((original > 0) && (count > original) && (count > previous)) {
+        } else if ((original > triggerMinValue) && (count > original) && (count > previous)) {
             if (isWarn) {
                 [self upDateWarnDataWithType:notificationType conditionType:ConditionWarnMoreThanOriginal Count:count];
                 [self makeNotificationStringWithConditionType:ConditionWarnMoreThanOriginal notificationType:notificationType];
@@ -309,16 +331,37 @@
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionErrorDoneThenError total:count pgCountString:pgCountString];
             }
         }
-    } else if (count == 0) {
+    } else if (count <= triggerMinValue) {
         if ((count < original) && (count < previous)) {
             if (isWarn) {
-                [self upDateWarnDataWithType:notificationType conditionType:ConditionWarnDone Count:count];
-                [self makeNotificationStringWithConditionType:ConditionWarnDone notificationType:notificationType];
-                [self addToNotificationArrayWithType:notificationType conditionType:ConditionWarnDone total:previous pgCountString:pgCountString];
+                if (notificationType == PGNotificationType) {
+                    [self upDateWarnDataWithType:notificationType conditionType:ConditionWarnDone Count:count];
+                    [self makeNotificationStringWithConditionType:ConditionWarnDone notificationType:notificationType];
+                    [self addToNotificationArrayWithType:notificationType conditionType:ConditionWarnDone total:previous pgCountString:pgCountString];
+                } else {
+                    if (count == 0) {
+                        [self upDateWarnDataWithType:notificationType conditionType:ConditionWarnDone Count:count];
+                        [self makeNotificationStringWithConditionType:ConditionWarnDone notificationType:notificationType];
+                        [self addToNotificationArrayWithType:notificationType conditionType:ConditionWarnDone total:previous pgCountString:pgCountString];
+                    } else {
+                        self.warnSec = @"120";
+                    }
+                }
             } else {
-                [self upDateErrorDataWithType:notificationType conditionType:ConditionErrorDone Count:count];
-                [self makeNotificationStringWithConditionType:ConditionErrorDone notificationType:notificationType];
-                [self addToNotificationArrayWithType:notificationType conditionType:ConditionErrorDone total:previous pgCountString:pgCountString];
+                if (notificationType == PGNotificationType) {
+                    [self upDateErrorDataWithType:notificationType conditionType:ConditionErrorDone Count:count];
+                    [self makeNotificationStringWithConditionType:ConditionErrorDone notificationType:notificationType];
+                    [self addToNotificationArrayWithType:notificationType conditionType:ConditionErrorDone total:previous pgCountString:pgCountString];
+                } else {
+                    if (count == 0) {
+                        [self upDateErrorDataWithType:notificationType conditionType:ConditionErrorDone Count:count];
+                        [self makeNotificationStringWithConditionType:ConditionErrorDone notificationType:notificationType];
+                        [self addToNotificationArrayWithType:notificationType conditionType:ConditionErrorDone total:previous pgCountString:pgCountString];
+                    } else {
+                        self.warnSec = @"120";
+                    }
+                }
+                
             }
         }
     }

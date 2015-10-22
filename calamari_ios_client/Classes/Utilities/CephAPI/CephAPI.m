@@ -61,6 +61,7 @@
                 error(readError);
             } else {
                 if ([receiveObject isEqual:@{}]) {
+                    
                     NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
                     for (NSHTTPCookie *cookie in [cookieJar cookies]) {
                         if ([cookie.name isEqualToString:@"XSRF-TOKEN"]) {
@@ -77,6 +78,7 @@
 }
 
 - (void) startGetClusterListWithIP:(NSString *)ip Port:(NSString *)port completion:(void (^)(BOOL finished))completion error:(void (^)(id error))error {
+
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[URLMaker getClusterListURLWithIP:ip Port:port]] cachePolicy:0 timeoutInterval:6];
     [request setHTTPMethod:@"GET"];
     [request setValue:[Cookies shareInstance].sessionID forHTTPHeaderField:@"X-XSRF-TOKEN"];
@@ -100,6 +102,7 @@
 }
 
 - (void) startGetClusterDetailWithIP:(NSString *)ip Port:(NSString *)port ClusterID:(NSString*)clusterID completion:(void (^)(BOOL finished))completion error:(void (^)(id error))error {
+
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[URLMaker getClusterDetailWithIP:ip Port:port ClusterID:clusterID]] cachePolicy:0 timeoutInterval:6];
     [request setHTTPMethod:@"GET"];
     [request setValue:[Cookies shareInstance].sessionID forHTTPHeaderField:@"X-XSRF-TOKEN"];
@@ -121,6 +124,7 @@
 }
 
 - (void) startGetClusterDataWithIP:(NSString *)ip Port:(NSString *)port Version:(NSString*)version ClusterID:(NSString*)clusterID Kind:(NSString*)kind completion:(void (^)(BOOL finished))completion error:(void (^)(id error))error {
+
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[URLMaker getClusterDataWithIP:ip Port:port Version:version ClusterID:clusterID Kind:kind]] cachePolicy:0 timeoutInterval:6];
     [request setHTTPMethod:@"GET"];
     [request setValue:[Cookies shareInstance].sessionID forHTTPHeaderField:@"X-XSRF-TOKEN"];
@@ -371,6 +375,8 @@
             if (readError) {
                 getError(readError);
             } else {
+                NSLog(@"%@", [URLMaker getUsageStatusDataWithIp:ip Port:port ClusterID:clusterID]);
+                NSLog(@"%@", receiveObject);
                 [self setDataWithDataArray:receiveObject[@"datapoints"] target:[ClusterData shareInstance].clusterDetailData key:clusterID kind:@"usage"];
                 completion(true);
             }

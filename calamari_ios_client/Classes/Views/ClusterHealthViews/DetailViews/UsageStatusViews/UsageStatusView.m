@@ -73,7 +73,7 @@
         
         self.xLayer = [CAShapeLayer layer];
         self.xLayer.backgroundColor = [UIColor normalBlackColor].CGColor;
-        self.xLayer.frame = CGRectMake(CGRectGetWidth(self.availableLabel.frame) / 3, CGRectGetMidY(self.frame) + 10 * height / 255, CGRectGetWidth(self.frame) - CGRectGetWidth(self.availableLabel.frame) * 2 / 3, 1);
+        self.xLayer.frame = CGRectMake(CGRectGetWidth(self.availableLabel.frame) / 3 + 5 * height / 255, CGRectGetMidY(self.frame) + 10 * height / 255, CGRectGetWidth(self.frame) - CGRectGetWidth(self.availableLabel.frame) * 2 / 3, 1);
         [self.layer addSublayer:self.xLayer];
         
         self.yLayer = [CAShapeLayer layer];

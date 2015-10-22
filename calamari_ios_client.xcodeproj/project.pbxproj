@@ -102,10 +102,14 @@
 		159169901BBD89B900846CB7 /* Japanese.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1591698F1BBD89B900846CB7 /* Japanese.plist */; settings = {ASSET_TAGS = (); }; };
 		159169931BBD8F7500846CB7 /* LocalizationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 159169921BBD8F7500846CB7 /* LocalizationManager.m */; settings = {ASSET_TAGS = (); }; };
 		159E4A3B1BA66D7200EFC3D2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 159E4A3A1BA66D7200EFC3D2 /* AVFoundation.framework */; };
+		15C476211BD3BBC300D9826B /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 15C476201BD3BBC300D9826B /* Launch Screen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		15CACE0B1BA5276300DFD26B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE0A1BA5276300DFD26B /* main.m */; };
 		15CACE0E1BA5276300DFD26B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE0D1BA5276300DFD26B /* AppDelegate.m */; };
 		15CACE161BA5276300DFD26B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15CACE151BA5276300DFD26B /* Images.xcassets */; };
 		15CACE251BA5276300DFD26B /* calamari_ios_clientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CACE241BA5276300DFD26B /* calamari_ios_clientTests.m */; };
+		15CFFA361BCCC37A008CFBB7 /* TimePeriodController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CFFA351BCCC37A008CFBB7 /* TimePeriodController.m */; settings = {ASSET_TAGS = (); }; };
+		15CFFA391BCCC43F008CFBB7 /* TimePeriodView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CFFA381BCCC43F008CFBB7 /* TimePeriodView.m */; settings = {ASSET_TAGS = (); }; };
+		15CFFA3C1BCCDE82008CFBB7 /* ClockSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CFFA3B1BCCDE82008CFBB7 /* ClockSettingView.m */; settings = {ASSET_TAGS = (); }; };
 		4F2D199058C3A0107D7AE603 /* libPods-calamari_ios_client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D56DBF74FAD2FCBB66FDFC /* libPods-calamari_ios_client.a */; };
 /* End PBXBuildFile section */
 
@@ -306,6 +310,7 @@
 		159169911BBD8F7500846CB7 /* LocalizationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizationManager.h; sourceTree = "<group>"; };
 		159169921BBD8F7500846CB7 /* LocalizationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizationManager.m; sourceTree = "<group>"; };
 		159E4A3A1BA66D7200EFC3D2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		15C476201BD3BBC300D9826B /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		15CACE051BA5276300DFD26B /* calamari_ios_client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calamari_ios_client.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15CACE091BA5276300DFD26B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		15CACE0A1BA5276300DFD26B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -315,6 +320,12 @@
 		15CACE1E1BA5276300DFD26B /* calamari_ios_clientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = calamari_ios_clientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15CACE231BA5276300DFD26B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		15CACE241BA5276300DFD26B /* calamari_ios_clientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = calamari_ios_clientTests.m; sourceTree = "<group>"; };
+		15CFFA341BCCC37A008CFBB7 /* TimePeriodController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimePeriodController.h; sourceTree = "<group>"; };
+		15CFFA351BCCC37A008CFBB7 /* TimePeriodController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimePeriodController.m; sourceTree = "<group>"; };
+		15CFFA371BCCC43F008CFBB7 /* TimePeriodView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimePeriodView.h; sourceTree = "<group>"; };
+		15CFFA381BCCC43F008CFBB7 /* TimePeriodView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimePeriodView.m; sourceTree = "<group>"; };
+		15CFFA3A1BCCDE82008CFBB7 /* ClockSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClockSettingView.h; sourceTree = "<group>"; };
+		15CFFA3B1BCCDE82008CFBB7 /* ClockSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockSettingView.m; sourceTree = "<group>"; };
 		A765B40473C3A8E0E63212ED /* Pods-calamari_ios_client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calamari_ios_client.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calamari_ios_client/Pods-calamari_ios_client.debug.xcconfig"; sourceTree = "<group>"; };
 		D6D56DBF74FAD2FCBB66FDFC /* libPods-calamari_ios_client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-calamari_ios_client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD9E3BA2309249C5C33E062 /* Pods-calamari_ios_client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calamari_ios_client.release.xcconfig"; path = "Pods/Target Support Files/Pods-calamari_ios_client/Pods-calamari_ios_client.release.xcconfig"; sourceTree = "<group>"; };
@@ -438,6 +449,8 @@
 				15550D741BB0F06100471D62 /* SettingController.m */,
 				1559785B1BC57B750059C43F /* AlertTriggersController.h */,
 				1559785C1BC57B750059C43F /* AlertTriggersController.m */,
+				15CFFA341BCCC37A008CFBB7 /* TimePeriodController.h */,
+				15CFFA351BCCC37A008CFBB7 /* TimePeriodController.m */,
 			);
 			path = SettingControllers;
 			sourceTree = "<group>";
@@ -754,6 +767,10 @@
 				1559785F1BC57C220059C43F /* AlertTriggersView.m */,
 				155978611BC58AB70059C43F /* AlertTriggerCalculatorView.h */,
 				155978621BC58AB70059C43F /* AlertTriggerCalculatorView.m */,
+				15CFFA371BCCC43F008CFBB7 /* TimePeriodView.h */,
+				15CFFA381BCCC43F008CFBB7 /* TimePeriodView.m */,
+				15CFFA3A1BCCDE82008CFBB7 /* ClockSettingView.h */,
+				15CFFA3B1BCCDE82008CFBB7 /* ClockSettingView.m */,
 			);
 			path = SettingViews;
 			sourceTree = "<group>";
@@ -796,6 +813,7 @@
 				15CACE0C1BA5276300DFD26B /* AppDelegate.h */,
 				15CACE0D1BA5276300DFD26B /* AppDelegate.m */,
 				15CACE151BA5276300DFD26B /* Images.xcassets */,
+				15C476201BD3BBC300D9826B /* Launch Screen.storyboard */,
 				15CACE081BA5276300DFD26B /* Supporting Files */,
 			);
 			path = calamari_ios_client;
@@ -899,7 +917,7 @@
 				TargetAttributes = {
 					15CACE041BA5276300DFD26B = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = S8FBP4YLUA;
+						DevelopmentTeam = MQTK4RU7AZ;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -939,6 +957,7 @@
 				15CACE161BA5276300DFD26B /* Images.xcassets in Resources */,
 				1591698E1BBD89AE00846CB7 /* English.plist in Resources */,
 				1591698C1BBD899D00846CB7 /* TranditionalChinese.plist in Resources */,
+				15C476211BD3BBC300D9826B /* Launch Screen.storyboard in Resources */,
 				159169901BBD89B900846CB7 /* Japanese.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1012,6 +1031,7 @@
 				15550D701BB0F03B00471D62 /* NotificationDetailView.m in Sources */,
 				15550D4D1BB0F03B00471D62 /* HealthDetailViewCell.m in Sources */,
 				15550D381BB0F03B00471D62 /* OSDHealthData.m in Sources */,
+				15CFFA391BCCC43F008CFBB7 /* TimePeriodView.m in Sources */,
 				15550D651BB0F03B00471D62 /* PoolIOPSViewCell.m in Sources */,
 				15550D2C1BB0F03B00471D62 /* LoginController.m in Sources */,
 				15550D4F1BB0F03B00471D62 /* CPULineBrokenView.m in Sources */,
@@ -1039,6 +1059,7 @@
 				15550D661BB0F03B00471D62 /* PoolIOPSViewFlowLayout.m in Sources */,
 				15550D201BB0F03B00471D62 /* BaseController.m in Sources */,
 				15550D421BB0F03B00471D62 /* TextFieldChecker.m in Sources */,
+				15CFFA3C1BCCDE82008CFBB7 /* ClockSettingView.m in Sources */,
 				15550D3A1BB0F03B00471D62 /* UserData.m in Sources */,
 				15550D281BB0F03B00471D62 /* PoolIOPSController.m in Sources */,
 				15550D401BB0F03B00471D62 /* URLMaker.m in Sources */,
@@ -1055,6 +1076,7 @@
 				15550D4B1BB0F03B00471D62 /* ClusterHealthViewFlowLayout.m in Sources */,
 				15550D571BB0F03B00471D62 /* HostHealthViewCell.m in Sources */,
 				15550D341BB0F03B00471D62 /* HostHealthData.m in Sources */,
+				15CFFA361BCCC37A008CFBB7 /* TimePeriodController.m in Sources */,
 				155978631BC58AB70059C43F /* AlertTriggerCalculatorView.m in Sources */,
 				15550D521BB0F03B00471D62 /* HostDetailView.m in Sources */,
 				15550D681BB0F03B00471D62 /* PoolListViewCell.m in Sources */,
@@ -1191,10 +1213,11 @@
 			baseConfigurationReference = A765B40473C3A8E0E63212ED /* Pods-calamari_ios_client.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = calamari_ios_client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Francis.inWinStackCeph;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inwinSTACK.CephMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1205,10 +1228,11 @@
 			baseConfigurationReference = DCD9E3BA2309249C5C33E062 /* Pods-calamari_ios_client.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = calamari_ios_client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Francis.inWinStackCeph;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inwinSTACK.CephMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

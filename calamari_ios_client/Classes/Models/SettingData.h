@@ -23,5 +23,6 @@
 @property (nonatomic, strong) NSArray *triggerErrorDetailArray;
 
 + (SettingData*) shareSettingData;
+- (void) setTriggerArray;
 
 @end
