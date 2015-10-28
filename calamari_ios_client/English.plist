@@ -21,7 +21,7 @@
 	<key>login_sign_in</key>
 	<string>Sign in</string>
 	<key>login_version</key>
-	<string>Ceph Monitor Version 0.12.2</string>
+	<string>Ceph Monitor Version 0.13.0</string>
 	<key>settings_profile_language</key>
 	<string>Language</string>
 	<key>settings_dialog_save</key>

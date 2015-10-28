@@ -917,7 +917,7 @@
 				TargetAttributes = {
 					15CACE041BA5276300DFD26B = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = MQTK4RU7AZ;
+						DevelopmentTeam = S8FBP4YLUA;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -1217,7 +1217,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = calamari_ios_client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.inwinSTACK.CephMonitor;
+				PRODUCT_BUNDLE_IDENTIFIER = Francis.inWinStackCeph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1232,7 +1232,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = calamari_ios_client/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.inwinSTACK.CephMonitor;
+				PRODUCT_BUNDLE_IDENTIFIER = Francis.inWinStackCeph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

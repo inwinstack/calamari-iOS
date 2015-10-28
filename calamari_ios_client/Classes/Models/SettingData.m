@@ -28,8 +28,8 @@
         self.languageOptionArray = @[@"English", @"繁體中文", @"日本語"];
         self.languageImageOptionArray = @[@"USAImage", @"TaiwanImage", @"JapaneseImage"];
         self.settingDetailArray = [NSMutableArray arrayWithArray:@[@"English", @"2015/12/31"]];
-        self.alertTitleArray = @[@"settings_alert_notifications", @"settings_alert_email_notifications", @"settings_auto_delete", @"settings_alert_triggers"];
-        self.alertBodyArray = @[@"settings_alert_notifications_detail", @"settings_alert_email_notifications_detail", @"settings_auto_delete_detail", @"settings_alert_triggers_detail"];
+        self.alertTitleArray = @[@"settings_alert_notifications", @"settings_alert_email_notifications", @"settings_auto_delete", @"settings_time_period", @"settings_alert_triggers"];
+        self.alertBodyArray = @[@"settings_alert_notifications_detail", @"settings_alert_email_notifications_detail", @"settings_auto_delete_detail", @"settings_time_period_detail",  @"settings_alert_triggers_detail"];
         self.checkBoxArray = @[@"Notifications", @"Email Notifications", @"Auto Delete", @"", @""];
         [self setTriggerArray];
     }

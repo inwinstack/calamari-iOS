@@ -63,7 +63,7 @@
             break;
             
         case 1:
-            cell.selectionView.frame = CGRectMake(tempFrame.origin.x, tempFrame.origin.y, tempFrame.size.width, 296);
+            cell.selectionView.frame = CGRectMake(tempFrame.origin.x, tempFrame.origin.y, tempFrame.size.width, 370);
             break;
             
         case 2:
@@ -84,7 +84,7 @@
             break;
             
         case 1:
-            return CGSizeMake(CGRectGetWidth(self.view.frame) - 20, 326);
+            return CGSizeMake(CGRectGetWidth(self.view.frame) - 20, 400);
             break;
             
         case 2:
@@ -158,7 +158,7 @@
                 
             case 2:
                 cell.mainLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"settings_about_version"];
-                cell.rightDetailLabel.text = @"0.12.2";
+                cell.rightDetailLabel.text = @"0.13.0";
                 cell.checkBoxButton.hidden = YES;
                 break;
         }
@@ -213,6 +213,9 @@
         [tableView reloadData];
     } else if (tableView.tag == 1) {
         if (indexPath.row == 3) {
+            self.timePeriodController = [[TimePeriodController alloc] init];
+            [self.navigationController pushViewController:self.timePeriodController animated:YES];
+        } else if (indexPath.row == 4) {
             self.alertTriggersController = [[AlertTriggersController alloc] init];
             [self.navigationController pushViewController:self.alertTriggersController animated:YES];
         } else {

@@ -13,21 +13,11 @@
 @interface ClockSettingView ()
 
 @property (nonatomic, strong) UIView *blackBackgroundView;
-@property (nonatomic, strong) UIView *clockBackgroundView;
 @property (nonatomic, strong) UIView *districtTopView;
 @property (nonatomic, strong) UIView *bottomDistrictView;
 @property (nonatomic, strong) UIView *buttonDistrictView;
-@property (nonatomic, strong) UILabel *hourLabel;
-@property (nonatomic, strong) UILabel *minuteLabel;
-@property (nonatomic, strong) UILabel *secondLabel;
 @property (nonatomic, strong) UILabel *symbolhmLabel;
 @property (nonatomic, strong) UILabel *symbolmsLabel;
-@property (nonatomic, strong) UILabel *zeroLabel;
-@property (nonatomic, strong) UILabel *tenLabel;
-@property (nonatomic, strong) UILabel *twentyLabel;
-@property (nonatomic, strong) UILabel *thirtyLabel;
-@property (nonatomic, strong) UILabel *fortyLabel;
-@property (nonatomic, strong) UILabel *fiftyLabel;
 @property (nonatomic, strong) CAShapeLayer *titleBackgroundLayer;
 @property (nonatomic, strong) CAShapeLayer *allViewLayer;
 @property (nonatomic, strong) CAShapeLayer *clockTrackBackgroundLayer;
@@ -35,6 +25,8 @@
 @property (nonatomic, strong) CAShapeLayer *clockOutSideRoundLayer;
 @property (nonatomic, strong) CAShapeLayer *clockDistrictRoundLayer;
 @property (nonatomic, strong) CAShapeLayer *clockLineLayer;
+@property (nonatomic, strong) UIView *clockBackgroundView;
+
 
 @end
 
@@ -50,11 +42,6 @@
         
         self.clockBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 145, CGRectGetMidY(self.frame) - 225, 290, 450)];
         [self addSubview:self.clockBackgroundView];
-        
-        self.clockNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.clockBackgroundView.frame), 30)];
-        self.clockNameLabel.textAlignment = NSTextAlignmentCenter;
-        self.clockNameLabel.font = [UIFont boldSystemFontOfSize:[UIView subHeadSize]];
-        [self addSubview:self.clockNameLabel];
         
         self.titleBackgroundLayer = [CAShapeLayer layer];
         
@@ -154,7 +141,8 @@
         self.clockDistrictRoundLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetWidth(self.clockBackgroundView.frame) / 2.0, CGRectGetHeight(self.clockBackgroundView.frame) / 2.0) radius:102 startAngle:0 endAngle:M_PI * 2 clockwise:0].CGPath;
         self.clockDistrictRoundLayer.strokeColor = [UIColor titleGrayColor].CGColor;
         self.clockDistrictRoundLayer.fillColor = [UIColor clearColor].CGColor;
-        self.clockDistrictRoundLayer.lineWidth = 2.0;
+        self.clockDistrictRoundLayer.opacity = 0.5;
+        self.clockDistrictRoundLayer.lineWidth = 1.5;
         [self.clockBackgroundView.layer addSublayer:self.clockDistrictRoundLayer];
         
         self.hourLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.clockBackgroundView.frame) / 2.0 - 60, CGRectGetHeight(self.clockBackgroundView.frame) / 2.0 - 10, 30, 20)];
@@ -180,48 +168,55 @@
         
         self.secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.symbolmsLabel.frame), CGRectGetMinY(self.symbolmsLabel.frame), 30, 20)];
         self.secondLabel.textAlignment = NSTextAlignmentCenter;
-        self.secondLabel.text = @"00";
+        self.secondLabel.text = @"30";
         [self.clockBackgroundView addSubview:self.secondLabel];
         
-        self.zeroLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.clockBackgroundView.frame) / 2.0 - 20, 93, 40, 20)];
-        self.zeroLabel.textAlignment = NSTextAlignmentCenter;
-        self.zeroLabel.text = @"00";
-        self.zeroLabel.font = [UIFont boldSystemFontOfSize:14];
-        self.zeroLabel.textColor = [UIColor TagLineColor];
-        [self.clockBackgroundView addSubview:self.zeroLabel];
+        self.zeroButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.clockBackgroundView.frame) / 2.0 - 20, 93, 40, 20)];
+        self.zeroButton.tag = 0;
+        [self.zeroButton setTitle:@"00" forState:UIControlStateNormal];
+        self.zeroButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        [self.zeroButton setTitleColor:[UIColor TagLineColor] forState:UIControlStateNormal];
+        [self.clockBackgroundView addSubview:self.zeroButton];
         
-        self.tenLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.clockBackgroundView.frame) / 2.0 + 100, 150, 40, 20)];
-        self.tenLabel.text = @"10";
-        self.tenLabel.font = [UIFont boldSystemFontOfSize:14];
-        self.tenLabel.textColor = [UIColor TagLineColor];
-        [self.clockBackgroundView addSubview:self.tenLabel];
+        self.tenButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.clockBackgroundView.frame) / 2.0 + 90, 150, 40, 20)];
+        self.tenButton.tag = 1;
+
+        [self.tenButton setTitle:@"10" forState:UIControlStateNormal];
+        self.tenButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        [self.tenButton setTitleColor:[UIColor TagLineColor] forState:UIControlStateNormal];
+        [self.clockBackgroundView addSubview:self.tenButton];
         
-        self.twentyLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.clockBackgroundView.frame) / 2.0 + 100, 275, 40, 20)];
-        self.twentyLabel.text = @"20";
-        self.twentyLabel.font = [UIFont boldSystemFontOfSize:14];
-        self.twentyLabel.textColor = [UIColor TagLineColor];
-        [self.clockBackgroundView addSubview:self.twentyLabel];
+        self.twentyButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.clockBackgroundView.frame) / 2.0 + 90, 275, 40, 20)];
+        self.twentyButton.tag = 2;
+
+        [self.twentyButton setTitle:@"20" forState:UIControlStateNormal];
+        self.twentyButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        [self.twentyButton setTitleColor:[UIColor TagLineColor] forState:UIControlStateNormal];
+        [self.clockBackgroundView addSubview:self.twentyButton];
         
-        self.thirtyLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.clockBackgroundView.frame) / 2.0 - 20, 340, 40, 20)];
-        self.thirtyLabel.textAlignment = NSTextAlignmentCenter;
-        self.thirtyLabel.text = @"30";
-        self.thirtyLabel.font = [UIFont boldSystemFontOfSize:14];
-        self.thirtyLabel.textColor = [UIColor TagLineColor];
-        [self.clockBackgroundView addSubview:self.thirtyLabel];
+        self.thirtyButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.clockBackgroundView.frame) / 2.0 - 20, 340, 40, 20)];
+        self.thirtyButton.tag = 3;
+
+        [self.thirtyButton setTitle:@"30" forState:UIControlStateNormal];
+        self.thirtyButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        [self.thirtyButton setTitleColor:[UIColor TagLineColor] forState:UIControlStateNormal];
+        [self.clockBackgroundView addSubview:self.thirtyButton];
         
-        self.fortyLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.clockBackgroundView.frame) / 2.0 - 140, 275, 40, 20)];
-        self.fortyLabel.textAlignment = NSTextAlignmentRight;
-        self.fortyLabel.text = @"40";
-        self.fortyLabel.font = [UIFont boldSystemFontOfSize:14];
-        self.fortyLabel.textColor = [UIColor TagLineColor];
-        [self.clockBackgroundView addSubview:self.fortyLabel];
+        self.fortyButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.clockBackgroundView.frame) / 2.0 - 130, 275, 40, 20)];
+        self.fortyButton.tag = 4;
+
+        [self.fortyButton setTitle:@"40" forState:UIControlStateNormal];
+        self.fortyButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        [self.fortyButton setTitleColor:[UIColor TagLineColor] forState:UIControlStateNormal];
+        [self.clockBackgroundView addSubview:self.fortyButton];
         
-        self.fiftyLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.clockBackgroundView.frame) / 2.0 - 140, 150, 40, 20)];
-        self.fiftyLabel.textAlignment = NSTextAlignmentRight;
-        self.fiftyLabel.text = @"50";
-        self.fiftyLabel.font = [UIFont boldSystemFontOfSize:14];
-        self.fiftyLabel.textColor = [UIColor TagLineColor];
-        [self.clockBackgroundView addSubview:self.fiftyLabel];
+        self.fiftyButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.clockBackgroundView.frame) / 2.0 - 130, 150, 40, 20)];
+        self.fiftyButton.tag = 5;
+
+        [self.fiftyButton setTitle:@"50" forState:UIControlStateNormal];
+        self.fiftyButton.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        [self.fiftyButton setTitleColor:[UIColor TagLineColor] forState:UIControlStateNormal];
+        [self.clockBackgroundView addSubview:self.fiftyButton];
         
         self.bottomDistrictView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.saveButton.frame) - 1, CGRectGetWidth(self.clockBackgroundView.frame), 2)];
         self.bottomDistrictView.backgroundColor = [UIColor osdButtonDefaultColor];
@@ -258,6 +253,20 @@
         [self.clockBackgroundView.layer addSublayer:self.selectedTriangleLayer];
         CGPathRelease(trianglePath);
         
+        self.hourButton = [[UIButton alloc] initWithFrame:self.hourLabel.frame];
+        [self.clockBackgroundView addSubview:self.hourButton];
+        
+        self.minuteButton = [[UIButton alloc] initWithFrame:self.minuteLabel.frame];
+        [self.clockBackgroundView addSubview:self.minuteButton];
+        
+        self.secondButton = [[UIButton alloc] initWithFrame:self.secondLabel.frame];
+        [self.clockBackgroundView addSubview:self.secondButton];
+        
+        self.clockNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, CGRectGetWidth(self.clockBackgroundView.frame), 30)];
+        self.clockNameLabel.text = @"沒有彩蛋";
+        self.clockNameLabel.textAlignment = NSTextAlignmentCenter;
+        self.clockNameLabel.font = [UIFont boldSystemFontOfSize:[UIView subHeadSize]];
+        [self.clockBackgroundView addSubview:self.clockNameLabel];
     }
     return self;
 }
