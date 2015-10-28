@@ -189,6 +189,12 @@
         [cell removeProgress];
     }
     
+    if (indexPath.row == 3) {
+        cell.bottomBar.alpha = 0;
+        cell.statusLabel.frame = CGRectMake(cell.statusLabel.frame.origin.x, CGRectGetMaxY(cell.lineView.frame) + (CGRectGetHeight(cell.frame) - CGRectGetMaxY(cell.lineView.frame)) / 2.0 - cell.statusLabel.frame.size.height, cell.statusLabel.frame.size.width, cell.statusLabel.frame.size.height);
+        cell.detailLabel.frame = CGRectMake(cell.statusLabel.frame.origin.x, CGRectGetMaxY(cell.statusLabel.frame), cell.statusLabel.frame.size.width, cell.statusLabel.frame.size.height);
+    }
+    
     cell.bottomBar.frame = CGRectMake(0, CGRectGetHeight(cell.frame) - 60, CGRectGetWidth(cell.frame), 60);
 
     return cell;

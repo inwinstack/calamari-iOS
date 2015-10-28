@@ -20,7 +20,7 @@
 
 @property (nonatomic, strong) ClusterHealthController *clusterHealthController;
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundTask;
-@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+//@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 @property (nonatomic, strong) ErrorView *alertView;
 @property (nonatomic) BOOL isBackground;
 

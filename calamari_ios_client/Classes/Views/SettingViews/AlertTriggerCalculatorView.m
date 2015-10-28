@@ -159,7 +159,6 @@
         
         NSRange tempRange = [self.titleLabel.text rangeOfString:@" "];
         NSString *tempTitle = [self.titleLabel.text substringToIndex:tempRange.location];
-        
         if ([tempTitle isEqualToString:@"PG"]) {
             if ([tempString intValue] > 100) {
                 return;
@@ -168,12 +167,12 @@
             NSString *tempLastString = [self.infoLabel.text substringFromIndex:tempSpaceRange.location + tempSpaceRange.length];
             long int newValue = self.currentCount * [tempString intValue] / 100;
             self.infoLabel.text = [NSString stringWithFormat:@"%ld %@", newValue, tempLastString];
-        } else if ([tempTitle isEqualToString:@"Usage"]) {
+        } else if ([tempTitle isEqualToString:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"alert_triggers_usage"]]) {
             if ([tempString intValue] > 100) {
                 return;
             }
             NSRange tempSpaceRange = [self.infoLabel.text rangeOfString:@" "];
-            NSString *tempLastString = [self.infoLabel.text substringFromIndex:tempSpaceRange.location + tempSpaceRange.length + 2];
+            NSString *tempLastString = ([[self.infoLabel.text substringWithRange:NSMakeRange(tempSpaceRange.location + tempSpaceRange.length + 1, 1)] isEqualToString:@"B"]) ? [self.infoLabel.text substringFromIndex:tempSpaceRange.location + tempSpaceRange.length + 2] : [self.infoLabel.text substringFromIndex:tempSpaceRange.location + tempSpaceRange.length];
             double newValue = self.currentCount * [tempString doubleValue] / 100.0;
             self.infoLabel.text = [NSString stringWithFormat:@"%@%@", [self caculateByte:newValue], tempLastString];
         }
@@ -236,8 +235,20 @@
     self.numberLabel.text = @"";
     NSRange tempRange = [self.titleLabel.text rangeOfString:@" "];
     NSString *tempTitle = [self.titleLabel.text substringToIndex:tempRange.location];
-    if ([tempTitle isEqualToString:@"PG"] || [tempTitle isEqualToString:@"Usage"]) {
-        self.infoLabel.text = self.originalValue;
+    if ([tempTitle isEqualToString:@"PG"] || [tempTitle isEqualToString:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"alert_triggers_usage"]]) {
+        if ([tempTitle isEqualToString:@"PG"]) {
+            
+            NSRange tempSpaceRange = [self.infoLabel.text rangeOfString:@" "];
+            NSString *tempLastString = [self.infoLabel.text substringFromIndex:tempSpaceRange.location + tempSpaceRange.length];
+            self.infoLabel.text = [NSString stringWithFormat:@"0 %@", tempLastString];
+            
+        } else if ([tempTitle isEqualToString:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"alert_triggers_usage"]]) {
+            
+            NSRange tempSpaceRange = [self.infoLabel.text rangeOfString:@" "];
+            NSString *tempLastString = ([[self.infoLabel.text substringWithRange:NSMakeRange(tempSpaceRange.location + tempSpaceRange.length + 1, 1)] isEqualToString:@"B"]) ? [self.infoLabel.text substringFromIndex:tempSpaceRange.location + tempSpaceRange.length + 2] : [self.infoLabel.text substringFromIndex:tempSpaceRange.location + tempSpaceRange.length];
+            NSLog(@"%@", tempLastString);
+            self.infoLabel.text = [NSString stringWithFormat:@"0.0 %@", tempLastString];
+        }
     }
 }
 

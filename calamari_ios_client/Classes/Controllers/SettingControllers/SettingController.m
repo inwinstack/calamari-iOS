@@ -63,7 +63,7 @@
             break;
             
         case 1:
-            cell.selectionView.frame = CGRectMake(tempFrame.origin.x, tempFrame.origin.y, tempFrame.size.width, 370);
+            cell.selectionView.frame = CGRectMake(tempFrame.origin.x, tempFrame.origin.y, tempFrame.size.width, 296);
             break;
             
         case 2:
@@ -84,7 +84,7 @@
             break;
             
         case 1:
-            return CGSizeMake(CGRectGetWidth(self.view.frame) - 20, 400);
+            return CGSizeMake(CGRectGetWidth(self.view.frame) - 20, 326);
             break;
             
         case 2:
@@ -158,7 +158,7 @@
                 
             case 2:
                 cell.mainLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"settings_about_version"];
-                cell.rightDetailLabel.text = @"0.12.1";
+                cell.rightDetailLabel.text = @"0.12.2";
                 cell.checkBoxButton.hidden = YES;
                 break;
         }
@@ -212,12 +212,9 @@
         self.tempDateFormat = [SettingData shareSettingData].dateFormatOptionArray[indexPath.row];
         [tableView reloadData];
     } else if (tableView.tag == 1) {
-        if (indexPath.row == 4) {
+        if (indexPath.row == 3) {
             self.alertTriggersController = [[AlertTriggersController alloc] init];
             [self.navigationController pushViewController:self.alertTriggersController animated:YES];
-        } else if (indexPath.row == 3) {
-//            self.timePeriodController = [[TimePeriodController alloc] init];
-//            [self.navigationController pushViewController:self.timePeriodController animated:YES];
         } else {
             UIButton *tempCheckBoxButton = [(SelectionViewCell*)[tableView cellForRowAtIndexPath:indexPath] checkBoxButton];
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]] isEqualToString:@"YES"]) {

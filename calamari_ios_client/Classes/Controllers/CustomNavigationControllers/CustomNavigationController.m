@@ -110,11 +110,11 @@
     NSString *usageStatusString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_usage_status"];
     NSString *poolIopsString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_pool_iops"];
     NSString *notificationString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_notification"];
-    NSString *logString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_option_logs"];
+//    NSString *logString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_option_logs"];
     NSString *settingString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_option_setting"];
     NSString *logoutString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_option_logout"];
     
-    self.itemArray = @[dashboardString, healthDetailString, osdHealthString, monitorHealthString, poolListString, hostListString, pgStatusString, usageStatusString, poolIopsString, notificationString, logString, settingString, logoutString];
+    self.itemArray = @[dashboardString, healthDetailString, osdHealthString, monitorHealthString, poolListString, hostListString, pgStatusString, usageStatusString, poolIopsString, notificationString, settingString, logoutString];
     self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
     [self.panGesture setMaximumNumberOfTouches:1];
     [self.view addGestureRecognizer:self.panGesture];
@@ -227,14 +227,11 @@
                     break;
                 } case 9: {
                     [SVProgressHUD dismiss];
-                    break;
-                } case 10: {
-                    [SVProgressHUD dismiss];
                     self.settingController = [[SettingController alloc] init];
                     [self pushViewController:self.settingController animated:YES];
                     self.viewControllers = @[self.viewControllers[0], self.viewControllers[1], self.settingController];
                     break;
-                } case 11: {
+                } case 10: {
                     [SVProgressHUD dismiss];
                     [[NotificationData shareInstance] stopTimer];
                     [self popToRootViewControllerAnimated:YES];
@@ -278,7 +275,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = (indexPath.row == tempSelectedIndex) ? [UIColor navigationSelectedColor] : [UIColor clearColor];
     cell.nameLabel.text = self.itemArray[indexPath.row];
-    cell.lineView.hidden = (indexPath.row != 11);
+    cell.lineView.hidden = (indexPath.row != 10);
     return cell;
 }
 
@@ -404,11 +401,11 @@
             NSString *usageStatusString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_usage_status"];
             NSString *poolIopsString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_pool_iops"];
             NSString *notificationString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_notification"];
-            NSString *logString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_option_logs"];
+//            NSString *logString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_option_logs"];
             NSString *settingString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_option_setting"];
             NSString *logoutString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_option_logout"];
             
-            self.itemArray = @[dashboardString, healthDetailString, osdHealthString, monitorHealthString, poolListString, hostListString, pgStatusString, usageStatusString, poolIopsString, notificationString, logString, settingString, logoutString];
+            self.itemArray = @[dashboardString, healthDetailString, osdHealthString, monitorHealthString, poolListString, hostListString, pgStatusString, usageStatusString, poolIopsString, notificationString, settingString, logoutString];
             
             self.navigationView.userNameLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"Account"];
             self.navigationView.userIPLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"];
