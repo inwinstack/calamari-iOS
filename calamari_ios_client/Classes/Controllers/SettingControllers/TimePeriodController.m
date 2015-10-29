@@ -101,6 +101,8 @@
         self.tempMinutePoint = self.clockSettingView.circleView.center;
     } else if (self.tempLabel == self.clockSettingView.secondLabel) {
         self.tempSecondPoint = self.clockSettingView.circleView.center;
+    } else if (self.tempLabel == self.clockSettingView.hourLabel) {
+        self.tempHourPoint = self.clockSettingView.circleView.center;
     }
     self.tempLabel.textColor = [UIColor blackColor];
 
@@ -133,6 +135,8 @@
         self.tempHourPoint = self.clockSettingView.circleView.center;
     } else if (self.tempLabel == self.clockSettingView.secondLabel) {
         self.tempSecondPoint = self.clockSettingView.circleView.center;
+    } else if (self.tempLabel == self.clockSettingView.minuteLabel) {
+        self.tempMinutePoint = self.clockSettingView.circleView.center;
     }
     self.tempLabel.textColor = [UIColor blackColor];
     
@@ -165,6 +169,8 @@
         self.tempHourPoint = self.clockSettingView.circleView.center;
     } else if (self.tempLabel == self.clockSettingView.minuteLabel) {
         self.tempMinutePoint = self.clockSettingView.circleView.center;
+    } else if (self.tempLabel == self.clockSettingView.secondLabel) {
+        self.tempSecondPoint = self.clockSettingView.circleView.center;
     }
     self.tempLabel.textColor = [UIColor blackColor];
     
@@ -226,7 +232,7 @@
         float tempY = fabs([panGesture locationInView:self.clockSettingView].y - CGRectGetHeight(self.clockSettingView.frame) / 2.0);
         float tempLength = sqrt((tempX * tempX + tempY * tempY));
         
-        if (tempLength > 85.5 && tempLength < 95.5) {
+        if (tempLength > 79 && tempLength < 100) {
             self.gestureEnable = YES;
 
         } else {
