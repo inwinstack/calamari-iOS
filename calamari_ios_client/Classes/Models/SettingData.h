@@ -23,6 +23,8 @@
 @property (nonatomic, strong) NSArray *triggerErrorDetailArray;
 
 + (SettingData*) shareSettingData;
++ (NSString*) caculateTimePeriodFormatStringWithValue:(NSString*)value;
++ (NSString*) caculateTimePeriodTotalWithValue:(NSString*)value;
 - (void) setTriggerArray;
 
 @end

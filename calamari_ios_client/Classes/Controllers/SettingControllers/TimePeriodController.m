@@ -13,6 +13,7 @@
 #import "SettingViewFlowLayout.h"
 #import "ClockSettingView.h"
 #import "UIColor+Reader.h"
+#import "SettingData.h"
 
 @interface TimePeriodController () <UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -21,11 +22,14 @@
 @property (nonatomic, strong) ClockSettingView *clockSettingView;
 @property (nonatomic, strong) UIPanGestureRecognizer *clockPanGesture;
 @property (nonatomic, strong) UILabel *tempLabel;
-@property (nonatomic, strong) NSArray *testArray;
+@property (nonatomic, strong) NSArray *titleArray;
+@property (nonatomic, strong) NSArray *detailArray;
+@property (nonatomic, strong) NSArray *keyArray;
 @property (nonatomic) CGPoint tempHourPoint;
 @property (nonatomic) CGPoint tempMinutePoint;
 @property (nonatomic) CGPoint tempSecondPoint;
 @property (nonatomic, strong) NSArray *timePointArray;
+@property (nonatomic, strong) NSArray *pointKeyArray;
 @property (nonatomic) BOOL gestureEnable;
 
 @end
@@ -45,7 +49,10 @@
     [self.timePeriodView registerClass:[SettingViewCell class] forCellWithReuseIdentifier:@"TimePeriodViewCellIdentifier"];
     
     self.clockPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(clockAction:)];
-    self.testArray = @[@"請按我", @"請按我", @"請按我"];
+    self.titleArray = @[@"Normal Status Period", @"Abnormal Status Period", @"Server Abnormal Status Period"];
+    self.detailArray = @[@"Check the system health every $", @"Check the system health every $", @"Check the server health every $"];
+    self.keyArray = @[@"normalTimePeriod", @"abnormalTimePeriod", @"serverAbnormalTimePeriod"];
+    self.pointKeyArray = @[@"normalPeriodPoint", @"abnormalPeriodPoint", @"serverAbnormalPeriodPoint"];
     self.timePointArray = @[@"145, 135.5", @"223.5,182", @"221.4,271.5", @"145, 314.5", @"67,269", @"68.3,178.9"];
     self.gestureEnable = NO;
 }
@@ -63,9 +70,16 @@
     if (!alertTriggerSelectionCell) {
         alertTriggerSelectionCell = [[SelectionViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TimePeriodSelectionViewCellIdentifier"];
     }
+    NSString *tempString = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], self.keyArray[indexPath.row]]];
+    
+    NSString *detailString = [self.detailArray[indexPath.row] stringByReplacingOccurrencesOfString:@"$" withString:[SettingData caculateTimePeriodFormatStringWithValue:tempString]];
     alertTriggerSelectionCell.checkBoxButton.hidden = YES;
     alertTriggerSelectionCell.districtLineView.frame = CGRectMake(alertTriggerSelectionCell.districtLineView.frame.origin.x, 73, alertTriggerSelectionCell.districtLineView.frame.size.width, alertTriggerSelectionCell.districtLineView.frame.size.height);
-    alertTriggerSelectionCell.mainLabel.text = self.testArray[indexPath.row];
+    alertTriggerSelectionCell.mainLabel.text = self.titleArray[indexPath.row];
+    alertTriggerSelectionCell.rightDetailLabel.frame = CGRectMake(10, CGRectGetMaxY(alertTriggerSelectionCell.mainLabel.frame), CGRectGetWidth(alertTriggerSelectionCell.districtLineView.frame) - 20, 37);
+    alertTriggerSelectionCell.rightDetailLabel.textAlignment = NSTextAlignmentLeft;
+
+    alertTriggerSelectionCell.rightDetailLabel.text = detailString;
     return alertTriggerSelectionCell;
 }
 
@@ -77,13 +91,22 @@
         [self.clockSettingView.hourButton addTarget:self action:@selector(hourAction) forControlEvents:UIControlEventTouchUpInside];
         [self.clockSettingView.minuteButton addTarget:self action:@selector(minuteAction) forControlEvents:UIControlEventTouchUpInside];
         [self.clockSettingView.secondButton addTarget:self action:@selector(secondAction) forControlEvents:UIControlEventTouchUpInside];
+        NSString *tempSelecteTimeValueString = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], self.keyArray[indexPath.row]]];
+        self.clockSettingView.hourLabel.text = [tempSelecteTimeValueString substringToIndex:2];
+        self.clockSettingView.minuteLabel.text = [tempSelecteTimeValueString substringWithRange:NSMakeRange(2, 2)];
+        self.clockSettingView.secondLabel.text = [tempSelecteTimeValueString substringFromIndex:4];
+
         self.tempLabel = self.clockSettingView.minuteLabel;
+        self.clockSettingView.clockNameLabel.text = self.titleArray[indexPath.row];
         [self.view.window addSubview:self.clockSettingView];
         [self.clockSettingView addGestureRecognizer:self.clockPanGesture];
         
-        self.tempHourPoint = CGPointMake(145, 135.5);
-        self.tempMinutePoint = CGPointMake(145, 135.5);
-        self.tempSecondPoint = CGPointMake(145, 314.5);
+        NSArray *tempPointArray = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@",  [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], self.pointKeyArray[indexPath.row]]];
+        
+        
+        self.tempHourPoint = [self getTimePointWithString:tempPointArray[0]];
+        self.tempMinutePoint = [self getTimePointWithString:tempPointArray[1]];
+        self.tempSecondPoint = [self getTimePointWithString:tempPointArray[2]];
 
         [self.clockSettingView.zeroButton addTarget:self action:@selector(timeButtonClickAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.clockSettingView.tenButton addTarget:self action:@selector(timeButtonClickAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -93,10 +116,12 @@
         [self.clockSettingView.fiftyButton addTarget:self action:@selector(timeButtonClickAction:) forControlEvents:UIControlEventTouchUpInside];
 
         self.tempLabel = self.clockSettingView.minuteLabel;
+        self.clockSettingView.circleView.center = self.tempMinutePoint;
     }
 }
 
 - (void) hourAction {
+
     if (self.tempLabel == self.clockSettingView.minuteLabel) {
         self.tempMinutePoint = self.clockSettingView.circleView.center;
     } else if (self.tempLabel == self.clockSettingView.secondLabel) {
@@ -165,6 +190,7 @@
 }
 
 - (void) secondAction {
+
     if (self.tempLabel == self.clockSettingView.hourLabel) {
         self.tempHourPoint = self.clockSettingView.circleView.center;
     } else if (self.tempLabel == self.clockSettingView.minuteLabel) {
@@ -205,6 +231,26 @@
 
 - (void) saveAction {
     [self.clockSettingView removeFromSuperview];
+    if (self.tempLabel == self.clockSettingView.hourLabel) {
+        self.tempHourPoint = self.clockSettingView.circleView.center;
+    } else if (self.tempLabel == self.clockSettingView.minuteLabel) {
+        self.tempMinutePoint = self.clockSettingView.circleView.center;
+    } else if (self.tempLabel == self.clockSettingView.secondLabel) {
+        self.tempSecondPoint = self.clockSettingView.circleView.center;
+    }
+    NSString *tempString = [NSString stringWithFormat:@"%@%@%@", self.clockSettingView.hourLabel.text, self.clockSettingView.minuteLabel.text, self.clockSettingView.secondLabel.text];
+    NSInteger objectIndex = [self.titleArray indexOfObject:self.clockSettingView.clockNameLabel.text];
+    NSString *currentKey = [NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], self.keyArray[objectIndex]];
+    NSString *currentPointKey = [NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], self.pointKeyArray[objectIndex]];
+    NSIndexPath *tempPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    
+    NSString *currentHourPointString = [NSString stringWithFormat:@"%f,%f", self.tempHourPoint.x, self.tempHourPoint.y];
+    NSString *currentMinutePointString = [NSString stringWithFormat:@"%f,%f", self.tempMinutePoint.x, self.tempMinutePoint.y];
+    NSString *currentSecondPointString = [NSString stringWithFormat:@"%f,%f", self.tempSecondPoint.x, self.tempSecondPoint.y];
+
+    [[NSUserDefaults standardUserDefaults] setObject:tempString forKey:currentKey];
+    [[NSUserDefaults standardUserDefaults] setObject:@[currentHourPointString, currentMinutePointString, currentSecondPointString] forKey:currentPointKey];
+    [[(SettingViewCell*)[self.timePeriodView cellForItemAtIndexPath:tempPath] selectionView] reloadData];
 }
 
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -281,13 +327,18 @@
     }
 }
 
-- (void) timeButtonClickAction:(UIButton*)timeButton {
-    self.tempLabel.text = timeButton.titleLabel.text;
-    NSString *pointString = self.timePointArray[timeButton.tag];
+- (CGPoint) getTimePointWithString:(NSString*)pointString {
     NSRange districtRange = [pointString rangeOfString:@","];
     float pointX = [[pointString substringToIndex:districtRange.location] floatValue];
     float pointY = [[pointString substringFromIndex:districtRange.location + districtRange.length] floatValue];
-    self.clockSettingView.circleView.center = CGPointMake(pointX, pointY);
+    return CGPointMake(pointX, pointY);
+}
+
+- (void) timeButtonClickAction:(UIButton*)timeButton {
+    self.tempLabel.text = timeButton.titleLabel.text;
+    NSString *pointString = self.timePointArray[timeButton.tag];
+    CGPoint resultPoint = [self getTimePointWithString:pointString];
+    self.clockSettingView.circleView.center = resultPoint;
 }
 
 - (void)didReceiveMemoryWarning {

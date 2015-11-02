@@ -15,12 +15,13 @@
 #import "NotificationData.h"
 #import "ErrorView.h"
 #import "ClusterHealthController.h"
+#import "SettingData.h"
 
 @interface AppDelegate () <ErrorDelegate>
 
 @property (nonatomic, strong) ClusterHealthController *clusterHealthController;
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundTask;
-//@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 @property (nonatomic, strong) ErrorView *alertView;
 @property (nonatomic) BOOL isBackground;
 
@@ -64,35 +65,30 @@
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
-//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"mute" ofType:@"mp3"];
-//    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
-//    NSError *error;
-//    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:fileData fileTypeHint:AVFileTypeMPEGLayer3 error:&error];
-//    [self.audioPlayer setNumberOfLoops:-1];
-//    if (self.audioPlayer != nil) {
-//        if ([self.audioPlayer prepareToPlay]) {
-//            [self.audioPlayer play];
-//        }
-//    }
+    [self playMuteSound];
+    
     return YES;
 }
 
 - (void) applicationWillEnterForeground:(UIApplication *)application {
     [NotificationData shareInstance].isBackground = NO;
+    self.isBackground = NO;
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    [[NotificationData shareInstance] restartTimerWithTimeInterval:10];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTime"] isEqualToString:@"did"]) {
+        [[NotificationData shareInstance] restartTimerWithTimeInterval:10];
+    }
 }
 
 - (void) applicationDidEnterBackground:(UIApplication *)application {
     self.isBackground = YES;
     [NotificationData shareInstance].isBackground = YES;
-    [[NotificationData shareInstance] restartTimerWithTimeInterval:30];
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTime"] isEqualToString:@"did"]) {
-        self.backgroundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-            
-        }];
+        [[NotificationData shareInstance] restartTimerWithTimeInterval:[[SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_normalTimePeriod", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]]] integerValue]];
     }
+    self.backgroundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        
+    }];
 }
 
 - (void) applicationWillTerminate:(UIApplication *)application {
@@ -132,6 +128,25 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     NSLog(@"didReceive:%@", userInfo);
+}
+
+- (void) playMuteSound {
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    if ([session setCategory:AVAudioSessionCategoryPlayback error:nil]) {
+        NSLog(@"Background Music Ok");
+    } else {
+        NSLog(@"Background error");
+    }
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"mute" ofType:@"mp3"];
+    NSData *fileData = [NSData dataWithContentsOfFile:filePath];
+    NSError *error;
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:fileData fileTypeHint:AVFileTypeMPEGLayer3 error:&error];
+    [self.audioPlayer setNumberOfLoops:-1];
+    if (self.audioPlayer != nil) {
+        if ([self.audioPlayer prepareToPlay]) {
+            [self.audioPlayer play];
+        }
+    }
 }
 
 @end

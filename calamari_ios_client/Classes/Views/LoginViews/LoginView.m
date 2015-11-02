@@ -74,6 +74,7 @@
         self.languageSettingButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.passwordField.frame), CGRectGetMaxY(self.passwordField.frame) + [UIView tbMarginOne], CGRectGetWidth(self.passwordField.frame), fieldHeight)];
         self.languageSettingButton.backgroundColor = [UIColor clearColor];
         self.languageSettingButton.layer.cornerRadius = 5;
+        self.loginButton.exclusiveTouch = YES;
         [self addSubview:self.languageSettingButton];
         
         
@@ -82,6 +83,7 @@
         self.loginButton.layer.cornerRadius = 5;
         [self.loginButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16]];
         [self.loginButton setTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_sign_in"] forState:UIControlStateNormal];
+        self.loginButton.exclusiveTouch = YES;
         [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self addSubview:self.loginButton];
         

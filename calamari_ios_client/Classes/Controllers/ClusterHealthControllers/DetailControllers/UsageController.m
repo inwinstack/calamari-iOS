@@ -25,10 +25,14 @@
         
     self.usageStatusView = [[UsageStatusView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:self.usageStatusView];
-    self.usageStatusView.maxLabel.text = [[[[ClusterData shareInstance] caculateByte:[[NSString stringWithFormat:@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_usage_max", [ClusterData shareInstance].clusterArray[0][@"id"]]]] doubleValue]] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"B" withString:@""];
-    self.usageStatusView.midYLabel.text = [[[[ClusterData shareInstance] caculateByte:[[NSString stringWithFormat:@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_usage_max", [ClusterData shareInstance].clusterArray[0][@"id"]]]] doubleValue] / 2.0] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"B" withString:@""];
-    self.usageStatusView.tempMidString = [NSString stringWithFormat:@"%f", [[NSString stringWithFormat:@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_usage_max", [ClusterData shareInstance].clusterArray[0][@"id"]]]] doubleValue] / 2.0];
-    [self.usageStatusView setDataWithDataArray:[ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_usage", [ClusterData shareInstance].clusterArray[0][@"id"]]]];
+    self.usageStatusView.maxLabel.text = [[[[ClusterData shareInstance] caculateByte:[[NSString stringWithFormat:@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_usage_max", [[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"]]]] doubleValue]] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"B" withString:@""];
+    self.usageStatusView.midYLabel.text = [[[[ClusterData shareInstance] caculateByte:[[NSString stringWithFormat:@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_usage_max", [[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"]]]] doubleValue] / 2.0] stringByReplacingOccurrencesOfString:@" " withString:@""] stringByReplacingOccurrencesOfString:@"B" withString:@""];
+    
+    self.usageStatusView.tempMidString = [NSString stringWithFormat:@"%f", [[NSString stringWithFormat:@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_usage_max", [[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"]]]] doubleValue] / 2.0];
+    
+    [self.usageStatusView setDataWithDataArray:[ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_usage", [[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"]]]];
+    
+    NSLog(@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_usage", [[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"]]]);
     self.usageStatusView.alpha = 0;
     [UIView animateWithDuration:1 delay:0 options:UIViewAnimationCurveEaseIn | UIViewAnimationCurveEaseOut | UIViewAnimationCurveEaseInOut animations:^{
         self.usageStatusView.alpha = 1;

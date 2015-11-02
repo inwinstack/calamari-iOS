@@ -338,6 +338,13 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"20" forKey:[NSString stringWithFormat:@"%@_PGTriggerError", self.loginView.hostIpField.text]];
     [[NSUserDefaults standardUserDefaults] setObject:@"70" forKey:[NSString stringWithFormat:@"%@_UsageTriggerWarn", self.loginView.hostIpField.text]];
     [[NSUserDefaults standardUserDefaults] setObject:@"85" forKey:[NSString stringWithFormat:@"%@_UsageTriggerError", self.loginView.hostIpField.text]];
+    [[NSUserDefaults standardUserDefaults] setObject:@"000030" forKey:[NSString stringWithFormat:@"%@_normalTimePeriod", self.loginView.hostIpField.text]];
+    [[NSUserDefaults standardUserDefaults] setObject:@"000200" forKey:[NSString stringWithFormat:@"%@_abnormalTimePeriod", self.loginView.hostIpField.text]];
+    [[NSUserDefaults standardUserDefaults] setObject:@"010000" forKey:[NSString stringWithFormat:@"%@_serverAbnormalTimePeriod", self.loginView.hostIpField.text]];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@[@"145,135.5", @"145,135.5", @"145,314.5"] forKey:[NSString stringWithFormat:@"%@_normalPeriodPoint", self.loginView.hostIpField.text]];
+    [[NSUserDefaults standardUserDefaults] setObject:@[@"145,135.5", @"164.65,137.68", @"145,135.5"] forKey:[NSString stringWithFormat:@"%@_abnormalPeriodPoint", self.loginView.hostIpField.text]];
+    [[NSUserDefaults standardUserDefaults] setObject:@[@"168.919373,138.755501", @"145,135.5", @"145,135.5"] forKey:[NSString stringWithFormat:@"%@_serverAbnormalPeriodPoint", self.loginView.hostIpField.text]];
     
     [[SettingData shareSettingData] setTriggerArray];
 }

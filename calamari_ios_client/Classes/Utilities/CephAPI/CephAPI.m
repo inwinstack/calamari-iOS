@@ -375,6 +375,7 @@
             if (readError) {
                 getError(readError);
             } else {
+                NSLog(@"%@", receiveObject[@"datapoints"]);
                 [self setDataWithDataArray:receiveObject[@"datapoints"] target:[ClusterData shareInstance].clusterDetailData key:clusterID kind:@"usage"];
                 completion(true);
             }
@@ -543,6 +544,7 @@
     long int tempMax = (max == 0) ? 20 : max;
     [target setObject:tempDataArray forKey:[NSString stringWithFormat:@"%@_%@", key, kind]];
     [target setObject:[NSString stringWithFormat:@"%ld", tempMax] forKey:[NSString stringWithFormat:@"%@_%@_max", key, kind]];
+
 }
 
 - (void) setAverageDataWithDataArray:(id)dataArray target:(id)target key:(NSString*)key kind:(NSString*)kind {

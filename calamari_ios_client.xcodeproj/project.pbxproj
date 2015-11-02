@@ -110,6 +110,7 @@
 		15CFFA361BCCC37A008CFBB7 /* TimePeriodController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CFFA351BCCC37A008CFBB7 /* TimePeriodController.m */; settings = {ASSET_TAGS = (); }; };
 		15CFFA391BCCC43F008CFBB7 /* TimePeriodView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CFFA381BCCC43F008CFBB7 /* TimePeriodView.m */; settings = {ASSET_TAGS = (); }; };
 		15CFFA3C1BCCDE82008CFBB7 /* ClockSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CFFA3B1BCCDE82008CFBB7 /* ClockSettingView.m */; settings = {ASSET_TAGS = (); }; };
+		15E2DC791BE7B20100B33650 /* mute.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 15E2DC781BE7B20100B33650 /* mute.mp3 */; settings = {ASSET_TAGS = (); }; };
 		4F2D199058C3A0107D7AE603 /* libPods-calamari_ios_client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D56DBF74FAD2FCBB66FDFC /* libPods-calamari_ios_client.a */; };
 /* End PBXBuildFile section */
 
@@ -326,6 +327,7 @@
 		15CFFA381BCCC43F008CFBB7 /* TimePeriodView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimePeriodView.m; sourceTree = "<group>"; };
 		15CFFA3A1BCCDE82008CFBB7 /* ClockSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClockSettingView.h; sourceTree = "<group>"; };
 		15CFFA3B1BCCDE82008CFBB7 /* ClockSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockSettingView.m; sourceTree = "<group>"; };
+		15E2DC781BE7B20100B33650 /* mute.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = mute.mp3; path = ../../../Downloads/mute.mp3; sourceTree = "<group>"; };
 		A765B40473C3A8E0E63212ED /* Pods-calamari_ios_client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calamari_ios_client.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calamari_ios_client/Pods-calamari_ios_client.debug.xcconfig"; sourceTree = "<group>"; };
 		D6D56DBF74FAD2FCBB66FDFC /* libPods-calamari_ios_client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-calamari_ios_client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD9E3BA2309249C5C33E062 /* Pods-calamari_ios_client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calamari_ios_client.release.xcconfig"; path = "Pods/Target Support Files/Pods-calamari_ios_client/Pods-calamari_ios_client.release.xcconfig"; sourceTree = "<group>"; };
@@ -822,6 +824,7 @@
 		15CACE081BA5276300DFD26B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				15E2DC781BE7B20100B33650 /* mute.mp3 */,
 				15CACE091BA5276300DFD26B /* Info.plist */,
 				15CACE0A1BA5276300DFD26B /* main.m */,
 				1591698B1BBD899D00846CB7 /* TranditionalChinese.plist */,
@@ -917,10 +920,10 @@
 				TargetAttributes = {
 					15CACE041BA5276300DFD26B = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = S8FBP4YLUA;
+						DevelopmentTeam = MQTK4RU7AZ;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -959,6 +962,7 @@
 				1591698C1BBD899D00846CB7 /* TranditionalChinese.plist in Resources */,
 				15C476211BD3BBC300D9826B /* Launch Screen.storyboard in Resources */,
 				159169901BBD89B900846CB7 /* Japanese.plist in Resources */,
+				15E2DC791BE7B20100B33650 /* mute.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1216,8 +1220,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = calamari_ios_client/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Francis.inWinStackCeph;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inwinSTACK.CephMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1231,8 +1236,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = calamari_ios_client/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Francis.inWinStackCeph;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inwinSTACK.CephMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
