@@ -16,5 +16,18 @@
 @property (nonatomic, strong) UIView *circleView;
 @property (nonatomic, strong) UIView *selectedCircleView;
 @property (nonatomic, strong) CAShapeLayer *selectedTriangleLayer;
+@property (nonatomic, strong) UIButton *hourButton;
+@property (nonatomic, strong) UIButton *minuteButton;
+@property (nonatomic, strong) UIButton *secondButton;
+@property (nonatomic, strong) UILabel *hourLabel;
+@property (nonatomic, strong) UILabel *minuteLabel;
+@property (nonatomic, strong) UILabel *secondLabel;
+@property (nonatomic, strong) UIButton *zeroButton;
+@property (nonatomic, strong) UIButton *tenButton;
+@property (nonatomic, strong) UIButton *twentyButton;
+@property (nonatomic, strong) UIButton *thirtyButton;
+@property (nonatomic, strong) UIButton *fortyButton;
+@property (nonatomic, strong) UIButton *fiftyButton;
+
 
 @end

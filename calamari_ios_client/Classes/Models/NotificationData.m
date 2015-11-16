@@ -11,6 +11,7 @@
 #import "ClusterData.h"
 #import "DateMaker.h"
 #import "LocalizationManager.h"
+#import "SettingData.h"
 
 @interface NotificationData () {
     int timeCount;
@@ -106,9 +107,11 @@
         timeCount = 0;
         [self stopTimer];
         __weak typeof(self) weakSelf = self;
+        NSString *hostIp = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"];
         [[CephAPI shareInstance] startGetClusterDetailAtBackgroundCompletion:^(BOOL finished) {
             if (finished) {
-                weakSelf.warnSec = (self.isBackground) ? @"30" : @"10";
+                
+                weakSelf.warnSec = (self.isBackground) ? [SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_normalTimePeriod", hostIp]]] : @"10";
                 [weakSelf startCheck];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"didRefreshAction" object:nil];
             }
@@ -116,7 +119,8 @@
             if (error) {
                 NSInteger errorCode = labs([error code]);
                 if ((errorCode >= 400 && errorCode < 410) || (errorCode >= 500 && errorCode < 510)) {
-                    weakSelf.warnSec = @"3600";
+                    weakSelf.warnSec = [SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_serverAbnormalTimePeriod", hostIp]]];
+;
                 }
                 [weakSelf  startTimer];
                 NSLog(@"%@", error);
@@ -286,7 +290,8 @@
     }
     
     if (count >= triggerMinValue) {
-        self.warnSec = @"120";
+        
+        self.warnSec = [SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_abnormalTimePeriod", currentHostIp]]];
         if ((original <= triggerMinValue) && (count > original) && (count > previous)) {
             if (isWarn) {
                 [self upDateWarnDataWithType:notificationType conditionType:ConditionNewWarn Count:count];
@@ -344,7 +349,7 @@
                         [self makeNotificationStringWithConditionType:ConditionWarnDone notificationType:notificationType];
                         [self addToNotificationArrayWithType:notificationType conditionType:ConditionWarnDone total:previous pgCountString:pgCountString];
                     } else {
-                        self.warnSec = @"120";
+                        self.warnSec = [SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_abnormalTimePeriod", currentHostIp]]];
                     }
                 }
             } else {
@@ -358,7 +363,7 @@
                         [self makeNotificationStringWithConditionType:ConditionErrorDone notificationType:notificationType];
                         [self addToNotificationArrayWithType:notificationType conditionType:ConditionErrorDone total:previous pgCountString:pgCountString];
                     } else {
-                        self.warnSec = @"120";
+                        self.warnSec = [SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_abnormalTimePeriod", currentHostIp]]];
                     }
                 }
                 
