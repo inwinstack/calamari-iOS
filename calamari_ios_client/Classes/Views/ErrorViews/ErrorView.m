@@ -15,11 +15,11 @@
 
 @property (nonatomic, strong) UITapGestureRecognizer *cancelGesture;
 @property (nonatomic, strong) UIView *cardBackgroundView;
-@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *messageLabel;
 @property (nonatomic, strong) UIButton *confirmButton;
 @property (nonatomic, strong) UIView *errorLineView;
 @property (nonatomic, strong) UIView *buttonLineView;
+@property (nonatomic, strong) UILabel *titleLabel;
 
 @end
 

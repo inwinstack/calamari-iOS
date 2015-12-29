@@ -17,6 +17,8 @@
 @property (nonatomic, strong) UILabel *reWeightValueLabel;
 @property (nonatomic, strong) UILabel *uuidValueLabel;
 
+@property (nonatomic, strong) UIButton *reweightHelpButton;
+
 - (void) setPoolLabelsArray:(NSArray*)labelArray;
 
 @end

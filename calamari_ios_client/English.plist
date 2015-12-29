@@ -25,7 +25,7 @@
 	<key>login_sign_in</key>
 	<string>Sign in</string>
 	<key>login_version</key>
-	<string>Ceph Monitor Version 0.16.0</string>
+	<string>Ceph Monitor Version 0.17.0</string>
 	<key>settings_profile_language</key>
 	<string>Language</string>
 	<key>settings_dialog_save</key>
@@ -310,5 +310,29 @@
 	<string>Trigger alert when usage exceeds %1$s</string>
 	<key>Usage</key>
 	<string>Usage</string>
+	<key>osd_detail_re_weight_help_title</key>
+	<string>HELP</string>
+	<key>osd_detail_re_weight_help</key>
+	<string>Reweight represents the override weight on the OSD. If an OSD usage is higher than others, it could reduce the weight to try and compensate for it.</string>
+	<key>notification_detail_count_help</key>
+	<string>The number of errors is a cumulative total of health warnings or health errors, so it may exceed the maximum of the system.</string>
+	<key>settings_time_period_normal_title</key>
+	<string>Normal Status Period</string>
+	<key>settings_time_period_normal_content</key>
+	<string>Check the system health every %1$s</string>
+	<key>settings_time_period_abnormal_title</key>
+	<string>Abnormal Status Period</string>
+	<key>settings_time_period_abnormal_content</key>
+	<string>Check the system health every %1$s</string>
+	<key>settings_time_period_server_abnormal_title</key>
+	<string>Server Abnormal Status Period</string>
+	<key>settings_time_period_server_abnormal_content</key>
+	<string>Check the server health every %1$s</string>
+	<key>other_time_unit_hour</key>
+	<string>hour</string>
+	<key>other_time_unit_min</key>
+	<string>min</string>
+	<key>other_time_unit_sec</key>
+	<string>second</string>
 </dict>
 </plist>

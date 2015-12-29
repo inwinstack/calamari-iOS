@@ -10,6 +10,7 @@
 #import "UIColor+Reader.h"
 #import "NotificationDetailView.h"
 #import "DateMaker.h"
+#import "HelpView.h"
 
 @interface NotificationDetailController ()
 
@@ -43,6 +44,8 @@
     self.notificationDetailView = [[NotificationDetailView alloc] initWithFrame:self.view.frame];
     self.view = self.notificationDetailView;
     
+    [self.notificationDetailView.helpButton addTarget:self action:@selector(helpAction) forControlEvents:UIControlEventTouchUpInside];
+    
     if (self.dataDic[@"ResolveTime"]) {
         NSString *resolvedtimeDataString = [[DateMaker shareDateMaker] getTodayWithNotificationFormatWithTimeStamp:[self.dataDic[@"ResolveTime"] doubleValue]];
         NSString *resolvedTimeString = [NSString stringWithFormat:@"%@\n%@", [[LocalizationManager sharedLocalizationManager] getTextByKey:@"notification_detail_resolved_title"], resolvedtimeDataString];
@@ -62,6 +65,12 @@
         [self.notificationDetailView setContentWithContent:contentString status:errorCondtionType errorTitle:errorTitleString errorCount:errorCountString errorTimeString:errorTimeString resolveTimeString:@""];
     }
 }
+
+- (void) helpAction {
+    HelpView *helpView = [[HelpView alloc] initWithTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"osd_detail_re_weight_help_title"] message:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"notification_detail_count_help"]];
+    [self.view.window addSubview:helpView];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

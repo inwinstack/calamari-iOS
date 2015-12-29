@@ -19,11 +19,11 @@
 	<key>login_developer</key>
 	<string>公司設計開發</string>
 	<key>login_fail_server_error</key>
-	<string>Failed to connect to server !</string>
+	<string>連接伺服器失敗 !</string>
 	<key>login_sign_in</key>
 	<string>登入</string>
 	<key>login_version</key>
-	<string>Ceph Monitor Version 0.16.0</string>
+	<string>Ceph Monitor Version 0.17.0</string>
 	<key>settings_profile_language</key>
 	<string>語言</string>
 	<key>settings_dialog_save</key>
@@ -137,7 +137,7 @@
 	<key>osd_detail_pools</key>
 	<string>資源池</string>
 	<key>osd_detail_re_weight</key>
-	<string>Reweight</string>
+	<string>權重分配</string>
 	<key>osd_detail_uuid</key>
 	<string>UUID</string>
 	<key>pool_list_id_replicas</key>
@@ -255,9 +255,9 @@
 	<key>notification_detail_resolved_title</key>
 	<string>解決時間</string>
 	<key>Warnings</key>
-	<string>警告</string>
+	<string>警告數</string>
 	<key>Errors</key>
-	<string>錯誤</string>
+	<string>錯誤數</string>
 	<key>Error ratio</key>
 	<string>錯誤比率</string>
 	<key>Warning ratio</key>
@@ -310,5 +310,29 @@
 	<string>使用量超過 %1$s 時觸發警告通知</string>
 	<key>Usage</key>
 	<string>使用量</string>
+	<key>osd_detail_re_weight_help_title</key>
+	<string>說明</string>
+	<key>osd_detail_re_weight_help</key>
+	<string>權重分配為 OSD 容量調整值，預設值為 100%，當各 OSD 儲存容量不平均時，可用來暫時調整使各 OSD 使用狀況達到平衡。</string>
+	<key>notification_detail_count_help</key>
+	<string>錯誤數為系統發生的總警告數或總錯誤數，因該值會隨系統狀況累加，故可能超過系統最大值。</string>
+	<key>settings_time_period_normal_title</key>
+	<string>預設監控週期</string>
+	<key>settings_time_period_normal_content</key>
+	<string>每 %1$s 檢查一次系統健康狀態</string>
+	<key>settings_time_period_abnormal_title</key>
+	<string>異常監控週期</string>
+	<key>settings_time_period_abnormal_content</key>
+	<string>每 %1$s 檢查一次系統健康狀態</string>
+	<key>settings_time_period_server_abnormal_title</key>
+	<string>伺服器異常監控週期</string>
+	<key>settings_time_period_server_abnormal_content</key>
+	<string>每 %1$s 檢查一次伺服器健康狀態</string>
+	<key>other_time_unit_hour</key>
+	<string>小時</string>
+	<key>other_time_unit_min</key>
+	<string>分鐘</string>
+	<key>other_time_unit_sec</key>
+	<string>秒</string>
 </dict>
 </plist>

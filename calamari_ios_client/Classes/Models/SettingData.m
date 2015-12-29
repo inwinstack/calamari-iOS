@@ -7,6 +7,7 @@
 //
 
 #import "SettingData.h"
+#import "LocalizationManager.h"
 
 @implementation SettingData
 
@@ -63,23 +64,40 @@
 
 + (NSString*) caculateTimePeriodFormatStringWithValue:(NSString*)value {
     NSString *hourString = @"";
+    NSString *hourUnitString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"other_time_unit_hour"];
+    NSString *minUnitString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"other_time_unit_min"];
+    NSString *secUnitString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"other_time_unit_sec"];
+
     if ([[value substringToIndex:2] intValue] > 0) {
         int hourValue = [[value substringToIndex:2] intValue];
-        hourString = (hourValue > 1) ? [NSString stringWithFormat:@"%d hours ", hourValue] : [NSString stringWithFormat:@"%d hour ", hourValue];
+        if ([hourUnitString isEqualToString:@"hour"]) {
+            hourString = (hourValue > 1) ? [NSString stringWithFormat:@"%d hours ", hourValue] : [NSString stringWithFormat:@"%d hour ", hourValue];
+        } else {
+            hourString = [NSString stringWithFormat:@"%d %@ ", hourValue, hourUnitString];
+        }
     }
     
     NSString *minuteString = @"";
     
     if ([[value substringWithRange:NSMakeRange(2, 2)] intValue] > 0) {
         int minuteValue = [[value substringWithRange:NSMakeRange(2, 2)] intValue];
-        minuteString = (minuteValue > 1) ? [NSString stringWithFormat:@"%d minutes ", minuteValue] : [NSString stringWithFormat:@"%d minute ", minuteValue];
+        if ([minUnitString isEqualToString:@"min"]) {
+            minuteString = (minuteValue > 1) ? [NSString stringWithFormat:@"%d minutes ", minuteValue] : [NSString stringWithFormat:@"%d minute ", minuteValue];
+        } else {
+            minuteString = [NSString stringWithFormat:@"%d %@ ", minuteValue, minUnitString];
+        }
     }
     
     NSString *secondString = @"";
     
     if ([[value substringFromIndex:4] intValue] > 0) {
         int secondValue = [[value substringFromIndex:4] intValue];
-        secondString = (secondValue > 1) ? [NSString stringWithFormat:@"%d seconds", secondValue] : [NSString stringWithFormat:@"%d second", secondValue];
+        if ([secUnitString isEqualToString:@"second"]) {
+            secondString = (secondValue > 1) ? [NSString stringWithFormat:@"%d seconds", secondValue] : [NSString stringWithFormat:@"%d second", secondValue];
+        } else {
+            secondString = [NSString stringWithFormat:@"%d %@", secondValue, secUnitString];
+
+        }
     }
     
     return [NSString stringWithFormat:@"%@%@%@", hourString, minuteString, secondString];

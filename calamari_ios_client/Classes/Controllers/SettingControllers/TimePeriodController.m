@@ -16,6 +16,7 @@
 #import "SettingData.h"
 #import "CephAPI.h"
 #import "SVProgressHUD.h"
+#import "LocalizationManager.h"
 
 @interface TimePeriodController () <UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -69,8 +70,8 @@
     [self.timePeriodView registerClass:[SettingViewCell class] forCellWithReuseIdentifier:@"TimePeriodViewCellIdentifier"];
     
     self.clockPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(clockAction:)];
-    self.titleArray = @[@"Normal Status Period", @"Abnormal Status Period", @"Server Abnormal Status Period"];
-    self.detailArray = @[@"Check the system health every $", @"Check the system health every $", @"Check the server health every $"];
+    self.titleArray = @[@"settings_time_period_normal_title", @"settings_time_period_abnormal_title", @"settings_time_period_server_abnormal_title"];
+    self.detailArray = @[@"settings_time_period_normal_content", @"settings_time_period_abnormal_content", @"settings_time_period_server_abnormal_content"];
     self.keyArray = @[@"normalTimePeriod", @"abnormalTimePeriod", @"serverAbnormalTimePeriod"];
     self.pointKeyArray = @[@"normalPeriodPoint", @"abnormalPeriodPoint", @"serverAbnormalPeriodPoint"];
     self.timePointArray = @[@"145, 135.5", @"223.5,182", @"221.4,271.5", @"145, 314.5", @"67,269", @"68.3,178.9"];
@@ -95,14 +96,16 @@
     }
     NSString *tempString = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], self.keyArray[indexPath.row]]];
     
-    NSString *detailString = [self.detailArray[indexPath.row] stringByReplacingOccurrencesOfString:@"$" withString:[SettingData caculateTimePeriodFormatStringWithValue:tempString]];
+    NSString *detailString = [[[LocalizationManager sharedLocalizationManager] getTextByKey:self.detailArray[indexPath.row]] stringByReplacingOccurrencesOfString:@"%1$s" withString:[SettingData caculateTimePeriodFormatStringWithValue:tempString]];
     alertTriggerSelectionCell.checkBoxButton.hidden = YES;
     alertTriggerSelectionCell.districtLineView.frame = CGRectMake(alertTriggerSelectionCell.districtLineView.frame.origin.x, 73, alertTriggerSelectionCell.districtLineView.frame.size.width, alertTriggerSelectionCell.districtLineView.frame.size.height);
-    alertTriggerSelectionCell.mainLabel.text = self.titleArray[indexPath.row];
+    alertTriggerSelectionCell.mainLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:self.titleArray[indexPath.row]];
     alertTriggerSelectionCell.rightDetailLabel.frame = CGRectMake(10, CGRectGetMaxY(alertTriggerSelectionCell.mainLabel.frame), CGRectGetWidth(alertTriggerSelectionCell.districtLineView.frame) - 20, 37);
     alertTriggerSelectionCell.rightDetailLabel.textAlignment = NSTextAlignmentLeft;
 
     alertTriggerSelectionCell.rightDetailLabel.text = detailString;
+    
+    NSLog(@"%@", [SettingData caculateTimePeriodFormatStringWithValue:tempString]);
     return alertTriggerSelectionCell;
 }
 

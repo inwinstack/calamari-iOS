@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UILabel *errorTitleLabel;
 @property (nonatomic, strong) UILabel *errorCountLabel;
 @property (nonatomic, strong) UILabel *errorTimeLabel;
+@property (nonatomic, strong) UIButton *helpButton;
 @property (nonatomic, strong) UILabel *resolveTimeLabel;
 
 - (void) setContentWithContent:(NSString*)content status:(NSString*)status errorTitle:(NSString*)errorTitle errorCount:(NSString*)errorCount errorTimeString:(NSString*)errorTimeString resolveTimeString:(NSString*)resolveTimeString;

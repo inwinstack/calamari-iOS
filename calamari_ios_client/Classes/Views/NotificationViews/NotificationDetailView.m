@@ -46,6 +46,10 @@
         self.resolveTimeLabel.alpha = 0;
         [self addSubview:self.resolveTimeLabel];
         
+        self.helpButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.errorTitleLabel.frame), CGRectGetMinY(self.errorTitleLabel.frame), CGRectGetHeight(self.errorTitleLabel.frame), CGRectGetHeight(self.errorTitleLabel.frame))];
+        [self.helpButton setBackgroundImage:[UIImage imageNamed:@"HelpImage"] forState:UIControlStateNormal];
+        [self addSubview:self.helpButton];
+        
     }
     return self;
 }
@@ -67,6 +71,8 @@
     self.errorTitleLabel.frame = CGRectMake(10, CGRectGetMaxY(self.statusImageView.frame) + 10, 0, 0);
     self.errorTitleLabel.text = errorTitle;
     [self.errorTitleLabel sizeToFit];
+    
+    self.helpButton.frame = CGRectMake(CGRectGetMaxX(self.errorTitleLabel.frame) + 10, CGRectGetMinY(self.errorTitleLabel.frame), CGRectGetHeight(self.errorTitleLabel.frame), CGRectGetHeight(self.errorTitleLabel.frame));
     
     self.errorCountLabel.frame = CGRectMake(10, CGRectGetMaxY(self.errorTitleLabel.frame), 0, 0);
     self.errorCountLabel.text = errorCount;

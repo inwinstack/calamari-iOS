@@ -193,7 +193,6 @@
             if (readError) {
                 error(readError);
             } else {
-
                 [[ClusterData shareInstance].clusterDetailData setObject:receiveObject forKey:[NSString stringWithFormat:@"%@_osd_detail", clusterID]];
                 completion(true);
             }
