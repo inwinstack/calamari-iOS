@@ -18,10 +18,12 @@
 	<string>確認</string>
 	<key>login_developer</key>
 	<string>公司設計開發</string>
+	<key>login_fail_server_error</key>
+	<string>Failed to connect to server !</string>
 	<key>login_sign_in</key>
 	<string>登入</string>
 	<key>login_version</key>
-	<string>Ceph Monitor Version 0.15.0</string>
+	<string>Ceph Monitor Version 0.16.0</string>
 	<key>settings_profile_language</key>
 	<string>語言</string>
 	<key>settings_dialog_save</key>
@@ -30,16 +32,18 @@
 	<string>取消</string>
 	<key>login_fail_sing_in</key>
 	<string>連線錯誤</string>
+	<key>login_account_error</key>
+	<string>無效的帳號或是密碼</string>
 	<key>login_fail_field</key>
 	<string>欄位未填</string>
 	<key>main_activity_fragment_health</key>
 	<string>儀表板</string>
 	<key>main_activity_fragment_health_detail</key>
-	<string>健康詳細資訊</string>
+	<string>健康狀態詳細資訊</string>
 	<key>main_activity_fragment_osd_health</key>
-	<string>OSD 健康</string>
+	<string>OSD 健康狀態</string>
 	<key>main_activity_fragment_mon_health</key>
-	<string>監視器健康</string>
+	<string>監控節點數健康狀態</string>
 	<key>main_activity_fragment_notification</key>
 	<string>通知</string>
 	<key>main_activity_fragment_host_health</key>
@@ -49,9 +53,9 @@
 	<key>main_activity_fragment_usage_status</key>
 	<string>使用量狀態</string>
 	<key>main_activity_fragment_pool_iops</key>
-	<string>集區 IOPS</string>
+	<string>資源池 IOPS</string>
 	<key>main_activity_fragment_pool_list</key>
-	<string>集區列表</string>
+	<string>資源池列表</string>
 	<key>main_activity_option_logs</key>
 	<string>紀錄</string>
 	<key>main_activity_option_setting</key>
@@ -71,33 +75,33 @@
 	<key>health_card_status_error</key>
 	<string>錯誤</string>
 	<key>health_card_health</key>
-	<string>健康</string>
+	<string>健康狀態</string>
 	<key>health_card_ago</key>
 	<string>之前</string>
 	<key>health_card_osd</key>
 	<string>OSD</string>
 	<key>health_card_in_and_up</key>
-	<string>In &amp; Up</string>
+	<string>正常運作中</string>
 	<key>health_card_mon</key>
-	<string>監視器</string>
+	<string>監控節點數</string>
 	<key>health_card_quorum</key>
-	<string>Quorum</string>
+	<string>台</string>
 	<key>health_card_pools</key>
-	<string>集區</string>
+	<string>資源池</string>
 	<key>health_card_active</key>
 	<string>活躍</string>
 	<key>health_card_hosts</key>
-	<string>主機</string>
+	<string>主機數</string>
 	<key>health_card_reporting</key>
-	<string>報告</string>
+	<string>運作中</string>
 	<key>health_card_pg</key>
 	<string>PG 狀態</string>
 	<key>health_card_clean</key>
-	<string>乾淨</string>
+	<string>Clean</string>
 	<key>health_card_Working</key>
-	<string>工作中</string>
+	<string>Working</string>
 	<key>health_card_Dirty</key>
-	<string>污染</string>
+	<string>Dirty</string>
 	<key>health_card_usage</key>
 	<string>使用量</string>
 	<key>health_card_used</key>
@@ -107,7 +111,7 @@
 	<key>health_card_iops</key>
 	<string>IOPS</string>
 	<key>health_card_read_write</key>
-	<string>- 讀取 + 寫入</string>
+	<string>- 讀 + 寫</string>
 	<key>health_card_warnings</key>
 	<string>警告</string>
 	<key>health_card_errors</key>
@@ -131,7 +135,7 @@
 	<key>osd_detail_cluster_ip</key>
 	<string>叢集 IP</string>
 	<key>osd_detail_pools</key>
-	<string>集區</string>
+	<string>資源池</string>
 	<key>osd_detail_re_weight</key>
 	<string>Reweight</string>
 	<key>osd_detail_uuid</key>

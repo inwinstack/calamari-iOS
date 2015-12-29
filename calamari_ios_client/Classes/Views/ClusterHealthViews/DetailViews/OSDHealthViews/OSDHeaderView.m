@@ -26,7 +26,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         float height = (CGRectGetWidth([UIScreen mainScreen].bounds) - CGRectGetWidth([UIScreen mainScreen].bounds) / 16) * 0.85;
-        float imageHeight = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? 21.0 : 9.0;
+        float imageHeight = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? 38.0 : 16.0;
         self.layer.borderWidth = 1.0;
         self.layer.borderColor = [UIColor oceanHorizonRuleTwoColor].CGColor;
         

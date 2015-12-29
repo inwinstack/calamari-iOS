@@ -42,16 +42,18 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-    
-    [[CephAPI shareInstance] startGetAlertTriggerApiWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] Completion:^(BOOL finished) {
-        if (finished) {
+    if (![[[NSBundle mainBundle] infoDictionary][@"isLocalVersion"] boolValue]) {
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+        
+        [[CephAPI shareInstance] startGetAlertTriggerApiWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] Completion:^(BOOL finished) {
+            if (finished) {
+                [SVProgressHUD dismiss];
+            }
+        } error:^(id getError) {
             [SVProgressHUD dismiss];
-        }
-    } error:^(id getError) {
-        [SVProgressHUD dismiss];
-        NSLog(@"%@", getError);
-    }];
+            NSLog(@"%@", getError);
+        }];
+    }
 }
 
 - (void)viewDidLoad {
@@ -251,7 +253,6 @@
 }
 
 - (void) saveAction {
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [self.clockSettingView removeFromSuperview];
     if (self.tempLabel == self.clockSettingView.hourLabel) {
         self.tempHourPoint = self.clockSettingView.circleView.center;
@@ -274,21 +275,25 @@
     [[NSUserDefaults standardUserDefaults] setObject:@[currentHourPointString, currentMinutePointString, currentSecondPointString] forKey:currentPointKey];
     [[(SettingViewCell*)[self.timePeriodView cellForItemAtIndexPath:tempPath] selectionView] reloadData];
 
-    [[CephAPI shareInstance] startPostTimePeroidApiWithHostIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] kind:self.keyKindArray[objectIndex] fieldName:self.keyFieldArray[objectIndex] value:[SettingData caculateTimePeriodTotalWithValue:tempString] completion:^(BOOL finished) {
-        if (finished) {
-            [[CephAPI shareInstance] startGetAlertTriggerApiWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] Completion:^(BOOL finished) {
-                if (finished) {
+    if (![[[NSBundle mainBundle] infoDictionary][@"isLocalVersion"] boolValue]) {
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+        
+        [[CephAPI shareInstance] startPostTimePeroidApiWithHostIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] kind:self.keyKindArray[objectIndex] fieldName:self.keyFieldArray[objectIndex] value:[SettingData caculateTimePeriodTotalWithValue:tempString] completion:^(BOOL finished) {
+            if (finished) {
+                [[CephAPI shareInstance] startGetAlertTriggerApiWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] Completion:^(BOOL finished) {
+                    if (finished) {
+                        [SVProgressHUD dismiss];
+                    }
+                } error:^(id getError) {
                     [SVProgressHUD dismiss];
-                }
-            } error:^(id getError) {
-                [SVProgressHUD dismiss];
-                NSLog(@"%@", getError);
-            }];
-        }
-    } error:^(id postError) {
-        [SVProgressHUD dismiss];
-        NSLog(@"%@", postError);
-    }];
+                    NSLog(@"%@", getError);
+                }];
+            }
+        } error:^(id postError) {
+            [SVProgressHUD dismiss];
+            NSLog(@"%@", postError);
+        }];
+    }
 }
 
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

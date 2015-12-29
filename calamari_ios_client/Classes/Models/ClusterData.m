@@ -254,7 +254,7 @@
     [PGData shareInstance].criticalCount = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"kind_health_counters"][@"pg"][@"critical"][@"count"]];
     [PGData shareInstance].warnCount = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"kind_health_counters"][@"pg"][@"warn"][@"count"]];
     [PGData shareInstance].okCount = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"kind_health_counters"][@"pg"][@"ok"][@"count"]];
-    [PGData shareInstance].pgDic = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"kind_osd"][@"pg_state_counts"]];
+    [PGData shareInstance].pgDic = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"kind_pg_state_counts"]];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         completion(true);
     });

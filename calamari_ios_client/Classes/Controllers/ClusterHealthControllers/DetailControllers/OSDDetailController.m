@@ -37,6 +37,8 @@
     self.osdDetailView.uuidValueLabel.text = [NSString stringWithFormat:@"%@", self.currentOSDDictionary[@"uuid"]];
     float reweight = [[ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_osd_detail", [ClusterData shareInstance].clusterArray[0][@"id"]]][@"reweight"] floatValue] / 1.0;
     self.osdDetailView.reWeightValueLabel.text = [NSString stringWithFormat:@"%d%%", (int)(reweight * 100.0)];
+//    [self.osdDetailView setPoolLabelsArray:@[@"Teset", @"FrancisHu770410@gmail.com", @"nutc.imac", @"1234", @"I Love My Family and I want world peace", @"Franc", @"Teset", @"FrancisHu770410@gmail.com", @"nutc.imac", @"1234", @"I Love My Family and I want world peace", @"Franc"]];
+
     [self.osdDetailView setPoolLabelsArray:(NSArray*)self.currentOSDDictionary[@"pools"]];
     [self.view addSubview:self.osdDetailView];
     self.navigationItem.title = [NSString stringWithFormat:@"%ld", (long)self.currentIndex];

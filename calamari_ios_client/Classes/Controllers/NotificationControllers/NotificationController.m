@@ -94,7 +94,6 @@
     notificationCell.statusImageView.image = ([statusString isEqualToString:@"Pending"]) ? [UIImage imageNamed:@"NotificationPendingImage"] : [UIImage imageNamed:@"NotificationResolvedImage"];
     
     notificationCell.statusTimeLabel.text = ([statusString isEqualToString:@"Pending"]) ? [NSString stringWithFormat:@" - %@", [[DateMaker shareDateMaker] getTodayWithNotificationFormatWithTimeStamp:[cellDictionary[@"Time"] doubleValue]]] : [NSString stringWithFormat:@" - %@", [[DateMaker shareDateMaker] getTodayWithNotificationFormatWithTimeStamp:[cellDictionary[@"ResolveTime"] doubleValue]]] ;
-    notificationCell.archiveButton.hidden = ([statusString isEqualToString:@"Pending"]);
     return notificationCell;
 }
 

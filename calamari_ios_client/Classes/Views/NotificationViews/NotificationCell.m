@@ -44,9 +44,6 @@
         self.statusTimeLabel.textColor = [UIColor unitTextDefalutGrayColor];
         [self addSubview:self.statusTimeLabel];
         
-        self.archiveButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.frame) - (20 + [UIView subHeadIconSize]), CGRectGetMinY(self.alertContentLabel.frame), [UIView subHeadIconSize], [UIView subHeadIconSize])];
-        [self.archiveButton setBackgroundImage:[UIImage imageNamed:@"NotificationArchiveImage"] forState:UIControlStateNormal];
-        [self addSubview:self.archiveButton];
     }
     return self;
 }

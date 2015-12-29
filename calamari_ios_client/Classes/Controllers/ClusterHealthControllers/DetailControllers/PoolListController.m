@@ -56,7 +56,7 @@
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return CGRectGetWidth([UIScreen mainScreen].bounds) * 0.43;
+    return 150;
 }
 
 - (void)didReceiveMemoryWarning {
