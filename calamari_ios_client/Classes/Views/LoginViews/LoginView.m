@@ -171,7 +171,7 @@
     self.accountField.layer.borderColor = [UIColor oceanBackgroundTwoColor].CGColor;
     self.passwordField.layer.borderColor = [UIColor oceanBackgroundTwoColor].CGColor;
     if (field) {
-        field.layer.borderColor = [UIColor errorColor].CGColor;
+        field.layer.borderColor = [UIColor normalBlueColor].CGColor;
     }
 }
 

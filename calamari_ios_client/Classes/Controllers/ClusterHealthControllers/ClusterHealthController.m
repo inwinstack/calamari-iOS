@@ -17,6 +17,7 @@
 #import "CephAPI.h"
 #import "NotificationData.h"
 #import "LocalizationManager.h"
+#import "SettingData.h"
 
 @interface ClusterHealthController ()
 
@@ -45,12 +46,14 @@
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
         [[CephAPI shareInstance] startGetClusterDetailAtBackgroundCompletion:^(BOOL finished) {
             if (finished) {
-                [[NotificationData shareInstance] restartTimerWithTimeInterval:10];
+                [[NotificationData shareInstance] restartTimerWithTimeInterval:[[SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_normalTimePeriod", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]]] integerValue]];
+                [[NotificationData shareInstance] startDashBoardTimer];
                 [SVProgressHUD dismiss];
             }
         } error:^(id error) {
             if (error) {
-                [[NotificationData shareInstance] restartTimerWithTimeInterval:10];
+                [[NotificationData shareInstance] restartTimerWithTimeInterval:[[SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_normalTimePeriod", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]]] integerValue]];
+                [[NotificationData shareInstance] startDashBoardTimer];
                 [SVProgressHUD dismiss];
                 NSLog(@"%@", error);
             }
@@ -62,7 +65,7 @@
     self.currentTimeString = @"0";
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHealthCardAction:) name:@"timeAddAction" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshAction) name:@"didRefreshAction" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshAction) name:@"didRefreshDashBoardAction" object:nil];
     self.navigationController.navigationBar.translucent = NO;
     self.flowLayout = [[ClusterHealthViewFlowLayout alloc] init];
     self.clusterHealthView = [[ClusterHealthView alloc] initWithFrame:self.view.frame collectionViewLayout:self.flowLayout];

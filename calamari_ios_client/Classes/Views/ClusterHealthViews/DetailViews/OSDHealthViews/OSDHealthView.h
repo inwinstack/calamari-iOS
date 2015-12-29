@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OSDHeaderView.h"
 
-@interface OSDHealthView : UICollectionView
+@interface OSDHealthView : UIView
 
 @property (nonatomic, strong) UIImageView *okView;
 @property (nonatomic, strong) UILabel *okLabel;
+@property (nonatomic, strong) UICollectionView *contentCollectionView;
+@property (nonatomic, strong) OSDHeaderView *osdHealthToolBar;
 
 @end

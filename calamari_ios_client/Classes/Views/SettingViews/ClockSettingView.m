@@ -41,6 +41,7 @@
         [self addSubview:self.blackBackgroundView];
         
         self.clockBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 145, CGRectGetMidY(self.frame) - 225, 290, 450)];
+        self.clockBackgroundView.layer.cornerRadius = 5.0;
         [self addSubview:self.clockBackgroundView];
         
         self.titleBackgroundLayer = [CAShapeLayer layer];
@@ -49,7 +50,7 @@
         
         self.allViewLayer = [CAShapeLayer layer];
         self.allViewLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.clockBackgroundView.frame), 450);
-        self.allViewLayer.path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, CGRectGetWidth(self.clockBackgroundView.frame), 400)].CGPath;
+        self.allViewLayer.path = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, CGRectGetWidth(self.clockBackgroundView.frame), 450)].CGPath;
         
         self.allViewLayer.fillColor = [UIColor oceanBackgroundThreeColor].CGColor;
         self.allViewLayer.mask = self.titleBackgroundLayer;
@@ -60,9 +61,11 @@
         [self.saveButton setTitleColor:[UIColor oceanNavigationBarColor] forState:UIControlStateNormal];
         [self.saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
         self.saveButton.backgroundColor = [UIColor oceanBackgroundThreeColor];
+        self.saveButton.layer.cornerRadius = 5.0;
         [self.clockBackgroundView addSubview:self.saveButton];
         
         self.cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 400, CGRectGetWidth(self.clockBackgroundView.frame) / 2.0, 50)];
+        self.cancelButton.layer.cornerRadius = 5.0;
         [self.cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
         self.cancelButton.backgroundColor = [UIColor oceanBackgroundThreeColor];
         [self.cancelButton setTitleColor:[UIColor normalBlackColor] forState:UIControlStateNormal];

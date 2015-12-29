@@ -158,7 +158,7 @@
                 
             case 2:
                 cell.mainLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"settings_about_version"];
-                cell.rightDetailLabel.text = @"0.13.0";
+                cell.rightDetailLabel.text = @"0.14.0";
                 cell.checkBoxButton.hidden = YES;
                 break;
         }

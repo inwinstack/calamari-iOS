@@ -192,7 +192,8 @@
                                                                                                         weakself.navigationController.navigationBarHidden = NO;
                                                                                                         weakself.clusterHealthController = [[ClusterHealthController alloc] init];
                                                                                                         [weakself.navigationController pushViewController:weakself.clusterHealthController animated:YES];
-                                                                                                        [[NotificationData shareInstance] restartTimerWithTimeInterval:10];
+                                                                                                        [[NotificationData shareInstance] restartTimerWithTimeInterval:30];
+                                                                                                        [[NotificationData shareInstance] startDashBoardTimer];
                                                                                                         
                                                                                                     }
                                                                                                 } error:^(id error) {
