@@ -66,6 +66,10 @@
         
         self.uuidValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(height * 5 / 255, CGRectGetMaxY(self.uuidTitleLabel.frame), CGRectGetWidth(self.frame) - height * 10 / 255, 15)];
         [self setValueLabel:self.uuidValueLabel];
+        
+        self.reweightHelpButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.reWeightTitleLabel.frame) + 20, CGRectGetMinY(self.reWeightTitleLabel.frame), 20, 20)];
+        [self.reweightHelpButton setBackgroundImage:[UIImage imageNamed:@"HelpImage"] forState:UIControlStateNormal];
+        [self addSubview:self.reweightHelpButton];
     }
     return self;
 }
@@ -116,7 +120,10 @@
         firstTime = false;
     }
     
-    self.reWeightTitleLabel.frame = CGRectMake(height * 5 / 255, CGRectGetMaxY([[self.subviews lastObject] frame]) +  height * 10 / 255, CGRectGetWidth(self.frame) -  height * 10 / 255,  25);
+    self.reWeightTitleLabel.frame = CGRectMake(height * 5 / 255, CGRectGetMaxY([[self.subviews lastObject] frame]) +  height * 10 / 255, 0,  25);
+    [self.reWeightTitleLabel sizeToFit];
+    self.reweightHelpButton.frame = CGRectMake(CGRectGetMaxX(self.reWeightTitleLabel.frame) + 15, CGRectGetMidY(self.reWeightTitleLabel.frame) - 7.5, 15, 15);
+    
     self.reWeightValueLabel.frame = CGRectMake(height * 5 / 255, CGRectGetMaxY(self.reWeightTitleLabel.frame), CGRectGetWidth(self.frame) -  height * 10 / 255,  15);
     self.uuidTitleLabel.frame = CGRectMake(height * 5 / 255, CGRectGetMaxY(self.reWeightValueLabel.frame) + height * 10 / 255, CGRectGetWidth(self.frame) - height * 10 / 255, 25);
     self.uuidValueLabel.frame = CGRectMake(height * 5 / 255, CGRectGetMaxY(self.uuidTitleLabel.frame), CGRectGetWidth(self.frame) - height * 10 / 255, 15);

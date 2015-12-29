@@ -19,13 +19,13 @@
 	<key>login_account_error</key>
 	<string>ユーザー名またはパスワードが違います</string>
 	<key>login_fail_server_error</key>
-	<string>Failed to connect to server !</string>
+	<string>Connection Server 障害!</string>
 	<key>login_developer</key>
 	<string>によって開発され</string>
 	<key>login_sign_in</key>
 	<string>ログイン</string>
 	<key>login_version</key>
-	<string>Ceph モニター版 0.16.0</string>
+	<string>Ceph モニター版 0.17.0</string>
 	<key>settings_profile_language</key>
 	<string>言語</string>
 	<key>settings_dialog_save</key>
@@ -43,7 +43,7 @@
 	<key>main_activity_fragment_osd_health</key>
 	<string>OSD ヘルス</string>
 	<key>main_activity_fragment_mon_health</key>
-	<string>MON ヘルス</string>
+	<string>ノード健康状態の監視</string>
 	<key>main_activity_fragment_notification</key>
 	<string>通知</string>
 	<key>main_activity_fragment_host_health</key>
@@ -81,11 +81,11 @@
 	<key>health_card_osd</key>
 	<string>OSD</string>
 	<key>health_card_in_and_up</key>
-	<string>In &amp; Up</string>
+	<string>通常運転中</string>
 	<key>health_card_mon</key>
 	<string>モニター</string>
 	<key>health_card_quorum</key>
-	<string>Quorum</string>
+	<string>ノード監視</string>
 	<key>health_card_pools</key>
 	<string>プール</string>
 	<key>health_card_active</key>
@@ -93,7 +93,7 @@
 	<key>health_card_hosts</key>
 	<string>ホスト</string>
 	<key>health_card_reporting</key>
-	<string>報告</string>
+	<string>運転中</string>
 	<key>health_card_pg</key>
 	<string>PG ステータス</string>
 	<key>health_card_clean</key>
@@ -137,7 +137,7 @@
 	<key>osd_detail_pools</key>
 	<string>プール</string>
 	<key>osd_detail_re_weight</key>
-	<string>Reweight</string>
+	<string>重量配分</string>
 	<key>osd_detail_uuid</key>
 	<string>UUID</string>
 	<key>pool_list_id_replicas</key>
@@ -255,13 +255,13 @@
 	<key>notification_detail_resolved_title</key>
 	<string>で解決</string>
 	<key>Warnings</key>
-	<string>警告</string>
+	<string>発生した警告の数</string>
 	<key>Errors</key>
 	<string>エラー</string>
 	<key>Error ratio</key>
 	<string>誤り率</string>
 	<key>Warning ratio</key>
-	<string>警告比</string>
+	<string>警告比率</string>
 	<key>NotificationTitleWarning</key>
 	<string>ストレージシステム警告</string>
 	<key>NotificationTitleError</key>
@@ -310,5 +310,29 @@
 	<string>使用率が %1$s を超えた場合に警報を発します</string>
 	<key>Usage</key>
 	<string>ユーセージ</string>
+	<key>osd_detail_re_weight_help_title</key>
+	<string>説明</string>
+	<key>osd_detail_re_weight_help</key>
+	<string>重量配分は、OSD容量の調整値であります、プリセット値100%。各OSDの記憶容量は、バランスではない場合、重量配分はOSD使用状態のバランスをとるために一時的に調整する。</string>
+	<key>notification_detail_count_help</key>
+	<string>エラー番号は、システムの警告やシステムエラーの合計数です。この値が原因でシステムの状態に増加します。これは、システムの最大値を超えること。</string>
+	<key>settings_time_period_normal_title</key>
+	<string>プリセット監視周期</string>
+	<key>settings_time_period_normal_content</key>
+	<string>%1$sに1回、システムの健康状態をチェックします</string>
+	<key>settings_time_period_abnormal_title</key>
+	<string>例外監視周期</string>
+	<key>settings_time_period_abnormal_content</key>
+	<string>%1$sに1回、システムの健康状態をチェックします</string>
+	<key>settings_time_period_server_abnormal_title</key>
+	<string>サーバ例外監視周期</string>
+	<key>settings_time_period_server_abnormal_content</key>
+	<string>%1$sに1回、サーバの健康状態をチェックします</string>
+	<key>other_time_unit_hour</key>
+	<string>時間</string>
+	<key>other_time_unit_min</key>
+	<string>分</string>
+	<key>other_time_unit_sec</key>
+	<string>秒</string>
 </dict>
 </plist>

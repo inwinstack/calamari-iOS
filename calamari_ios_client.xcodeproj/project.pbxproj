@@ -111,6 +111,7 @@
 		15CFFA391BCCC43F008CFBB7 /* TimePeriodView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CFFA381BCCC43F008CFBB7 /* TimePeriodView.m */; };
 		15CFFA3C1BCCDE82008CFBB7 /* ClockSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CFFA3B1BCCDE82008CFBB7 /* ClockSettingView.m */; };
 		15E2DC7B1BE7BF3600B33650 /* mute.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 15E2DC7A1BE7BF3600B33650 /* mute.mp3 */; };
+		394DB26A1C2301890071C016 /* HelpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 394DB2691C2301890071C016 /* HelpView.m */; };
 		39610B741BFB32040077E806 /* TestNewApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 39610B731BFB32040077E806 /* TestNewApi.m */; };
 		4F2D199058C3A0107D7AE603 /* libPods-calamari_ios_client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D56DBF74FAD2FCBB66FDFC /* libPods-calamari_ios_client.a */; };
 /* End PBXBuildFile section */
@@ -329,6 +330,8 @@
 		15CFFA3A1BCCDE82008CFBB7 /* ClockSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClockSettingView.h; sourceTree = "<group>"; };
 		15CFFA3B1BCCDE82008CFBB7 /* ClockSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockSettingView.m; sourceTree = "<group>"; };
 		15E2DC7A1BE7BF3600B33650 /* mute.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mute.mp3; sourceTree = "<group>"; };
+		394DB2681C2301890071C016 /* HelpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpView.h; sourceTree = "<group>"; };
+		394DB2691C2301890071C016 /* HelpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpView.m; sourceTree = "<group>"; };
 		39610B731BFB32040077E806 /* TestNewApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestNewApi.m; sourceTree = "<group>"; };
 		A765B40473C3A8E0E63212ED /* Pods-calamari_ios_client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calamari_ios_client.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calamari_ios_client/Pods-calamari_ios_client.debug.xcconfig"; sourceTree = "<group>"; };
 		D6D56DBF74FAD2FCBB66FDFC /* libPods-calamari_ios_client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-calamari_ios_client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -540,6 +543,8 @@
 				15550D0F1BB0F03B00471D62 /* NavigationViews */,
 				15550D141BB0F03B00471D62 /* NotificationViews */,
 				15550D1D1BB0F03B00471D62 /* SettingViews */,
+				394DB2681C2301890071C016 /* HelpView.h */,
+				394DB2691C2301890071C016 /* HelpView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1095,6 +1100,7 @@
 				15550D5E1BB0F03B00471D62 /* OSDHealthViewCell.m in Sources */,
 				15550D291BB0F03B00471D62 /* PoolListController.m in Sources */,
 				15550D561BB0F03B00471D62 /* HostHealthView.m in Sources */,
+				394DB26A1C2301890071C016 /* HelpView.m in Sources */,
 				15550D7B1BB0FE8F00471D62 /* SettingViewCell.m in Sources */,
 				15550D471BB0F03B00471D62 /* ClusterHealthCellBar.m in Sources */,
 				15550D3E1BB0F03B00471D62 /* UIView+SizeMaker.m in Sources */,

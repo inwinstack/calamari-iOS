@@ -11,6 +11,9 @@
 #import "OSDDetailView.h"
 #import "ClusterData.h"
 #import "OSDHealthData.h"
+#import "UIView+SizeMaker.h"
+#import "HelpView.h"
+#import "LocalizationManager.h"
 
 @interface OSDDetailController ()
 
@@ -41,6 +44,8 @@
 
     [self.osdDetailView setPoolLabelsArray:(NSArray*)self.currentOSDDictionary[@"pools"]];
     [self.view addSubview:self.osdDetailView];
+    
+    [self.osdDetailView.reweightHelpButton addTarget:self action:@selector(reweightHelpAction) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.title = [NSString stringWithFormat:@"%ld", (long)self.currentIndex];
     switch (self.OSDdetailType) {
         case OSDDetailOKType: {
@@ -60,6 +65,11 @@
     } completion:^(BOOL finished) {
         self.osdDetailView.alpha = 1;
     }];
+}
+
+- (void) reweightHelpAction {
+    HelpView *helpView = [[HelpView alloc] initWithTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"osd_detail_re_weight_help_title"] message:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"osd_detail_re_weight_help"]];
+    [self.view.window addSubview:helpView];
 }
 
 - (void)didReceiveMemoryWarning {
