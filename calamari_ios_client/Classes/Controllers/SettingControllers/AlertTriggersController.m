@@ -14,7 +14,9 @@
 #import "SettingData.h"
 #import "AlertTriggerCalculatorView.h"
 #import "ClusterData.h"
+#import "CephAPI.h"
 #import "LocalizationManager.h"
+#import "SVProgressHUD.h"
 
 @interface AlertTriggersController () <UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -28,11 +30,26 @@
 @property (nonatomic, strong) NSArray *minArray;
 @property (nonatomic, strong) NSArray *locationWarnKeyArray;
 @property (nonatomic, strong) NSArray *locationErrorKeyArray;
+@property (nonatomic, strong) NSArray *updateKeyArray;
 @property (nonatomic, strong) AlertTriggerCalculatorView *alertCalculatorView;
 
 @end
 
 @implementation AlertTriggersController
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    
+    [[CephAPI shareInstance] startGetAlertTriggerApiWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] Completion:^(BOOL finished) {
+        if (finished) {
+            [SVProgressHUD dismiss];
+        }
+    } error:^(id getError) {
+        [SVProgressHUD dismiss];
+        NSLog(@"%@", getError);
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,6 +72,7 @@
     self.locationErrorKeyArray = @[@"alert_triggers_osd_error_detail", @"alert_triggers_mon_error_detail", @"alert_triggers_pg_error_detail", @"alert_triggers_usage_error_detail"];
     self.locationWarnKeyArray = @[@"alert_triggers_osd_warning_detail", @"alert_triggers_mon_warning_detail", @"alert_triggers_pg_warning_detail", @"alert_triggers_usage_warning_detail"];
     self.minArray = @[@"1", @"1", @"20"];
+    self.updateKeyArray = @[@"osd", @"mon", @"pg", @"usage"];
     [self.alertTriggersView registerClass:[SettingViewCell class] forCellWithReuseIdentifier:@"AlertTriggersCellIdentifer"];
 }
 
@@ -122,21 +140,50 @@
 }
 
 - (void) enterAction {
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     NSRange tempSearchSpaceRange = [self.alertCalculatorView.titleLabel.text rangeOfString:@" "];
     NSInteger objectIndex = [self.calculatorNameArray indexOfObject:[self.alertCalculatorView.titleLabel.text substringToIndex:tempSearchSpaceRange.location]];
+    
     if ([[self.alertCalculatorView.titleLabel.text substringFromIndex:tempSearchSpaceRange.location + tempSearchSpaceRange.length] isEqualToString:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"Warnings"]]) {
-        [[NSUserDefaults standardUserDefaults] setObject:self.alertCalculatorView.numberLabel.text forKey:[NSString stringWithFormat:@"%@_%@TriggerWarn", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], self.keyNameArray[objectIndex]]];
+        [[CephAPI shareInstance] startPostAlertTriggerApiWithHostIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] kind:self.updateKeyArray[objectIndex] warnError:@"warning" fieldName:[NSString stringWithFormat:@"%@_warning", self.updateKeyArray[objectIndex]] value:self.alertCalculatorView.numberLabel.text completion:^(BOOL finished) {
+            if (finished) {
+                [[CephAPI shareInstance] startGetAlertTriggerApiWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] Completion:^(BOOL finished) {
+                    if (finished) {
+                        [SVProgressHUD dismiss];
+                        NSIndexPath *reloadPath = [NSIndexPath indexPathForItem:objectIndex inSection:0];
+                        [[(SettingViewCell*)[self.alertTriggersView cellForItemAtIndexPath:reloadPath] selectionView] reloadData];
+                    }
+                } error:^(id getError) {
+                    [SVProgressHUD dismiss];
+                    NSLog(@"%@", getError);
+                }];
+            }
+        } error:^(id postError) {
+            [SVProgressHUD dismiss];
+            NSLog(@"%@", postError);
+        }];
     } else {
-        [[NSUserDefaults standardUserDefaults] setObject:self.alertCalculatorView.numberLabel.text forKey:[NSString stringWithFormat:@"%@_%@TriggerError", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], self.keyNameArray[objectIndex]]];
+        [[CephAPI shareInstance] startPostAlertTriggerApiWithHostIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] kind:self.updateKeyArray[objectIndex] warnError:@"error" fieldName:[NSString stringWithFormat:@"%@_error", self.updateKeyArray[objectIndex]] value:self.alertCalculatorView.numberLabel.text completion:^(BOOL finished) {
+            if (finished) {
+                [[CephAPI shareInstance] startGetAlertTriggerApiWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] Completion:^(BOOL finished) {
+                    if (finished) {
+                        [SVProgressHUD dismiss];
+                        NSIndexPath *reloadPath = [NSIndexPath indexPathForItem:objectIndex inSection:0];
+                        [[(SettingViewCell*)[self.alertTriggersView cellForItemAtIndexPath:reloadPath] selectionView] reloadData];
+                    }
+                } error:^(id getError) {
+                    [SVProgressHUD dismiss];
+                    NSLog(@"%@", getError);
+                }];
+            }
+        } error:^(id postError) {
+            [SVProgressHUD dismiss];
+            NSLog(@"%@", postError);
+        }];
         
     }
-    [[SettingData shareSettingData] setTriggerArray];
-
     [self.alertCalculatorView removeFromSuperview];
     
-    NSIndexPath *reloadPath = [NSIndexPath indexPathForItem:objectIndex inSection:0];
-    [[(SettingViewCell*)[self.alertTriggersView cellForItemAtIndexPath:reloadPath] selectionView] reloadData];
-
 }
 
 - (int) totalMaxWithType:(AlertCalculatorType)alertCalculatorType {

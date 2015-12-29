@@ -111,6 +111,7 @@
 		15CFFA391BCCC43F008CFBB7 /* TimePeriodView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CFFA381BCCC43F008CFBB7 /* TimePeriodView.m */; };
 		15CFFA3C1BCCDE82008CFBB7 /* ClockSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CFFA3B1BCCDE82008CFBB7 /* ClockSettingView.m */; };
 		15E2DC7B1BE7BF3600B33650 /* mute.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 15E2DC7A1BE7BF3600B33650 /* mute.mp3 */; };
+		39610B741BFB32040077E806 /* TestNewApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 39610B731BFB32040077E806 /* TestNewApi.m */; };
 		4F2D199058C3A0107D7AE603 /* libPods-calamari_ios_client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6D56DBF74FAD2FCBB66FDFC /* libPods-calamari_ios_client.a */; };
 /* End PBXBuildFile section */
 
@@ -328,6 +329,7 @@
 		15CFFA3A1BCCDE82008CFBB7 /* ClockSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClockSettingView.h; sourceTree = "<group>"; };
 		15CFFA3B1BCCDE82008CFBB7 /* ClockSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockSettingView.m; sourceTree = "<group>"; };
 		15E2DC7A1BE7BF3600B33650 /* mute.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mute.mp3; sourceTree = "<group>"; };
+		39610B731BFB32040077E806 /* TestNewApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestNewApi.m; sourceTree = "<group>"; };
 		A765B40473C3A8E0E63212ED /* Pods-calamari_ios_client.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calamari_ios_client.debug.xcconfig"; path = "Pods/Target Support Files/Pods-calamari_ios_client/Pods-calamari_ios_client.debug.xcconfig"; sourceTree = "<group>"; };
 		D6D56DBF74FAD2FCBB66FDFC /* libPods-calamari_ios_client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-calamari_ios_client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCD9E3BA2309249C5C33E062 /* Pods-calamari_ios_client.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calamari_ios_client.release.xcconfig"; path = "Pods/Target Support Files/Pods-calamari_ios_client/Pods-calamari_ios_client.release.xcconfig"; sourceTree = "<group>"; };
@@ -839,6 +841,7 @@
 			children = (
 				15CACE241BA5276300DFD26B /* calamari_ios_clientTests.m */,
 				15CACE221BA5276300DFD26B /* Supporting Files */,
+				39610B731BFB32040077E806 /* TestNewApi.m */,
 			);
 			path = calamari_ios_clientTests;
 			sourceTree = "<group>";
@@ -920,7 +923,7 @@
 				TargetAttributes = {
 					15CACE041BA5276300DFD26B = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = MQTK4RU7AZ;
+						DevelopmentTeam = S8FBP4YLUA;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1117,6 +1120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15CACE251BA5276300DFD26B /* calamari_ios_clientTests.m in Sources */,
+				39610B741BFB32040077E806 /* TestNewApi.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1220,10 +1224,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = calamari_ios_client/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.inwinSTACK.CephMonitor;
+				PRODUCT_BUNDLE_IDENTIFIER = Francis.inWinStackCeph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1236,10 +1241,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = calamari_ios_client/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.inwinSTACK.CephMonitor;
+				PRODUCT_BUNDLE_IDENTIFIER = Francis.inWinStackCeph;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

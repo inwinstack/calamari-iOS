@@ -87,4 +87,24 @@
     return [NSString stringWithFormat:@"http://%@:%@/graphite/render/?format=json-array&target=%@.iops", ip, port, iopsID];
 }
 
++ (NSString*) getAlertRuleStringWithHostIp:(NSString*)hostIp port:(NSString *)port {
+    return [NSString stringWithFormat:@"http://%@/api/v1/user/me/alert_rule", hostIp];
+}
+
++ (NSString*) getSetAlertTriggerStringWithHostIp:(NSString*)hostIp port:(NSString*)port kind:(NSString *)kind warnError:(NSString *)warnError {
+    return [NSString stringWithFormat:@"http://%@/api/v1/user/me/%@/%@", hostIp, kind, warnError];
+}
+
++ (NSString*) getSetTimePeriodStringWithHostIp:(NSString *)hostIp port:(NSString *)port kind:(NSString *)kind {
+    return [NSString stringWithFormat:@"http://%@/api/v1/user/me/polling/%@", hostIp, kind];
+}
+
++ (NSString*) getUserInfoWithIP:(NSString *)ip Port:(NSString *)port {
+    return [NSString stringWithFormat:@"http://%@:%@/api/v1/user/me", ip, port];
+}
+
++ (NSString*) getSetEmailEnableUrlStringWithHostIp:(NSString *)hostIp port:(NSString *)port {
+    return [NSString stringWithFormat:@"http://%@:%@/api/v1/user/me/email/notify", hostIp, port];
+}
+
 @end

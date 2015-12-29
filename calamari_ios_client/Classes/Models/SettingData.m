@@ -62,12 +62,40 @@
 }
 
 + (NSString*) caculateTimePeriodFormatStringWithValue:(NSString*)value {
-    NSString *hourString = ([[value substringToIndex:2] intValue] > 0) ? [NSString stringWithFormat:@"%d hours ", [[value substringToIndex:2] intValue]] : @"";
+    NSString *hourString = @"";
+    if ([[value substringToIndex:2] intValue] > 0) {
+        int hourValue = [[value substringToIndex:2] intValue];
+        hourString = (hourValue > 1) ? [NSString stringWithFormat:@"%d hours ", hourValue] : [NSString stringWithFormat:@"%d hour ", hourValue];
+    }
     
-    NSString *minuteString = ([[value substringWithRange:NSMakeRange(2, 2)] intValue] > 0) ? [NSString stringWithFormat:@"%d minutes ", [[value substringWithRange:NSMakeRange(2, 2)] intValue]] : @"";
+    NSString *minuteString = @"";
     
-    NSString *secondString = ([[value substringFromIndex:4] intValue] > 0) ? [NSString stringWithFormat:@"%d seconds", [[value substringFromIndex:4] intValue]] : @"";
+    if ([[value substringWithRange:NSMakeRange(2, 2)] intValue] > 0) {
+        int minuteValue = [[value substringWithRange:NSMakeRange(2, 2)] intValue];
+        minuteString = (minuteValue > 1) ? [NSString stringWithFormat:@"%d minutes ", minuteValue] : [NSString stringWithFormat:@"%d minute ", minuteValue];
+    }
+    
+    NSString *secondString = @"";
+    
+    if ([[value substringFromIndex:4] intValue] > 0) {
+        int secondValue = [[value substringFromIndex:4] intValue];
+        secondString = (secondValue > 1) ? [NSString stringWithFormat:@"%d seconds", secondValue] : [NSString stringWithFormat:@"%d second", secondValue];
+    }
+    
     return [NSString stringWithFormat:@"%@%@%@", hourString, minuteString, secondString];
+}
+
++ (NSString*) timePeriodFormatWithValue:(NSString*)value {
+    NSInteger valueInteger = [value integerValue];
+    NSInteger hourValue = valueInteger / 3600;
+    NSString *hourString = (hourValue < 10) ? [NSString stringWithFormat:@"0%ld", (long)hourValue] : [NSString stringWithFormat:@"%ld", (long)hourValue];
+    NSInteger minuteValue = (valueInteger % 3600) / 60;
+    NSString *minuteString = (minuteValue < 10) ? [NSString stringWithFormat:@"0%ld", (long)minuteValue] : [NSString stringWithFormat:@"%ld", (long)minuteValue];
+
+    NSInteger secondValue = (valueInteger % 60);
+    NSString *secondString = (secondValue < 10) ? [NSString stringWithFormat:@"0%ld", (long)secondValue] : [NSString stringWithFormat:@"%ld", (long)secondValue];
+    return [NSString stringWithFormat:@"%@%@%@", hourString, minuteString, secondString];
+    
 }
 
 + (NSString*) caculateTimePeriodTotalWithValue:(NSString *)value {

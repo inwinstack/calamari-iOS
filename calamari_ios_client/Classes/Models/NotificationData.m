@@ -56,6 +56,7 @@
         self.notificationUsageContentArray = @[@"Disk usage exceeds 70%!Please expand the storage capacity!", @"Not enough free space! Please expand the storage capacity immediately!", @"Storage capacity has been expanded!"];
         self.notificationContentDetailArray = @[@[@"OSD is in abnormal status!", @"OSD comes new abnormal status!", @"OSD comes new abnormal status!", @"OSD has been repaired!"], @[@"Monitor is in abnormal status!", @"Monitor comes new abnormal status!", @"Monitor comes new abnormal status!", @"Monitor has been repaired!"], @[@"Some PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"PGs have been repaired!"]];
         self.notificationUsageContentDetailArray = @[@"Disk usage exceeds 70%! Please expand the storage capacity!", @"Disk usage exceeds 85%! Please expand the storage capacity!", @"Storage capacity has been expanded!"];
+//        self.notificationUsageContentArray = @[@"Disk usage exceeds 70%!Please expand the storage capacity!", @"Not enough free space! Please expand the storage capacity immediately!", @"Storage capacity has been expanded!"];
         timeCount = 0;
         dashBoardCount = 0;
     }
@@ -79,12 +80,13 @@
 
 - (void) resetRecord {
     NSString *currentHostIp = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"];
-    self.warnOriginalArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_WarnPreviousRecord", currentHostIp]]];
-    self.warnPreviousArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_WarnOriginalRecord", currentHostIp]]];
+
+    self.warnPreviousArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_WarnPreviousRecord", currentHostIp]]];
+    self.warnOriginalArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_WarnOriginalRecord", currentHostIp]]];
     self.notificationErrorCountArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_ErrorCountRecord", currentHostIp]]];
     self.notificationWarnCountArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_WarnCountRecord", currentHostIp]]];
-    self.errorOriginalArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_ErrorPreviousRecord", currentHostIp]]];
-    self.errorPreviousArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_ErrorOriginalRecord", currentHostIp]]];
+    self.errorPreviousArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_ErrorPreviousRecord", currentHostIp]]];
+    self.errorOriginalArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_ErrorOriginalRecord", currentHostIp]]];
 }
 
 - (void) startTimer {
@@ -106,6 +108,7 @@
 - (void) refreshAction {
     timeCount++;
     if (timeCount == [self.warnSec intValue]) {
+        NSLog(@"%@", self.warnSec);
         timeCount = 0;
         [self stopTimer];
         __weak typeof(self) weakSelf = self;
@@ -165,15 +168,24 @@
 
             float tempUsageErrorTrigger = [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_UsageTriggerError", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] floatValue] / 100.0;
             float tempUsageWarnTrigger = [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_UsageTriggerWarn", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] floatValue] / 100.0;
-            
+            NSString *currentHostIp = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"];
+
             if (usagePercent >= tempUsageErrorTrigger) {
-                [self makeNotificationStringWithUsageType:UsageErrorType];
-                [self addToNotificationArrayWithUsageType:UsageErrorType usagePercent:usagePercentString];
+                self.warnSec = [SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_abnormalTimePeriod", currentHostIp]]];
+                
+                if (![self.errorPreviousArray[loopCount] isEqualToString:@"1"]) {
+                    [self makeNotificationStringWithUsageType:UsageErrorType];
+                    [self addToNotificationArrayWithUsageType:UsageErrorType usagePercent:usagePercentString];
+                }
                 self.warnPreviousArray[loopCount] = @"0";
                 self.errorPreviousArray[loopCount] = @"1";
             } else if (usagePercent >= tempUsageWarnTrigger) {
-                [self makeNotificationStringWithUsageType:UsageWarnType];
-                [self addToNotificationArrayWithUsageType:UsageWarnType usagePercent:usagePercentString];
+                self.warnSec = [SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_abnormalTimePeriod", currentHostIp]]];
+                if ([self.warnPreviousArray[loopCount] isEqualToString:@"0"]) {
+                    [self makeNotificationStringWithUsageType:UsageWarnType];
+                    [self addToNotificationArrayWithUsageType:UsageWarnType usagePercent:usagePercentString];
+                }
+                
                 self.warnPreviousArray[loopCount] = @"1";
                 self.errorPreviousArray[loopCount] = @"0";
             } else {
@@ -182,8 +194,12 @@
                     self.errorPreviousArray[loopCount] = @"0";
                     [self makeNotificationStringWithUsageType:UsageDoneType];
                     [self addToNotificationArrayWithUsageType:UsageDoneType usagePercent:usagePercentString];
+                    
                 }
             }
+            
+            [[NSUserDefaults standardUserDefaults] setObject:self.warnPreviousArray forKey:[NSString stringWithFormat:@"%@_WarnPreviousRecord", currentHostIp]];
+            [[NSUserDefaults standardUserDefaults] setObject:self.errorPreviousArray forKey:[NSString stringWithFormat:@"%@_ErrorPreviousRecord", currentHostIp]];
         } else {
             NSString *getFirstKey = [NSString stringWithFormat:@"%@_health_counters", clusterID];
             dataDic = [ClusterData shareInstance].clusterDetailData[getFirstKey][key];
@@ -263,6 +279,7 @@
             [self makeNotificationStringWithConditionType:ConditionWarnDone notificationType:notificationType];
             [self addToNotificationArrayWithType:notificationType conditionType:ConditionWarnDone total:previous pgCountString:pgWarnCountString];
         } else {
+            
             [self upDateErrorDataWithType:notificationType conditionType:ConditionErrorDone Count:0];
             [self makeNotificationStringWithConditionType:ConditionErrorDone notificationType:notificationType];
             [self addToNotificationArrayWithType:notificationType conditionType:ConditionErrorDone total:previous pgCountString:pgWarnCountString];
@@ -281,7 +298,7 @@
     if (count > 0) {
         if ((count < original) && (count > previous)) {
             if (isWarn) {
-                [self upDateWarnDataWithType:notificationType conditionType:ConditionErrorDoneThenError Count:count];
+                [self upDateWarnDataWithType:notificationType conditionType:ConditionWarnDoneThenWarn Count:count];
             } else {
                 
                 [self upDateErrorDataWithType:notificationType conditionType:ConditionErrorDoneThenError Count:count];
@@ -295,7 +312,6 @@
         self.warnSec = [SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_abnormalTimePeriod", currentHostIp]]];
         if ((original < triggerMinValue) && (count > original) && (count > previous)) {
             if (isWarn) {
-                NSLog(@"didEnterFuck");
                 [self upDateWarnDataWithType:notificationType conditionType:ConditionNewWarn Count:count];
                 [self makeNotificationStringWithConditionType:ConditionNewWarn notificationType:notificationType];
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionNewWarn total:count pgCountString:pgCountString];
@@ -306,7 +322,6 @@
             }
         } else if ((original >= triggerMinValue) && (count > original) && (count > previous)) {
             if (isWarn) {
-                NSLog(@"didEnterRight");
                 [self upDateWarnDataWithType:notificationType conditionType:ConditionWarnMoreThanOriginal Count:count];
                 [self makeNotificationStringWithConditionType:ConditionWarnMoreThanOriginal notificationType:notificationType];
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionWarnMoreThanOriginal total:count pgCountString:pgCountString];
@@ -339,7 +354,7 @@
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionErrorDoneThenError total:count pgCountString:pgCountString];
             }
         }
-    } else if (count <= triggerMinValue) {
+    } else {
         if ((count < original) && (count < previous)) {
             if (isWarn) {
                 if (notificationType == PGNotificationType) {
@@ -377,7 +392,8 @@
 }
 
 - (void) addToNotificationArrayWithUsageType:(NotificationUsageType)notificationUsageType usagePercent:(NSString*)usagePercent {
-    NSString *notificationConetentString = self.notificationUsageContentDetailArray[notificationUsageType];
+    NSString *usagePercentString = [NSString stringWithFormat:@"%@%%", usagePercent];
+    NSString *notificationConetentString = self.notificationUsageContentArray[notificationUsageType];
     NSString *notificationTimeString = [NSString stringWithFormat:@"%f", [[DateMaker shareDateMaker] getTodayTimestamp]];
     NSString *notificationStatusString = (notificationUsageType == UsageDoneType) ? @"Resolved" :  @"Pending";
     NSString *notificationTypeString;
@@ -386,14 +402,73 @@
     } else if (notificationUsageType == UsageWarnType) {
         notificationTypeString = @"Warning";
     }
+
+    NSDictionary *notificationContentDictionary;
     
-    NSDictionary *notificationContentDictionary = @{@"Content" : notificationConetentString, @"Status" : notificationStatusString, @"Time" : notificationTimeString, @"Type" : notificationTypeString, @"ErrorCount" : usagePercent, @"ErrorTitle" : @"Usage"};
-    
-    if (self.notificationArray.count > 0) {
-        [self.notificationArray insertObject:notificationContentDictionary atIndex:0];
+    NSMutableArray *tempRemoveDicArray = [NSMutableArray array];
+    NSMutableArray *tempGlobalDicArray = [NSMutableArray array];
+    NSMutableArray *tempResolveArray = [NSMutableArray array];
+    if (notificationUsageType == UsageDoneType) {
+        NSString *resolveTimeString = notificationTimeString;
+        NSString *resolveContentString = notificationConetentString;
+        NSString *totalErrorString;
+        
+        
+        for (int i = 0; i < self.notificationArray.count; i++) {
+            NSDictionary *tempDic = self.notificationArray[i];
+            
+            if (([tempDic[@"Type"] isEqualToString:@"Warning"] || [tempDic[@"Type"] isEqualToString:@"Error"]) && [tempDic[@"TypeCode"] isEqualToString:@"space"]) {
+                [tempRemoveDicArray addObject:tempDic];
+                resolveContentString = tempDic[@"Content"];
+                totalErrorString = tempDic[@"ErrorCount"];
+                notificationTimeString = tempDic[@"Time"];
+                notificationTypeString = tempDic[@"Type"];
+                NSString *notificationCurrentTrigger = tempDic[@"currentTrigger"];
+
+                notificationContentDictionary = @{@"Content" : resolveContentString, @"Status" : notificationStatusString, @"Time" : notificationTimeString, @"Type" : tempDic[@"Type"], @"TypeCode" : @"space", @"ErrorCount" : totalErrorString, @"ErrorTitle" : @"Usage", @"ResolveTime" : resolveTimeString, @"ResolveContent" : resolveContentString, @"currentTrigger" : notificationCurrentTrigger};
+                [tempResolveArray addObject:notificationContentDictionary];
+                break;
+            }
+        }
+
     } else {
-        [self.notificationArray addObject:notificationContentDictionary];
+        for (int i = 0; i < self.notificationArray.count; i++) {
+            NSDictionary *tempDic = self.notificationArray[i];
+            
+            if (([tempDic[@"Type"] isEqualToString:@"Warning"] || [tempDic[@"Type"] isEqualToString:@"Error"]) && [tempDic[@"TypeCode"] isEqualToString:@"space"] && (tempDic[@"ResolveTime"] == nil)) {
+                
+                [tempRemoveDicArray addObject:tempDic];
+            }
+        }
+        NSString *currentTrigger = (notificationUsageType == UsageWarnType) ? [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_UsageTriggerWarn", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] : [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_UsageTriggerError", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]];
+
+        notificationContentDictionary = @{@"Content" : notificationConetentString, @"Status" : notificationStatusString, @"Time" : notificationTimeString, @"Type" : notificationTypeString, @"TypeCode" : @"space", @"ErrorCount" : usagePercentString, @"ErrorTitle" : @"Usage", @"currentTrigger" : currentTrigger};
+        [tempGlobalDicArray addObject:notificationContentDictionary];
     }
+    
+    for (id removeObj in tempRemoveDicArray) {
+        [self.notificationArray removeObject:removeObj];
+    }
+    
+    for (id addObj in tempGlobalDicArray) {
+        (self.notificationArray.count > 0) ? [self.notificationArray insertObject:addObj atIndex:0] : [self.notificationArray addObject:addObj];
+    }
+    
+    for (id notificationContent in self.notificationArray) {
+        (notificationContent[@"ResolveTime"]) ? [tempResolveArray addObject:notificationContent] : nil;
+    }
+    for (id resolveObj in tempResolveArray) {
+        [self.notificationArray removeObject:resolveObj];
+    }
+    [self sortResolvedArray:tempResolveArray];
+    
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_Auto Delete", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] isEqualToString:@"YES"]) {
+        for (id tempObject in tempResolveArray) {
+            [self.notificationArray addObject:tempObject];
+        }
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:self.notificationArray forKey:[NSString stringWithFormat:@"%@_NotificationAlerts", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]];
 }
 
 - (void) addToNotificationArrayWithType:(NotificationType)notificationType conditionType:(NotificationCoditionType)conditionType total:(int)total pgCountString:(NSString*)pgCountString {
@@ -424,6 +499,7 @@
     NSMutableArray *tempGlobalDicArray = [NSMutableArray array];
     NSMutableArray *tempRemoveDicArray = [NSMutableArray array];
     NSDictionary *notificationContentDictionary;
+    
     if (conditionType == ConditionWarnDone) {
         NSString *resolveTimeString = notificationTimeString;
         NSString *resolveContentString = notificationConetentString;
@@ -468,6 +544,7 @@
             }
         }
     }
+    
     if (tempGlobalDicArray.count > 0) {
         for (id removeObj in tempRemoveDicArray) {
             [self.notificationArray removeObject:removeObj];
@@ -482,13 +559,14 @@
             [self.notificationArray addObject:notificationContentDictionary];
         }
     }
+    
     NSMutableArray *tempPendingArray = [NSMutableArray array];
     NSMutableArray *tempResolveArray = [NSMutableArray array];
     for (id notificationContent in self.notificationArray) {
         (notificationContent[@"ResolveTime"]) ? [tempResolveArray addObject:notificationContent] : [tempPendingArray addObject:notificationContent] ;
     }
     [self sortArray:tempPendingArray];
-    [self sortArray:tempResolveArray];
+    [self sortResolvedArray:tempResolveArray];
     
     self.notificationArray = [NSMutableArray array];
     for (id tempObject in tempPendingArray) {
@@ -505,6 +583,20 @@
 }
 
 - (void) sortArray:(NSMutableArray*)sortArray {
+    for (int i = 0; i < sortArray.count; i++) {
+        for (int j = i; j < sortArray.count; j++) {
+            double originTimeInterval = [sortArray[i][@"ResolveTime"] doubleValue];
+            double changeTimeInterval = [sortArray[j][@"ResolveTime"] doubleValue];
+            if (originTimeInterval < changeTimeInterval) {
+                id tempObject = sortArray[i];
+                sortArray[i] = sortArray[j];
+                sortArray[j] = tempObject;
+            }
+        }
+    }
+}
+
+- (void) sortResolvedArray:(NSMutableArray*)sortArray {
     for (int i = 0; i < sortArray.count; i++) {
         for (int j = i; j < sortArray.count; j++) {
             double originTimeInterval = [sortArray[i][@"Time"] doubleValue];
@@ -533,7 +625,19 @@
 }
 
 - (void) makeNotificationStringWithUsageType:(NotificationUsageType)usageType {
-    NSString *usageContentString = [[LocalizationManager sharedLocalizationManager] getTextByKey:self.notificationUsageContentArray[usageType]];
+    NSString *usageContentString = (NSString*)[[LocalizationManager sharedLocalizationManager] getTextByKey:self.notificationUsageContentArray[usageType]];
+    
+    NSRange rangeOfPercent = [usageContentString rangeOfString:@"%"];
+    if (rangeOfPercent.location < usageContentString.length) {
+        NSRange rangeOfSpace = [usageContentString rangeOfString:@" "];
+        NSString *numberString = [usageContentString substringWithRange:NSMakeRange(rangeOfSpace.location + rangeOfSpace.length, rangeOfPercent.location - (rangeOfSpace.location + rangeOfSpace.length))];
+        
+        NSString *currentNumberString = (usageType == UsageWarnType) ? [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_UsageTriggerWarn", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] : [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_UsageTriggerError", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]];
+        
+        
+        usageContentString = [usageContentString stringByReplacingOccurrencesOfString:numberString withString:currentNumberString];
+    }
+    
     NSString *usageTitleString;
     if (usageType == UsageErrorType) {
         usageTitleString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"NotificationTitleError"];
@@ -542,12 +646,14 @@
     } else {
         usageTitleString = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"NotificationTitleInfo"];
     }
+    
     [self startNotificationWithNotificationString:usageContentString notificationTitle:usageTitleString];
 }
 
 - (void) startNotificationWithNotificationString:(NSString*)notificationString notificationTitle:(NSString*)notificationTitle {
     
     if (self.canNotification && [[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_Notifications", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]] isEqualToString:@"YES"]) {
+        
         UILocalNotification* notifyWarn = [[UILocalNotification alloc] init];
         notifyWarn.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
         notifyWarn.timeZone = [NSTimeZone defaultTimeZone];

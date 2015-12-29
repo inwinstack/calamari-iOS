@@ -13,6 +13,7 @@
 
 @interface ErrorView ()
 
+@property (nonatomic, strong) UITapGestureRecognizer *cancelGesture;
 @property (nonatomic, strong) UIView *cardBackgroundView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *messageLabel;
@@ -62,8 +63,15 @@
         self.buttonLineView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.titleLabel.frame), CGRectGetMaxY(self.messageLabel.frame), CGRectGetWidth(self.titleLabel.frame), 1)];
         self.buttonLineView.backgroundColor = [UIColor oceanHorizonRuleTwoColor];
         [self addSubview:self.buttonLineView];
+        
+        self.cancelGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cancelAction)];
+        [self addGestureRecognizer:self.cancelGesture];
     }
     return self;
+}
+
+- (void) cancelAction {
+    [self removeFromSuperview];
 }
 
 - (void) didSelect {
