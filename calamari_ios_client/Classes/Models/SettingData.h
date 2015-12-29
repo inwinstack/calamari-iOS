@@ -25,6 +25,7 @@
 + (SettingData*) shareSettingData;
 + (NSString*) caculateTimePeriodFormatStringWithValue:(NSString*)value;
 + (NSString*) caculateTimePeriodTotalWithValue:(NSString*)value;
++ (NSString*) timePeriodFormatWithValue:(NSString*)value;
 - (void) setTriggerArray;
 
 @end

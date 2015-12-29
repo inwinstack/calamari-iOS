@@ -144,7 +144,7 @@
             return [NSString stringWithFormat:@"%d", HealthWarn];
         } else if ([serviceName isEqualToString:@"usage"]) {
             return usedCount;
-        } {
+        } else {
             return otherWarn;
         }
     } else {
@@ -166,6 +166,7 @@
             NSString *used_bytes = [NSString stringWithFormat:@"%@", self.clusterDetailData[[NSString stringWithFormat:@"%@_space", clusterID]][@"space"][@"used_bytes"]];
             double quotas = [used_bytes doubleValue] / [capacity_bytes doubleValue] * 100;
             return [NSString stringWithFormat:@"%d%%", (int) quotas];
+            
         } else {
             return @"";
         }

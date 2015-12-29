@@ -19,6 +19,8 @@
 #import "UIColor+Reader.h"
 #import "AlertTriggersController.h"
 #import "TimePeriodController.h"
+#import "CephAPI.h"
+#import "SVProgressHUD.h"
 
 @interface SettingController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource, AlertSectionDelegate>
 
@@ -133,20 +135,25 @@
             cell = [[SelectionViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SelectionCellIdentifier"];
         }
         switch (tableView.tag) {
-            case 0:
+            case 0: {
                 cell.mainLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:[SettingData shareSettingData].settingMainNameArray[indexPath.row]];
                 cell.rightDetailLabel.text = (indexPath.row == 0) ? [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguage"] : [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentDateFormat"] ;
                 cell.checkBoxButton.hidden = YES;
                 break;
                 
-            case 1:
+            } case 1: {
                 cell.districtLineView.frame =  CGRectMake(0, 73, CGRectGetWidth([UIScreen mainScreen].bounds) - 20, 2);
                 cell.rightDetailLabel.frame = (indexPath.row > 2) ? CGRectMake(10, CGRectGetMaxY(cell.mainLabel.frame), CGRectGetWidth(cell.districtLineView.frame) - 20, 37) : CGRectMake(10, CGRectGetMaxY(cell.mainLabel.frame), CGRectGetWidth(cell.districtLineView.frame) - 50, 37);
                 cell.rightDetailLabel.font = [UIFont systemFontOfSize:[UIView noteSize]];
                 cell.rightDetailLabel.textAlignment = NSTextAlignmentLeft;
                 
                 cell.mainLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:[SettingData shareSettingData].alertTitleArray[indexPath.row]];
-                cell.rightDetailLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:[SettingData shareSettingData].alertBodyArray[indexPath.row]];
+                NSString *rightDetailString = [[LocalizationManager sharedLocalizationManager] getTextByKey:[SettingData shareSettingData].alertBodyArray[indexPath.row]];
+                if ([rightDetailString rangeOfString:@"nutc.imac@gmail.com"].location < rightDetailString.length) {
+                    NSString *currentAdminString = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_adminEmail", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]];
+                    rightDetailString = [rightDetailString stringByReplacingOccurrencesOfString:@"nutc.imac@gmail.com" withString:currentAdminString];
+                }
+                cell.rightDetailLabel.text = rightDetailString;
                 cell.checkBoxButton.hidden = (indexPath.row > 2);
                 cell.checkBoxButton.frame = CGRectMake(CGRectGetWidth(cell.districtLineView.frame) - 30, 27, 20, 20);
                 cell.checkBoxButton.tag = indexPath.row;
@@ -155,26 +162,49 @@
                 cell.checkBoxButton.layer.borderWidth = ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]] isEqualToString:@"YES"]) ? 0.0 : 2.0;
                 
                 break;
-                
-            case 2:
+            } case 2: {
                 cell.mainLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"settings_about_version"];
-                cell.rightDetailLabel.text = @"0.14.0";
+                cell.rightDetailLabel.text = @"0.15.0";
                 cell.checkBoxButton.hidden = YES;
                 break;
+            }
         }
         return cell;
     }
 }
 
 - (void) didSelectCheckBoxButton:(UIButton*)checkBoxButton {
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]] isEqualToString:@"YES"]) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]];
-        checkBoxButton.layer.borderWidth = 2.0;
+    if (checkBoxButton.tag == 1) {
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+        NSString *postValue = ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]] isEqualToString:@"YES"]) ? @"0" : @"1";
+        NSLog(@"%@", postValue);
+        [[CephAPI shareInstance] startPostEmailEnableWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] value:postValue Completion:^(BOOL finshed) {
+            if (finshed) {
+                [[CephAPI shareInstance] startGetAlertTriggerApiWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] Completion:^(BOOL finished) {
+                    if (finshed) {
+                        [SVProgressHUD dismiss];
+                        [(UITableView*)checkBoxButton.superview.superview.superview reloadData];
+                    }
+                } error:^(id getError) {
+                    [SVProgressHUD dismiss];
+                    NSLog(@"%@", getError);
+                }];
+            }
+        } error:^(id postError) {
+            [SVProgressHUD dismiss];
+            NSLog(@"%@", postError);
+        }];
     } else {
-        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]];
-        checkBoxButton.layer.borderWidth = 0.0;
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]] isEqualToString:@"YES"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]];
+            checkBoxButton.layer.borderWidth = 2.0;
+        } else {
+            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]];
+            checkBoxButton.layer.borderWidth = 0.0;
+            [(UITableView*)checkBoxButton.superview.superview.superview reloadData];
+
+        }
     }
-    [(UITableView*)checkBoxButton.superview.superview.superview reloadData];
 
 }
 
@@ -220,13 +250,14 @@
             [self.navigationController pushViewController:self.alertTriggersController animated:YES];
         } else {
             UIButton *tempCheckBoxButton = [(SelectionViewCell*)[tableView cellForRowAtIndexPath:indexPath] checkBoxButton];
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]] isEqualToString:@"YES"]) {
-                [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]];
-                tempCheckBoxButton.layer.borderWidth = 2.0;
-            } else {
-                [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]];
-                tempCheckBoxButton.layer.borderWidth = 0.0;
-            }
+//            if ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]] isEqualToString:@"YES"]) {
+//                [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]];
+//                tempCheckBoxButton.layer.borderWidth = 2.0;
+//            } else {
+//                [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[indexPath.row]]];
+//                tempCheckBoxButton.layer.borderWidth = 0.0;
+//            }
+            [self didSelectCheckBoxButton:tempCheckBoxButton];
             [tableView reloadData];
         }
     }

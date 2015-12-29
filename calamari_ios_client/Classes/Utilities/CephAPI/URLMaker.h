@@ -11,6 +11,7 @@
 @interface URLMaker : NSObject
 
 + (NSString*) getLoginURLWithIP:(NSString*)ip Port:(NSString*)port;
++ (NSString*) getUserInfoWithIP:(NSString*)ip Port:(NSString*)port;
 + (NSString*) getClusterListURLWithIP:(NSString*)ip Port:(NSString*)port;
 + (NSString*) getClusterDetailWithIP:(NSString*)ip Port:(NSString*)port ClusterID:(NSString*)clusterID;
 + (NSString*) getClusterDataWithIP:(NSString*)ip Port:(NSString*)port Version:(NSString*)version ClusterID:(NSString*)clusterID Kind:(NSString*)kind;
@@ -27,5 +28,10 @@
 + (NSString*) getCPULoadAverageWithIP:(NSString*)ip Port:(NSString*)port nodeID:(NSString*)nodeID;
 + (NSString*) getCPUByteWithIP:(NSString*)ip Port:(NSString*)port nodeID:(NSString*)nodeID;
 + (NSString*) getCPUIOPSWithIP:(NSString*)ip Port:(NSString*)port iopsID:(NSString*)iopsID;
+
++ (NSString*) getAlertRuleStringWithHostIp:(NSString*)hostIp port:(NSString*)port;
++ (NSString*) getSetAlertTriggerStringWithHostIp:(NSString*)hostIp port:(NSString*)port kind:(NSString *)kind warnError:(NSString *)warnError;
++ (NSString*) getSetTimePeriodStringWithHostIp:(NSString*)hostIp port:(NSString*)port kind:(NSString*)kind;
++ (NSString*) getSetEmailEnableUrlStringWithHostIp:(NSString*)hostIp port:(NSString*)port;
 
 @end

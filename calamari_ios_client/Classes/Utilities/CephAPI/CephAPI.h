@@ -28,4 +28,10 @@
 - (void) startGetCPUSummaryDataWithIP:(NSString *)ip Port:(NSString *)port nodeID:(NSString *)nodeID Completion:(void (^)(BOOL finished))completion error:(void (^)(id error))getError;
 - (void) startGetCPUIOPSDataWithIP:(NSString *)ip Port:(NSString *)port iopsArray:(NSArray*)iopsArray Completion:(void (^)(BOOL finished))completion error:(void (^)(id error))getError;
 
+- (void) startGetAlertTriggerApiWithIp:(NSString*)hostIp port:(NSString*)port Completion:(void (^)(BOOL finished))completion error:(void (^)(id getError))getError;
+- (void) startPostAlertTriggerApiWithHostIp:(NSString*)hostIp port:(NSString*)port kind:(NSString*)kind warnError:(NSString*)warnError fieldName:(NSString*)fieldName value:(NSString*)value completion:(void (^)(BOOL finished))completion error:(void (^)(id postError))postError;
+- (void) startPostTimePeroidApiWithHostIp:(NSString*)hostIp port:(NSString*)port kind:(NSString*)kind fieldName:(NSString*)fieldName value:(NSString*)value completion:(void (^)(BOOL finished))completion error:(void (^)(id postError))postError;
+- (void) startPostEmailEnableWithIp:(NSString*)hosIp port:(NSString*)port value:(NSString*)value Completion:(void (^)(BOOL finshed))completion error:(void (^)(id postError))postError;
+- (void) startGetEmailNumberWithIp:(NSString*)hostIp port:(NSString*)port Completion:(void (^)(BOOL finshed))completion error:(void (^)(id postError))postError;
+
 @end

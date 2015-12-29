@@ -16,6 +16,7 @@
 #import "DateMaker.h"
 #import "HostHealthData.h"
 #import "AFNetworking.h"
+#import "SettingData.h"
 #import "AFURLResponseSerialization.h"
 
 @interface CephAPI ()
@@ -585,6 +586,92 @@
     double tempMax = (max == 0) ? 20.0 : max;
     [target setObject:tempDataArray forKey:[NSString stringWithFormat:@"%@_%@", key, kind]];
     [target setObject:[NSString stringWithFormat:@"%.1f", tempMax] forKey:[NSString stringWithFormat:@"%@_%@_max", key, kind]];
+}
+
+- (void) startGetAlertTriggerApiWithIp:(NSString*)hostIp port:(NSString*)port Completion:(void (^)(BOOL finished))completion error:(void (^)(id getError))getError {
+    AFHTTPRequestOperationManager *operationManager = [AFHTTPRequestOperationManager manager];
+    [operationManager.requestSerializer setValue:[Cookies shareInstance].sessionID forHTTPHeaderField:@"X-XSRF-TOKEN"];
+    [operationManager GET:[URLMaker getAlertRuleStringWithHostIp:hostIp port:port] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"osd_warning"] forKey:[NSString stringWithFormat:@"%@_OSDTriggerWarn", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"osd_error"] forKey:[NSString stringWithFormat:@"%@_OSDTriggerError", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"mon_warning"] forKey:[NSString stringWithFormat:@"%@_MONTriggerWarn", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"mon_error"] forKey:[NSString stringWithFormat:@"%@_MONTriggerError", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"pg_warning"] forKey:[NSString stringWithFormat:@"%@_PGTriggerWarn", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"pg_error"] forKey:[NSString stringWithFormat:@"%@_PGTriggerError", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"usage_warning"] forKey:[NSString stringWithFormat:@"%@_UsageTriggerWarn", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"usage_error"] forKey:[NSString stringWithFormat:@"%@_UsageTriggerError", hostIp]];
+        ([responseObject[@"enable_email_notify"] intValue] == 1) ? [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:[NSString stringWithFormat:@"%@_Email Notifications", hostIp]] : [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:[NSString stringWithFormat:@"%@_Email Notifications", hostIp]];
+
+        [[NSUserDefaults standardUserDefaults] setObject:[SettingData timePeriodFormatWithValue:responseObject[@"general_polling"]] forKey:[NSString stringWithFormat:@"%@_normalTimePeriod", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:[SettingData timePeriodFormatWithValue:responseObject[@"abnormal_state_polling"]] forKey:[NSString stringWithFormat:@"%@_abnormalTimePeriod", hostIp]];
+        [[NSUserDefaults standardUserDefaults] setObject:[SettingData timePeriodFormatWithValue:responseObject[@"abnormal_server_state_polling"]] forKey:[NSString stringWithFormat:@"%@_serverAbnormalTimePeriod", hostIp]];
+
+        [[SettingData shareSettingData] setTriggerArray];
+        completion(true);
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        getError(error);
+    }];
+}
+
+- (void) startPostAlertTriggerApiWithHostIp:(NSString*)hostIp port:(NSString*)port kind:(NSString*)kind warnError:(NSString*)warnError fieldName:(NSString*)fieldName value:(NSString*)value completion:(void (^)(BOOL finished))completion error:(void (^)(id postError))postError {
+    
+    AFHTTPRequestOperationManager *operationManager = [AFHTTPRequestOperationManager manager];
+    [operationManager.requestSerializer setValue:[Cookies shareInstance].sessionID forHTTPHeaderField:@"X-XSRF-TOKEN"];
+    NSDictionary *param = @{fieldName : value};
+    [operationManager POST:[URLMaker getSetAlertTriggerStringWithHostIp:hostIp port:port kind:kind warnError:warnError] parameters:param success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([responseObject[@"detail"] isEqualToString:@"Update success"]) {
+            completion(true);
+        } else {
+            NSLog(@"%@", responseObject);
+            postError(@"failed");
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        postError(error);
+    }];
+}
+
+- (void) startPostTimePeroidApiWithHostIp:(NSString*)hostIp port:(NSString*)port kind:(NSString*)kind fieldName:(NSString*)fieldName value:(NSString*)value completion:(void (^)(BOOL finished))completion error:(void (^)(id postError))postError {
+    AFHTTPRequestOperationManager *operationManager = [AFHTTPRequestOperationManager manager];
+    [operationManager.requestSerializer setValue:[Cookies shareInstance].sessionID forHTTPHeaderField:@"X-XSRF-TOKEN"];
+    NSDictionary *param = @{fieldName : value};
+    [operationManager POST:[URLMaker getSetTimePeriodStringWithHostIp:hostIp port:port kind:kind] parameters:param success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([responseObject[@"detail"] isEqualToString:@"Update success"]) {
+            completion(true);
+        } else {
+            NSLog(@"%@", responseObject);
+            postError(@"failed");
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        postError(error);
+    }];
+}
+
+- (void) startPostEmailEnableWithIp:(NSString*)hosIp port:(NSString*)port value:(NSString*)value Completion:(void (^)(BOOL finshed))completion error:(void (^)(id postError))postError {
+    AFHTTPRequestOperationManager *operationManager = [AFHTTPRequestOperationManager manager];
+    [operationManager.requestSerializer setValue:[Cookies shareInstance].sessionID forHTTPHeaderField:@"X-XSRF-TOKEN"];
+    NSNumber *numberOfValue = [NSNumber numberWithInt:[value intValue]];
+    NSDictionary *param = @{@"enable_email_notify" : numberOfValue};
+    [operationManager POST:[URLMaker getSetEmailEnableUrlStringWithHostIp:hosIp port:port] parameters:param success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([responseObject[@"detail"] isEqualToString:@"Update success"]) {
+            completion(true);
+        } else {
+            NSLog(@"%@", responseObject);
+            postError(@"failed");
+        }
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        postError(error);
+    }];
+}
+
+- (void) startGetEmailNumberWithIp:(NSString*)hostIp port:(NSString*)port Completion:(void (^)(BOOL finshed))completion error:(void (^)(id postError))postError {
+    AFHTTPRequestOperationManager *operationManager = [AFHTTPRequestOperationManager manager];
+    [operationManager.requestSerializer setValue:[Cookies shareInstance].sessionID forHTTPHeaderField:@"X-XSRF-TOKEN"];
+    [operationManager GET:[URLMaker getUserInfoWithIP:hostIp Port:port] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        [[NSUserDefaults standardUserDefaults] setObject:responseObject[@"email"] forKey:[NSString stringWithFormat:@"%@_adminEmail", hostIp]];
+        completion(true);
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        postError(error);
+    }];
 }
 
 @end

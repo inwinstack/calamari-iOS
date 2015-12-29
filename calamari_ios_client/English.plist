@@ -21,7 +21,7 @@
 	<key>login_sign_in</key>
 	<string>Sign in</string>
 	<key>login_version</key>
-	<string>Ceph Monitor Version 0.14.0</string>
+	<string>Ceph Monitor Version 0.15.0</string>
 	<key>settings_profile_language</key>
 	<string>Language</string>
 	<key>settings_dialog_save</key>
@@ -304,5 +304,7 @@
 	<string>Trigger alert when usage exceeds %1$s</string>
 	<key>alert_triggers_usage_error_detail</key>
 	<string>Trigger alert when usage exceeds %1$s</string>
+	<key>Usage</key>
+	<string>Usage</string>
 </dict>
 </plist>

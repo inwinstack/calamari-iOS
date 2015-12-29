@@ -14,6 +14,8 @@
 #import "ClockSettingView.h"
 #import "UIColor+Reader.h"
 #import "SettingData.h"
+#import "CephAPI.h"
+#import "SVProgressHUD.h"
 
 @interface TimePeriodController () <UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -30,11 +32,27 @@
 @property (nonatomic) CGPoint tempSecondPoint;
 @property (nonatomic, strong) NSArray *timePointArray;
 @property (nonatomic, strong) NSArray *pointKeyArray;
+@property (nonatomic, strong) NSArray *keyKindArray;
+@property (nonatomic, strong) NSArray *keyFieldArray;
 @property (nonatomic) BOOL gestureEnable;
 
 @end
 
 @implementation TimePeriodController
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    
+    [[CephAPI shareInstance] startGetAlertTriggerApiWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] Completion:^(BOOL finished) {
+        if (finished) {
+            [SVProgressHUD dismiss];
+        }
+    } error:^(id getError) {
+        [SVProgressHUD dismiss];
+        NSLog(@"%@", getError);
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,6 +73,9 @@
     self.pointKeyArray = @[@"normalPeriodPoint", @"abnormalPeriodPoint", @"serverAbnormalPeriodPoint"];
     self.timePointArray = @[@"145, 135.5", @"223.5,182", @"221.4,271.5", @"145, 314.5", @"67,269", @"68.3,178.9"];
     self.gestureEnable = NO;
+    
+    self.keyKindArray = @[@"general", @"abnormal_state", @"abnormal_server_state"];
+    self.keyFieldArray = @[@"general_polling", @"abnormal_state_polling", @"abnormal_server_state_polling"];
 }
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -230,6 +251,7 @@
 }
 
 - (void) saveAction {
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [self.clockSettingView removeFromSuperview];
     if (self.tempLabel == self.clockSettingView.hourLabel) {
         self.tempHourPoint = self.clockSettingView.circleView.center;
@@ -251,6 +273,22 @@
     [[NSUserDefaults standardUserDefaults] setObject:tempString forKey:currentKey];
     [[NSUserDefaults standardUserDefaults] setObject:@[currentHourPointString, currentMinutePointString, currentSecondPointString] forKey:currentPointKey];
     [[(SettingViewCell*)[self.timePeriodView cellForItemAtIndexPath:tempPath] selectionView] reloadData];
+
+    [[CephAPI shareInstance] startPostTimePeroidApiWithHostIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] kind:self.keyKindArray[objectIndex] fieldName:self.keyFieldArray[objectIndex] value:[SettingData caculateTimePeriodTotalWithValue:tempString] completion:^(BOOL finished) {
+        if (finished) {
+            [[CephAPI shareInstance] startGetAlertTriggerApiWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] Completion:^(BOOL finished) {
+                if (finished) {
+                    [SVProgressHUD dismiss];
+                }
+            } error:^(id getError) {
+                [SVProgressHUD dismiss];
+                NSLog(@"%@", getError);
+            }];
+        }
+    } error:^(id postError) {
+        [SVProgressHUD dismiss];
+        NSLog(@"%@", postError);
+    }];
 }
 
 - (UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

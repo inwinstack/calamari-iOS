@@ -29,6 +29,15 @@
     NSString *errorCountString = [NSString stringWithFormat:@"%@", self.dataDic[@"ErrorCount"]];
     NSString *errorTimeString = [NSString stringWithFormat:@"%@\n%@", [[LocalizationManager sharedLocalizationManager] getTextByKey:@"notification_detail_triggered_title"], timeDataString];
     
+    NSRange rangeOfPercent = [contentString rangeOfString:@"%"];
+    if (rangeOfPercent.location < contentString.length) {
+        
+        NSString *currentNumberString = self.dataDic[@"currentTrigger"];
+        
+        contentString = [contentString stringByReplacingOccurrencesOfString:@"70" withString:currentNumberString];
+        
+    }
+    
     
     ([errorType isEqualToString:@"Error"]) ? [self.navigationController.navigationBar setBarTintColor:[UIColor errorColor]] : [self.navigationController.navigationBar setBarTintColor:[UIColor warningColor]] ;
     self.notificationDetailView = [[NotificationDetailView alloc] initWithFrame:self.view.frame];
@@ -38,6 +47,16 @@
         NSString *resolvedtimeDataString = [[DateMaker shareDateMaker] getTodayWithNotificationFormatWithTimeStamp:[self.dataDic[@"ResolveTime"] doubleValue]];
         NSString *resolvedTimeString = [NSString stringWithFormat:@"%@\n%@", [[LocalizationManager sharedLocalizationManager] getTextByKey:@"notification_detail_resolved_title"], resolvedtimeDataString];
         contentString = [NSString stringWithFormat:@"%@", [[LocalizationManager sharedLocalizationManager] getTextByKey:self.dataDic[@"ResolveContent"]]];
+        
+        NSRange rangeOfResolvePercent = [contentString rangeOfString:@"%"];
+        if (rangeOfResolvePercent.location < contentString.length) {
+
+            NSString *currentResolveNumberString = self.dataDic[@"currentTrigger"];
+            
+            contentString = [contentString stringByReplacingOccurrencesOfString:@"70" withString:currentResolveNumberString];
+            
+        }
+        
         [self.notificationDetailView setContentWithContent:contentString status:errorCondtionType errorTitle:errorTitleString errorCount:errorCountString errorTimeString:errorTimeString resolveTimeString:resolvedTimeString];
     } else {
         [self.notificationDetailView setContentWithContent:contentString status:errorCondtionType errorTitle:errorTitleString errorCount:errorCountString errorTimeString:errorTimeString resolveTimeString:@""];

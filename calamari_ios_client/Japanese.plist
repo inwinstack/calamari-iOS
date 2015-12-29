@@ -21,7 +21,7 @@
 	<key>login_sign_in</key>
 	<string>ログイン</string>
 	<key>login_version</key>
-	<string>Ceph モニター版 0.14.0</string>
+	<string>Ceph モニター版 0.15.0</string>
 	<key>settings_profile_language</key>
 	<string>言語</string>
 	<key>settings_dialog_save</key>
@@ -304,5 +304,7 @@
 	<string>使用率が %1$s を超えた場合に警報を発します</string>
 	<key>alert_triggers_usage_error_detail</key>
 	<string>使用率が %1$s を超えた場合に警報を発します</string>
+	<key>Usage</key>
+	<string>ユーセージ</string>
 </dict>
 </plist>

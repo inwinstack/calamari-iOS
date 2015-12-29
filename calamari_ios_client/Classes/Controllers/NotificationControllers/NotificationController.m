@@ -76,8 +76,20 @@
     NSDictionary *cellDictionary = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_NotificationAlerts", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]][indexPath.row];
     NSString *statusString = cellDictionary[@"Status"];
     notificationCell.statusColorView.fillColor = ([cellDictionary[@"Type"] isEqualToString:@"Error"]) ? [UIColor errorColor].CGColor : [UIColor warningColor].CGColor;
-    notificationCell.alertContentLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:cellDictionary[@"Content"]];
+    
+    NSString *alertContentString = [[LocalizationManager sharedLocalizationManager] getTextByKey:cellDictionary[@"Content"]];
+    NSRange rangeOfPercent = [alertContentString rangeOfString:@"%"];
+    if (rangeOfPercent.location < alertContentString.length) {
+        
+        NSString *currentNumberString = cellDictionary[@"currentTrigger"];
+        
+        alertContentString = [alertContentString stringByReplacingOccurrencesOfString:@"70" withString:currentNumberString];
+    
+    }
+    
+    notificationCell.alertContentLabel.text = alertContentString;
     notificationCell.statusLabel.text =  statusString;
+    NSLog(@"%@",  [[LocalizationManager sharedLocalizationManager] getTextByKey:cellDictionary[@"Content"]]);
     notificationCell.statusLabel.textColor = ([statusString isEqualToString:@"Pending"]) ? [UIColor errorColor] : [UIColor normalBlueColor];
     notificationCell.statusImageView.image = ([statusString isEqualToString:@"Pending"]) ? [UIImage imageNamed:@"NotificationPendingImage"] : [UIImage imageNamed:@"NotificationResolvedImage"];
     
