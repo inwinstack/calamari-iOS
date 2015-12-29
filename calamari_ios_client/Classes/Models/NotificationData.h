@@ -38,6 +38,7 @@ typedef  NS_ENUM(NSUInteger, NotificationUsageType) {
 @property (nonatomic, strong) NSDictionary *warnCodeDic;
 @property (nonatomic, strong) NSString *warnSec;
 @property (nonatomic, strong) NSTimer *refreshTimer;
+@property (nonatomic, strong) NSTimer *dashboardTimer;
 @property (nonatomic, strong) NSMutableArray *warnOriginalArray;
 @property (nonatomic, strong) NSMutableArray *warnPreviousArray;
 @property (nonatomic, strong) NSMutableArray *errorOriginalArray;
@@ -51,5 +52,7 @@ typedef  NS_ENUM(NSUInteger, NotificationUsageType) {
 - (void) restartTimerWithTimeInterval:(float)timeInterValCount;
 - (void) stopTimer;
 - (void) resetRecord;
+- (void) startDashBoardTimer;
+- (void) stopDashBoardTimer;
 
 @end

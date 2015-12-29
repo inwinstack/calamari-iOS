@@ -12,9 +12,11 @@
 #import "DateMaker.h"
 #import "LocalizationManager.h"
 #import "SettingData.h"
+#import "APIRecord.h"
 
 @interface NotificationData () {
     int timeCount;
+    int dashBoardCount;
 }
 
 @property (nonatomic, strong) NSArray *keyArray;
@@ -46,7 +48,7 @@
         self.canNotification = YES;
         self.isBackground = NO;
         self.notificationArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_NotificationAlerts", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]]];
-        self.warnSec = @"10";
+        self.warnSec = @"30";
         self.warnCodeDic = @{@"OSD" : @"01", @"Monitor" : @"02", @"PG" : @"03", @"Usage" : @"04", @"Info" : @"4", @"Warning" : @"3", @"Error" : @"2", @"Critical" : @"1"};
         self.triggerKeyArray = @[@"OSD", @"MON", @"PG", @"Usage"];
         self.keyArray = @[@"osd", @"mon", @"pg", @"space"];
@@ -55,6 +57,7 @@
         self.notificationContentDetailArray = @[@[@"OSD is in abnormal status!", @"OSD comes new abnormal status!", @"OSD comes new abnormal status!", @"OSD has been repaired!"], @[@"Monitor is in abnormal status!", @"Monitor comes new abnormal status!", @"Monitor comes new abnormal status!", @"Monitor has been repaired!"], @[@"Some PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"Some other PGs are being modified by Ceph!", @"PGs have been repaired!"]];
         self.notificationUsageContentDetailArray = @[@"Disk usage exceeds 70%! Please expand the storage capacity!", @"Disk usage exceeds 85%! Please expand the storage capacity!", @"Storage capacity has been expanded!"];
         timeCount = 0;
+        dashBoardCount = 0;
     }
     return self;
 }
@@ -102,7 +105,6 @@
 
 - (void) refreshAction {
     timeCount++;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"timeAddAction" object:[NSString stringWithFormat:@"%d", timeCount]];
     if (timeCount == [self.warnSec intValue]) {
         timeCount = 0;
         [self stopTimer];
@@ -111,7 +113,7 @@
         [[CephAPI shareInstance] startGetClusterDetailAtBackgroundCompletion:^(BOOL finished) {
             if (finished) {
                 
-                weakSelf.warnSec = (self.isBackground) ? [SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_normalTimePeriod", hostIp]]] : @"10";
+                weakSelf.warnSec = [SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_normalTimePeriod", hostIp]]];
                 [weakSelf startCheck];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"didRefreshAction" object:nil];
             }
@@ -120,7 +122,6 @@
                 NSInteger errorCode = labs([error code]);
                 if ((errorCode >= 400 && errorCode < 410) || (errorCode >= 500 && errorCode < 510)) {
                     weakSelf.warnSec = [SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_serverAbnormalTimePeriod", hostIp]]];
-;
                 }
                 [weakSelf  startTimer];
                 NSLog(@"%@", error);
@@ -292,8 +293,9 @@
     if (count >= triggerMinValue) {
         
         self.warnSec = [SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_abnormalTimePeriod", currentHostIp]]];
-        if ((original <= triggerMinValue) && (count > original) && (count > previous)) {
+        if ((original < triggerMinValue) && (count > original) && (count > previous)) {
             if (isWarn) {
+                NSLog(@"didEnterFuck");
                 [self upDateWarnDataWithType:notificationType conditionType:ConditionNewWarn Count:count];
                 [self makeNotificationStringWithConditionType:ConditionNewWarn notificationType:notificationType];
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionNewWarn total:count pgCountString:pgCountString];
@@ -302,8 +304,9 @@
                 [self makeNotificationStringWithConditionType:ConditionNewError notificationType:notificationType];
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionNewError total:count pgCountString:pgCountString];
             }
-        } else if ((original > triggerMinValue) && (count > original) && (count > previous)) {
+        } else if ((original >= triggerMinValue) && (count > original) && (count > previous)) {
             if (isWarn) {
+                NSLog(@"didEnterRight");
                 [self upDateWarnDataWithType:notificationType conditionType:ConditionWarnMoreThanOriginal Count:count];
                 [self makeNotificationStringWithConditionType:ConditionWarnMoreThanOriginal notificationType:notificationType];
                 [self addToNotificationArrayWithType:notificationType conditionType:ConditionWarnMoreThanOriginal total:count pgCountString:pgCountString];
@@ -555,6 +558,38 @@
         notifyWarn.alertTitle = notificationTitle;
         [[UIApplication sharedApplication] scheduleLocalNotification:notifyWarn];
     }
+}
+
+- (void) refreshDashBoardAction {
+    dashBoardCount++;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"timeAddAction" object:[NSString stringWithFormat:@"%d", dashBoardCount]];
+    if (dashBoardCount == 10) {
+        dashBoardCount = 0;
+        [self stopDashBoardTimer];
+        __weak typeof(self) weakSelf = self;
+        NSString *hostIp = [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"];
+        [[CephAPI shareInstance] startGetClusterDataWithIP:hostIp Port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] Version:[APIRecord shareInstance].APIDictionary[@"Health"][0] ClusterID:[[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"] Kind:[APIRecord shareInstance].APIDictionary[@"Health"][1] completion:^(BOOL finished) {
+            if (finished) {
+                [weakSelf  startDashBoardTimer];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"didRefreshDashBoardAction" object:nil];
+            }
+        } error:^(id error) {
+            [weakSelf  startDashBoardTimer];
+            NSLog(@"%@", error);
+        }];
+
+    }
+}
+
+- (void) startDashBoardTimer {
+    [self stopDashBoardTimer];
+    self.dashboardTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshDashBoardAction) userInfo:nil repeats:YES];
+}
+
+- (void) stopDashBoardTimer {
+    dashBoardCount = 0;
+    [self.dashboardTimer invalidate];
+    self.dashboardTimer = nil;
 }
 
 @end

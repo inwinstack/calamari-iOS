@@ -26,6 +26,7 @@
 @property (nonatomic, strong) UIView *forthLine;
 @property (nonatomic, strong) UIView *fifthLine;
 @property (nonatomic, strong) UIView *topNumberLine;
+@property (nonatomic) BOOL tempFirstTime;
 
 @end
 
@@ -34,6 +35,8 @@
 - (instancetype) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.tempFirstTime = true;
+        
         self.blackBackgroundView = [[UIView alloc] initWithFrame:self.frame];
         self.blackBackgroundView.backgroundColor = [UIColor blackColor];
         self.blackBackgroundView.alpha = 0.5;
@@ -41,6 +44,7 @@
         
         self.calculatorView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - 145, CGRectGetMidY(self.frame) - 209, 290, 438)];
         self.calculatorView.layer.borderWidth = 2.0;
+        self.calculatorView.layer.cornerRadius = 5.0;
         self.calculatorView.layer.borderColor = [UIColor osdButtonHighlightColor].CGColor;
         self.calculatorView.backgroundColor = [UIColor oceanBackgroundThreeColor];
         [self addSubview:self.calculatorView];
@@ -76,12 +80,14 @@
         for (int i = 0; i < 9; i++) {
             UIButton *numberButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.calculatorView.frame) / 3 * (i % 3), CGRectGetMaxY(self.infoLabel.frame) + 150 - 70 * (i / 3), CGRectGetWidth(self.calculatorView.frame) / 3, 70)];
             numberButton.tag = i + 1;
-        
+            
             numberButton.titleLabel.font = [UIFont systemFontOfSize:[UIView largeButtonSize]];
             [numberButton setTitle:[NSString stringWithFormat:@"%d", i + 1] forState:UIControlStateNormal];
             [numberButton setTitleColor:[UIColor titleGrayColor] forState:UIControlStateNormal];
             numberButton.backgroundColor = [UIColor oceanBackgroundOneColor];
             [numberButton addTarget:self action:@selector(numberButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            [numberButton addTarget:self action:@selector(numberButtonHighlight:) forControlEvents:UIControlEventTouchDown];
+            [numberButton addTarget:self action:@selector(numberButtonUnHighlight:) forControlEvents:UIControlEventTouchUpOutside];
             [self.calculatorView addSubview:numberButton];
             numberButton.exclusiveTouch = YES;
 
@@ -93,11 +99,15 @@
         [self.zeroButton setTitleColor:[UIColor titleGrayColor] forState:UIControlStateNormal];
         self.zeroButton.backgroundColor = [UIColor oceanBackgroundOneColor];
         [self.zeroButton addTarget:self action:@selector(numberButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [self.zeroButton addTarget:self action:@selector(numberButtonHighlight:) forControlEvents:UIControlEventTouchDown];
+        [self.zeroButton addTarget:self action:@selector(numberButtonUnHighlight:) forControlEvents:UIControlEventTouchUpOutside];
         [self.calculatorView addSubview:self.zeroButton];
         self.zeroButton.exclusiveTouch = YES;
 
         
         self.clearButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.zeroButton.frame), CGRectGetMinY(self.zeroButton.frame), CGRectGetWidth(self.calculatorView.frame) / 3, 70)];
+        [self.clearButton addTarget:self action:@selector(numberButtonHighlight:) forControlEvents:UIControlEventTouchDown];
+        [self.clearButton addTarget:self action:@selector(numberButtonUnHighlight:) forControlEvents:UIControlEventTouchUpOutside];
         [self.clearButton setTitle:@"Clear" forState:UIControlStateNormal];
         [self.clearButton setTitleColor:[UIColor titleGrayColor] forState:UIControlStateNormal];
         self.clearButton.backgroundColor = [UIColor oceanBackgroundOneColor];
@@ -152,7 +162,20 @@
     return self;
 }
 
+- (void) numberButtonUnHighlight:(UIButton*)numberButton {
+    numberButton.backgroundColor = [UIColor oceanBackgroundOneColor];
+}
+
+- (void) numberButtonHighlight:(UIButton*)numberButton {
+    numberButton.backgroundColor = [UIColor navigationSelectedColor];
+}
+
 - (void) numberButtonClicked:(UIButton*)numberButton {
+    if (self.tempFirstTime) {
+        self.tempFirstTime = false;
+        [self clearAction];
+    }
+    numberButton.backgroundColor = [UIColor oceanBackgroundOneColor];
     if (self.numberLabel.text.length < 6) {
         
         NSString *tempString = ([self.numberLabel.text integerValue] > 0) ? [NSString stringWithFormat:@"%@%ld", self.numberLabel.text, numberButton.tag] : [NSString stringWithFormat:@"%ld", numberButton.tag];
@@ -230,6 +253,7 @@
 }
 
 - (void) clearAction {
+    self.clearButton.backgroundColor = [UIColor oceanBackgroundOneColor];
     [self.saveButton setTitleColor:[UIColor navigationSelectedColor] forState:UIControlStateNormal];
     self.saveButton.enabled = NO;
     self.numberLabel.text = @"";

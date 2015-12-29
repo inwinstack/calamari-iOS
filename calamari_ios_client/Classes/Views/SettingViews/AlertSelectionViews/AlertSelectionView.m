@@ -61,6 +61,7 @@
         [self.selectionBackgroundView addSubview:self.districtBottomView];
         
         self.cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.districtBottomView.frame), CGRectGetWidth(self.selectionBackgroundView.frame) / 2 - 1, 48)];
+        self.cancelButton.layer.cornerRadius = 5.0;
         [self.cancelButton setTitleColor:[UIColor normalBlackColor] forState:UIControlStateNormal];
         [self.cancelButton addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
         [self.cancelButton setTitle:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"settings_dialog_cancel"] forState:UIControlStateNormal];
@@ -74,6 +75,7 @@
         
         self.enterButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.districtMidView.frame), CGRectGetMaxY(self.districtBottomView.frame), CGRectGetWidth(self.selectionBackgroundView.frame) / 2 - 1, 48)];
         self.enterButton.backgroundColor = [UIColor whiteColor];
+        self.enterButton.layer.cornerRadius = 5.0;
         [self.enterButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
         [self.enterButton setTitleColor:[UIColor oceanNavigationBarColor] forState:UIControlStateNormal];
         [self.enterButton addTarget:self action:@selector(enterAction:) forControlEvents:UIControlEventTouchUpInside];

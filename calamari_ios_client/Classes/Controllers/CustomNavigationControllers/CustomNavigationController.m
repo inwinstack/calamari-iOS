@@ -435,6 +435,9 @@
 
         tempSelectedIndex = 0;
         [self.navigationView.navigationTableView reloadData];
+    } else if ([viewController class] == [NotificationController class]) {
+        tempSelectedIndex = 9;
+        [self.navigationView.navigationTableView reloadData];
     }
 }
 

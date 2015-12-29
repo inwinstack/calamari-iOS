@@ -76,7 +76,8 @@
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"firstTime"] isEqualToString:@"did"]) {
-        [[NotificationData shareInstance] restartTimerWithTimeInterval:10];
+        [[NotificationData shareInstance] startDashBoardTimer];
+        [[NotificationData shareInstance] restartTimerWithTimeInterval:[[SettingData caculateTimePeriodTotalWithValue:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_normalTimePeriod", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]]]] integerValue]];
     }
 }
 
@@ -122,6 +123,11 @@
 
 - (void) didConfirm {
     [self.alertView removeFromSuperview];
+    for (id object in self.window.subviews) {
+        if ([self.window.subviews indexOfObject:object] > 0) {
+            [object removeFromSuperview];
+        }
+    }
     self.notificationController = [[NotificationController alloc] init];
     [self.customNavigationController pushViewController:self.notificationController animated:YES];
 }

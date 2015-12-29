@@ -137,6 +137,7 @@
             if (readError) {
                 error(readError);
             } else {
+
                 if ([kind isEqualToString:@"mon"]) {
                     NSMutableArray *tempMonArray = [NSMutableArray array];
                     for (id monContent in receiveObject) {
@@ -149,7 +150,24 @@
                     }
                     [[NSUserDefaults standardUserDefaults] setObject:tempMonArray forKey:[NSString stringWithFormat:@"kind_%@",kind]];
                 } else {
-                    [[NSUserDefaults standardUserDefaults] setObject:receiveObject forKey:[NSString stringWithFormat:@"kind_%@",kind]];
+                    if ([kind isEqualToString:@"osd"]) {
+                        NSMutableArray *testResultArray = [NSMutableArray array];
+                        for (id objectDic in receiveObject[@"osds"]) {
+                            NSMutableDictionary *newDic = [NSMutableDictionary dictionary];
+                            for (NSString *dicKey in [objectDic allKeys]) {
+                                if ([[NSString stringWithFormat:@"%@", objectDic[dicKey]] isEqualToString:@"<null>"]) {
+                                    [newDic setObject:@" " forKey:dicKey];
+                                } else {
+                                    [newDic setObject:objectDic[dicKey] forKey:dicKey];
+                                }
+                            }
+                            [testResultArray addObject:newDic];
+                        }
+                        NSMutableDictionary *finalDic = [NSMutableDictionary dictionaryWithDictionary:@{@"osds" : testResultArray}];
+                        [[NSUserDefaults standardUserDefaults] setObject:finalDic forKey:[NSString stringWithFormat:@"kind_%@",kind]];
+                    } else {
+                        [[NSUserDefaults standardUserDefaults] setObject:receiveObject forKey:[NSString stringWithFormat:@"kind_%@",kind]];
+                    }
                 }
                 [[ClusterData shareInstance].clusterDetailData setObject:receiveObject forKey:[NSString stringWithFormat:@"%@_%@", clusterID, kind]];
                 completion(true);
@@ -375,7 +393,6 @@
             if (readError) {
                 getError(readError);
             } else {
-                NSLog(@"%@", receiveObject[@"datapoints"]);
                 [self setDataWithDataArray:receiveObject[@"datapoints"] target:[ClusterData shareInstance].clusterDetailData key:clusterID kind:@"usage"];
                 completion(true);
             }
@@ -384,6 +401,7 @@
 }
 
 - (void) startGetAllDataWithIP:(NSString*)ip Port:(NSString*)port nodeID:(NSString*)nodeID whichType:(NSString*)whichType Completion:(void (^)(BOOL finished))completion error:(void (^)(id error))getError {
+
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[URLMaker getAllDataWithIP:ip Port:port nodeID:nodeID whichAll:whichType]] cachePolicy:0 timeoutInterval:6];
     [request setHTTPMethod:@"GET"];
     [request setValue:[Cookies shareInstance].sessionID forHTTPHeaderField:@"X-XSRF-TOKEN"];
@@ -407,35 +425,36 @@
                 } else if ([whichType isEqualToString:@"cpu"]) {
                     NSMutableArray *tempArray = [NSMutableArray array];
                     NSMutableDictionary *tempDic = [NSMutableDictionary dictionary];
-                    for (int i = 0; i < [receiveObject count] - 1; i ++) {
-                        [tempArray addObject:receiveObject[i]];
-                        [tempDic setObject:receiveObject[i] forKey:receiveObject[i][@"id"]];
-                    }
-
-                    for (int j = 0; j < tempArray.count; j++) {
-                        for (int k = 0; k < (tempArray.count - 1); k++) {
-                            NSRange findFirstRange = [[NSString stringWithFormat:@"%@", tempArray[k][@"id"]] rangeOfString:@"cpu.cpu"];
-                            NSRange findNextRange = [[NSString stringWithFormat:@"%@", tempArray[k + 1][@"id"]] rangeOfString:@"cpu.cpu"];
-                            NSString *findFirstValue = [[NSString stringWithFormat:@"%@", tempArray[k][@"id"]] substringFromIndex:findFirstRange.length + findFirstRange.location];
-                            NSString *findNextValue = [[NSString stringWithFormat:@"%@", tempArray[k + 1][@"id"]] substringFromIndex:findNextRange.length + findNextRange.location];
-                            if ([findFirstValue integerValue] > [findNextValue integerValue]) {
-                                id tempObj = tempArray[k];
-                                tempArray[k] = tempArray[k + 1];
-                                tempArray[k + 1] = tempObj;
+                    
+                    if ([receiveObject count] > 0) {
+                        for (int i = 0; i < [receiveObject count] - 1; i ++) {
+                            [tempArray addObject:receiveObject[i]];
+                            [tempDic setObject:receiveObject[i] forKey:receiveObject[i][@"id"]];
+                        }
+                        for (int j = 0; j < tempArray.count; j++) {
+                            for (int k = 0; k < (tempArray.count - 1); k++) {
+                                NSRange findFirstRange = [[NSString stringWithFormat:@"%@", tempArray[k][@"id"]] rangeOfString:@"cpu.cpu"];
+                                NSRange findNextRange = [[NSString stringWithFormat:@"%@", tempArray[k + 1][@"id"]] rangeOfString:@"cpu.cpu"];
+                                NSString *findFirstValue = [[NSString stringWithFormat:@"%@", tempArray[k][@"id"]] substringFromIndex:findFirstRange.length + findFirstRange.location];
+                                NSString *findNextValue = [[NSString stringWithFormat:@"%@", tempArray[k + 1][@"id"]] substringFromIndex:findNextRange.length + findNextRange.location];
+                                if ([findFirstValue integerValue] > [findNextValue integerValue]) {
+                                    id tempObj = tempArray[k];
+                                    tempArray[k] = tempArray[k + 1];
+                                    tempArray[k + 1] = tempObj;
+                                }
                             }
                         }
+                        NSMutableArray *resultArray = [NSMutableArray array];
+                        for (id objectValue in tempArray) {
+                            [resultArray addObject:objectValue[@"id"]];
+                        }
+                        
+                        [tempDic setObject:[receiveObject lastObject] forKey:[receiveObject lastObject][@"id"]];
+                        [resultArray insertObject:[receiveObject lastObject][@"id"] atIndex:0];
+                        [HostHealthData shareInstance].hostAllCPUKeyArray = resultArray;
+                        
+                        [[HostHealthData shareInstance].hostDic setObject:tempDic forKey:[NSString stringWithFormat:@"%@_%@", nodeID, whichType]];
                     }
-                    
-                    NSMutableArray *resultArray = [NSMutableArray array];
-                    for (id objectValue in tempArray) {
-                        [resultArray addObject:objectValue[@"id"]];
-                    }
-                    
-                    [tempDic setObject:[receiveObject lastObject] forKey:[receiveObject lastObject][@"id"]];
-                    [resultArray insertObject:[receiveObject lastObject][@"id"] atIndex:0];
-                    [HostHealthData shareInstance].hostAllCPUKeyArray = resultArray;
-                    
-                    [[HostHealthData shareInstance].hostDic setObject:tempDic forKey:[NSString stringWithFormat:@"%@_%@", nodeID, whichType]];
                 } else {
                     [[HostHealthData shareInstance].hostDic setObject:receiveObject forKey:[NSString stringWithFormat:@"%@_%@", nodeID, whichType]];
                 }

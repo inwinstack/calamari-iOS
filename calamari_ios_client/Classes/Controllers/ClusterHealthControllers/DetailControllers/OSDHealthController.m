@@ -10,8 +10,6 @@
 #import "UIColor+Reader.h"
 #import "OSDHealthView.h"
 #import "OSDHealthViewCell.h"
-#import "OSDHeaderView.h"
-#import "OSDViewFLowLayout.h"
 #import "OSDHealthData.h"
 #import "OSDDetailController.h"
 #import "CephAPI.h"
@@ -25,7 +23,6 @@
     NSInteger currentIndex;
 }
 
-@property (nonatomic, strong) OSDHeaderView *osdHealthToolBar;
 @property (nonatomic, strong) NSMutableArray *warnArray;
 @property (nonatomic, strong) NSMutableArray *errorArray;
 
@@ -43,19 +40,15 @@
     [self setBackButtonDisplay:YES];
     self.navigationItem.title = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"main_activity_fragment_osd_health"];
     
-    self.flowLayout = [[OSDViewFLowLayout alloc] init];
-    self.osdHealthView = [[OSDHealthView alloc] initWithFrame:self.view.frame collectionViewLayout:self.flowLayout];
-    self.osdHealthView.delegate = self;
-    self.osdHealthView.dataSource = self;
+    self.osdHealthView = [[OSDHealthView alloc] initWithFrame:self.view.frame];
+    self.osdHealthView.contentCollectionView.delegate = self;
+    self.osdHealthView.contentCollectionView.dataSource = self;
     self.view = self.osdHealthView;
-    [self.osdHealthView registerClass:[OSDHealthViewCell class] forCellWithReuseIdentifier:@"OSDHealthCell"];
-    [self.osdHealthView registerClass:[OSDHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"OSDHeaderView"];
+    [self.osdHealthView.contentCollectionView registerClass:[OSDHealthViewCell class] forCellWithReuseIdentifier:@"OSDHealthCell"];
     currentIndex = 0;
     
-    self.osdHealthToolBar = [[OSDHeaderView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame) - 64 - CGRectGetWidth(self.view.frame) * 0.1, CGRectGetWidth(self.view.frame), CGRectGetWidth(self.view.frame) * 0.1)];
-    [self.osdHealthToolBar setCurrentButton:currentIndex];
-    self.osdHealthToolBar.delegate = self;
-    [self.view addSubview:self.osdHealthToolBar];
+    [self.osdHealthView.osdHealthToolBar setCurrentButton:currentIndex];
+    self.osdHealthView.osdHealthToolBar.delegate = self;
 }
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -169,7 +162,7 @@
             break;
         }
     }
-    [self.osdHealthView reloadData];
+    [self.osdHealthView.contentCollectionView reloadData];
 }
 
 - (void) osdHealthOKDisplay {
