@@ -30,6 +30,9 @@
 @property (nonatomic, strong) AlertSelectionView *alertSelectionView;
 @property (nonatomic, strong) NSString *tempLanguageString;
 @property (nonatomic, strong) NSString *tempImageString;
+@property (nonatomic, strong) UITableView *tempTableView;
+@property (nonatomic, strong) NSMutableArray *tempOptionArray;
+@property (nonatomic, strong) UITextField *tempCurrentTextfield;
 
 @end
 
@@ -56,25 +59,51 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [SettingData shareSettingData].languageOptionArray.count;
+    if (tableView.tag == 2) {
+        return self.tempOptionArray.count;
+    } else {
+        return [SettingData shareSettingData].languageOptionArray.count;
+    }
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    AlertSelectionViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LanguageSettingAlertViewCellIdentifier"];
-    if (!cell) {
-        cell = [[AlertSelectionViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LanguageSettingAlertViewCellIdentifier" imageName:[SettingData shareSettingData].languageImageOptionArray[indexPath.row]];
+    if (tableView.tag == 2) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TempOptionCellIdentifier"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TempOptionCellIdentifier"];
+            
+        }
+        
+        cell.textLabel.text = self.tempOptionArray[indexPath.row];
+        return cell;
+    } else {
+        AlertSelectionViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LanguageSettingAlertViewCellIdentifier"];
+        if (!cell) {
+            cell = [[AlertSelectionViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LanguageSettingAlertViewCellIdentifier" imageName:[SettingData shareSettingData].languageImageOptionArray[indexPath.row]];
+        }
+        cell.districtLineView.alpha = (indexPath.row == 2) ? 0.0 : 1.0;
+        cell.mainNameLabel.text = [SettingData shareSettingData].languageOptionArray[indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectedView.backgroundColor = ([self.tempLanguageString isEqualToString:cell.mainNameLabel.text]) ? [UIColor oceanNavigationBarColor] : [UIColor osdButtonHighlightColor];
+        return cell;
     }
-    cell.districtLineView.alpha = (indexPath.row == 2) ? 0.0 : 1.0;
-    cell.mainNameLabel.text = [SettingData shareSettingData].languageOptionArray[indexPath.row];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.selectedView.backgroundColor = ([self.tempLanguageString isEqualToString:cell.mainNameLabel.text]) ? [UIColor oceanNavigationBarColor] : [UIColor osdButtonHighlightColor];
-    return cell;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.tempLanguageString = [SettingData shareSettingData].languageOptionArray[indexPath.row];
-    self.tempImageString = [SettingData shareSettingData].languageImageOptionArray[indexPath.row];
-    [tableView reloadData];
+    if (tableView.tag == 2) {
+        self.tempCurrentTextfield.text = self.tempOptionArray[indexPath.row];
+        
+        __weak typeof(self) weakSelf = self;
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            weakSelf.tempTableView.alpha = 0.0;
+        }];
+        
+    } else {
+        self.tempLanguageString = [SettingData shareSettingData].languageOptionArray[indexPath.row];
+        self.tempImageString = [SettingData shareSettingData].languageImageOptionArray[indexPath.row];
+        [tableView reloadData];
+    }
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -102,7 +131,19 @@
     self.loginView.passwordField.text = ([[NSUserDefaults standardUserDefaults] objectForKey:@"Password"]) ? [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"Password"]] : @"";
     self.loginView.languageContentLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguage"];
     self.loginView.languageCountryImageView.image = [UIImage imageNamed:[[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguageImage"]];
+    
+    self.tempTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    self.tempTableView.delegate = self;
+    self.tempTableView.dataSource = self;
+    self.tempTableView.tag = 2;
+    self.tempTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:self.tempTableView];
+}
 
+- (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if ([[touches anyObject] locationInView:self.view].y > CGRectGetMaxY(self.loginView.loginButton.frame) || [[touches anyObject] locationInView:self.view].y < CGRectGetMinY(self.loginView.accountField.frame)) {
+        [self textFieldResign];
+    }
 }
 
 - (void) alertButtonDidSelect:(UIButton *)alertButton {
@@ -129,6 +170,7 @@
     [self.view.window addSubview:self.alertSelectionView];
     self.tempLanguageString = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguage"];
     self.tempImageString = [[NSUserDefaults standardUserDefaults] objectForKey:@"CurrentLanguageImage"];
+    [self textFieldResign];
 }
 
 - (void) loginAction {
@@ -183,6 +225,7 @@
                                                                                                         [UserData shareInstance].accountString = self.loginView.accountField.text;
                                                                                                         [UserData shareInstance].passwordString = self.loginView.passwordField.text;
                                                                                                         [SVProgressHUD dismiss];
+                                                                                                        [self addHistory];
                                                                                                         if (![[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_Notifications", self.loginView.hostIpField.text]]) {
                                                                                                             [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:[NSString stringWithFormat:@"%@_Notifications", self.loginView.hostIpField.text]];
                                                                                                             [self setDefaultTrigger];
@@ -279,8 +322,25 @@
         } error:^(id error) {
             [SVProgressHUD dismiss];
             weakself.loginView.userInteractionEnabled = YES;
-            [weakself.view addSubview:weakself.errorView];
-            NSLog(@"%@", error);
+            for (NSString *errorKey in [[[(NSError*)error userInfo][NSUnderlyingErrorKey] userInfo] allKeys]) {
+                if ([errorKey isEqualToString:@"_kCFURLErrorAuthFailedResponseKey"]) {
+                    weakself.errorView = [[ErrorView alloc] initWithFrame:weakself.view.frame title:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_fail_title"] message:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_account_error"]];
+                    [weakself.view addSubview:weakself.errorView];
+                    break;
+                } else if ([errorKey isEqualToString:NSLocalizedDescriptionKey]) {
+                    if ([[[(NSError*)error userInfo][NSUnderlyingErrorKey] userInfo][errorKey] isEqualToString:@"A server with the specified hostname could not be found."]) {
+                        weakself.errorView = [[ErrorView alloc] initWithFrame:weakself.view.frame title:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_fail_title"] message:@"hostname could not be found."];
+                        [weakself.view addSubview:weakself.errorView];
+                    } else if ([[[(NSError*)error userInfo][NSUnderlyingErrorKey] userInfo][errorKey] isEqualToString:@"The Internet connection appears to be offline."]) {
+                        weakself.errorView = [[ErrorView alloc] initWithFrame:weakself.view.frame title:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_fail_title"] message:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_fail_server_error"]];
+                        [weakself.view addSubview:weakself.errorView];
+                    } else {
+                        [weakself.view addSubview:weakself.errorView];
+                    }
+                    break;
+                }
+            }
+//            NSLog(@"ff:%@", [[[(NSError*)error userInfo][NSUnderlyingErrorKey] userInfo] allKeys]);
         }];
     } else {
         [SVProgressHUD dismiss];
@@ -291,9 +351,55 @@
     }
 }
 
+- (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSMutableArray *tempSortArray = [NSMutableArray array];
+    if (textField == self.loginView.hostIpField) {
+        self.tempOptionArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"TempLoginHostArray"]];
+    } else if (textField == self.loginView.portField) {
+        self.tempOptionArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"TempLoginPortArray"]];
+    } else if (textField == self.loginView.accountField) {
+        self.tempOptionArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"TempLoginAccountArray"]];
+    }
+    
+    for (NSString *optionString in self.tempOptionArray) {
+        if ([optionString rangeOfString:textField.text].location == 0) {
+            [tempSortArray addObject:optionString];
+        }
+    }
+    
+    self.tempOptionArray = tempSortArray;
+
+    if (textField != self.loginView.passwordField) {
+        [self.tempTableView reloadData];
+        self.tempTableView.frame = (self.tempOptionArray.count > 3) ? CGRectMake(textField.frame.origin.x, CGRectGetMaxY(textField.frame), textField.frame.size.width, 100) : CGRectMake(textField.frame.origin.x, CGRectGetMaxY(textField.frame), textField.frame.size.width, 37 * self.tempOptionArray.count);
+    }
+    return YES;
+}
+
 - (void) textFieldDidBeginEditing:(UITextField *)textField {
+    self.tempCurrentTextfield = textField;
     [TextFieldChecker shareInstance].checkArray = [NSMutableArray arrayWithArray:@[self.loginView.hostIpField, self.loginView.portField, self.loginView.accountField, self.loginView.passwordField]];
     [self.loginView setRedField:textField];
+    
+    if (textField == self.loginView.hostIpField) {
+        self.tempOptionArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"TempLoginHostArray"]];
+    } else if (textField == self.loginView.portField) {
+        self.tempOptionArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"TempLoginPortArray"]];
+    } else if (textField == self.loginView.accountField) {
+        self.tempOptionArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"TempLoginAccountArray"]];
+    }
+    
+    NSLog(@"%@", self.tempOptionArray);
+    if (textField != self.loginView.passwordField) {
+        [self.tempTableView reloadData];
+        __weak typeof(self) weakSelf = self;
+        self.tempTableView.frame = CGRectMake(textField.frame.origin.x, CGRectGetMaxY(textField.frame), textField.frame.size.width, 0);
+        self.tempTableView.alpha = 1.0;
+        [UIView animateWithDuration:0.3 animations:^{
+            weakSelf.tempTableView.frame = CGRectMake(textField.frame.origin.x, CGRectGetMaxY(textField.frame), textField.frame.size.width, 37 * weakSelf.tempOptionArray.count);
+        }];
+    }
+    
     if (textField.frame.origin.y > 150 && ![[UIDevice currentDevice].model isEqualToString:@"iPad"]) {
         [UIView animateWithDuration:0.3 animations:^{
             self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - 150, self.view.frame.size.width, self.view.frame.size.height);
@@ -309,7 +415,13 @@
             self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + 150, self.view.frame.size.width, self.view.frame.size.height);
             textField.tag = 0;
         }];
+    
     }
+    __weak typeof(self) weakSelf = self;
+
+    [UIView animateWithDuration:0.3 animations:^{
+        weakSelf.tempTableView.alpha = 0.0;
+    }];
 }
 
 - (void) textFieldResign {
@@ -323,6 +435,17 @@
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     [self.loginView setRedField:nil];
     [textField resignFirstResponder];
+    if (textField == self.loginView.passwordField) {
+        [self.loginView.hostIpField becomeFirstResponder];
+    } else {
+        for (UIView *subView in self.loginView.subviews) {
+            if ([subView class] == [UITextField class] && subView.frame.origin.y > textField.frame.origin.y) {
+                [subView becomeFirstResponder];
+                break;
+            }
+        }
+    }
+    
     return YES;
 }
 
@@ -330,7 +453,23 @@
     [self.errorView removeFromSuperview];
 }
 
+- (void) addHistory {
+    NSMutableSet *tempLoginHostArray = [NSMutableSet setWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"TempLoginHostArray"]];
+    NSMutableSet *tempLoginPortArray = [NSMutableSet setWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"TempLoginPortArray"]];
+    NSMutableSet *tempLoginAccountArray = [NSMutableSet setWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"TempLoginAccountArray"]];
+    
+    [tempLoginHostArray addObject:self.loginView.hostIpField.text];
+    [tempLoginPortArray addObject:self.loginView.portField.text];
+    [tempLoginAccountArray addObject:self.loginView.accountField.text];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:tempLoginHostArray.allObjects forKey:@"TempLoginHostArray"];
+    [[NSUserDefaults standardUserDefaults] setObject:tempLoginPortArray.allObjects forKey:@"TempLoginPortArray"];
+    [[NSUserDefaults standardUserDefaults] setObject:tempLoginAccountArray.allObjects forKey:@"TempLoginAccountArray"];
+    NSLog(@"%@" ,[[NSUserDefaults standardUserDefaults] objectForKey:@"TempLoginAccountArray"]);
+}
+
 - (void) setDefaultTrigger {
+    
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:[NSString stringWithFormat:@"%@_OSDTriggerWarn", self.loginView.hostIpField.text]];
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:[NSString stringWithFormat:@"%@_OSDTriggerError", self.loginView.hostIpField.text]];
     [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:[NSString stringWithFormat:@"%@_MONTriggerWarn", self.loginView.hostIpField.text]];
@@ -349,6 +488,16 @@
     
     [[SettingData shareSettingData] setTriggerArray];
 }
+
+
+- (BOOL) shouldAutorotate {
+    return YES;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -17,7 +17,7 @@
     if (self) {
         self.backgroundColor = [UIColor oceanBackgroundOneColor];
         
-        self.okView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - ((CGRectGetWidth(self.frame) * 0.3) / 2), CGRectGetMidY(self.frame) - ((CGRectGetWidth(self.frame) * 0.3) / 2) - 60, (CGRectGetWidth(self.frame) * 0.3), (CGRectGetWidth(self.frame) * 0.3))];
+        self.okView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - ((CGRectGetWidth(self.frame) * 0.5) / 2), CGRectGetMidY(self.frame) - ((CGRectGetWidth(self.frame) * 0.5) / 2) - 60, (CGRectGetWidth(self.frame) * 0.5), (CGRectGetWidth(self.frame) * 0.5))];
         self.okView.image = [UIImage imageNamed:@"OSDHealthOKView"];
         self.okView.contentMode = UIViewContentModeScaleAspectFill;
         self.okView.alpha = 0;

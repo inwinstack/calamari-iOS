@@ -15,12 +15,14 @@
 
 - (void) prepareLayout {
     [super prepareLayout];
-    self.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    self.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20);
     if ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) {
         self.minimumInteritemSpacing = 20;
         self.minimumLineSpacing = 20;
         self.itemSize = CGSizeMake((CGRectGetWidth([UIScreen mainScreen].bounds) - CGRectGetWidth([UIScreen mainScreen].bounds) / 16) / 2, ((CGRectGetWidth([UIScreen mainScreen].bounds) - CGRectGetWidth([UIScreen mainScreen].bounds) / 16) * 0.85) / 2);
     } else {
+        self.minimumInteritemSpacing = 20;
+        self.minimumLineSpacing = 20;
         self.itemSize = CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds) - CGRectGetWidth([UIScreen mainScreen].bounds) / 16 , (CGRectGetWidth([UIScreen mainScreen].bounds) - CGRectGetWidth([UIScreen mainScreen].bounds) / 16) * 0.85);
     }
     

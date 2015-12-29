@@ -58,6 +58,7 @@
     self = [super initWithRootViewController:rootViewController];
     if (self) {
         self.panGesture.enabled = NO;
+        
     }
     return self;
 }
@@ -226,28 +227,35 @@
                     self.viewControllers = @[self.viewControllers[0], self.viewControllers[1], self.notificationController];
                     break;
                 } case 9: {
-                    self.errorView = [[ErrorView alloc] initWithFrame:[UIScreen mainScreen].bounds title:@"系統訊息" message:@"連線錯誤"];
-                    self.errorView.delegate = self;
-                    [[CephAPI shareInstance] startGetAlertTriggerApiWithIp:ipString port:portString Completion:^(BOOL finished) {
-                        if (finished) {
-                            [[CephAPI shareInstance] startGetEmailNumberWithIp:ipString port:portString Completion:^(BOOL finshed) {
-                                if (finshed) {
+                    if (![[[NSBundle mainBundle] infoDictionary][@"isLocalVersion"] boolValue]) {
+                        self.errorView = [[ErrorView alloc] initWithFrame:[UIScreen mainScreen].bounds title:@"系統訊息" message:@"連線錯誤"];
+                        self.errorView.delegate = self;
+                        [[CephAPI shareInstance] startGetAlertTriggerApiWithIp:ipString port:portString Completion:^(BOOL finished) {
+                            if (finished) {
+                                [[CephAPI shareInstance] startGetEmailNumberWithIp:ipString port:portString Completion:^(BOOL finshed) {
+                                    if (finshed) {
+                                        [SVProgressHUD dismiss];
+                                        self.settingController = [[SettingController alloc] init];
+                                        [self pushViewController:self.settingController animated:YES];
+                                        self.viewControllers = @[self.viewControllers[0], self.viewControllers[1], self.settingController];
+                                    }
+                                } error:^(id postError) {
                                     [SVProgressHUD dismiss];
-                                    self.settingController = [[SettingController alloc] init];
-                                    [self pushViewController:self.settingController animated:YES];
-                                    self.viewControllers = @[self.viewControllers[0], self.viewControllers[1], self.settingController];
-                                }
-                            } error:^(id postError) {
-                                [SVProgressHUD dismiss];
-                                [self.view addSubview:self.errorView];
-                                NSLog(@"%@", postError);
-                            }];
-                        }
-                    } error:^(id getError) {
+                                    [self.view addSubview:self.errorView];
+                                    NSLog(@"%@", postError);
+                                }];
+                            }
+                        } error:^(id getError) {
+                            [SVProgressHUD dismiss];
+                            [self.view addSubview:self.errorView];
+                            NSLog(@"%@", getError);
+                        }];
+                    } else {
                         [SVProgressHUD dismiss];
-                        [self.view addSubview:self.errorView];
-                        NSLog(@"%@", getError);
-                    }];
+                        self.settingController = [[SettingController alloc] init];
+                        [self pushViewController:self.settingController animated:YES];
+                        self.viewControllers = @[self.viewControllers[0], self.viewControllers[1], self.settingController];
+                    }
                     
                     break;
                 } case 10: {

@@ -63,7 +63,7 @@
         self.downTriangleImageView.image = [UIImage imageNamed:@"DownTriangleImage"];
         [self.languageView addSubview:self.downTriangleImageView];
         
-        self.languageCountryImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (CGRectGetHeight(self.languageView.frame) / 2.0) - ([UIView bodySize] / 2.0), [UIView bodySize], [UIView bodySize])];
+        self.languageCountryImageView = [[UIImageView alloc] initWithFrame:CGRectMake([UIView lrMarginOne], (CGRectGetHeight(self.languageView.frame) / 2.0) - ([UIView bodySize] / 2.0), [UIView bodySize], [UIView bodySize])];
         [self.languageView addSubview:self.languageCountryImageView];
         
         self.languageContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.languageCountryImageView.frame) + 5, 0, CGRectGetWidth(self.frame) - (CGRectGetMaxX(self.languageCountryImageView.frame) + ([UIView bodySize] + 10)), CGRectGetHeight(self.languageView.frame))];
@@ -142,6 +142,7 @@
 }
 
 - (void) setDefaultField:(UITextField*)field {
+    field.returnKeyType = UIReturnKeyNext;
     field.layer.borderWidth = 1;
     field.layer.borderColor = [UIColor oceanBackgroundTwoColor].CGColor;
     field.layer.cornerRadius = 4;

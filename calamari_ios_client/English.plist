@@ -12,8 +12,12 @@
 	<string>Password</string>
 	<key>login_fail_title</key>
 	<string>Login Failed</string>
+	<key>login_account_error</key>
+	<string>Incorrect username or password.</string>
 	<key>login_from</key>
 	<string>From</string>
+	<key>login_fail_server_error</key>
+	<string>Failed to connect to server !</string>
 	<key>login_fail_confirm</key>
 	<string>Confirm</string>
 	<key>login_developer</key>
@@ -21,7 +25,7 @@
 	<key>login_sign_in</key>
 	<string>Sign in</string>
 	<key>login_version</key>
-	<string>Ceph Monitor Version 0.15.0</string>
+	<string>Ceph Monitor Version 0.16.0</string>
 	<key>settings_profile_language</key>
 	<string>Language</string>
 	<key>settings_dialog_save</key>

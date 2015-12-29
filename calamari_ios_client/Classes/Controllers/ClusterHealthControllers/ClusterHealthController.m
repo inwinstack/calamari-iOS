@@ -210,21 +210,17 @@
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) {
         if (indexPath.row == 6 || indexPath.row == 7) {
-            return CGSizeMake((CGRectGetWidth([UIScreen mainScreen].bounds) - 20) / 2 - 10, (CGRectGetWidth([UIScreen mainScreen].bounds)) / 2.2) ;
+            return CGSizeMake((CGRectGetWidth([UIScreen mainScreen].bounds) - 40) / 2 - 10, (CGRectGetWidth([UIScreen mainScreen].bounds)) / 2.2) ;
         } else {
-            return CGSizeMake((CGRectGetWidth([UIScreen mainScreen].bounds) - 20) / 2 - 10, ((CGRectGetWidth([UIScreen mainScreen].bounds) - 20) * 0.85) / 2.7);
+            return CGSizeMake((CGRectGetWidth([UIScreen mainScreen].bounds) - 40) / 2 - 10, ((CGRectGetWidth([UIScreen mainScreen].bounds) - 20) * 0.85) / 2.7);
         }
     } else {
         if (indexPath.row == 6) {
-            return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds) - 20, CGRectGetWidth([UIScreen mainScreen].bounds)) ;
+            return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds) - 40, CGRectGetWidth([UIScreen mainScreen].bounds)) ;
         } else {
-            return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds) - 20, (CGRectGetWidth([UIScreen mainScreen].bounds) - 20) * 0.7);
+            return CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds) - 40, (CGRectGetWidth([UIScreen mainScreen].bounds) * 15.0 / 16.0) * 0.7);
         }
     }
-}
-
-- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-    return CGSizeMake(self.view.frame.size.width, 10);
 }
 
 - (void) getData {

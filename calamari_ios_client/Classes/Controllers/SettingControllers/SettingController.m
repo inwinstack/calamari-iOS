@@ -164,7 +164,7 @@
                 break;
             } case 2: {
                 cell.mainLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"settings_about_version"];
-                cell.rightDetailLabel.text = @"0.15.0";
+                cell.rightDetailLabel.text = @"0.16.0";
                 cell.checkBoxButton.hidden = YES;
                 break;
             }
@@ -175,25 +175,37 @@
 
 - (void) didSelectCheckBoxButton:(UIButton*)checkBoxButton {
     if (checkBoxButton.tag == 1) {
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-        NSString *postValue = ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]] isEqualToString:@"YES"]) ? @"0" : @"1";
-        NSLog(@"%@", postValue);
-        [[CephAPI shareInstance] startPostEmailEnableWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] value:postValue Completion:^(BOOL finshed) {
-            if (finshed) {
-                [[CephAPI shareInstance] startGetAlertTriggerApiWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] Completion:^(BOOL finished) {
-                    if (finshed) {
+        if (![[[NSBundle mainBundle] infoDictionary][@"isLocalVersion"] boolValue]) {
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+            NSString *postValue = ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]] isEqualToString:@"YES"]) ? @"0" : @"1";
+            NSLog(@"%@", postValue);
+            [[CephAPI shareInstance] startPostEmailEnableWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] value:postValue Completion:^(BOOL finshed) {
+                if (finshed) {
+                    [[CephAPI shareInstance] startGetAlertTriggerApiWithIp:[[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"] port:[[NSUserDefaults standardUserDefaults] objectForKey:@"Port"] Completion:^(BOOL finished) {
+                        if (finshed) {
+                            [SVProgressHUD dismiss];
+                            [(UITableView*)checkBoxButton.superview.superview.superview reloadData];
+                        }
+                    } error:^(id getError) {
                         [SVProgressHUD dismiss];
-                        [(UITableView*)checkBoxButton.superview.superview.superview reloadData];
-                    }
-                } error:^(id getError) {
-                    [SVProgressHUD dismiss];
-                    NSLog(@"%@", getError);
-                }];
+                        NSLog(@"%@", getError);
+                    }];
+                }
+            } error:^(id postError) {
+                [SVProgressHUD dismiss];
+                NSLog(@"%@", postError);
+            }];
+        } else {
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]] isEqualToString:@"YES"]) {
+                [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]];
+                checkBoxButton.layer.borderWidth = 2.0;
+            } else {
+                [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]];
+                checkBoxButton.layer.borderWidth = 0.0;
+                [(UITableView*)checkBoxButton.superview.superview.superview reloadData];
+                
             }
-        } error:^(id postError) {
-            [SVProgressHUD dismiss];
-            NSLog(@"%@", postError);
-        }];
+        }
     } else {
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]] isEqualToString:@"YES"]) {
             [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:[NSString stringWithFormat:@"%@_%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"], [SettingData shareSettingData].checkBoxArray[checkBoxButton.tag]]];

@@ -166,6 +166,9 @@
                         }
                         NSMutableDictionary *finalDic = [NSMutableDictionary dictionaryWithDictionary:@{@"osds" : testResultArray}];
                         [[NSUserDefaults standardUserDefaults] setObject:finalDic forKey:[NSString stringWithFormat:@"kind_%@",kind]];
+                        if(receiveObject[@"pg_state_counts"]) {
+                            [[NSUserDefaults standardUserDefaults] setObject:receiveObject[@"pg_state_counts"] forKey:[NSString stringWithFormat:@"kind_pg_state_counts"]];
+                        }
                     } else {
                         [[NSUserDefaults standardUserDefaults] setObject:receiveObject forKey:[NSString stringWithFormat:@"kind_%@",kind]];
                     }
