@@ -30,9 +30,11 @@
     
     self.usageStatusView.tempMidString = [NSString stringWithFormat:@"%f", [[NSString stringWithFormat:@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_usage_max", [[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"]]]] doubleValue] / 2.0];
     
+    NSLog(@"%@", [NSString stringWithFormat:@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_usage_max", [[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"]]]]);
+    
     [self.usageStatusView setDataWithDataArray:[ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_usage", [[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"]]]];
     
-    NSLog(@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_usage", [[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"]]]);
+//    NSLog(@"%@", [ClusterData shareInstance].clusterDetailData[[NSString stringWithFormat:@"%@_usage", [[NSUserDefaults standardUserDefaults] objectForKey:@"ClusterID"]]]);
     self.usageStatusView.alpha = 0;
     [UIView animateWithDuration:1 delay:0 options:UIViewAnimationCurveEaseIn | UIViewAnimationCurveEaseOut | UIViewAnimationCurveEaseInOut animations:^{
         self.usageStatusView.alpha = 1;

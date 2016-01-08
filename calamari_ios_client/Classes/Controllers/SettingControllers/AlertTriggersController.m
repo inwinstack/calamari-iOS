@@ -56,7 +56,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackButtonDisplay:YES];
-    self.title = @"Alert Triggers";
+    self.title = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"settings_alert_triggers"];
     
     self.flowLayout = [[SettingViewFlowLayout alloc] init];
     

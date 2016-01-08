@@ -60,7 +60,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackButtonDisplay:YES];
-    self.title = @"Time Period";
+    self.title = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"settings_time_period"];
     self.flowLayout = [[SettingViewFlowLayout alloc] init];
     self.timePeriodView = [[TimePeriodView alloc] initWithFrame:self.view.frame collectionViewLayout:self.flowLayout];
     self.view = self.timePeriodView;
@@ -123,7 +123,7 @@
         self.clockSettingView.secondLabel.text = [tempSelecteTimeValueString substringFromIndex:4];
 
         self.tempLabel = self.clockSettingView.minuteLabel;
-        self.clockSettingView.clockNameLabel.text = self.titleArray[indexPath.row];
+        self.clockSettingView.clockNameLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:self.titleArray[indexPath.row]];
         [self.view.window addSubview:self.clockSettingView];
         [self.clockSettingView addGestureRecognizer:self.clockPanGesture];
         

@@ -41,6 +41,7 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+    NSLog(@"did");
     self.loginView.hostIpField.text = ([[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]) ? [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"HostIP"]] : @"";
     self.loginView.portField.text = ([[NSUserDefaults standardUserDefaults] objectForKey:@"Port"]) ? [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"Port"]] : @"";
     self.loginView.accountField.text = ([[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]) ? [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"Account"]] : @"";
@@ -51,7 +52,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [[Cookies shareInstance] clearCookies];
     [[NSUserDefaults standardUserDefaults] setObject:@"didLogout" forKey:@"firstTime"];
-
+    NSLog(@"finish");
 }
 
 - (void) backgroundAction {
@@ -182,6 +183,7 @@
     self.loginView.accountField.text = [self.loginView.accountField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     self.loginView.passwordField.text = [self.loginView.passwordField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
 
+    NSLog(@"didlogin");
     if ([[TextFieldChecker shareInstance] startCheck]) {
         [[TextFieldChecker shareInstance].checkArray removeAllObjects];
         self.errorView = [[ErrorView alloc] initWithFrame:self.view.frame title:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_fail_title"] message:[[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_fail_sing_in"]];
