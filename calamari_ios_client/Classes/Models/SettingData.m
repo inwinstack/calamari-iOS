@@ -23,7 +23,7 @@
 - (instancetype) init {
     self = [super init];
     if (self) {
-        self.settingNameArray = @[@"settings_profile", @"settings_alert", @"settings_about"];
+        self.settingNameArray = @[@"settings_profile", @"settings_alert"];
         self.settingMainNameArray = @[@"settings_profile_language", @"settings_profile_formats"];
         self.dateFormatOptionArray = @[@"2015/12/31", @"12/31/2015", @"31/12/2015"];
         self.languageOptionArray = @[@"English", @"繁體中文", @"日本語"];
