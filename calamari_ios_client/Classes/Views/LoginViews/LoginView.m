@@ -28,6 +28,7 @@
         float titleHeight = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? 176.0 : 88.0;
         float fieldHeight = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? 50.0 : CGRectGetWidth([UIScreen mainScreen].bounds) * 0.13;
         
+        
         self.titleView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - titleWidth / 2.0, [UIView tbMarginFour], titleWidth, titleHeight)];
         self.titleView.image = [UIImage imageNamed:@"inWinStackIcon"];
         [self addSubview:self.titleView];

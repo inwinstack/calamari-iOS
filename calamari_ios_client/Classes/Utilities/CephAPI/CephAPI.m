@@ -554,7 +554,7 @@
         [tempElementArray addObject:[[DateMaker shareDateMaker] getTimeWithTimeStamp:[NSString stringWithFormat:@"%@", dataArray[i][0]]]];
         double tempCount = 0.0;
         for (int k = 1 ;k < [dataArray[i] count]; k++) {
-            tempCount += [[NSString stringWithFormat:@"%@", dataArray[i][k]] floatValue];
+            tempCount += [[NSString stringWithFormat:@"%@", dataArray[i][k]] doubleValue];
             [tempElementArray addObject:[NSString stringWithFormat:@"%@", dataArray[i][k]]];
         }
         [tempDataArray addObject:tempElementArray];
@@ -563,9 +563,9 @@
         }
     }
     max = ceil(max / 20.0) * 20.0;
-    long int tempMax = (max == 0) ? 20 : max;
+    double tempMax = (max == 0) ? 20.0 : max;
     [target setObject:tempDataArray forKey:[NSString stringWithFormat:@"%@_%@", key, kind]];
-    [target setObject:[NSString stringWithFormat:@"%ld", tempMax] forKey:[NSString stringWithFormat:@"%@_%@_max", key, kind]];
+    [target setObject:[NSString stringWithFormat:@"%.f", tempMax] forKey:[NSString stringWithFormat:@"%@_%@_max", key, kind]];
 
 }
 

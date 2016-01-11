@@ -200,7 +200,8 @@
             CGPathMoveToPoint(chartPath, nil, startX, startY);
         } else {
             CGPathMoveToPoint(chartPath, nil, startX, CGRectGetMinY(self.yLayer.frame) + height * (1 - [dataArray[0][1] floatValue] / ([self.middleLabel.text floatValue] * 2)));
-        }        for (id object in dataArray) {
+        }
+        for (id object in dataArray) {
             float x = startX + (tempX * tempheight * 0.7 / 255);
             float y;
             if ([[[NSString stringWithFormat:@"%@", object[0]] substringFromIndex:[object[0] rangeOfString:@":"].location] isEqualToString:@":00"]) {
@@ -216,6 +217,7 @@
             if (isnan(y) || isinf(y)) {
                 y = startY;
             }
+            
             IOPSY = (([object[1] isEqualToString:@"<null>"])) ? IOPSY : y;
             CGPathAddLineToPoint(chartPath, nil, x, IOPSY);
             tempX++;

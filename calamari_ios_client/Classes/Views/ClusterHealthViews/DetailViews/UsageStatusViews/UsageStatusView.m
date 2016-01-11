@@ -196,17 +196,17 @@
 
 - (void) setDataWithDataArray:(NSMutableArray*)dataArray {
     if (dataArray.count > 0) {
-        float tempheight = (CGRectGetWidth([UIScreen mainScreen].bounds) - CGRectGetWidth([UIScreen mainScreen].bounds) / 16) * 0.85;
+        double tempheight = (CGRectGetWidth([UIScreen mainScreen].bounds) - CGRectGetWidth([UIScreen mainScreen].bounds) / 16) * 0.85;
         
         self.tagLabelStringArray = [NSMutableArray array];
         CGMutablePathRef writePath = CGPathCreateMutable();
         CGMutablePathRef readPath = CGPathCreateMutable();
         
-        float startX = CGRectGetMaxX(self.yLayer.frame);
-        float startY = CGRectGetMinY(self.xLayer.frame);
-        float height = CGRectGetMinY(self.xLayer.frame) - CGRectGetMidY(self.maxLabel.frame);
-        float availableLocationY = startY;
-        float usedLocationY = startY;
+        double startX = CGRectGetMaxX(self.yLayer.frame);
+        double startY = CGRectGetMinY(self.xLayer.frame);
+        double height = CGRectGetMinY(self.xLayer.frame) - CGRectGetMidY(self.maxLabel.frame);
+        double availableLocationY = startY;
+        double usedLocationY = startY;
 
         int tempX = 0;
         int count = 0;
@@ -216,10 +216,10 @@
         CGPathMoveToPoint(readPath, nil, startX + (tempX * tempheight * 0.7 / 255), startY);
         
         for (id object in dataArray) {
-            float x = startX + (tempX * tempheight * 0.7 / 255);
-            float addX = startX + ((tempX + 1) * tempheight * 0.7 / 255);
-            float y;
-            float readY;
+            double x = startX + (tempX * tempheight * 0.7 / 255);
+            double addX = startX + ((tempX + 1) * tempheight * 0.7 / 255);
+            double y;
+            double readY;
             if ([[[NSString stringWithFormat:@"%@", object[0]] substringFromIndex:[object[0] rangeOfString:@":"].location] isEqualToString:@":00"]) {
                 [self.tagLayerArray[count] setFrame:CGRectMake(x, CGRectGetMinY(self.yLayer.frame), tempheight * 0.5 / 255, height + CGRectGetMidY(self.maxLabel.frame) - CGRectGetMinY(self.yLayer.frame))];
                 ([[[NSString stringWithFormat:@"%@", object[0]] substringFromIndex:[object[0] rangeOfString:@" "].location + 1] isEqualToString:@"00:00"]) ? [self.tagLabelStringArray addObject:[[DateMaker shareDateMaker] getDateWithDate:object[0]]] : [self.tagLabelStringArray addObject:[[NSString stringWithFormat:@"%@", object[0]] substringFromIndex:[object[0] rangeOfString:@" "].location + 1]];
@@ -229,7 +229,7 @@
             if ([object[2] isEqualToString:@"<null>"] || [object[2] isEqualToString:@"0"]) {
                 readY = startY;
             } else {
-                readY = CGRectGetMidY(self.maxLabel.frame) + height * (1 - [object[2] floatValue] / ([self.tempMidString floatValue] * 2));
+                readY = CGRectGetMidY(self.maxLabel.frame) + height * (1 - [object[2] doubleValue] / ([self.tempMidString doubleValue] * 2.0));
             }
             if (isnan(readY) || isinf(readY)) {
                 readY = startY;
@@ -241,12 +241,13 @@
             if ([object[1] isEqualToString:@"<null>"] || [object[1] isEqualToString:@"0"]) {
                 y = readY;
             } else {
-                y = CGRectGetMidY(self.maxLabel.frame) + height * (1 - ([object[1] floatValue] + [object[2] floatValue]) / ([self.tempMidString floatValue] * 2));
+                y = CGRectGetMidY(self.maxLabel.frame) + height * (1 - ([object[1] doubleValue] + [object[2] doubleValue]) / ([self.tempMidString doubleValue] * 2.0));
             }
             if (isnan(y) || isinf(y)) {
                 y = readY;
             }
             availableLocationY = ([object[1] isEqualToString:@"<null>"]) ? availableLocationY : y;
+            NSLog(@"%f", availableLocationY);
             CGPathAddLineToPoint(writePath, nil, x, availableLocationY);
             CGPathAddLineToPoint(writePath, nil, addX, availableLocationY);
             tempX++;

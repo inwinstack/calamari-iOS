@@ -261,6 +261,7 @@
                 } case 10: {
                     [SVProgressHUD dismiss];
                     [[NotificationData shareInstance] stopTimer];
+                    [[NotificationData shareInstance] stopDashBoardTimer];
                     [self popToRootViewControllerAnimated:YES];
                     break;
                 }

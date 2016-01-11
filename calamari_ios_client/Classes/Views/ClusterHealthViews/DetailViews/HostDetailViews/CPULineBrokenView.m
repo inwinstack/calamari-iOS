@@ -254,6 +254,23 @@
         if ([dataArray[0] count] > 4) {
             self.freeLabel.alpha = 1;
             self.freeLayer.opacity = 1;
+            
+            self.systemLabel.frame = CGRectMake(CGRectGetWidth([UIScreen mainScreen].bounds) * 0.04, CGRectGetWidth([UIScreen mainScreen].bounds) * 0.03, 0, height * 25 / 255);
+            self.systemLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_summary_active"];
+            [self.systemLabel sizeToFit];
+            
+            self.userLabel.frame = CGRectMake(CGRectGetMaxX(self.systemLabel.frame) + height * 5 / 255, CGRectGetMinY(self.systemLabel.frame), 0, height * 25 / 255);
+            self.userLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_summary_buffers"];
+            [self.userLabel sizeToFit];
+            
+            self.idleLabel.frame  = CGRectMake(CGRectGetMaxX(self.userLabel.frame) + height * 5 / 255, CGRectGetMinY(self.systemLabel.frame), 0, height * 25 / 255);
+            self.idleLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_summary_cached"];
+            [self.idleLabel sizeToFit];
+            
+            self.freeLabel.frame = CGRectMake(CGRectGetMaxX(self.idleLabel.frame) + height * 5 / 255, CGRectGetMinY(self.systemLabel.frame), 0, height * 25 / 255);
+            self.freeLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"host_detail_summary_free"];
+            [self.freeLabel sizeToFit];
+
             for (id object in dataArray) {
                 float x = startX + (tempX * tempheight * 0.7 / 255);
                 float addX = startX + ((tempX + 1) * tempheight * 0.7 / 255);
