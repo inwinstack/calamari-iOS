@@ -23,6 +23,7 @@
 @property (nonatomic, strong) UILabel *versionLabel;
 @property (nonatomic, strong) UILabel *fromLabel;
 @property (nonatomic, strong) UILabel *designLabel;
+@property (nonatomic, strong) UILabel *titleLabel;
 
 - (void) setDefaultField;
 - (void) setRedField:(UITextField*)field;
