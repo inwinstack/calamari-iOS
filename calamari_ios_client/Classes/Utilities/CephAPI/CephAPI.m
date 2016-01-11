@@ -138,7 +138,6 @@
             if (readError) {
                 error(readError);
             } else {
-
                 if ([kind isEqualToString:@"mon"]) {
                     NSMutableArray *tempMonArray = [NSMutableArray array];
                     for (id monContent in receiveObject) {

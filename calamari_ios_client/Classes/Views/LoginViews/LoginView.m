@@ -24,16 +24,22 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor oceanBackgroundOneColor];
-        float titleWidth = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? 220.0 : 110.0;
-        float titleHeight = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? 176.0 : 88.0;
+        float titleWidth = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? 300.0 : 150.0;
         float fieldHeight = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? 50.0 : CGRectGetWidth([UIScreen mainScreen].bounds) * 0.13;
+        float titleMargin = ([[UIDevice currentDevice].model isEqualToString:@"iPad"]) ? 30.0 : 10.0;
         
-        
-        self.titleView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - titleWidth / 2.0, [UIView tbMarginFour], titleWidth, titleHeight)];
-        self.titleView.image = [UIImage imageNamed:@"inWinStackIcon"];
+        self.titleView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMidX(self.frame) - titleWidth / 2.0, [UIView tbMarginFour], titleWidth, titleWidth)];
+        self.titleView.image = [UIImage imageNamed:@"MOEIcon"];
         [self addSubview:self.titleView];
         
-        self.hostIpField = [[UITextField alloc] initWithFrame:CGRectMake([UIView lrMarginOne], CGRectGetMaxY(self.titleView.frame) + [UIView tbMarginThree], CGRectGetWidth(self.frame) - [UIView lrMarginOne] * 2, fieldHeight)];
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake([UIView lrMarginOne], CGRectGetMaxY(self.titleView.frame) + titleMargin, CGRectGetWidth(self.frame) - [UIView lrMarginOne] * 2, 30.0)];
+        self.titleLabel.text = @"儲存監控系統";
+        self.titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.titleLabel.textColor = [UIColor languageContentColor];
+        self.titleLabel.font = [UIFont systemFontOfSize:[UIView headerLineSize]];
+        [self addSubview:self.titleLabel];
+        
+        self.hostIpField = [[UITextField alloc] initWithFrame:CGRectMake([UIView lrMarginOne], CGRectGetMaxY(self.titleLabel.frame) + titleMargin, CGRectGetWidth(self.frame) - [UIView lrMarginOne] * 2, fieldHeight)];
         self.hostIpField.placeholder = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_host"];
         self.hostIpField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         
@@ -89,7 +95,6 @@
         [self addSubview:self.loginButton];
         
         self.versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.frame) - 50, CGRectGetWidth(self.frame), 20)];
-        self.versionLabel.text = [[LocalizationManager sharedLocalizationManager] getTextByKey:@"login_version"];
         self.versionLabel.textAlignment = NSTextAlignmentCenter;
         [self setDefaultLabel:self.versionLabel];
         
